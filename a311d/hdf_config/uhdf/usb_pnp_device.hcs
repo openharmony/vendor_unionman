@@ -16,7 +16,7 @@ root {
                 serviceName = "usb_pnp_sample_service";
                 deviceMatchAttr = "usb_pnp_sample_matchAttr";
                 length = 19;
-                matchFlag = 0x0003;
+                matchFlag = 0x0000;
                 vendorId = 0xFFF0;
                 productId = 0xFFF0;
                 bcdDeviceLow = 0x0000;
