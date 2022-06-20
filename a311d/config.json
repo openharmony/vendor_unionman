@@ -356,13 +356,13 @@
           "features": []
         },
         {
-          "component": "dsoftbus_standard",
+          "component": "dsoftbus",
           "features": [
-            "dsoftbus_standard_feature_conn_p2p = true",
-            "dsoftbus_standard_feature_disc_ble = true",
-            "dsoftbus_standard_feature_conn_br = true",
-            "dsoftbus_standard_feature_conn_ble = true",
-            "dsoftbus_standard_feature_trans_udp_stream = true"
+            "dsoftbus_feature_conn_p2p = true",
+            "dsoftbus_feature_disc_ble = true",
+            "dsoftbus_feature_conn_br = true",
+            "dsoftbus_feature_conn_ble = true",
+            "dsoftbus_feature_trans_udp_stream = true"
           ]
         },
         {
@@ -446,7 +446,7 @@
       "subsystem": "hdf",
       "components": [
         {
-          "component": "device_driver_framework",
+          "component": "hdf_core",
           "features": []
         },
         {
@@ -686,7 +686,7 @@
           "features": []
         },
         {
-          "component": "user_auth",
+          "component": "user_auth_framework",
           "features": []
         },
         {
@@ -736,7 +736,7 @@
           "features": []
         },
         {
-          "component": "multimedia_audio_standard",
+          "component": "multimedia_audio_framework",
           "features": []
         },
         {
