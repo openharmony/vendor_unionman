@@ -11,5 +11,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-enable_HDF_NL80211 = true
+enable_HDF_NL80211 = false
 enable_HDF_UT = false
