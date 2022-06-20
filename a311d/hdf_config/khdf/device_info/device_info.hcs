@@ -381,17 +381,6 @@
                     deviceMatchAttr = "hdf_codec_driver";
                 }
             }
-            device_codec_ex :: device {
-                device0 :: deviceNode {
-                    policy = 1;
-                    priority = 50;
-                    preload = 0;
-                    permission = 0666;
-                    moduleName = "CODEC_NAU8540";
-                    serviceName = "codec_service_1";
-                    deviceMatchAttr = "hdf_codec_driver_ex";
-                }
-            }
             device_dsp :: device {
                 device0 :: deviceNode {
                     policy = 1;
@@ -422,16 +411,7 @@
                     permission = 0666;
                     moduleName = "HDF_AUDIO";
                     deviceMatchAttr = "hdf_audio_driver_0";
-                    serviceName = "hdf_audio_codec_dev0";
-                }
-                device1 :: deviceNode {
-                    policy = 2;
-                    priority = 60;
-                    preload = 0;
-                    permission = 0666;
-                    moduleName = "HDF_AUDIO";
-                    deviceMatchAttr = "hdf_audio_driver_1";
-                    serviceName = "hdf_audio_smartpa_dev0";
+                    serviceName = "hdf_audio_codec_primary_dev0";
                 }
             }
             device_stream :: device {
@@ -460,6 +440,17 @@
                     permission = 0666;
                     moduleName = "HDF_AUDIO_CONTROL";
                     serviceName = "hdf_audio_control";
+                }
+            }
+            device_analog_headset :: device {
+                device0 :: deviceNode {
+                    policy = 1;
+                    priority = 90;
+                    preload = 0;
+                    permission = 0666;
+                    moduleName = "AUDIO_ANALOG_HEADSET";
+                    serviceName = "analog_headset_service";
+                    deviceMatchAttr = "analog_headset_attr";
                 }
             }
         }
