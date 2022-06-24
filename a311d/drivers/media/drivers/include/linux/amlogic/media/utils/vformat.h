@@ -13,7 +13,6 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  */
-
 #ifndef VFORMAT_H
 #define VFORMAT_H
 

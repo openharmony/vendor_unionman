@@ -17,7 +17,6 @@
 *
 * Description:
 */
-
 #include "firmware_type.h"
 #include "../chips/decoder_cpu_ver_info.h"
 
