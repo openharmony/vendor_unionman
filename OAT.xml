@@ -55,6 +55,7 @@
 		<policyitem type="copyright" name="Huawei Technologies Co., Ltd." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="华为技术有限公司版权声明"/>
 		<policyitem type="copyright" name="Huawei Device Co., Ltd." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="华为终端有限公司版权声明"/>
 		<policyitem type="copyright" name="Unionman Technology Co., Ltd." path=".*" desc="Unionman copyright"/>
+		<policyitem type="copyright" name="Amlogic, Inc." path=".*" desc="Amlogic copyright"/>
             </policy>
         </policylist>
 
