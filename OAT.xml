@@ -67,6 +67,7 @@
                 <filteritem type="filepath" name=".idea/.*" desc="IDE temp files"/>
                 <filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/>
                 <filteritem type="filepath" name="src/test/.*" desc="Test files"/>
+                <filteritem type="filepath" name="a311d/drivers/.*" desc="kernel source drivers files"/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
 		    <filteritem type="filename" name="BUILD.gn" desc="Compilation scripts do not declare license"/>
