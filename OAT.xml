@@ -55,6 +55,7 @@
 		<policyitem type="copyright" name="Huawei Technologies Co., Ltd." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="华为技术有限公司版权声明"/>
 		<policyitem type="copyright" name="Huawei Device Co., Ltd." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="华为终端有限公司版权声明"/>
 		<policyitem type="copyright" name="Unionman Technology Co., Ltd." path=".*" desc="Unionman copyright"/>
+		<policyitem type="copyright" name="Amlogic, Inc." path=".*" desc="Amlogic copyright"/>
             </policy>
         </policylist>
 
@@ -67,6 +68,7 @@
                 <filteritem type="filepath" name=".idea/.*" desc="IDE temp files"/>
                 <filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/>
                 <filteritem type="filepath" name="src/test/.*" desc="Test files"/>
+                <filteritem type="filepath" name="a311d/drivers/.*" desc="kernel source drivers files"/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
 		    <filteritem type="filename" name="BUILD.gn" desc="Compilation scripts do not declare license"/>

@@ -111,10 +111,6 @@
       "subsystem": "security",
       "components": [
         {
-          "component": "permission_standard",
-          "features": []
-        },
-        {
           "component": "appverify",
           "features": []
         },
@@ -127,7 +123,7 @@
           "features": []
         },
         {
-          "component": "deviceauth_standard",
+          "component": "device_auth",
           "features": []
         },
         {
@@ -450,7 +446,7 @@
           "features": []
         },
         {
-          "component": "bluetooth_device_driver",
+          "component": "drivers_peripheral_bluetooth",
           "features": []
         },
         {
@@ -566,11 +562,11 @@
           "features": []
         },
         {
-          "component": "memorytracker_device_driver",
+          "component": "drivers_peripheral_memorytracker",
           "features": []
         },
         {
-          "component": "memorytracker_device_driver_interface",
+          "component": "drivers_interface_memorytracker",
           "features": []
         },
         {
