@@ -12,14 +12,14 @@
 
 ```
 vendor/unionman/         // vendor_unionman 仓的仓库路径
-├── a311d                // Unionpi Tiger开发板
+├── unionpi_tiger        // Unionpi Tiger开发板
 └── ...
 
 ```
 
 ## 使用教程
 
-Unionpi Tiger使用参考 [使用教程](https://gitee.com/openharmony-sig/device_board_unionman/blob/master/a311d/README_zh.md)
+Unionpi Tiger使用参考 [使用教程](https://gitee.com/openharmony-sig/device_board_unionman/blob/master/unionpi_tiger/README_zh.md)
 
 
 ## 贡献
