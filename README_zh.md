@@ -1,28 +1,35 @@
-# vendor_unionman
+# vendor/unionman 组件
 
-## 介绍
+## 简介
 
-该仓库托管Unionman产品：Unionpi Tiger（Amlogic A311D）系列OpenHarmony硬件。
+该仓库托管Unionman开发板(或产品)，编译框架适配、解决方案参考代码和脚本。
+
+## 约束
+
+支持Unionpi_Tiger（Amlogic A311D）
 
 ## 软件架构
 
-支持基于Amlogic A311D芯片进行开发。
-
-代码路径：
-
 ```
-vendor/unionman/         // vendor_unionman 仓的仓库路径
-├── unionpi_tiger        // Unionpi Tiger开发板
-└── ...
-
+vendor/unionman/          # vendor_unionman 仓的仓库路径
+├── LICENSE
+├── OAT.xml
+├── README_zh.md
+└── unionpi_tiger         # Unionpi Tiger开发板
+    ├── audio             # audio配置
+    ├── config.json       # 产品模块详细配置
+    ├── hals              # hal层相关配置
+    ├── hdf_config        # hdf相关
+    ├── power_config      # 电源配置
+    ├── product.gni
+    └── resourceschedule
 ```
 
-## 使用教程
+## 开发环境搭建
 
-Unionpi Tiger使用参考 [使用教程](https://gitee.com/openharmony-sig/device_board_unionman/blob/master/unionpi_tiger/README_zh.md)
+Unionpi Tiger使用参考 [使用教程](https://gitee.com/openharmony-sig/device_board_unionman/blob/master/a311d/README_zh.md)
 
-
-## 贡献
+## 参与贡献
 
 [如何参与](https://gitee.com/openharmony/docs/blob/HEAD/zh-cn/contribute/%E5%8F%82%E4%B8%8E%E8%B4%A1%E7%8C%AE.md)
 
@@ -30,7 +37,8 @@ Unionpi Tiger使用参考 [使用教程](https://gitee.com/openharmony-sig/devic
 
 ## 相关仓
 
-[device_board_unionman](https://gitee.com/openharmony-sig/device_board_unionman)
+- vendor_unionman
 
-[device_soc_amlogic](https://gitee.com/openharmony-sig/device_soc_amlogic)
+- [device_board_unionman](https://gitee.com/openharmony-sig/device_board_unionman)
 
+- [device_soc_amlogic](https://gitee.com/openharmony-sig/device_soc_amlogic)
