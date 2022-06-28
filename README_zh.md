@@ -1,26 +1,26 @@
-# vendor/unionman 组件
+# vendor_unionman
 
-## 简介
+## 介绍
 
 该仓库托管Unionman开发板(或产品)，编译框架适配、解决方案参考代码和脚本。
 
 ## 约束
 
-支持Unionpi_Tiger（Amlogic A311D）
+支持Unionpi_Tiger (Amlogic A311D)。
 
-## 软件架构
+## 目录
 
 ```
 vendor/unionman/          # vendor_unionman 仓的仓库路径
 ├── LICENSE
 ├── OAT.xml
 ├── README_zh.md
-└── unionpi_tiger         # Unionpi Tiger开发板
-    ├── audio             # audio配置
-    ├── config.json       # 产品模块详细配置
-    ├── hals              # hal层相关配置
-    ├── hdf_config        # hdf相关
-    ├── power_config      # 电源配置
+└── unionpi_tiger         # Unionpi Tiger开发板目录
+    ├── audio             # audio配置目录
+    ├── config.json       # 产品模块详细配置目录
+    ├── hals              # hal层相关配置目录
+    ├── hdf_config        # hdf相关hcs目录
+    ├── power_config      # 电源配置目录
     ├── product.gni
     └── resourceschedule
 ```
