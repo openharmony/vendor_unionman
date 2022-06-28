@@ -38,7 +38,7 @@ else
     HCS_DIR := $(LOCAL_HCS_ROOT)
   endif
 endif
-$(info HCS_DIR = $(HCS_DIR))
+$(warning HCS_DIR = $(HCS_DIR))
 HCB_FLAGS := -b -i -a
 
 HCS_OBJ := hdf_hcs_hex.o
