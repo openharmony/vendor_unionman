@@ -1,0 +1,1 @@
+uart ttl 短接 rx tx 测试
