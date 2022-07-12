@@ -15,12 +15,5 @@ import("//build/ohos.gni")
 
 group("sample_group") {
   deps = [
-    "adc:adc_test",
-    "can:can_test",
-    "gpio:gpio_test",
-    "i2c:i2c_test",
-    "pwm:pwm_test",
-    "spi:spi_test",
-    "uart:uart_test",
   ]
 }
