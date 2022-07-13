@@ -47,26 +47,26 @@ enum {
 static void print_usage(char *prg)
 {
     (void)fprintf(stderr,
-            "Usage: %s [<can-interface>] [Options]\n"
-            "Options:\n"
-            " -f, --family=FAMILY\t"
-            "protocol family (default PF_CAN = %d)\n"
-            " -t, --type=TYPE\t"
-            "socket type, see man 2 socket (default SOCK_RAW = %d)\n"
-            " -p, --protocol=PROTO\t"
-            "CAN protocol (default CAN_RAW = %d)\n"
-            "     --filter=id:mask[:id:mask]...\n"
-            "\t\t\t"
-            "apply filter\n"
-            " -h, --help\t\t"
-            "this help\n"
-            " -o <filename>\t\t"
-            "output into filename\n"
-            " -d\t\t\t"
-            "daemonize\n"
-            "     --version\t\t"
-            "print version information and exit\n",
-            prg, PF_CAN, SOCK_RAW, CAN_RAW);
+                  "Usage: %s [<can-interface>] [Options]\n"
+                  "Options:\n"
+                  " -f, --family=FAMILY\t"
+                  "protocol family (default PF_CAN = %d)\n"
+                  " -t, --type=TYPE\t"
+                  "socket type, see man 2 socket (default SOCK_RAW = %d)\n"
+                  " -p, --protocol=PROTO\t"
+                  "CAN protocol (default CAN_RAW = %d)\n"
+                  "     --filter=id:mask[:id:mask]...\n"
+                  "\t\t\t"
+                  "apply filter\n"
+                  " -h, --help\t\t"
+                  "this help\n"
+                  " -o <filename>\t\t"
+                  "output into filename\n"
+                  " -d\t\t\t"
+                  "daemonize\n"
+                  "     --version\t\t"
+                  "print version information and exit\n",
+                  prg, PF_CAN, SOCK_RAW, CAN_RAW);
 }
 
 static void sigterm(int signo)
@@ -211,8 +211,7 @@ int main(int argc, char **argv)
 
     if (optdaemon) {
         daemon(1, 0);
-    }
-    else {
+    } else {
         signal(SIGTERM, sigterm);
         signal(SIGHUP, sigterm);
     }
@@ -240,8 +239,9 @@ int main(int argc, char **argv)
             for (i = 0; i < frame.can_dlc; i++) {
                 n += snprintf_s(buf + n, BUF_SIZ - n, "%02x ", frame.data[i]);
             }
-            if (frame.can_id & CAN_RTR_FLAG)
+            if (frame.can_id & CAN_RTR_FLAG) {
                 n += snprintf_s(buf + n, BUF_SIZ - n, "remote request");
+            }
 
             fprintf(out, "%s\n", buf);
 

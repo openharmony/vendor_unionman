@@ -42,19 +42,19 @@ enum {
 void print_usage(char *prg)
 {
     (void)fprintf(stderr,
-            "Usage: %s <can-interface> [<can-interface-out>] [Options]\n"
-            "\n"
-            "Send all messages received on <can-interface> to <can-interface-out>\n"
-            "If <can-interface-out> is omitted, then <can_interface> is used for sending\n"
-            "\n"
-            "Options:\n"
-            " -f, --family=FAMILY   Protocol family (default PF_CAN = %d)\n"
-            " -t, --type=TYPE       Socket type, see man 2 socket (default SOCK_RAW = %d)\n"
-            " -p, --protocol=PROTO  CAN protocol (default CAN_RAW = %d)\n"
-            " -v, --verbose         be verbose\n"
-            " -h, --help            this help\n"
-            "     --version         print version information and exit\n",
-            prg, PF_CAN, SOCK_RAW, CAN_RAW);
+                  "Usage: %s <can-interface> [<can-interface-out>] [Options]\n"
+                  "\n"
+                  "Send all messages received on <can-interface> to <can-interface-out>\n"
+                  "If <can-interface-out> is omitted, then <can_interface> is used for sending\n"
+                  "\n"
+                  "Options:\n"
+                  " -f, --family=FAMILY   Protocol family (default PF_CAN = %d)\n"
+                  " -t, --type=TYPE       Socket type, see man 2 socket (default SOCK_RAW = %d)\n"
+                  " -p, --protocol=PROTO  CAN protocol (default CAN_RAW = %d)\n"
+                  " -v, --verbose         be verbose\n"
+                  " -h, --help            this help\n"
+                  "     --version         print version information and exit\n",
+                  prg, PF_CAN, SOCK_RAW, CAN_RAW);
 }
 
 void sigterm(int signo)

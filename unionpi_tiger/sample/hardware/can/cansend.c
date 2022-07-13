@@ -37,21 +37,21 @@
 static void print_usage(char *prg)
 {
     (void)fprintf(stderr,
-            "Usage: %s [<can-interface>] [Options] <can-msg>\n"
-            "<can-msg> can consist of up to 8 bytes given as a space separated list\n"
-            "Options:\n"
-            " -i, --identifier=ID	CAN Identifier (default = 1)\n"
-            " -r  --rtr		send remote request\n"
-            " -e  --extended	send extended frame\n"
-            " -f, --family=FAMILY	Protocol family (default PF_CAN = %d)\n"
-            " -t, --type=TYPE	Socket type, see man 2 socket (default SOCK_RAW = %d)\n"
-            " -p, --protocol=PROTO	CAN protocol (default CAN_RAW = %d)\n"
-            " -l			send message infinite times\n"
-            "     --loop=COUNT	send message COUNT times\n"
-            " -v, --verbose		be verbose\n"
-            " -h, --help		this help\n"
-            "     --version		print version information and exit\n",
-            prg, PF_CAN, SOCK_RAW, CAN_RAW);
+                  "Usage: %s [<can-interface>] [Options] <can-msg>\n"
+                  "<can-msg> can consist of up to 8 bytes given as a space separated list\n"
+                  "Options:\n"
+                  " -i, --identifier=ID	CAN Identifier (default = 1)\n"
+                  " -r  --rtr		send remote request\n"
+                  " -e  --extended	send extended frame\n"
+                  " -f, --family=FAMILY	Protocol family (default PF_CAN = %d)\n"
+                  " -t, --type=TYPE	Socket type, see man 2 socket (default SOCK_RAW = %d)\n"
+                  " -p, --protocol=PROTO	CAN protocol (default CAN_RAW = %d)\n"
+                  " -l			send message infinite times\n"
+                  "     --loop=COUNT	send message COUNT times\n"
+                  " -v, --verbose		be verbose\n"
+                  " -h, --help		this help\n"
+                  "     --version		print version information and exit\n",
+                  prg, PF_CAN, SOCK_RAW, CAN_RAW);
 }
 
 enum {

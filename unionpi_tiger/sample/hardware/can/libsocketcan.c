@@ -117,7 +117,7 @@ static int addattr32(struct nlmsghdr *n, size_t maxlen, int type, __u32 data)
     rta = NLMSG_TAIL(n);
     rta->rta_type = type;
     rta->rta_len = len;
-    (void)memcpy_s(RTA_DATA(rta), 4L, &data, 4L);
+    (void)memcpy_s(RTA_DATA(rta), maxlen, &data, 4L);
     n->nlmsg_len = NLMSG_ALIGN(n->nlmsg_len) + len;
 
     return 0;
@@ -239,7 +239,7 @@ static int send_dump_request(int fd, const char *name, int family, int type)
 {
     struct get_req req;
 
-    (void)memset(&req, sizeof(req), 0, sizeof(req));
+    (void)memset_s(&req, sizeof(req), sizeof(req), 0, sizeof(req));
 
     req.n.nlmsg_len = sizeof(req);
     req.n.nlmsg_type = type;
@@ -409,8 +409,8 @@ static int do_get_nl_link(int fd, __u8 acquire, const char *name, void *res)
                 if (!tb[IFLA_STATS64]) {
                     fprintf(stderr, "no link statistics (64-bit) found\n");
                 } else {
-                    (void)memcpy_s(res, sizeof(struct rtnl_link_stats64), 
-                           RTA_DATA(tb[IFLA_STATS64]), sizeof(struct rtnl_link_stats64));
+                    (void)memcpy_s(res, sizeof(struct rtnl_link_stats64),
+                        RTA_DATA(tb[IFLA_STATS64]), sizeof(struct rtnl_link_stats64));
                     ret = 0;
                 }
                 continue;
@@ -427,7 +427,7 @@ static int do_get_nl_link(int fd, __u8 acquire, const char *name, void *res)
                     fprintf(stderr, "no can statistics found\n");
                 } else {
                     (void)memcpy_s(res, sizeof(struct can_device_stats),
-                           RTA_DATA(linkinfo[IFLA_INFO_XSTATS]), sizeof(struct can_device_stats));
+                        RTA_DATA(linkinfo[IFLA_INFO_XSTATS]), sizeof(struct can_device_stats));
                     ret = 0;
                 }
                 continue;
@@ -461,8 +461,8 @@ static int do_get_nl_link(int fd, __u8 acquire, const char *name, void *res)
                     break;
                 case GET_BITTIMING:
                     if (can_attr[IFLA_CAN_BITTIMING]) {
-                        (void)memcpy_s(res, sizeof(struct can_bittiming), 
-                               RTA_DATA(can_attr[IFLA_CAN_BITTIMING]), sizeof(struct can_bittiming));
+                        (void)memcpy_s(res, sizeof(struct can_bittiming),
+                            RTA_DATA(can_attr[IFLA_CAN_BITTIMING]), sizeof(struct can_bittiming));
                         ret = 0;
                     } else {
                         fprintf(stderr, "no bittiming data found\n");
@@ -471,8 +471,8 @@ static int do_get_nl_link(int fd, __u8 acquire, const char *name, void *res)
                     break;
                 case GET_CTRLMODE:
                     if (can_attr[IFLA_CAN_CTRLMODE]) {
-                        (void)memcpy_s(res, sizeof(struct can_ctrlmode), 
-                               RTA_DATA(can_attr[IFLA_CAN_CTRLMODE]), sizeof(struct can_ctrlmode));
+                        (void)memcpy_s(res, sizeof(struct can_ctrlmode),
+                            RTA_DATA(can_attr[IFLA_CAN_CTRLMODE]), sizeof(struct can_ctrlmode));
                         ret = 0;
                     } else {
                         fprintf(stderr, "no ctrlmode data found\n");
@@ -481,8 +481,8 @@ static int do_get_nl_link(int fd, __u8 acquire, const char *name, void *res)
                     break;
                 case GET_CLOCK:
                     if (can_attr[IFLA_CAN_CLOCK]) {
-                        (void)memcpy_s(res, sizeof(struct can_clock), 
-                               RTA_DATA(can_attr[IFLA_CAN_CLOCK]), sizeof(struct can_clock));
+                        (void)memcpy_s(res, sizeof(struct can_clock),
+                            RTA_DATA(can_attr[IFLA_CAN_CLOCK]), sizeof(struct can_clock));
                         ret = 0;
                     } else {
                         fprintf(stderr, "no clock parameter data found\n");
@@ -491,8 +491,8 @@ static int do_get_nl_link(int fd, __u8 acquire, const char *name, void *res)
                     break;
                 case GET_BITTIMING_CONST:
                     if (can_attr[IFLA_CAN_BITTIMING_CONST]) {
-                        (void)memcpy_s(res, sizeof(struct can_bittiming_const), 
-                               RTA_DATA(can_attr[IFLA_CAN_BITTIMING_CONST]), sizeof(struct can_bittiming_const));
+                        (void)memcpy_s(res, sizeof(struct can_bittiming_const),
+                            RTA_DATA(can_attr[IFLA_CAN_BITTIMING_CONST]), sizeof(struct can_bittiming_const));
                         ret = 0;
                     } else {
                         fprintf(stderr, "no bittiming_const data found\n");
@@ -501,8 +501,8 @@ static int do_get_nl_link(int fd, __u8 acquire, const char *name, void *res)
                     break;
                 case GET_BERR_COUNTER:
                     if (can_attr[IFLA_CAN_BERR_COUNTER]) {
-                        (void)memcpy_s(res, sizeof(struct can_berr_counter), 
-                               RTA_DATA(can_attr[IFLA_CAN_BERR_COUNTER]), sizeof(struct can_berr_counter));
+                        (void)memcpy_s(res, sizeof(struct can_berr_counter),
+                            RTA_DATA(can_attr[IFLA_CAN_BERR_COUNTER]), sizeof(struct can_berr_counter));
                         ret = 0;
                     } else {
                         fprintf(stderr, "no berr_counter data found\n");
