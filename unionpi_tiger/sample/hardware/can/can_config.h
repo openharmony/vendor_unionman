@@ -1,3 +1,23 @@
+/*
+ * linux/can/config.h
+ *
+ * Definitions for the CAN config interface
+ *
+ * Copyright (c) 2009 Wolfgang Grandegger <wg@grandegger.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the version 2 of the GNU General Public License
+ * as published by the Free Software Foundation
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ */
+ 
+#ifndef CAN_CONFIG_H
+#define CAN_CONFIG_H
+
 /* include/can_config.h.  Generated from can_config.h.in by configure.  */
 /* include/can_config.h.in.  Generated from configure.ac by autoheader.  */
 
@@ -114,3 +134,4 @@
 /* Define to the type of an unsigned integer type of width exactly 32 bits if
    such a type exists and the standard includes do not define it. */
 /* #undef uint32_t */
+#endif

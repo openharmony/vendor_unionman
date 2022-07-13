@@ -1,3 +1,18 @@
+/*
+* Copyright (c) 2022 Unionman Technology Co., Ltd.
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
 #include "can_config.h"
 
 #include <errno.h>
@@ -21,8 +36,6 @@
 #include <linux/can.h>
 #include <linux/can/raw.h>
 
-extern int optind, opterr, optopt;
-
 static int s = -1;
 static int running = 1;
 
@@ -34,7 +47,7 @@ enum {
 
 void print_usage(char *prg)
 {
-    fprintf(stderr,
+    (void)fprintf(stderr,
             "Usage: %s [<can-interface>] [Options]\n"
             "\n"
             "cansequence sends CAN messages with a rising sequence number as payload.\n"
@@ -86,8 +99,8 @@ int main(int argc, char **argv)
     int verbose = 0, quit = 0;
     int exit_value = EXIT_SUCCESS;
 
-    signal(SIGTERM, sigterm);
-    signal(SIGHUP, sigterm);
+    (void)signal(SIGTERM, sigterm);
+    (void)signal(SIGHUP, sigterm);
 
     struct option long_options[] = {
         {"extended", no_argument, 0, 'e'},
@@ -138,8 +151,9 @@ int main(int argc, char **argv)
                 if (optarg) {
                     loopcount = strtoul(optarg, NULL, 0);
                     infinite = 0;
-                } else
+                } else {
                     infinite = 1;
+                }
                 break;
 
             case 'i':
@@ -147,13 +161,14 @@ int main(int argc, char **argv)
                 break;
 
             default:
-                fprintf(stderr, "Unknown option %c\n", opt);
+                fprintf(stderr, "Unknown option %d\n", opt);
                 break;
         }
     }
 
-    if (argv[optind] != NULL)
+    if (argv[optind] != NULL) {
         interface = argv[optind];
+    }
 
     if (extended) {
         filter->can_mask = CAN_EFF_MASK;
@@ -174,7 +189,7 @@ int main(int argc, char **argv)
     }
 
     addr.can_family = family;
-    strncpy(ifr.ifr_name, interface, sizeof(ifr.ifr_name));
+    (void)strncpy_s(ifr.ifr_name, sizeof(ifr.ifr_name), interface, sizeof(ifr.ifr_name));
     if (ioctl(s, SIOCGIFINDEX, &ifr)) {
         perror("ioctl");
         return 1;
@@ -211,11 +226,12 @@ int main(int argc, char **argv)
                 sequence = frame.data[0];
             }
 
-            if (verbose > 1)
+            if (verbose > 1) {
                 printf("received frame. sequence number: %d\n", frame.data[0]);
+            }
 
             if (frame.data[0] != sequence) {
-                printf("received wrong sequence count. expected: %d, got: %d\n", sequence, frame.data[0]);
+                printf("received wrong sequence count. expected: %c, got: %d\n", sequence, frame.data[0]);
                 if (quit) {
                     exit_value = EXIT_FAILURE;
                     break;
@@ -224,15 +240,17 @@ int main(int argc, char **argv)
             }
 
             sequence++;
-            if (verbose && !sequence)
+            if (verbose && !sequence) {
                 printf("sequence wrap around (%d)\n", seq_wrap++);
+            }
         }
     } else {
         while ((infinite || loopcount--) && running) {
             ssize_t len;
 
-            if (verbose > 1)
-                printf("sending frame. sequence number: %d\n", sequence);
+            if (verbose > 1) {
+                printf("sending frame. sequence number: %c\n", sequence);
+            }
 
         again:
             len = write(s, &frame, sizeof(frame));
@@ -252,7 +270,7 @@ int main(int argc, char **argv)
                             exit(EXIT_FAILURE);
                         }
 
-                        err = poll(fds, 1, 1000);
+                        err = poll(fds, 1, 1000L);
                         if (err == -1 && errno != -EINTR) {
                             perror("poll()");
                             exit(EXIT_FAILURE);
@@ -269,8 +287,9 @@ int main(int argc, char **argv)
             (unsigned char)frame.data[0]++;
             sequence++;
 
-            if (verbose && !sequence)
+            if (verbose && !sequence) {
                 printf("sequence wrap around (%d)\n", seq_wrap++);
+            }
         }
     }
 
