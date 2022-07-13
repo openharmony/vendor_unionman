@@ -127,6 +127,7 @@ static int addattr_l(struct nlmsghdr *n, size_t maxlen, int type, const void *da
 {
     int len = RTA_LENGTH(alen);
     struct rtattr *rta;
+    int ret;
 
     if (NLMSG_ALIGN(n->nlmsg_len) + RTA_ALIGN(len) > maxlen) {
         fprintf(stderr, "addattr_l ERROR: message exceeded bound of %zu\n", maxlen);
@@ -136,7 +137,9 @@ static int addattr_l(struct nlmsghdr *n, size_t maxlen, int type, const void *da
     rta = NLMSG_TAIL(n);
     rta->rta_type = type;
     rta->rta_len = len;
-    (void)memcpy_s(RTA_DATA(rta), alen, data, alen);
+    ret = memcpy_s(RTA_DATA(rta), alen, data, alen);
+    if (ret != 0) {
+    }
     n->nlmsg_len = NLMSG_ALIGN(n->nlmsg_len) + RTA_ALIGN(len);
 
     return 0;
@@ -238,8 +241,11 @@ static int send_mod_request(int fd, struct nlmsghdr *n)
 static int send_dump_request(int fd, const char *name, int family, int type)
 {
     struct get_req req;
+    int ret;
 
-    (void)memset_s(&req, sizeof(req), sizeof(req), 0, sizeof(req));
+    ret = memset_s(&req, sizeof(req), sizeof(req), 0, sizeof(req));
+    if (ret != 0){
+    }
 
     req.n.nlmsg_len = sizeof(req);
     req.n.nlmsg_type = type;

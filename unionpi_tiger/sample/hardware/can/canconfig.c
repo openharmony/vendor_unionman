@@ -349,8 +349,10 @@ static inline void print_ctrlmode(__u32 cm_flags)
     (void)fprintf(stdout,
                   "loopback[%s], listen-only[%s], tripple-sampling[%s],"
                   "one-shot[%s], berr-reporting[%s]\n",
-                  (cm_flags & CAN_CTRLMODE_LOOPBACK) ? "ON" : "OFF", (cm_flags & CAN_CTRLMODE_LISTENONLY) ? "ON" : "OFF",
-                  (cm_flags & CAN_CTRLMODE_3_SAMPLES) ? "ON" : "OFF", (cm_flags & CAN_CTRLMODE_ONE_SHOT) ? "ON" : "OFF",
+                  (cm_flags & CAN_CTRLMODE_LOOPBACK) ? "ON" : "OFF",
+                  (cm_flags & CAN_CTRLMODE_LISTENONLY) ? "ON" : "OFF",
+                  (cm_flags & CAN_CTRLMODE_3_SAMPLES) ? "ON" : "OFF",
+                  (cm_flags & CAN_CTRLMODE_ONE_SHOT) ? "ON" : "OFF",
                   (cm_flags & CAN_CTRLMODE_BERR_REPORTING) ? "ON" : "OFF");
 }
 
