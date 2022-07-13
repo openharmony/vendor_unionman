@@ -37,8 +37,8 @@
 #define UM_GPIO_EXPORTED 1
 
 // errno
-#define UM_GPIO_ERR -1
-#define UM_GPIO_NOT_EXPROT -2
+#define UM_GPIO_ERR (-1)
+#define UM_GPIO_NOT_EXPROT (-2)
 
 // value high - low level
 #define UM_GPIO_LOW_LEVE 0
@@ -47,7 +47,7 @@
 #define UM_GPIO_IN 0
 #define UM_GPIO_OUT 1
 
-#define UM_GPIO_NOT_EXPROT_ERROR -2
+#define UM_GPIO_NOT_EXPROT_ERROR (-2)
 
 int UM_GPIO_Export(int s32GpioNum, int bExport);
 

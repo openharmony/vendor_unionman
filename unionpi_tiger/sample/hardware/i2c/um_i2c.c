@@ -4,13 +4,11 @@
 #include <unistd.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
-#include <linux/i2c.h>
-#include <linux/i2c-dev.h>
-#include <sys/ioctl.h>
 #include <sys/types.h>
 #include <fcntl.h>
-#include <asm/ioctl.h>
 #include <stdint.h>
+#include <linux/i2c.h>
+#include <linux/i2c-dev.h>
 
 #include "um_i2c.h"
 
@@ -55,7 +53,7 @@ int i2c_read(int i2cChannel, int device_addr, int sub_addr, unsigned char *buff,
     ioctl(fd, I2C_RETRIES, 2);
 
     // write reg
-    memset(buftmp, 0, 32);
+    (void)memset_s(buftmp, sizeof(buftmp), 0, 32);
     buftmp[0] = sub_addr;
     i2c_data.msgs[0].len = 1;
     i2c_data.msgs[0].addr = device_addr;
@@ -111,17 +109,17 @@ int i2c_write(int i2cChannel, unsigned char device_addr, unsigned char sub_addr,
     ioctl(fd, I2C_TIMEOUT, 1);
     ioctl(fd, I2C_RETRIES, 2);
 
-    memset(buftmp, 0, 32);
+    (void)memset_s(buftmp, sizeof(buftmp), 0, 32);
     buftmp[0] = sub_addr;
-    memcpy(buftmp + 1, buff, ByteNo);
+    (void)memcpy_s(buftmp + 1,sizeof(buftmp), buff, ByteNo);
     i2c_data.msgs[0].len = ByteNo + 1;
-    ;
+
     i2c_data.msgs[0].addr = device_addr;
     i2c_data.msgs[0].flags = 0; // 0: write 1:read
     i2c_data.msgs[0].buf = buftmp;
     ret = ioctl(fd, I2C_RDWR, (unsigned long)&i2c_data);
     if (ret < 0) {
-        printf("write reg %x %x error\r\n", device_addr, sub_addr);
+        printf("write reg %c %c error\r\n", device_addr, sub_addr);
         close(fd);
         free(i2c_data.msgs);
         return I2C_TRANSFER_FAIL;
@@ -136,7 +134,6 @@ int i2c_write(int i2cChannel, unsigned char device_addr, unsigned char sub_addr,
 
 int i2c_writeWithoutSub(int i2cChannel, unsigned char device_addr, unsigned char *buff, int ByteNo)
 {
-
     int fd, ret;
     unsigned char buftmp[32];
     struct i2c_rdwr_ioctl_data i2c_data;
@@ -176,7 +173,7 @@ int i2c_writeWithoutSub(int i2cChannel, unsigned char device_addr, unsigned char
 
     ret = ioctl(fd, I2C_RDWR, (unsigned long)&i2c_data);
     if (ret < 0) {
-        printf("i2c_writeWithoutSub %x  error", device_addr);
+        printf("i2c_writeWithoutSub %c  error", device_addr);
         close(fd);
         free(i2c_data.msgs);
         return I2C_TRANSFER_FAIL;
@@ -190,7 +187,6 @@ int i2c_writeWithoutSub(int i2cChannel, unsigned char device_addr, unsigned char
 
 int i2c_readWithoutSub(int i2cChannel, int device_addr, unsigned char *buff, int ByteNo)
 {
-
     int fd, ret;
     int i;
     struct i2c_rdwr_ioctl_data i2c_data;

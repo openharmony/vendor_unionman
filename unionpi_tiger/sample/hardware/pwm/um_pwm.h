@@ -2,11 +2,11 @@
 #define __UM_PWM_H__
 
 // errno
-#define PWM_ERR -1
-#define PWM_WRONOG_CHANNEL -2
-#define PWM_FILE_NOT_EXIST -3
-#define PWM_PARAM_OUT_OF_RANGE -4
-#define PWM_DUTYCYCLE_PARAM_OUT_OF_RANGE -5
+#define PWM_ERR (-1)
+#define PWM_WRONOG_CHANNEL (-2)
+#define PWM_FILE_NOT_EXIST (-3)
+#define PWM_PARAM_OUT_OF_RANGE (-4)
+#define PWM_DUTYCYCLE_PARAM_OUT_OF_RANGE (-5)
 
 // pwm vaild range
 #define PWM_MAX_PERIOD 340000000

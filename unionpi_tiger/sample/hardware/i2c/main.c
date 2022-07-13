@@ -4,7 +4,7 @@
 #include <string.h>
 #include "um_i2c.h"
 
-void user_help()
+void user_help(void)
 {
     printf("Please input like this: deceivei2c <int> [int] \n");
     printf("\t\tthere must have one parameter it is int for range[0,1] \n");

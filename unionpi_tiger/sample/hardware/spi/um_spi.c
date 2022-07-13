@@ -1,7 +1,5 @@
 #include <unistd.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <getopt.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <linux/types.h>
@@ -15,7 +13,7 @@ char *default_dev = DEFAULT_DEV;
 
 struct spi_ioc_transfer tr;
 
-int DEV_HARDWARE_SPI_begin()
+int DEV_HARDWARE_SPI_begin(void)
 {
     int ret = SPI_SUCCESS;
     if ((hardware_SPI.fd = open(default_dev, O_RDWR)) < 0) {
@@ -46,7 +44,6 @@ int DEV_HARDWARE_SPI_end(void)
 
 int DEV_HARDWARE_SPI_Mode(int mode)
 {
-
     if (SPI_MODE_0 != mode && SPI_MODE_1 != mode && SPI_MODE_2 != mode && SPI_MODE_3 != mode) {
         return SPI_PARAM_FAIL;
     }
@@ -68,15 +65,15 @@ int DEV_HARDWARE_SPI_Mode(int mode)
 
 int DEV_HARDWARE_SPI_GET_Mode(int *mode)
 {
-
     if (hardware_SPI.fd <= 0) {
         return SPI_NOT_OPENED_FAIL;
     }
 
     int tmp = 0;
     int ret = ioctl(hardware_SPI.fd, SPI_IOC_RD_MODE, &tmp);
-    if (ret == -1)
+    if (ret == -1) {
         return SPI_GET_MODE_FAIL;
+    }
 
     printf("DEV_HARDWARE_SPI_GET_Mode = %x", tmp);
     *mode = tmp & 0x3;
@@ -86,7 +83,6 @@ int DEV_HARDWARE_SPI_GET_Mode(int *mode)
 
 int DEV_HARDWARE_SPI_SET_BitOrder(int order)
 {
-
     if (SPI_BIT_ORDER_LSBFIRST != order && SPI_BIT_ORDER_MSBFIRST != order) {
         return SPI_PARAM_FAIL;
     }
@@ -117,21 +113,19 @@ int DEV_HARDWARE_SPI_SET_BitOrder(int order)
 
 int DEV_HARDWARE_SPI_GET_BitOrder(int *order)
 {
-
     if (hardware_SPI.fd <= 0) {
         return SPI_NOT_OPENED_FAIL;
     }
 
     int tmp = 0;
     int ret = ioctl(hardware_SPI.fd, SPI_IOC_RD_MODE, &tmp);
-    if (ret == -1)
+    if (ret == -1) {
         return SPI_GET_MODE_FAIL;
+    }
 
-    // printf("2 DEV_HARDWARE_SPI_GET_BitOrder = %x", tmp);
     if (((tmp & 0x08) >> 3) == 0) {
         *order = 1; // msb
     } else {
-        ;
         *order = 0; // lsb
     }
 
@@ -140,7 +134,6 @@ int DEV_HARDWARE_SPI_GET_BitOrder(int *order)
 
 int DEV_HARDWARE_SPI_SET_ChipSelect(int CS_Mode)
 {
-
     if (hardware_SPI.fd <= 0) {
         return SPI_NOT_OPENED_FAIL;
     }
@@ -171,20 +164,20 @@ int DEV_HARDWARE_SPI_SET_ChipSelect(int CS_Mode)
 
 int DEV_HARDWARE_SPI_GET_ChipSelect(int *CS_Mode)
 {
-
     if (hardware_SPI.fd <= 0) {
         return SPI_NOT_OPENED_FAIL;
     }
 
     int tmp = 0;
     int ret = ioctl(hardware_SPI.fd, SPI_IOC_RD_MODE, &tmp);
-    if (ret == -1)
+    if (ret == -1) {
         return SPI_GET_MODE_FAIL;
+    }
 
     printf("DEV_HARDWARE_SPI_GET_ChipSelect = %x", tmp);
     if ((tmp >> 6) & 0x1 == 1) {
         *CS_Mode = SPI_CS_Mode_NONE;
-    } else if ((tmp >> 2) & 0x1 == 1) {
+    } else if ((tmp >> 2) & (0x1 == 1)) {
         *CS_Mode = SPI_CS_Mode_HIGH;
     } else {
         *CS_Mode = SPI_CS_Mode_LOW;
@@ -195,7 +188,6 @@ int DEV_HARDWARE_SPI_GET_ChipSelect(int *CS_Mode)
 
 int DEV_HARDWARE_SPI_SET_SPEED(int speed)
 {
-
     if (hardware_SPI.fd <= 0) {
         return SPI_NOT_OPENED_FAIL;
     }
@@ -212,7 +204,6 @@ int DEV_HARDWARE_SPI_SET_SPEED(int speed)
 
 int DEV_HARDWARE_SPI_GET_SPEED(int *speed)
 {
-
     if (hardware_SPI.fd <= 0) {
         return SPI_NOT_OPENED_FAIL;
     }
@@ -231,21 +222,12 @@ int DEV_HARDWARE_SPI_GET_SPEED(int *speed)
 
 int DEV_HARDWARE_SPI_transferFullDuplex(unsigned char *txbuf, int len, unsigned char *rxbuf)
 {
-
     if (hardware_SPI.fd <= 0) {
         return SPI_NOT_OPENED_FAIL;
     }
 
-#if 0
-    int i = 0;
-    for(i = 0; i < len; i++){
-        printf("transferFullDuplex %x ", txbuf[i]);
-    }
-
-#endif
-
     struct spi_ioc_transfer xfer;
-    memset(&xfer, 0, sizeof(xfer));
+    (void)memset_s(&xfer, sizeof(xfer), 0, sizeof(xfer));
 
     xfer.len = len;
     xfer.tx_buf = (unsigned long)txbuf;

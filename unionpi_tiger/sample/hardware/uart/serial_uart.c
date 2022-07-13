@@ -48,7 +48,6 @@ void set_baud(int fd, int baud)
     cfsetispeed(&opt, baud);
     cfsetospeed(&opt, baud);
     status = tcsetattr(fd, TCSANOW, &opt);
-
     if (status != 0) {
         perror("tcsetattr fd1");
         return;
@@ -153,17 +152,10 @@ int set_params(int fd, int databits, int stopbits, int parity)
     }
 
     // cts rts /
-    // if ( uartID == 1 || uartID == 2 )
-    //	options.c_cflag |= CRTSCTS;
-    // else
-
     options.c_cflag &= ~CRTSCTS;
     options.c_lflag = 0;
     options.c_cc[VTIME] = 10;
     options.c_cc[VMIN] = 1;
-
-    // options.c_lflag &= ~(ICANON | ECHO | ECHOE );
-    // options.c_oflag |= OPOST;
 
     // Set input parity option /
     tcflush(fd, TCIFLUSH);
@@ -245,7 +237,6 @@ speed_t getBaudrate(int baudrate)
 
 int uartDevInit(int fd, int uartBaud)
 {
-    // printf("baud=%d\n", baud);
     set_baud(fd, getBaudrate(uartBaud));
     // uart param /
     if (set_params(fd, 8, 1, 'n')) {
