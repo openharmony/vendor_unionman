@@ -97,9 +97,10 @@ static void do_show_bitrate(const char *name)
     if (can_get_bittiming(name, &bt) < 0) {
         fprintf(stderr, "%s: failed to get bitrate\n", name);
         exit(EXIT_FAILURE);
-    } else
+    } else {
         fprintf(stdout, "%s bitrate: %u, sample-point: %0.3f\n", name, bt.bitrate,
-                (float)((float)bt.sample_point / 1000));
+                (float)((float)bt.sample_point / 1000L));
+    }
 }
 
 static void do_set_bitrate(int argc, char *argv[], const char *name)
@@ -155,7 +156,7 @@ static void do_set_bittiming(int argc, char *argv[], const char *name)
     int argc_temp = argc;
     char *argv_temp[] = argv;
 
-    memset(&bt, 0, sizeof(bt));
+    (void)memset_s(&bt, sizeof(bt), 0, sizeof(bt));
 
     while (argc_temp > 0) {
         if (!strcmp(*argv_temp, "tq")) {
@@ -290,7 +291,7 @@ static void do_show_clockfreq(const char *name)
         exit(EXIT_FAILURE);
     }
 
-    fprintf(stdout, "%s clock freq: %u\n", name, clock.freq);
+    (void)fprintf(stdout, "%s clock freq: %u\n", name, clock.freq);
 }
 
 static void cmd_clockfreq(int argc, char *argv[], const char *name)
@@ -346,11 +347,11 @@ static void cmd_stop(int argc, char *argv[], const char *name)
 static inline void print_ctrlmode(__u32 cm_flags)
 {
     (void)fprintf(stdout,
-            "loopback[%s], listen-only[%s], tripple-sampling[%s],"
-            "one-shot[%s], berr-reporting[%s]\n",
-            (cm_flags & CAN_CTRLMODE_LOOPBACK) ? "ON" : "OFF", (cm_flags & CAN_CTRLMODE_LISTENONLY) ? "ON" : "OFF",
-            (cm_flags & CAN_CTRLMODE_3_SAMPLES) ? "ON" : "OFF", (cm_flags & CAN_CTRLMODE_ONE_SHOT) ? "ON" : "OFF",
-            (cm_flags & CAN_CTRLMODE_BERR_REPORTING) ? "ON" : "OFF");
+                  "loopback[%s], listen-only[%s], tripple-sampling[%s],"
+                  "one-shot[%s], berr-reporting[%s]\n",
+                  (cm_flags & CAN_CTRLMODE_LOOPBACK) ? "ON" : "OFF", (cm_flags & CAN_CTRLMODE_LISTENONLY) ? "ON" : "OFF",
+                  (cm_flags & CAN_CTRLMODE_3_SAMPLES) ? "ON" : "OFF", (cm_flags & CAN_CTRLMODE_ONE_SHOT) ? "ON" : "OFF",
+                  (cm_flags & CAN_CTRLMODE_BERR_REPORTING) ? "ON" : "OFF");
 }
 
 static void do_show_ctrlmode(const char *name)
@@ -445,7 +446,7 @@ static void do_set_restart_ms(int argc, char *argv[], const char *name)
     int ret = (__u32)strtoul(argv[1], NULL, 10);
     int ret_fprintf = (__u32)strtoul(argv[1], NULL, 10);
     if (can_set_restart_ms(name, ret) < 0) {
-        fprintf(stderr, "failed to set restart_ms of %s to %lu\n", name, ret_fprintf);
+        fprintf(stderr, "failed to set restart_ms of %s to %d\n", name, ret_fprintf);
         exit(EXIT_FAILURE);
     }
 }
