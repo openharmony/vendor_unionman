@@ -1,3 +1,18 @@
+/*
+* Copyright (c) 2022 Unionman Technology Co., Ltd.
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
 #include "can_config.h"
 
 #include <stdio.h>
@@ -18,8 +33,6 @@
 #include <linux/can.h>
 #include <linux/can/raw.h>
 
-extern int optind, opterr, optopt;
-
 static int running = 1;
 
 enum {
@@ -28,7 +41,7 @@ enum {
 
 void print_usage(char *prg)
 {
-    fprintf(stderr,
+    (void)fprintf(stderr,
             "Usage: %s <can-interface> [<can-interface-out>] [Options]\n"
             "\n"
             "Send all messages received on <can-interface> to <can-interface-out>\n"
@@ -61,9 +74,9 @@ int main(int argc, char **argv)
     int s[2];
     int verbose = 0;
 
-    signal(SIGTERM, sigterm);
-    signal(SIGHUP, sigterm);
-    signal(SIGINT, sigterm);
+    (void)signal(SIGTERM, sigterm);
+    (void)signal(SIGHUP, sigterm);
+    (void)signal(SIGINT, sigterm);
 
     struct option long_options[] = {
         {"help", no_argument, 0, 'h'},
@@ -102,7 +115,7 @@ int main(int argc, char **argv)
                 exit(0);
 
             default:
-                fprintf(stderr, "Unknown option %c\n", opt);
+                fprintf(stderr, "Unknown option %d\n", opt);
                 break;
         }
     }
@@ -113,18 +126,20 @@ int main(int argc, char **argv)
     }
 
     intf_name[0] = argv[optind++];
-    if (optind == argc)
+    if (optind == argc) {
         intf_name[1] = intf_name[0];
-    else
+    } else {
         intf_name[1] = argv[optind];
+    }
 
     printf("interface-in = %s, interface-out = %s, family = %d, type = %d, proto = %d\n", intf_name[0], intf_name[1],
            family, type, proto);
 
-    if (intf_name[0] == intf_name[1])
+    if (intf_name[0] == intf_name[1]) {
         out = 0;
-    else
+    } else {
         out = 1;
+    }
 
     for (i = 0; i <= out; i++) {
         if ((s[i] = socket(family, type, proto)) < 0) {
@@ -133,7 +148,7 @@ int main(int argc, char **argv)
         }
 
         addr[i].can_family = family;
-        strcpy(ifr[i].ifr_name, intf_name[i]);
+        (void)strcpy_s(ifr[i].ifr_name, sizeof(ifr[i].ifr_name), intf_name[i]);
         ioctl(s[i], SIOCGIFINDEX, &ifr[i]);
         addr[i].can_ifindex = ifr[i].ifr_ifindex;
 

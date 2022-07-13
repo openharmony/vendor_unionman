@@ -51,6 +51,10 @@
         <policylist>
             <policy name="projectPolicy" desc="">
                 <policyitem type="copyright" name="Unionman Technology Co., Ltd." path=".*" desc="Unionman copyright"/>
+				<policyitem type="copyright" name="Marc Kleine-Budde <mkl@pengutronix.de>, Pengutronix" path=".*" desc="Marc copyright"/>
+				<policyitem type="copyright" name="Juergen Beisert <jbe@pengutronix.de>, Pengutronix" path=".*" desc="Juergen copyright"/>
+				<policyitem type="copyright" name="Luotao Fu <l.fu@pengutronix.de>, Pengutronix" path=".*" desc="Luotao copyright"/>
+				<policyitem type="copyright" name="Wolfgang Grandegger <wg@grandegger.com>" path=".*" desc="Wolfgang copyright"/>
             </policy>
         </policylist>
         <filefilterlist>

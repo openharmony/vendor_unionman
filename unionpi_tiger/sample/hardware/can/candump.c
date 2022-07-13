@@ -1,3 +1,18 @@
+/*
+* Copyright (c) 2022 Unionman Technology Co., Ltd.
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
 #include "can_config.h"
 
 #include <errno.h>
@@ -21,8 +36,6 @@
 #include <linux/can.h>
 #include <linux/can/raw.h>
 
-extern int optind, opterr, optopt;
-
 static int s = -1;
 static int running = 1;
 
@@ -33,7 +46,7 @@ enum {
 
 static void print_usage(char *prg)
 {
-    fprintf(stderr,
+    (void)fprintf(stderr,
             "Usage: %s [<can-interface>] [Options]\n"
             "Options:\n"
             " -f, --family=FAMILY\t"
@@ -67,8 +80,9 @@ static int filter_count = 0;
 int add_filter(u_int32_t id, u_int32_t mask)
 {
     filter = realloc(filter, sizeof(struct can_filter) * (filter_count + 1));
-    if (!filter)
+    if (!filter) {
         return -1;
+    }
 
     filter[filter_count].can_id = id;
     filter[filter_count].can_mask = mask;
@@ -96,7 +110,7 @@ int main(int argc, char **argv)
     int opt, optdaemon = 0;
     uint32_t id, mask;
 
-    signal(SIGPIPE, SIG_IGN);
+    (void)signal(SIGPIPE, SIG_IGN);
 
     struct option long_options[] = {
         {"help", no_argument, 0, 'h'},
@@ -147,8 +161,9 @@ int main(int argc, char **argv)
                     mask = strtoul(ptr, NULL, 0);
                     ptr = strchr(ptr, ':');
                     add_filter(id, mask);
-                    if (!ptr)
+                    if (!ptr) {
                         break;
+                    }
                     ptr++;
                 }
                 break;
@@ -158,13 +173,14 @@ int main(int argc, char **argv)
                 exit(0);
 
             default:
-                fprintf(stderr, "Unknown option %c\n", opt);
+                fprintf(stderr, "Unknown option %d\n", opt);
                 break;
         }
     }
 
-    if (optind != argc)
+    if (optind != argc) {
         interface = argv[optind];
+    }
 
     printf("interface = %s, family = %d, type = %d, proto = %d\n", interface, family, type, proto);
 
@@ -174,7 +190,7 @@ int main(int argc, char **argv)
     }
 
     addr.can_family = family;
-    strncpy(ifr.ifr_name, interface, sizeof(ifr.ifr_name));
+    (void)strncpy_s(ifr.ifr_name, sizeof(ifr.ifr_name), interface, sizeof(ifr.ifr_name));
     if (ioctl(s, SIOCGIFINDEX, &ifr)) {
         perror("ioctl");
         return 1;
@@ -193,8 +209,9 @@ int main(int argc, char **argv)
         }
     }
 
-    if (optdaemon)
+    if (optdaemon) {
         daemon(1, 0);
+    }
     else {
         signal(SIGTERM, sigterm);
         signal(SIGHUP, sigterm);
@@ -213,17 +230,18 @@ int main(int argc, char **argv)
             perror("read");
             return 1;
         } else {
-            if (frame.can_id & CAN_EFF_FLAG)
-                n = snprintf(buf, BUF_SIZ, "<0x%08x> ", frame.can_id & CAN_EFF_MASK);
-            else
-                n = snprintf(buf, BUF_SIZ, "<0x%03x> ", frame.can_id & CAN_SFF_MASK);
+            if (frame.can_id & CAN_EFF_FLAG) {
+                n = snprintf_s(buf, BUF_SIZ, "<0x%08x> ", frame.can_id & CAN_EFF_MASK);
+            } else {
+                n = snprintf_s(buf, BUF_SIZ, "<0x%03x> ", frame.can_id & CAN_SFF_MASK);
+            }
 
-            n += snprintf(buf + n, BUF_SIZ - n, "[%d] ", frame.can_dlc);
+            n += snprintf_s(buf + n, BUF_SIZ - n, "[%d] ", frame.can_dlc);
             for (i = 0; i < frame.can_dlc; i++) {
-                n += snprintf(buf + n, BUF_SIZ - n, "%02x ", frame.data[i]);
+                n += snprintf_s(buf + n, BUF_SIZ - n, "%02x ", frame.data[i]);
             }
             if (frame.can_id & CAN_RTR_FLAG)
-                n += snprintf(buf + n, BUF_SIZ - n, "remote request");
+                n += snprintf_s(buf + n, BUF_SIZ - n, "remote request");
 
             fprintf(out, "%s\n", buf);
 
@@ -231,10 +249,11 @@ int main(int argc, char **argv)
                 err = fflush(out);
                 if (err == -1 && errno == EPIPE) {
                     err = -EPIPE;
-                    fclose(out);
+                    (void)fclose(out);
                     out = fopen(optout, "a");
-                    if (!out)
+                    if (!out) {
                         exit(EXIT_FAILURE);
+                    }
                 }
             } while (err == -EPIPE);
 

@@ -31,7 +31,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
-#include <fcntl.h>
 #include <net/if.h>
 
 #include <linux/if_link.h>
@@ -94,13 +93,14 @@ struct req_info {
  */
 static void parse_rtattr(struct rtattr **tb, int max, struct rtattr *rta, int len)
 {
-    memset(tb, 0, sizeof(*tb) * (max + 1));
-    while (RTA_OK(rta, len)) {
-        if (rta->rta_type <= max) {
-            tb[rta->rta_type] = rta;
+    struct rtattr *rta_temp = rta;
+    (void)memset_s(tb, sizeof(struct rtattr) * (max + 1), 0, sizeof(struct rtattr) * (max + 1));
+    while (RTA_OK(rta_temp, len)) {
+        if (rta_temp->rta_type <= max) {
+            tb[rta_temp->rta_type] = rta_temp;
         }
 
-        rta = RTA_NEXT(rta, len);
+        rta_temp = RTA_NEXT(rta_temp, len);
     }
 }
 
@@ -117,7 +117,7 @@ static int addattr32(struct nlmsghdr *n, size_t maxlen, int type, __u32 data)
     rta = NLMSG_TAIL(n);
     rta->rta_type = type;
     rta->rta_len = len;
-    memcpy(RTA_DATA(rta), &data, 4);
+    (void)memcpy_s(RTA_DATA(rta), 4L, &data, 4L);
     n->nlmsg_len = NLMSG_ALIGN(n->nlmsg_len) + len;
 
     return 0;
@@ -136,7 +136,7 @@ static int addattr_l(struct nlmsghdr *n, size_t maxlen, int type, const void *da
     rta = NLMSG_TAIL(n);
     rta->rta_type = type;
     rta->rta_len = len;
-    memcpy(RTA_DATA(rta), data, alen);
+    (void)memcpy_s(RTA_DATA(rta), alen, data, alen);
     n->nlmsg_len = NLMSG_ALIGN(n->nlmsg_len) + RTA_ALIGN(len);
 
     return 0;
@@ -170,7 +170,7 @@ static int send_mod_request(int fd, struct nlmsghdr *n)
     };
     char buf[16384];
 
-    memset(&nladdr, 0, sizeof(nladdr));
+    (void)memset_s(&nladdr, sizeof(nladdr), 0, sizeof(nladdr));
 
     nladdr.nl_family = AF_NETLINK;
     nladdr.nl_pid = 0;
@@ -180,7 +180,6 @@ static int send_mod_request(int fd, struct nlmsghdr *n)
     n->nlmsg_flags |= NLM_F_ACK;
 
     status = sendmsg(fd, &msg, 0);
-
     if (status < 0) {
         perror("Cannot talk to rtnetlink");
         return -1;
@@ -208,8 +207,9 @@ static int send_mod_request(int fd, struct nlmsghdr *n)
                     fprintf(stderr, "ERROR truncated\n");
                 } else {
                     errno = -err->error;
-                    if (errno == 0)
+                    if (errno == 0) {
                         return 0;
+                    }
 
                     perror("RTNETLINK answers");
                 }
@@ -239,7 +239,7 @@ static int send_dump_request(int fd, const char *name, int family, int type)
 {
     struct get_req req;
 
-    memset(&req, 0, sizeof(req));
+    (void)memset(&req, sizeof(req), 0, sizeof(req));
 
     req.n.nlmsg_len = sizeof(req);
     req.n.nlmsg_type = type;
@@ -275,7 +275,7 @@ static int send_dump_request(int fd, const char *name, int family, int type)
  * @return 0 if success
  * @return negativ if failed
  */
-static int open_nl_sock()
+static int open_nl_sock(void)
 {
     int fd;
     int sndbuf = 32768;
@@ -293,7 +293,7 @@ static int open_nl_sock()
 
     setsockopt(fd, SOL_SOCKET, SO_RCVBUF, (void *)&rcvbuf, sizeof(rcvbuf));
 
-    memset(&local, 0, sizeof(local));
+    (void)memset_s(&local, sizeof(local), 0, sizeof(local));
     local.nl_family = AF_NETLINK;
     local.nl_groups = 0;
 
@@ -388,8 +388,9 @@ static int do_get_nl_link(int fd, __u8 acquire, const char *name, void *res)
                 done++;
                 continue;
             }
-            if (type != RTM_NEWLINK)
+            if (type != RTM_NEWLINK) {
                 continue;
+            }
 
             struct ifinfomsg *ifi = NLMSG_DATA(nl_msg);
             struct rtattr *tb[IFLA_MAX + 1];
@@ -398,31 +399,35 @@ static int do_get_nl_link(int fd, __u8 acquire, const char *name, void *res)
             parse_rtattr(tb, IFLA_MAX, IFLA_RTA(ifi), len);
 
             /* Finish process if the reply message is matched */
-            if (strcmp((char *)RTA_DATA(tb[IFLA_IFNAME]), name) == 0)
+            if (strcmp((char *)RTA_DATA(tb[IFLA_IFNAME]), name) == 0) {
                 done++;
-            else
+            } else {
                 continue;
+            }
 
             if (acquire == GET_LINK_STATS) {
                 if (!tb[IFLA_STATS64]) {
                     fprintf(stderr, "no link statistics (64-bit) found\n");
                 } else {
-                    memcpy(res, RTA_DATA(tb[IFLA_STATS64]), sizeof(struct rtnl_link_stats64));
+                    (void)memcpy_s(res, sizeof(struct rtnl_link_stats64), 
+                           RTA_DATA(tb[IFLA_STATS64]), sizeof(struct rtnl_link_stats64));
                     ret = 0;
                 }
                 continue;
             }
 
-            if (tb[IFLA_LINKINFO])
+            if (tb[IFLA_LINKINFO]) {
                 parse_rtattr_nested(linkinfo, IFLA_INFO_MAX, tb[IFLA_LINKINFO]);
-            else
+            } else {
                 continue;
+            }
 
             if (acquire == GET_XSTATS) {
-                if (!linkinfo[IFLA_INFO_XSTATS])
+                if (!linkinfo[IFLA_INFO_XSTATS]) {
                     fprintf(stderr, "no can statistics found\n");
-                else {
-                    memcpy(res, RTA_DATA(linkinfo[IFLA_INFO_XSTATS]), sizeof(struct can_device_stats));
+                } else {
+                    (void)memcpy_s(res, sizeof(struct can_device_stats),
+                           RTA_DATA(linkinfo[IFLA_INFO_XSTATS]), sizeof(struct can_device_stats));
                     ret = 0;
                 }
                 continue;
@@ -449,48 +454,59 @@ static int do_get_nl_link(int fd, __u8 acquire, const char *name, void *res)
                     if (can_attr[IFLA_CAN_RESTART_MS]) {
                         *((__u32 *)res) = *((__u32 *)RTA_DATA(can_attr[IFLA_CAN_RESTART_MS]));
                         ret = 0;
-                    } else
+                    } else {
                         fprintf(stderr, "no restart_ms data found\n");
+                    }
 
                     break;
                 case GET_BITTIMING:
                     if (can_attr[IFLA_CAN_BITTIMING]) {
-                        memcpy(res, RTA_DATA(can_attr[IFLA_CAN_BITTIMING]), sizeof(struct can_bittiming));
+                        (void)memcpy_s(res, sizeof(struct can_bittiming), 
+                               RTA_DATA(can_attr[IFLA_CAN_BITTIMING]), sizeof(struct can_bittiming));
                         ret = 0;
-                    } else
+                    } else {
                         fprintf(stderr, "no bittiming data found\n");
+                    }
 
                     break;
                 case GET_CTRLMODE:
                     if (can_attr[IFLA_CAN_CTRLMODE]) {
-                        memcpy(res, RTA_DATA(can_attr[IFLA_CAN_CTRLMODE]), sizeof(struct can_ctrlmode));
+                        (void)memcpy_s(res, sizeof(struct can_ctrlmode), 
+                               RTA_DATA(can_attr[IFLA_CAN_CTRLMODE]), sizeof(struct can_ctrlmode));
                         ret = 0;
-                    } else
+                    } else {
                         fprintf(stderr, "no ctrlmode data found\n");
+                    }
 
                     break;
                 case GET_CLOCK:
                     if (can_attr[IFLA_CAN_CLOCK]) {
-                        memcpy(res, RTA_DATA(can_attr[IFLA_CAN_CLOCK]), sizeof(struct can_clock));
+                        (void)memcpy_s(res, sizeof(struct can_clock), 
+                               RTA_DATA(can_attr[IFLA_CAN_CLOCK]), sizeof(struct can_clock));
                         ret = 0;
-                    } else
+                    } else {
                         fprintf(stderr, "no clock parameter data found\n");
+                    }
 
                     break;
                 case GET_BITTIMING_CONST:
                     if (can_attr[IFLA_CAN_BITTIMING_CONST]) {
-                        memcpy(res, RTA_DATA(can_attr[IFLA_CAN_BITTIMING_CONST]), sizeof(struct can_bittiming_const));
+                        (void)memcpy_s(res, sizeof(struct can_bittiming_const), 
+                               RTA_DATA(can_attr[IFLA_CAN_BITTIMING_CONST]), sizeof(struct can_bittiming_const));
                         ret = 0;
-                    } else
+                    } else {
                         fprintf(stderr, "no bittiming_const data found\n");
+                    }
 
                     break;
                 case GET_BERR_COUNTER:
                     if (can_attr[IFLA_CAN_BERR_COUNTER]) {
-                        memcpy(res, RTA_DATA(can_attr[IFLA_CAN_BERR_COUNTER]), sizeof(struct can_berr_counter));
+                        (void)memcpy_s(res, sizeof(struct can_berr_counter), 
+                               RTA_DATA(can_attr[IFLA_CAN_BERR_COUNTER]), sizeof(struct can_berr_counter));
                         ret = 0;
-                    } else
+                    } else {
                         fprintf(stderr, "no berr_counter data found\n");
+                    }
 
                     break;
 
@@ -523,8 +539,9 @@ static int get_link(const char *name, __u8 acquire, void *res)
     int err, fd;
 
     fd = open_nl_sock();
-    if (fd < 0)
+    if (fd < 0) {
         return -1;
+    }
 
     err = do_get_nl_link(fd, acquire, name, res);
     close(fd);
@@ -559,7 +576,7 @@ static int do_set_nl_link(int fd, __u8 if_state, const char *name, struct req_in
 
     const char *type = "can";
 
-    memset(&req, 0, sizeof(req));
+    (void)memset_s(&req, sizeof(req), 0, sizeof(req));
 
     req.n.nlmsg_len = NLMSG_LENGTH(sizeof(struct ifinfomsg));
     req.n.nlmsg_flags = NLM_F_REQUEST | NLM_F_ACK;
@@ -597,18 +614,20 @@ static int do_set_nl_link(int fd, __u8 if_state, const char *name, struct req_in
         struct rtattr *data = NLMSG_TAIL(&req.n);
         addattr_l(&req.n, sizeof(req), IFLA_INFO_DATA, NULL, 0);
 
-        if (req_info->restart_ms > 0 || req_info->disable_autorestart)
-            addattr32(&req.n, 1024, IFLA_CAN_RESTART_MS, req_info->restart_ms);
+        if (req_info->restart_ms > 0 || req_info->disable_autorestart) {
+            addattr32(&req.n, 1024L, IFLA_CAN_RESTART_MS, req_info->restart_ms);
+        }
 
-        if (req_info->restart)
-            addattr32(&req.n, 1024, IFLA_CAN_RESTART, 1);
+        if (req_info->restart) {
+            addattr32(&req.n, 1024L, IFLA_CAN_RESTART, 1);
+        }
 
         if (req_info->bittiming != NULL) {
-            addattr_l(&req.n, 1024, IFLA_CAN_BITTIMING, req_info->bittiming, sizeof(struct can_bittiming));
+            addattr_l(&req.n, 1024L, IFLA_CAN_BITTIMING, req_info->bittiming, sizeof(struct can_bittiming));
         }
 
         if (req_info->ctrlmode != NULL) {
-            addattr_l(&req.n, 1024, IFLA_CAN_CTRLMODE, req_info->ctrlmode, sizeof(struct can_ctrlmode));
+            addattr_l(&req.n, 1024L, IFLA_CAN_CTRLMODE, req_info->ctrlmode, sizeof(struct can_ctrlmode));
         }
 
         /* mark end of data section */
@@ -644,8 +663,9 @@ static int set_link(const char *name, __u8 if_state, struct req_info *req_info)
     int err, fd;
 
     fd = open_nl_sock();
-    if (fd < 0)
+    if (fd < 0) {
         return -1;
+    }
 
     err = do_set_nl_link(fd, if_state, name, req_info);
     close(fd);
@@ -762,8 +782,9 @@ int can_set_restart_ms(const char *name, __u32 restart_ms)
         .restart_ms = restart_ms,
     };
 
-    if (restart_ms == 0)
+    if (restart_ms == 0) {
         req_info.disable_autorestart = 1;
+    }
 
     return set_link(name, 0, &req_info);
 }
@@ -792,7 +813,7 @@ int can_set_restart_ms(const char *name, __u32 restart_ms)
  * @endcode
  *
  * You have to define the control mode struct yourself. A can_ctrlmode struct
- * is declared as:
+ * is declared as
  *
  * @code
  * struct can_ctrlmode {
@@ -841,7 +862,7 @@ int can_set_ctrlmode(const char *name, struct can_ctrlmode *cm)
  * function if you wish to define the bittiming in expert mode with fully
  * manually defined timing values.
  * You have to define the bittiming struct yourself. a can_bittiming struct
- * consists of:
+ * consists of
  *
  * @code
  * struct can_bittiming {
@@ -896,7 +917,7 @@ int can_set_bitrate(const char *name, __u32 bitrate)
 {
     struct can_bittiming bt;
 
-    memset(&bt, 0, sizeof(bt));
+    (void)memset_s(&bt, sizeof(bt), 0, sizeof(bt));
     bt.bitrate = bitrate;
 
     return can_set_bittiming(name, &bt);
@@ -923,7 +944,7 @@ int can_set_bitrate_samplepoint(const char *name, __u32 bitrate, __u32 sample_po
 {
     struct can_bittiming bt;
 
-    memset(&bt, 0, sizeof(bt));
+    (void)memset_s(&bt, sizeof(bt), 0, sizeof(bt));
     bt.bitrate = bitrate;
     bt.sample_point = sample_point;
 
@@ -1061,7 +1082,7 @@ int can_get_clock(const char *name, struct can_clock *clock)
  * @param btc pointer to the bittiming constant struct.
  *
  * This one stores the hardware dependent bittiming constant. The
- * can_bittiming_const struct consists:
+ * can_bittiming_const struct consists
  *
  * @code
  * struct can_bittiming_const {
