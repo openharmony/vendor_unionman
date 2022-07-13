@@ -17,18 +17,15 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 #include <unistd.h>
 #include <string.h>
 
-#include <sys/types.h>
 #include <sys/ioctl.h>
 #include <string.h>
 #include <linux/i2c.h>
 #include <linux/i2c-dev.h>
 
 #include <unistd.h>
-#include <getopt.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <linux/types.h>
@@ -53,9 +50,9 @@ int SYSFS_GPIO_Export(int s32GpioNum, int bExport)
     char buffer[256];
 
     if (bExport) {
-        snprintf(buffer, sizeof(buffer), "echo %d > /sys/class/gpio/export", s32GpioNum);
+        (void)snprintf_s(buffer, sizeof(buffer), sizeof(buffer), "echo %d > /sys/class/gpio/export", s32GpioNum);
     } else {
-        snprintf(buffer, sizeof(buffer), "echo %d > /sys/class/gpio/unexport", s32GpioNum);
+        (void)snprintf_s(buffer, sizeof(buffer), sizeof(buffer), "echo %d > /sys/class/gpio/unexport", s32GpioNum);
     }
 
     printf("shl %s\n", buffer);
@@ -71,7 +68,7 @@ int SYSFS_GPIO_Direction(int Pin, int Dir)
     char path[DIR_MAXSIZ];
     int fd;
 
-    snprintf(path, DIR_MAXSIZ, "/sys/class/gpio/gpio%d/direction", Pin);
+    (void)snprintf_s(path, sizeof(path), DIR_MAXSIZ, "/sys/class/gpio/gpio%d/direction", Pin);
     fd = open(path, O_WRONLY);
     if (fd < 0) {
         printf("Set Direction failed: Pin%d\n", Pin);
@@ -93,7 +90,7 @@ int SYSFS_GPIO_Read(int Pin)
     char value_str[3];
     int fd;
 
-    snprintf(path, DIR_MAXSIZ, "/sys/class/gpio/gpio%d/value", Pin);
+    (void)snprintf_s(path, sizeof(path), DIR_MAXSIZ, "/sys/class/gpio/gpio%d/value", Pin);
     fd = open(path, O_RDONLY);
     if (fd < 0) {
         printf("Read failed Pin%d\n", Pin);
@@ -115,7 +112,7 @@ int SYSFS_GPIO_Write(int Pin, int value)
     char path[DIR_MAXSIZ];
     int fd;
 
-    snprintf(path, DIR_MAXSIZ, "/sys/class/gpio/gpio%d/value", Pin);
+    (void)snprintf_s(path, sizeof(path), DIR_MAXSIZ, "/sys/class/gpio/gpio%d/value", Pin);
     fd = open(path, O_WRONLY);
     if (fd < 0) {
         printf("Write failed : Pin%d,value = %d\n", Pin, value);
@@ -131,59 +128,56 @@ int SYSFS_GPIO_Write(int Pin, int value)
     return 0;
 }
 
-int SPI_open()
+int SPI_open(void)
 {
     int fd, ret;
     fd = open("/dev/spidev32766.0", O_RDWR);
-    // printf("*************************************************fd = %d", fd);
-
     if (fd < 0) {
         printf("can not open SPI device\n");
     }
 
     ret = ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &bits);
-    if (ret == -1)
+    if (ret == -1) {
         printf("can't set bits per word");
+    }
 
     ret = ioctl(fd, SPI_IOC_RD_BITS_PER_WORD, &bits);
-    if (ret == -1)
+    if (ret == -1) {
         printf("can't get bits per word");
-
-    // mode &= 0xfC;
-    // mode |= SPI_LSB_FIRST;
-    // mode &= ~SPI_CS_HIGH;
-    // mode &= ~SPI_NO_CS;
+    }
 
     ret = ioctl(fd, SPI_IOC_WR_MODE, &mode);
-    if (ret == -1)
+    if (ret == -1) {
         printf("can't set spi mode");
+    }
 
     mode &= ~0x04;
     mode &= ~0x40;
     ret = ioctl(fd, SPI_IOC_WR_MODE, &mode);
-    if (ret == -1)
+    if (ret == -1) {
         printf("can't set spi mode 1");
+    }
 
     mode &= ~SPI_LSB_FIRST;
     ret = ioctl(fd, SPI_IOC_WR_MODE, &mode);
-    if (ret == -1)
+    if (ret == -1) {
         printf("can't set spi mode 2");
+    }
 
     ret = ioctl(fd, SPI_IOC_RD_MODE, &mode);
-    if (ret == -1)
+    if (ret == -1) {
         printf("can't get spi mode");
+    }
 
     ret = ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed);
-    if (ret == -1)
+    if (ret == -1) {
         printf("can't set max speed hz");
+    }
 
     ret = ioctl(fd, SPI_IOC_RD_MAX_SPEED_HZ, &speed);
-    if (ret == -1)
+    if (ret == -1) {
         printf("can't get max speed hz");
-
-    // printf("spi mode: %d\n", mode);
-    // printf("bits per word: %d\n", bits);
-    // printf("max speed: %d Hz (%d MHz)\n", speed, speed/1000000);
+    }
 
     return fd;
 }
@@ -193,7 +187,7 @@ int SPI_close(int dev_fh)
     return close(dev_fh);
 }
 
-int SPI_readFlashID()
+int SPI_readFlashID(void)
 {
     int ret;
     int fd;
@@ -206,7 +200,7 @@ int SPI_readFlashID()
         return -1;
     }
     struct spi_ioc_transfer xfer;
-    memset(&xfer, 0, sizeof(xfer));
+    (void)memset_s(&xfer, sizeof(xfer), 0, sizeof(xfer));
 
     readIDCmd[0] = 0x9f;
     readIDCmd[1] = 0x0;

@@ -13,11 +13,11 @@ int set_pwm_enable(int pwmChannel, int isEnable)
     // pwmchannel
     char pwm_file_name[128];
 
-    memset(pwm_file_name, 0, sizeof(pwm_file_name));
+    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
     if (PWM1 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/enabled", PWM1_PEX);
+        (void)sprintf_s(pwm_file_name, PWM1_PEX, "%s/enabled", PWM1_PEX);
     } else if (PWM2 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/enabled", PWM2_PEX);
+        (void)sprintf_s(pwm_file_name, PWM2_PEX, "%s/enabled", PWM2_PEX);
     } else {
         return PWM_WRONOG_CHANNEL;
     }
@@ -26,7 +26,7 @@ int set_pwm_enable(int pwmChannel, int isEnable)
         return PWM_FILE_NOT_EXIST;
     }
 
-    snprintf(buffer, sizeof(buffer), "echo %d > %s", isEnable, pwm_file_name);
+    (void)snprintf_s(buffer, sizeof(buffer), sizeof(buffer), "echo %d > %s", isEnable, pwm_file_name);
 
     system(buffer);
 
@@ -39,11 +39,11 @@ int set_pwm_period(int pwmChannel, long period)
 
     // pwmchannel
     char pwm_file_name[128];
-    memset(pwm_file_name, 0, sizeof(pwm_file_name));
+    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
     if (PWM1 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/period", PWM1_PEX);
+        (void)sprintf_s(pwm_file_name, PWM1_PEX, "%s/period", PWM1_PEX);
     } else if (PWM2 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/period", PWM2_PEX);
+        (void)sprintf_s(pwm_file_name, PWM2_PEX, "%s/period", PWM2_PEX);
     } else {
         return PWM_WRONOG_CHANNEL;
     }
@@ -57,7 +57,7 @@ int set_pwm_period(int pwmChannel, long period)
     if (period) {
         fprintf(fp, "%ld", period);
     }
-    fclose(fp);
+    (void)fclose(fp);
     return ret;
 }
 
@@ -66,27 +66,26 @@ int get_pwm_dutyCycle(int pwmChannel, long *value)
     int ret = 0;
 
     char pwm_file_name[128];
-    memset(pwm_file_name, 0, sizeof(pwm_file_name));
+    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
     if (PWM1 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/duty_cycle", PWM1_PEX);
+        (void)sprintf_s(pwm_file_name, PWM1_PEX, "%s/duty_cycle", PWM1_PEX);
     } else if (PWM2 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/duty_cycle", PWM2_PEX);
+        (void)sprintf_s(pwm_file_name, PWM2_PEX, "%s/duty_cycle", PWM2_PEX);
     } else {
         return PWM_WRONOG_CHANNEL;
     }
 
-    // printf("get_pwm_dutyCycle pwmchannel = %s", pwm_file_name);
     if (access(pwm_file_name, F_OK) != 0) {
         return PWM_FILE_NOT_EXIST;
     }
 
     FILE *fp;
     char buffer[32];
-    memset(buffer, 0, sizeof(buffer));
+    (void)memset_s(buffer, sizeof(buffer), 0, sizeof(buffer));
     fp = fopen(pwm_file_name, "r");
-    fread(buffer, sizeof(buffer), 1, fp);
+    (void)fread(buffer, sizeof(buffer), 1, fp);
 
-    fclose(fp);
+    (void)fclose(fp);
     printf("get_pwm_dutyCycle = %s\n", buffer);
     *value = atol(buffer);
 
@@ -98,27 +97,26 @@ int get_pwm_period(int pwmChannel, long *value)
     int ret = 0;
 
     char pwm_file_name[128];
-    memset(pwm_file_name, 0, sizeof(pwm_file_name));
+    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
     if (PWM1 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/period", PWM1_PEX);
+        (void)sprintf_s(pwm_file_name, PWM1_PEX, "%s/period", PWM1_PEX);
     } else if (PWM2 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/period", PWM2_PEX);
+        (void)sprintf_s(pwm_file_name, PWM2_PEX, "%s/period", PWM2_PEX);
     } else {
         return PWM_WRONOG_CHANNEL;
     }
 
-    // printf("get_pwm_period pwmchannel = %s", pwm_file_name);
     if (access(pwm_file_name, F_OK) != 0) {
         return PWM_FILE_NOT_EXIST;
     }
 
     FILE *fp;
     char buffer[32];
-    memset(buffer, 0, sizeof(buffer));
+    (void)memset(buffer, 0, sizeof(buffer));
     fp = fopen(pwm_file_name, "r");
-    fread(buffer, sizeof(buffer), 1, fp);
+    (void)fread(buffer, sizeof(buffer), 1, fp);
 
-    fclose(fp);
+    (void)fclose(fp);
     *value = atol(buffer);
 
     return ret;
@@ -130,11 +128,11 @@ int set_pwm_dutyCycle(int pwmChannel, long dutyCycle)
 
     // pwmchannel
     char pwm_file_name[128];
-    memset(pwm_file_name, 0, sizeof(pwm_file_name));
+    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
     if (PWM1 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/duty_cycle", PWM1_PEX);
+        (void)sprintf_s(pwm_file_name, PWM1_PEX, "%s/duty_cycle", PWM1_PEX);
     } else if (PWM2 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/duty_cycle", PWM2_PEX);
+        (void)sprintf_s(pwm_file_name, PWM2_PEX, "%s/duty_cycle", PWM2_PEX);
     } else {
         return PWM_WRONOG_CHANNEL;
     }
@@ -148,7 +146,7 @@ int set_pwm_dutyCycle(int pwmChannel, long dutyCycle)
     if (dutyCycle) {
         fprintf(fp, "%ld", dutyCycle);
     }
-    fclose(fp);
+    (void)fclose(fp);
     return ret;
 }
 
@@ -158,12 +156,12 @@ int is_pwm_enabled(int pwmChannel, int *value)
 
     // check pwm enabled or not
     char pwm_file_name[128];
-    memset(pwm_file_name, 0, sizeof(pwm_file_name));
+    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
     if (PWM1 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/enabled", PWM1_PEX);
+        (void)sprintf_s(pwm_file_name, PWM1_PEX, "%s/enabled", PWM1_PEX);
         printf("pwmchannel = %s", pwm_file_name);
     } else if (PWM2 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/enabled", PWM2_PEX);
+        (void)sprintf_s(pwm_file_name, PWM2_PEX, "%s/enabled", PWM2_PEX);
         printf("pwmchannel = %s\n", pwm_file_name);
     } else {
         return PWM_WRONOG_CHANNEL;
@@ -171,12 +169,10 @@ int is_pwm_enabled(int pwmChannel, int *value)
 
     if (access(pwm_file_name, F_OK) != 0) {
         return PWM_FILE_NOT_EXIST;
-
     } else {
-        //*value = PWM_IS_ENABLED;
         FILE *fp;
         char buffer[32];
-        memset(buffer, 0, sizeof(buffer));
+        (void)memset_s(buffer, sizeof(buffer), 0, sizeof(buffer));
         fp = fopen(pwm_file_name, "r");
         fread(buffer, sizeof(buffer), 1, fp);
 
@@ -193,11 +189,11 @@ int set_pwm_polarity(int pwmChannel, int polarity)
 
     // pwmchannel
     char pwm_file_name[128];
-    memset(pwm_file_name, 0, sizeof(pwm_file_name));
+    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
     if (PWM1 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/polarity", PWM1_PEX);
+        (void)sprintf_s(pwm_file_name, PWM1_PEX, "%s/polarity", PWM1_PEX);
     } else if (PWM2 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/polarity", PWM2_PEX);
+        (void)sprintf_s(pwm_file_name, PWM2_PEX, "%s/polarity", PWM2_PEX);
     } else {
         return PWM_WRONOG_CHANNEL;
     }
@@ -210,12 +206,11 @@ int set_pwm_polarity(int pwmChannel, int polarity)
     fp = fopen(pwm_file_name, "rw+");
     if (polarity == PWM_POLARITY_NORMAL) {
         fprintf(fp, "%s", "normal");
-
     } else if (polarity == PWM_POLARITY_INVERSED) {
         fprintf(fp, "%s", "inversed");
     }
 
-    fclose(fp);
+    (void)fclose(fp);
     return ret;
 }
 int get_pwm_polarity(int pwmChannel, int *value)
@@ -224,11 +219,11 @@ int get_pwm_polarity(int pwmChannel, int *value)
 
     // pwmchannel
     char pwm_file_name[128];
-    memset(pwm_file_name, 0, sizeof(pwm_file_name));
+    (void)memset(pwm_file_name, 0, sizeof(pwm_file_name));
     if (PWM1 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/polarity", PWM1_PEX);
+        (void)sprintf_s(pwm_file_name, PWM1_PEX, "%s/polarity", PWM1_PEX);
     } else if (PWM2 == pwmChannel) {
-        sprintf(pwm_file_name, "%s/polarity", PWM2_PEX);
+        (void)sprintf_s(pwm_file_name, PWM2_PEX, "%s/polarity", PWM2_PEX);
     } else {
         return PWM_WRONOG_CHANNEL;
     }
@@ -237,16 +232,15 @@ int get_pwm_polarity(int pwmChannel, int *value)
     }
     FILE *fp;
     char buffer[32];
-    memset(buffer, 0, sizeof(buffer));
+    (void)memset_s(buffer, sizeof(buffer), 0, sizeof(buffer));
     fp = fopen(pwm_file_name, "r");
-    fread(buffer, sizeof(buffer), 1, fp);
-    fclose(fp);
+    (void)fread(buffer, sizeof(buffer), 1, fp);
+    (void)fclose(fp);
 
     if (strstr(buffer, "normal") != NULL) {
         *value = PWM_POLARITY_NORMAL;
     } else if (strstr(buffer, "inversed") != NULL) {
         *value = PWM_POLARITY_INVERSED;
-
     } else {
         ret = PWM_ERR;
     }

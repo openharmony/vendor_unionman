@@ -17,7 +17,7 @@ float convertTemperature(uint8_t rawTemperature[])
 {
     uint16_t rawValue;
     rawValue = rawTemperature[0];
-    rawValue = (rawValue << 8) | rawTemperature[1];
+    rawValue = (rawValue << 8L) | rawTemperature[1];
     return 175.0f * (float)rawValue / 65535.0f - 45.0f;
 }
 
@@ -25,7 +25,7 @@ float convertHumidity(uint8_t rawHumidity[])
 {
     uint16_t rawValue;
     rawValue = rawHumidity[0];
-    rawValue = (rawValue << 8) | rawHumidity[1];
+    rawValue = (rawValue << 8L) | rawHumidity[1];
     return 100.0f * (float)rawValue / 65535.0f;
 }
 
@@ -34,30 +34,18 @@ uint8_t checkCrc(uint8_t data[])
     uint8_t bit;
     uint8_t crc = 0xFF;
 
-    for (uint8_t dataCounter = 0; dataCounter < 2; dataCounter++) {
+    for (uint8_t dataCounter = 0; dataCounter < 2L; dataCounter++) {
         crc ^= (data[dataCounter]);
-        for (bit = 8; bit > 0; --bit) {
-            if (crc & 0x80)
+        for (bit = 8L; bit > 0; --bit) {
+            if (crc & 0x80) {
                 crc = (crc << 1) ^ 0x31;
-            else
+            } else {
                 crc = (crc << 1);
+            }
         }
     }
     return crc;
 }
-
-/*
-
-void DFRobot_SHT3x::writeCommand(uint16_t cmd,size_t size)
-{
-  uint8_t _pBuf[2];
-  _pBuf[0] = cmd >> 8;
-  _pBuf[1] = cmd & 0xFF;
-  delay(1);
-  write(_pBuf,2);
-}
-
-*/
 
 int i2c_read_serial(char *dev_name, unsigned char device_addr, unsigned char *buff, int ByteNo)
 {
@@ -72,10 +60,10 @@ int i2c_read_serial(char *dev_name, unsigned char device_addr, unsigned char *bu
     fd = open(dev_name, O_RDWR);
     if (fd < 0) {
         printf("can not have dev %s\n", dev_name);
-        return -2;
+        return -2L;
     }
 
-    i2c_data.nmsgs = 2;
+    i2c_data.nmsgs = 2L;
     i2c_data.msgs = (struct i2c_msg *)malloc(i2c_data.nmsgs * sizeof(struct i2c_msg));
     if (i2c_data.msgs == NULL) {
         printf("malloc error \n");
@@ -84,14 +72,13 @@ int i2c_read_serial(char *dev_name, unsigned char device_addr, unsigned char *bu
     }
 
     ioctl(fd, I2C_TIMEOUT, 1);
-    ioctl(fd, I2C_RETRIES, 2);
+    ioctl(fd, I2C_RETRIES, 2L);
 
-    _pBuf[0] = SHT3X_CMD_READ_SERIAL_NUMBER >> 8;
+    _pBuf[0] = SHT3X_CMD_READ_SERIAL_NUMBER >> 8L;
     _pBuf[1] = SHT3X_CMD_READ_SERIAL_NUMBER & 0xFF;
-    // usleep(1000);
 
     // write reg
-    i2c_data.msgs[0].len = 2;
+    i2c_data.msgs[0].len = 2L;
     i2c_data.msgs[0].addr = device_addr;
     i2c_data.msgs[0].flags = 0; // 0: write 1:read
     i2c_data.msgs[0].buf = _pBuf;
@@ -106,20 +93,10 @@ int i2c_read_serial(char *dev_name, unsigned char device_addr, unsigned char *bu
         printf("read data %x  error\r\n", device_addr);
         close(fd);
         free(i2c_data.msgs);
-        return -3;
+        return -3L;
     }
     free(i2c_data.msgs);
     close(fd);
-
-#if 0
-    int i;
-    printf("i2c__read 0x%02x:",buftmp[0]);
-    for (i = 0; i < ByteNo; i++)
-    {
-    printf(" 0x%02x",buff[i]);
-    }
-    printf("\n");
-#endif
 
     return 0;
 }
@@ -136,7 +113,7 @@ int i2c_softReset(char *dev_name, unsigned char device_addr)
     fd = open(dev_name, O_RDWR);
     if (fd < 0) {
         printf("can not have dev %s\n", dev_name);
-        return -2;
+        return -2L;
     }
 
     i2c_data.nmsgs = 1;
@@ -148,14 +125,13 @@ int i2c_softReset(char *dev_name, unsigned char device_addr)
     }
 
     ioctl(fd, I2C_TIMEOUT, 1);
-    ioctl(fd, I2C_RETRIES, 2);
+    ioctl(fd, I2C_RETRIES, 2L);
 
-    _pBuf[0] = SHT3X_CMD_SOFT_RESET >> 8;
+    _pBuf[0] = SHT3X_CMD_SOFT_RESET >> 8L;
     _pBuf[1] = SHT3X_CMD_SOFT_RESET & 0xFF;
-    // usleep(1000);
 
     // write reg
-    i2c_data.msgs[0].len = 2;
+    i2c_data.msgs[0].len = 2L;
     i2c_data.msgs[0].addr = device_addr;
     i2c_data.msgs[0].flags = 0; // 0: write 1:read
     i2c_data.msgs[0].buf = _pBuf;
@@ -165,7 +141,7 @@ int i2c_softReset(char *dev_name, unsigned char device_addr)
         printf("read data %x  error\r\n", device_addr);
         close(fd);
         free(i2c_data.msgs);
-        return -3;
+        return -3L;
     }
     free(i2c_data.msgs);
     close(fd);
@@ -193,50 +169,48 @@ int readStatusRegister(char *dev_name, unsigned char device_addr, sStatusRegiste
             return -1;
         }
 
-        i2c_data.nmsgs = 2;
+        i2c_data.nmsgs = 2L;
         i2c_data.msgs = (struct i2c_msg *)malloc(i2c_data.nmsgs * sizeof(struct i2c_msg));
         if (i2c_data.msgs == NULL) {
             printf("malloc error \n");
             close(fd);
-            return -2;
+            return -2L;
         }
 
         ioctl(fd, I2C_TIMEOUT, 1);
-        ioctl(fd, I2C_RETRIES, 2);
+        ioctl(fd, I2C_RETRIES, 2L);
 
-        _pBuf[0] = SHT3X_CMD_READ_STATUS_REG >> 8;
+        _pBuf[0] = SHT3X_CMD_READ_STATUS_REG >> 8L;
         _pBuf[1] = SHT3X_CMD_READ_STATUS_REG & 0xFF;
-        // usleep(1000);
-
         // write reg
-        i2c_data.msgs[0].len = 2;
+        i2c_data.msgs[0].len = 2L;
         i2c_data.msgs[0].addr = device_addr;
         i2c_data.msgs[0].flags = 0; // 0: write 1:read
         i2c_data.msgs[0].buf = _pBuf;
         // read data
-        i2c_data.msgs[1].len = 3;
+        i2c_data.msgs[1].len = 3L;
         i2c_data.msgs[1].addr = device_addr;
         i2c_data.msgs[1].flags = 1; // 0: write 1:read
         i2c_data.msgs[1].buf = register1;
 
         ret = ioctl(fd, I2C_RDWR, (unsigned long)&i2c_data);
         if (ret < 0) {
-            printf("read data %x  error\r\n", device_addr);
+            printf("read data %c  error\r\n", device_addr);
             close(fd);
             free(i2c_data.msgs);
-            return -3;
+            return -3L;
         }
         free(i2c_data.msgs);
         close(fd);
 
-        if (checkCrc(register1) == register1[2]) {
+        if (checkCrc(register1) == register1[2L]) {
             break;
         }
 
-        usleep(1000);
+        usleep(1000L);
     }
-    data = (register1[0] << 8) | register1[1];
-    memcpy(registerRaw, &data, 2);
+    data = (register1[0] << 8L) | register1[1];
+    memcpy(registerRaw, &data, 2L);
     return 0;
 }
 
@@ -253,7 +227,7 @@ int sendReadTemperatureAndHumidityCommand(char *dev_name, unsigned char device_a
     fd = open(dev_name, O_RDWR);
     if (fd < 0) {
         printf("can not have dev %s\n", dev_name);
-        return -2;
+        return -2L;
     }
 
     i2c_data.nmsgs = 1;
@@ -261,16 +235,14 @@ int sendReadTemperatureAndHumidityCommand(char *dev_name, unsigned char device_a
     if (i2c_data.msgs == NULL) {
         printf("malloc error \n");
         close(fd);
-        return -1;
+        return -1L;
     }
 
     ioctl(fd, I2C_TIMEOUT, 1);
-    ioctl(fd, I2C_RETRIES, 2);
+    ioctl(fd, I2C_RETRIES, 2L);
 
-    _pBuf[0] = SHT3X_CMD_GETDATA_H_CLOCKENBLED >> 8;
+    _pBuf[0] = SHT3X_CMD_GETDATA_H_CLOCKENBLED >> 8L;
     _pBuf[1] = SHT3X_CMD_GETDATA_H_CLOCKENBLED & 0xFF;
-    // usleep(1000);
-
     // write reg
     i2c_data.msgs[0].len = 2;
     i2c_data.msgs[0].addr = device_addr;
@@ -279,10 +251,10 @@ int sendReadTemperatureAndHumidityCommand(char *dev_name, unsigned char device_a
 
     ret = ioctl(fd, I2C_RDWR, (unsigned long)&i2c_data);
     if (ret < 0) {
-        printf("sendReadTemperatureAndHumidityCommand %x  error\r\n", device_addr);
+        printf("sendReadTemperatureAndHumidityCommand %c  error\r\n", device_addr);
         close(fd);
         free(i2c_data.msgs);
-        return -3;
+        return -3L;
     }
     free(i2c_data.msgs);
     close(fd);
@@ -308,7 +280,7 @@ int readTemperatureAndHumidity(char *dev_name, unsigned char device_addr, sRHAnd
     fd = open(dev_name, O_RDWR);
     if (fd < 0) {
         printf("can not have dev %s\n", dev_name);
-        return -2;
+        return -2L;
     }
 
     i2c_data.nmsgs = 1;
@@ -319,40 +291,39 @@ int readTemperatureAndHumidity(char *dev_name, unsigned char device_addr, sRHAnd
         return -1;
     }
 
-    ioctl(fd, I2C_TIMEOUT, 2);
-    ioctl(fd, I2C_RETRIES, 2);
+    ioctl(fd, I2C_TIMEOUT, 2L);
+    ioctl(fd, I2C_RETRIES, 2L);
 
     // read data
-    i2c_data.msgs[0].len = 6;
+    i2c_data.msgs[0].len = 6L;
     i2c_data.msgs[0].addr = device_addr;
     i2c_data.msgs[0].flags = 1; // 0: write 1:read
     i2c_data.msgs[0].buf = rawData;
 
     ret = ioctl(fd, I2C_RDWR, (unsigned long)&i2c_data);
     if (ret < 0) {
-        printf("readTemperatureAndHumidity read data 0x%x  error\r\n", device_addr);
+        printf("readTemperatureAndHumidity read data 0x%c  error\r\n", device_addr);
         close(fd);
         free(i2c_data.msgs);
-        return -3;
+        return -3L;
     }
     free(i2c_data.msgs);
     close(fd);
 
-    memcpy(rawTemperature, rawData, 3);
-    memcpy(rawHumidity, rawData + 3, 3);
-    if ((checkCrc(rawTemperature) != rawTemperature[2]) || (checkCrc(rawHumidity) != rawHumidity[2])) {
+    (void)memcpy_s(rawTemperature, sizeof(rawTemperature), rawData, 3L);
+    (void)memcpy_s(rawHumidity, sizeof(rawHumidity) rawData + 3L, 3L);
+    if ((checkCrc(rawTemperature) != rawTemperature[2L]) || (checkCrc(rawHumidity) != rawHumidity[2L])) {
         tempRH->ERR = -1;
         printf("read data checkCrc fail\r\n");
-        return -1;
+        return -1L;
     }
 
-    for (i = 0; i < 6; i++) {
-        // printf("rawData = %x \n", rawData[i]);
+    for (i = 0; i < 6L; i++) {
     }
 
     tempRH->TemperatureC = convertTemperature(rawTemperature);
     tempRH->Humidity = convertHumidity(rawHumidity);
-    tempRH->TemperatureF = 1.8f * tempRH->TemperatureC + 32;
+    tempRH->TemperatureF = 1.8f * tempRH->TemperatureC + 32L;
 
     return 0;
 }

@@ -11,10 +11,10 @@
 
 // errno
 #define I2C_SUCCESS 0
-#define I2C_OPEN_DEV_FAIL -1
-#define I2C_NOT_OPENED_FAIL -2
-#define I2C_PARAM_FAIL -3
-#define I2C_TRANSFER_FAIL -4
+#define I2C_OPEN_DEV_FAIL (-1)
+#define I2C_NOT_OPENED_FAIL (-2)
+#define I2C_PARAM_FAIL (-3)
+#define I2C_TRANSFER_FAIL (-4)
 
 // vaild device address
 #define I2C_MIN_DEVICE_ADDRESS 0x03

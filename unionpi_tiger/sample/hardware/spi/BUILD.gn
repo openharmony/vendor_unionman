@@ -31,9 +31,8 @@ ohos_executable("spi_test") {
     "um_spi.c",
   ]
 
-  include_dirs = [
-    "//base/hiviewdfx/hilog/interfaces/native/innerkits/include",
-  ]
+  include_dirs =
+      [ "//base/hiviewdfx/hilog/interfaces/native/innerkits/include" ]
 
   configs = [ ":warns" ]
 
@@ -42,8 +41,4 @@ ohos_executable("spi_test") {
   external_deps = [ "hiviewdfx_hilog_native:libhilog" ]
 
   install_images = [ "system" ]
-
 }
-
-
-

@@ -24,12 +24,12 @@
 
 // errno
 #define SPI_SUCCESS 0
-#define SPI_OPEN_DEV_FAIL -1
-#define SPI_NOT_OPENED_FAIL -2
-#define SPI_SET_MODE_FAIL -3
-#define SPI_GET_MODE_FAIL -4
-#define SPI_PARAM_FAIL -5
-#define SPI_TRANSFER_FAIL -6
+#define SPI_OPEN_DEV_FAIL (-1)
+#define SPI_NOT_OPENED_FAIL (-2)
+#define SPI_SET_MODE_FAIL (-3)
+#define SPI_GET_MODE_FAIL (-4)
+#define SPI_PARAM_FAIL (-5)
+#define SPI_TRANSFER_FAIL (-6)
 
 #define DEFAULT_DEV "/dev/spidev32766.0"
 
@@ -52,7 +52,7 @@ typedef struct SPIStruct {
 } HARDWARE_SPI;
 
 //函数功能：打开40_ext上的spi接口
-int DEV_HARDWARE_SPI_begin();
+int DEV_HARDWARE_SPI_begin(void);
 
 //功能函数：关闭40_ext上的spi接口
 int DEV_HARDWARE_SPI_end(void);
