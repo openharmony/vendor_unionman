@@ -48,24 +48,24 @@ enum {
 void print_usage(char *prg)
 {
     (void)fprintf(stderr,
-            "Usage: %s [<can-interface>] [Options]\n"
-            "\n"
-            "cansequence sends CAN messages with a rising sequence number as payload.\n"
-            "When the -r option is given, cansequence expects to receive these messages\n"
-            "and prints an error message if a wrong sequence number is encountered.\n"
-            "The main purpose of this program is to test the reliability of CAN links.\n"
-            "\n"
-            "Options:\n"
-            " -e  --extended		send extended frame\n"
-            " -i, --identifier=ID	CAN Identifier (default = %u)\n"
-            " -r, --receive		work as receiver\n"
-            "     --loop=COUNT	send message COUNT times\n"
-            " -p  --poll		use poll(2) to wait for buffer space while sending\n"
-            " -q  --quit		quit if a wrong sequence is encountered\n"
-            " -v, --verbose		be verbose (twice to be even more verbose\n"
-            " -h  --help		this help\n"
-            "     --version		print version information and exit\n",
-            prg, CAN_ID_DEFAULT);
+                  "Usage: %s [<can-interface>] [Options]\n"
+                  "\n"
+                  "cansequence sends CAN messages with a rising sequence number as payload.\n"
+                  "When the -r option is given, cansequence expects to receive these messages\n"
+                  "and prints an error message if a wrong sequence number is encountered.\n"
+                  "The main purpose of this program is to test the reliability of CAN links.\n"
+                  "\n"
+                  "Options:\n"
+                  " -e  --extended		send extended frame\n"
+                  " -i, --identifier=ID	CAN Identifier (default = %u)\n"
+                  " -r, --receive		work as receiver\n"
+                  "     --loop=COUNT	send message COUNT times\n"
+                  " -p  --poll		use poll(2) to wait for buffer space while sending\n"
+                  " -q  --quit		quit if a wrong sequence is encountered\n"
+                  " -v, --verbose		be verbose (twice to be even more verbose\n"
+                  " -h  --help		this help\n"
+                  "     --version		print version information and exit\n",
+                  prg, CAN_ID_DEFAULT);
 }
 
 void sigterm(int signo)
