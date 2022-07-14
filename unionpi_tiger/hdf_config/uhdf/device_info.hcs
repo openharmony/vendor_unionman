@@ -36,7 +36,7 @@
         bluetooth :: host {
             hostName = "blue_host";
             priority = 50;
-            caps = ["DAC_OVERRIDE", "DAC_READ_SEARCH", "NET_ADMIN"];
+            caps = ["NET_ADMIN"];
             bluetooth_device :: device {
                 device0 :: deviceNode {
                     policy = 2;
@@ -49,7 +49,6 @@
         audio_bluetooth :: host {
             hostName = "a2dp_host";
             priority = 50;
-            caps = ["DAC_OVERRIDE", "DAC_READ_SEARCH"];
             bluetooth_device :: device {
                 device0 :: deviceNode {
                     policy = 2;
@@ -117,8 +116,7 @@
             hostName = "power_host";
             priority = 50;
             uid = "power_host";
-            gid = "power_host";
-            caps = ["DAC_OVERRIDE", "DAC_READ_SEARCH"];
+            gid = ["power_host", "system"];
             power_device :: device {
                 device0 :: deviceNode {
                     policy = 2;
@@ -147,13 +145,13 @@
         wlan :: host {
             hostName = "wifi_host";
             priority = 50;
-            caps = ["DAC_OVERRIDE", "DAC_READ_SEARCH"];
+            gid = ["wifi_host", "wifi_group"];
             wifi_device :: device {
                 device0 :: deviceNode {
                     policy = 2;
                     priority = 100;
                     moduleName = "libwifi_hdi_c_device.z.so";
-                    serviceName = "wlan_hal_c_service";
+                    serviceName = "wlan_hal_service";
                 }
             }
         }
@@ -197,7 +195,7 @@
         hdi_server :: host {
             hostName = "camera_host";
             priority = 50;
-            caps = ["DAC_OVERRIDE", "DAC_READ_SEARCH"];
+            caps = ["DAC_OVERRIDE"];
             camera_device :: device {
                  device0 :: deviceNode {
                      policy = 2;
@@ -206,7 +204,7 @@
                      serviceName = "camera_service";
                  }
              }
-            display_device :: device {
+	        display_device :: device {
                 device0 :: deviceNode {
                     policy = 2;
                     priority = 120;
@@ -240,7 +238,6 @@
         display_gralloc :: host {
             hostName = "disp_gralloc_host";
             priority = 40;
-            caps = ["DAC_OVERRIDE", "DAC_READ_SEARCH"];
             input_device :: device {
                 device0 :: deviceNode {
                     policy = 2;
@@ -312,8 +309,7 @@
             hostName = "face_auth_host";
             priority = 50;
             uid = "useriam";
-            gid = "useriam";
-            caps = ["DAC_OVERRIDE", "DAC_READ_SEARCH"];
+            gid = ["useriam"];
             face_auth_device :: device {
                 device0 :: deviceNode {
                     policy = 2;
@@ -328,8 +324,7 @@
             hostName = "pin_auth_host";
             priority = 50;
             uid = "useriam";
-            gid = "useriam";
-            caps = ["DAC_OVERRIDE", "DAC_READ_SEARCH"];
+            gid = ["useriam"];
             pin_auth_device :: device {
                 device0 :: deviceNode {
                     policy = 2;
@@ -344,8 +339,7 @@
             hostName = "user_auth_host";
             priority = 50;
             uid = "useriam";
-            gid = "useriam";
-            caps = ["DAC_OVERRIDE", "DAC_READ_SEARCH"];
+            gid = ["useriam"];
             user_auth_device :: device {
                 device0 :: deviceNode {
                     policy = 2;
@@ -360,8 +354,7 @@
             hostName = "fingerprint_auth_host";
             priority = 50;
             uid = "useriam";
-            gid = "useriam";
-            caps = ["DAC_OVERRIDE", "DAC_READ_SEARCH"];
+            gid = ["useriam"];
             fingerprint_device :: device {
                 device0 :: deviceNode {
                     policy = 2;
@@ -369,6 +362,37 @@
                     moduleName = "libfingerprint_auth_driver.z.so";
                     serviceName = "fingerprint_auth_interface_service";
                 }
+            }
+        }
+
+        location :: host { 
+            hostName = "location_host"; 
+            priority = 50; 
+            uid = "location_host";
+            gid = ["location_host"];
+            location_gnss_device :: device { 
+                device0 :: deviceNode { 
+                    policy = 2; 
+                    priority = 100; 
+                    moduleName = "liblocation_gnss_hdi_driver.z.so"; 
+                    serviceName = "gnss_interface_service"; 
+                } 
+            }
+            location_agnss_device :: device { 
+                device0 :: deviceNode { 
+                    policy = 2; 
+                    priority = 100; 
+                    moduleName = "liblocation_agnss_hdi_driver.z.so"; 
+                    serviceName = "agnss_interface_service"; 
+                } 
+            }
+            location_geofence_device :: device { 
+                device0 :: deviceNode { 
+                    policy = 2; 
+                    priority = 100; 
+                    moduleName = "liblocation_geofence_hdi_driver.z.so"; 
+                    serviceName = "geofence_interface_service"; 
+                } 
             }
         }
     }
