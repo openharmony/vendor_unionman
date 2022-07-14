@@ -1,5 +1,5 @@
 root {
-    platfrom {
+    platform {
         template dai_controller {
             match_attr = "";
             serviceName = "";
@@ -37,9 +37,9 @@ root {
                         "External Codec Enable",
                         "Internally Codec Enable",
                     */
-                    /* array index, iface, enable */
-                    6,  4,  0,
-                    7,  4,  0
+                    /* array index, iface, mixer/mux, enable */
+                    6,  4,  0,  0,
+                    7,  4,  0,  0
                 ];
             }
         }
