@@ -198,19 +198,19 @@
                     serviceName = "hdf_disp";
                 }
             }
-            device_hi35xx_disp :: device {
-                device0 :: deviceNode {
-                    policy = 0;
-                    priority = 195;
-                    moduleName = "HI351XX_DISP";
-                }
-            }
             device_lcd :: device {
                 device0 :: deviceNode {
                     policy = 0;
                     priority = 100;
+                    preload = 2;
+                    moduleName = "LITE_LCDKIT";
+                    deviceMatchAttr = "hdf_lcdkit_driver";
+                }
+                device1 :: deviceNode {
+                    policy = 0;
+                    priority = 100;
                     preload = 0;
-                    moduleName = "LCD_ICN9700";
+                    moduleName = "LCD_ICN6211";
                 }
             }
             device_pwm_bl :: device {
