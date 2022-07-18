@@ -19,7 +19,7 @@ ohos_executable("led_light") {
 
   include_dirs = [ "//third_party/bounds_checking_function/include" ]
 
-  deps = [ "//drivers/peripheral/misc/light/hal:hdi_light" ]
+  deps = [ "//drivers/peripheral/light/hal:hdi_light" ]
 
   external_deps = [
     "hdf_core:libhdf_utils",
