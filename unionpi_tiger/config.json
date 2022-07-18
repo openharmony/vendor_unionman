@@ -40,10 +40,10 @@
       ]
     },
     {
-      "subsystem": "amlogic_products",
+      "subsystem": "unionman_products",
       "components": [
         {
-          "component": "amlogic_products",
+          "component": "unionman_products",
           "features": []
         }
       ]
