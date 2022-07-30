@@ -34,9 +34,10 @@ ohos_executable("canconfig") {
 
   configs = [ ":warns" ]
 
-  deps = [ "//utils/native/base:utils" ]
-
-  external_deps = [ "hiviewdfx_hilog_native:libhilog" ]
+  external_deps = [
+    "c_utils:utils",
+    "hiviewdfx_hilog_native:libhilog",
+  ]
 
   install_images = [ "system" ]
 }
@@ -50,9 +51,10 @@ ohos_executable("candump") {
 
   configs = [ ":warns" ]
 
-  deps = [ "//utils/native/base:utils" ]
-
-  external_deps = [ "hiviewdfx_hilog_native:libhilog" ]
+  external_deps = [
+    "c_utils:utils",
+    "hiviewdfx_hilog_native:libhilog",
+  ]
 
   install_images = [ "system" ]
 }
@@ -66,9 +68,10 @@ ohos_executable("canecho") {
 
   configs = [ ":warns" ]
 
-  deps = [ "//utils/native/base:utils" ]
-
-  external_deps = [ "hiviewdfx_hilog_native:libhilog" ]
+  external_deps = [
+    "c_utils:utils",
+    "hiviewdfx_hilog_native:libhilog",
+  ]
 
   install_images = [ "system" ]
 }
@@ -82,9 +85,10 @@ ohos_executable("cansend") {
 
   configs = [ ":warns" ]
 
-  deps = [ "//utils/native/base:utils" ]
-
-  external_deps = [ "hiviewdfx_hilog_native:libhilog" ]
+  external_deps = [
+    "c_utils:utils",
+    "hiviewdfx_hilog_native:libhilog",
+  ]
 
   install_images = [ "system" ]
 }
@@ -98,9 +102,10 @@ ohos_executable("cansequence") {
 
   configs = [ ":warns" ]
 
-  deps = [ "//utils/native/base:utils" ]
-
-  external_deps = [ "hiviewdfx_hilog_native:libhilog" ]
+  external_deps = [
+    "c_utils:utils",
+    "hiviewdfx_hilog_native:libhilog",
+  ]
 
   install_images = [ "system" ]
 }
