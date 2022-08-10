@@ -13,8 +13,8 @@ root {
             }
 
             device_pwm_0x00000001 :: pwm_device {
-                num = 1;
-                match_attr = "linux_pwm_adapter_1";
+                num = 2;
+                match_attr = "linux_pwm_adapter_2";
             }
         }
     }
