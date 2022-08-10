@@ -164,8 +164,8 @@
                     priority = 80;
                     permission = 0644;
                     moduleName = "HDF_PLATFORM_PWM";
-                    serviceName = "HDF_PLATFORM_PWM_1";
-                    deviceMatchAttr = "linux_pwm_adapter_1";
+                    serviceName = "HDF_PLATFORM_PWM_2";
+                    deviceMatchAttr = "linux_pwm_adapter_2";
                }
            }
             device_mipi_dsi:: device {
