@@ -34,6 +34,13 @@
             priority = 50;
             device_gpio :: device {
                 device0 :: deviceNode {
+                    policy = 2;
+                    priority = 10;
+                    permission = 0644;
+                    moduleName = "HDF_PLATFORM_GPIO_MANAGER";
+                    serviceName = "HDF_PLATFORM_GPIO_MANAGER";
+                }
+                device1 :: deviceNode {
                     policy = 0;
                     priority = 10;
                     permission = 0644;
@@ -107,7 +114,7 @@
             }
             device_spi :: device {
                 device0 :: deviceNode {
-                    policy = 1;
+                    policy = 2;
                     priority = 60;
                     permission = 0644;
                     moduleName = "HDF_PLATFORM_SPI";
@@ -115,20 +122,12 @@
                     deviceMatchAttr = "amlogic_a311d_spi_0";
                 }
                 device1 :: deviceNode {
-                    policy = 1;
+                    policy = 2;
                     priority = 60;
                     permission = 0644;
                     moduleName = "HDF_PLATFORM_SPI";
                     serviceName = "HDF_PLATFORM_SPI_1";
                     deviceMatchAttr = "amlogic_a311d_spi_1";
-                }
-                device2 :: deviceNode {
-                    policy = 1;
-                    priority = 60;
-                    permission = 0644;
-                    moduleName = "HDF_PLATFORM_SPI";
-                    serviceName = "HDF_PLATFORM_SPI_2";
-                    deviceMatchAttr = "amlogic_a311d_spi_2";
                 }
             }
             device_sdio :: device {
@@ -153,7 +152,7 @@
             }
             device_pwm :: device {
                device0 :: deviceNode {
-                    policy = 1;
+                    policy = 2;
                     priority = 80;
                     permission = 0644;
                     moduleName = "HDF_PLATFORM_PWM";
@@ -161,7 +160,7 @@
                     deviceMatchAttr = "linux_pwm_adapter_0";
                }
                device1 :: deviceNode {
-                    policy = 1;
+                    policy = 2;
                     priority = 80;
                     permission = 0644;
                     moduleName = "HDF_PLATFORM_PWM";
