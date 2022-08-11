@@ -73,7 +73,7 @@ root {
                     busConfig {
                         // 0:i2c 1:spi
                         busType = 0;
-                        busNum = 3;
+                        busNum = 7;
                         clkGpio = 2;
                         dataGpio = 1;
                         i2cClkIomux = [0x0, 0x0];
