@@ -15,28 +15,27 @@ import("//build/ohos.gni")
 import("//build/ohos/ndk/ndk.gni")
 
 config("warns") {
-  cflags = [
-    "-Wno-unused-variable",
-    "-Wno-implicit-function-declaration",
-  ]
+  cflags = [ "-Werror" ]
 }
 
 ohos_executable("i2c_test") {
   output_name = "i2c_test"
   sources = [
+    "i2cinterface.c",
     "main.c",
-    "um_i2c.c",
   ]
 
-  include_dirs =
-      [ "//base/hiviewdfx/hilog/interfaces/native/innerkits/include" ]
+  include_dirs = [
+    "//base/hiviewdfx/hilog/interfaces/native/innerkits/include",
+    "//utils/native/base/include",
+  ]
 
   configs = [ ":warns" ]
 
-  external_deps = [
-    "c_utils:utils",
-    "hiviewdfx_hilog_native:libhilog",
-  ]
+  deps = [ "//utils/native/base:utils" ]
+
+  external_deps = [ "hiviewdfx_hilog_native:libhilog" ]
 
   install_images = [ "system" ]
+  part_name = "unionman_products"
 }
