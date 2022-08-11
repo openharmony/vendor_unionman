@@ -14,5 +14,9 @@
 import("//build/ohos.gni")
 
 group("hdf") {
-  deps = [ "led_light:led_light" ]
+  deps = [
+    "gpio:gpio",
+    "led_light:led_light",
+    "pwm:pwm",
+  ]
 }
