@@ -20,25 +20,29 @@
 #define UM_GPIO_UNEXPORT "/sys/class/gpio/unexport"
 #define UM_GPIO_PEX "/sys/class/gpio/gpio"
 
-// gpios                                 raspberry pie
-#define UM_GPIO_01 378 /* GPIO.7 */
-#define UM_GPIO_02 379 /* GPIO.0 */
-#define UM_GPIO_03 380 /* GPIO.2 */
-#define UM_GPIO_04 381 /* GPIO.3 */
-#define UM_GPIO_05 382 /* GPIO.21 */
-#define UM_GPIO_06 383 /* GPIO.22 */
-#define UM_GPIO_07 384 /* GPIO.23 */
-#define UM_GPIO_08 385 /* GPIO.24 */
-#define UM_GPIO_09 386 /* GPIO.25 */
-#define UM_GPIO_10 387 /* GPIO.1 */
-#define UM_GPIO_11 388 /* GPIO.4 */
-#define UM_GPIO_12 389 /* GPIO.5 */
-#define UM_GPIO_13 390 /* GPIO.6 */
-#define UM_GPIO_14 391 /* GPIO.30 */
-#define UM_GPIO_15 392 /* GPIO.26 */
-#define UM_GPIO_16 393 /* GPIO.27 */
-#define UM_GPIO_17 409 /* GPIO.28 */
-#define UM_GPIO_18 408 /* GPIO.29 */
+// hilog
+#undef LOG_DOMAIN
+#undef LOG_TAG
+#define LOG_DOMAIN 0  // 标识业务领域，范围0x0~0xFFFFF
+#define LOG_TAG "GPIO_TEST"
+
+// gpios
+#define UM_GPIO_01 380 /* GPIO.7 */
+#define UM_GPIO_02 381 /* GPIO.0 */
+#define UM_GPIO_03 382 /* GPIO.2 */
+#define UM_GPIO_04 383 /* GPIO.3 */
+#define UM_GPIO_05 384 /* GPIO.21 */
+#define UM_GPIO_06 385 /* GPIO.22 */
+#define UM_GPIO_07 386 /* GPIO.23 */
+#define UM_GPIO_08 387 /* GPIO.24 */
+#define UM_GPIO_09 388 /* GPIO.25 */
+#define UM_GPIO_10 389 /* GPIO.1 */
+#define UM_GPIO_11 390 /* GPIO.4 */
+#define UM_GPIO_12 391 /* GPIO.5 */
+#define UM_GPIO_13 392 /* GPIO.6 */
+#define UM_GPIO_14 393 /* GPIO.30 */
+#define UM_GPIO_15 394 /* GPIO.26 */
+#define UM_GPIO_16 395 /* GPIO.27 */
 
 // spi cs
 #define UM_GPIO_SPI_CS 486 /* SS0 */
@@ -53,27 +57,52 @@
 
 // errno
 #define UM_GPIO_ERR (-1)
-#define UM_GPIO_NOT_EXPROT (-2)
+#define UM_GPIO_NOT_EXPROT_ERROR (-2)
 
 // value high - low level
 #define UM_GPIO_LOW_LEVE 0
 #define UM_GPIO_HIGH_LEVE 1
 
-#define UM_GPIO_IN 0
-#define UM_GPIO_OUT 1
+/**
+ * set gpio export
+ * @param gpioNum gpioNum
+ * @param bExport export,0:not export 1:export
+ */
+int UM_GPIO_Export(int gpioNum, int bExport);
 
-#define UM_GPIO_NOT_EXPROT_ERROR (-2)
+/**
+ * set gpio direction
+ * @param gpioNum gpioNum
+ * @param direction direction,0:in 1:out
+ */
+int UM_GPIO_SetDirection(int gpioNum, int direction);
 
-int UM_GPIO_Export(int s32GpioNum, int bExport);
+/**
+ * set gpio value
+ * @param gpioNum gpioNum
+ * @param value value,0:low 1:high
+ */
+int UM_GPIO_SetValue(int gpioNum, int value);
 
-int UM_GPIO_SetDirection(int s32GpioNum, int direction);
+/**
+ * check gpio export or not
+ * @param gpioNum gpioNum
+ * @param *value export,0:not export 1:exported
+ */
+int UM_GPIO_IsExport(int gpioNum, int *value);
 
-int UM_GPIO_SetValue(int s32GpioNum, int s32Value);
+/**
+ * get gpio direction
+ * @param gpioNum gpioNum
+ * @param *value direction,0:in 1:out
+ */
+int UM_GPIO_GetDirection(int gpioNum, int *value);
 
-int UM_GPIO_IsExport(int s32GpioNum, int *ps32Value);
-
-int UM_GPIO_GetDirection(int s32GpioNum, int *ps32Value);
-
-int UM_GPIO_GetValue(int s32GpioNum, int *ps32Value);
+/**
+ * get gpio value
+ * @param gpioNum gpioNum
+ * @param *value value,0:low 1:high
+ */
+int UM_GPIO_GetValue(int gpioNum, int *value);
 
 #endif /* __UM_GPIO_H__ */
