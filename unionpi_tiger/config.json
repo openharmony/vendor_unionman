@@ -5,9 +5,11 @@
   "target_cpu": "arm",
   "type": "standard",
   "version": "3.0",
+  "api_version": 8,
   "board": "unionpi_tiger",
   "enable_ramdisk": true,
   "build_selinux": true,
+  "build_seccomp": true,
   "inherit": [ "productdefine/common/inherit/rich.json", "productdefine/common/inherit/chipset_common.json" ],
   "subsystems": [
     {
@@ -34,7 +36,7 @@
         {
           "component": "graphic_standard",
           "features": [
-            "graphic_standard_feature_ace_enable_gpu = false"
+            "graphic_standard_feature_ace_enable_gpu = true"
           ]
         }
       ]
@@ -67,6 +69,33 @@
           "component": "wpa_supplicant-2.9",
           "features": [
             "wpa_supplicant_driver_nl80211 = true"
+          ]
+        }
+      ]
+    },
+    {
+      "subsystem": "hdf",
+      "components": [
+        {
+          "component": "drivers_interface_audio",
+          "features": []
+        },
+        {
+          "component": "drivers_peripheral_audio",
+          "features": [
+            "drivers_peripheral_audio_alsa_lib = false"
+          ]
+        }
+      ]
+    },
+    {
+      "subsystem": "startup",
+      "components": [
+        {
+          "component": "init",
+          "features": [
+            "enable_ohos_startup_init_feature_ab_partition = false",
+            "enable_ohos_startup_init_feature_loader = false"
           ]
         }
       ]
