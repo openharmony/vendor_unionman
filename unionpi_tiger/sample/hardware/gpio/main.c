@@ -22,32 +22,41 @@
 
 int main(int argc, char **argv)
 {
-    int s32GpioNum = UM_GPIO_09;
+    int gpioNum = UM_GPIO_07;
     int bExport = UM_GPIO_EXPORTED;
     int direction = UM_GPIO_DIRECTION_OUT;
-    int s32Value = UM_GPIO_HIGH_LEVE;
-    int s32GetValue = -1;
+    int value = UM_GPIO_HIGH_LEVE;
+    int getValue = -1;
 
-    /* 本例子只是模拟一个gpio口（GPIO_09）
-    来做设置out模式，且将其设置为高电平
-    有需要的话可以自己设置程序来控制gpio */
+    // 判断是否有输入参数，如有，则赋值指定gpio口
     if (argv[1] != NULL) {
-        s32GpioNum = atoi(argv[1]);
+        getValue = atoi(argv[1]);
+        if (getValue >= UM_GPIO_01 && getValue <= UM_GPIO_16) {
+            gpioNum = getValue;
+        } else {
+            printf("please input the gpioNum between 380 and 395.\n");
+            return UM_GPIO_ERR;
+        }
     }
 
-    UM_GPIO_IsExport(s32GpioNum, &s32GetValue);
-    if (s32GetValue == UM_GPIO_NOT_EXPORT) {
-        UM_GPIO_Export(s32GpioNum, bExport);
+    // 判断gpio口是否已经导出，如未导出则执行对应函数
+    UM_GPIO_IsExport(gpioNum, &getValue);
+    if (getValue == UM_GPIO_NOT_EXPORT) {
+        UM_GPIO_Export(gpioNum, bExport);
     }
 
-    UM_GPIO_SetDirection(s32GpioNum, direction);
-    UM_GPIO_SetValue(s32GpioNum, s32Value);
+    // 设置gpio口为输入或输出模式
+    UM_GPIO_SetDirection(gpioNum, direction);
+    // 设置gpio口为高低电平
+    UM_GPIO_SetValue(gpioNum, value);
 
-    UM_GPIO_GetDirection(s32GpioNum, &s32GetValue);
-    printf("s32GpioNum:[%d], direction:[%d]\n", s32GpioNum, s32GetValue);
+    // 获取对应gpio口的模式并打印
+    UM_GPIO_GetDirection(gpioNum, &getValue);
+    printf("gpioNum:[%d], direction:[%d]\n", gpioNum, getValue);
 
-    UM_GPIO_GetValue(s32GpioNum, &s32GetValue);
-    printf("s32GpioNum:[%d], value:[%d]\n", s32GpioNum, s32GetValue);
+    // 获取对应gpio口的电平值并打印
+    UM_GPIO_GetValue(gpioNum, &getValue);
+    printf("gpioNum:[%d], value:[%d]\n", gpioNum, getValue);
 
     return 0;
 }
