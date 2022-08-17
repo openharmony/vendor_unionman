@@ -15,13 +15,7 @@ import("//build/ohos.gni")
 import("//build/ohos/ndk/ndk.gni")
 
 config("warns") {
-  cflags = [
-    "-Wno-misleading-indentation",
-    "-Wno-parentheses",
-    "-Wno-macro-redefined",
-    "-Wno-unused-variable",
-    "-Wno-implicit-function-declaration",
-  ]
+  cflags = [ "-Werror" ]
 }
 
 ohos_executable("spi_test") {
@@ -30,16 +24,20 @@ ohos_executable("spi_test") {
     "main.c",
     "um_spi.c",
   ]
-
-  include_dirs =
-      [ "//base/hiviewdfx/hilog/interfaces/native/innerkits/include" ]
+  include_dirs = [
+    "//base/hiviewdfx/hilog/interfaces/native/innerkits/include",
+    "//utils/native/base/include/securec.h",
+  ]
 
   configs = [ ":warns" ]
 
+  deps = [ "//utils/native/base:utils" ]
+
   external_deps = [
-    "c_utils:utils",
     "hiviewdfx_hilog_native:libhilog",
+    "utils_base:utils",
   ]
 
   install_images = [ "system" ]
+  part_name = "unionman_products"
 }
