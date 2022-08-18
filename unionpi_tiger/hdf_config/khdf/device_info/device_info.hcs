@@ -86,14 +86,6 @@
                     serviceName = "HDF_PLATFORM_UART_1";
                     deviceMatchAttr = "amlogic_a311d_uart_1";
                 }
-                device2 :: deviceNode {
-                    policy = 2;
-                    permission = 0644;
-                    priority = 40;
-                    moduleName = "HDF_PLATFORM_UART";
-                    serviceName = "HDF_PLATFORM_UART_2";
-                    deviceMatchAttr = "amlogic_a311d_uart_2";
-                }
             }
             device_i2c :: device {
                 device0 :: deviceNode {

@@ -9,18 +9,13 @@ root {
             }
 
             device_uart_0x0000 :: uart_device {
-                driver_name = "ttyS0";
+                num = 0;
                 match_attr = "amlogic_a311d_uart_0";
             }
 
             device_uart_0x0001 :: uart_device {
                 num = 1;
                 match_attr = "amlogic_a311d_uart_1";
-            }
-
-            device_uart_0x0002 :: uart_device {
-                num = 1;
-                match_attr = "amlogic_a311d_uart_2";
             }
         }
     }
