@@ -26,16 +26,14 @@ ohos_executable("spi_test") {
   ]
   include_dirs = [
     "//base/hiviewdfx/hilog/interfaces/native/innerkits/include",
-    "//utils/native/base/include/securec.h",
+    "//commonlibrary/c_utils/base/include/securec.h",
   ]
 
   configs = [ ":warns" ]
 
-  deps = [ "//utils/native/base:utils" ]
-
   external_deps = [
+    "c_utils:utils",
     "hiviewdfx_hilog_native:libhilog",
-    "utils_base:utils",
   ]
 
   install_images = [ "system" ]
