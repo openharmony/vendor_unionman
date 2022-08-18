@@ -27,7 +27,7 @@ vendor/unionman/          # vendor_unionman 仓的仓库路径
 
 ## 开发环境搭建
 
-Unionpi Tiger使用参考 [使用教程](https://gitee.com/openharmony-sig/device_board_unionman/blob/master/unionpi_tiger/README_zh.md)
+Unionpi Tiger使用参考 [使用教程](https://gitee.com/openharmony/device_board_unionman/blob/master/unionpi_tiger/README_zh.md)
 
 ## 参与贡献
 
@@ -39,6 +39,6 @@ Unionpi Tiger使用参考 [使用教程](https://gitee.com/openharmony-sig/devic
 
 - vendor_unionman
 
-- [device_board_unionman](https://gitee.com/openharmony-sig/device_board_unionman)
+- [device_board_unionman](https://gitee.com/openharmony/device_board_unionman)
 
-- [device_soc_amlogic](https://gitee.com/openharmony-sig/device_soc_amlogic)
+- [device_soc_amlogic](https://gitee.com/openharmony/device_soc_amlogic)
