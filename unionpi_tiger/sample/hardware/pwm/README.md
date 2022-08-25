@@ -33,7 +33,7 @@ $ echo 1 > /sys/class/pwm/pwmchip0/pwm0/enabled
 $ echo 0 > /sys/class/pwm/pwmchip0/pwm0/enabled
 ```
 
-### 设置pwm的溢出值
+### 设置pwm的溢出值（单位 ns）
 
 ```
 $ echo 2600000 > /sys/class/pwm/pwmchip0/pwm0/period
@@ -106,3 +106,13 @@ int is_pwm_enabled(int pwmChannel);
 
 ![](../figures/pwm_demo.png)
 图1	pwm连接实物图
+
+### 使用方法
+
+烧录成功后，连接开发板，在串口调试窗口下直接执行该程序。
+
+```
+# pwm_test 1 1500000
+```
+
+1 是选择的引脚，1500000 是设置的 duty_cycle
