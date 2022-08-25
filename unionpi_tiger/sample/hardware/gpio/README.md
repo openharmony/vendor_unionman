@@ -92,23 +92,6 @@ int UM_GPIO_GetValue(int gpioNum, int *ps32Value);
 # echo 0 > /sys/class/gpio/gpio386/value
 ```
 
-## 如何编译
-
-1.将此`gpio`目录复制到openharmony源码的`vendor/unionman/a311d/sample/hardware`目录下
-
-2.修改`device/unionman/a311d`路径下BUILD.gn文件，将`gpio`源码纳入编译体系，具体修改内容如下：
-
-```
-group("a311d_group") {
-  deps = [
-    "//device/unionman/a311d/system:system",
-    "//device/unionman/a311d/kernel:kernel",
-    ...
-    "//vendor/unionman/a311d/sample/hardware/gpio:gpio_test",
-  ]
-}
-```
-
 ## 运行结果
 
 > 本例子只是模拟一个gpio口（GPIO_07）来做设置out模式，且将其设置为高电平，有需要的话可以自己设置程序来控制gpio来操作
