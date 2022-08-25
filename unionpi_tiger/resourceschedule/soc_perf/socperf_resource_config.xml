@@ -17,13 +17,23 @@
     <Resource>
         <res id="1000" name="lit_cpu_min_freq" pair="1001">
             <default>1000000</default>
-            <path>/sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq</path>
-            <node>1000000 1200000 1398000 1512000 1608000 1704000 1800000</node>
+            <path>/sys/devices/system/cpu/cpufreq/policy2/scaling_min_freq</path>
+            <node>1000000 1200000 1398000 1512000 1608000 1704000 1800000 1908000 2016000 2108000 2208000</node>
         </res>
         <res id="1001" name="lit_cpu_max_freq" pair="1000" mode="1">
-            <default>1800000</default>
-            <path>/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq</path>
-            <node>1000000 1200000 1398000 1512000 1608000 1704000 1800000</node>
+            <default>2208000</default>
+            <path>/sys/devices/system/cpu/cpufreq/policy2/scaling_max_freq</path>
+            <node>1000000 1200000 1398000 1512000 1608000 1704000 1800000 1908000 2016000 2108000 2208000</node>
+        </res>
+        <res id="2000" name="gpu_min_freq" pair="2001">
+            <default>249999996</default>
+            <path>/sys/class/devfreq/ffe40000.gpu/min_freq</path>
+            <node>249999996 285714281 399999994 499999992 666666656 799999987</node>
+        </res>
+        <res id="2001" name="gpu_max_freq" pair="2000" mode="1">
+            <default>799999987</default>
+            <path>/sys/class/devfreq/ffe40000.gpu/max_freq</path>
+            <node>249999996 285714281 399999994 499999992 666666656 799999987</node>
         </res>
     </Resource>
 </Configs>
