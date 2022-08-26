@@ -22,7 +22,7 @@ int main(int argc, char **argv)
     double temperature = 0;
 
     if (get_adc_data(ADC_1, &value) >= 0) {
-        temperature = ((double)value) * TEMP_INDEX;
+        temperature = ((double)value) * TEMP_CONST;
         printf("adc:[%d]\n", value);
         printf("temperature:[%.1f]C\n", temperature);
     }
