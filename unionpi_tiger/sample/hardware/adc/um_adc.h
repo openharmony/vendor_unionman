@@ -21,11 +21,10 @@
 #define ADC_2 2
 #define ADC_CHANNEL_1 "/sys/bus/iio/devices/iio:device0/in_voltage2_raw"
 #define ADC_CHANNEL_2 "/sys/bus/iio/devices/iio:device0/in_voltage3_raw"
-#define TEMP_INDEX 0.04665
+#define TEMP_CONST 0.042
 
-#define ADC_VALUE_ERROR (-1)
-#define ADC_PARAM_ERROR (-2)
-#define ADC_PATH_ERROR (-3)
+#define ADC_OK 0
+#define ADC_ERROR (-1)
 
 int get_adc_data(int adc_channel, int *value);
 
