@@ -13,20 +13,15 @@
  * limitations under the License.
  */
 
-#undef LOG_TAG
-#define LOG_TAG "adc_test"
-
 #include <stdio.h>
-#include <stdlib.h>
 #include <securec.h>
-#include "hilog/log.h"
 #include "um_adc.h"
 
 int get_adc_data(int adc_channel, int *value)
 {
     if (value == NULL) {
-        HILOG_ERROR(LOG_CORE, "value pointer error\n");
-        return ADC_VALUE_ERROR;
+        printf("value pointer error\n");
+        return ADC_ERROR;
     }
 
     char adc_path[128];
@@ -37,17 +32,16 @@ int get_adc_data(int adc_channel, int *value)
     } else if (adc_channel == ADC_2) {
         (void)sprintf_s(adc_path, sizeof(adc_path), "%s", ADC_CHANNEL_2);
     } else {
-        HILOG_DEBUG(LOG_CORE, "no such a adc_channel\n");
-        return ADC_PARAM_ERROR;
+        printf("no such a adc_channel\n");
+        return ADC_ERROR;
     }
 
     FILE *fp = NULL;
     char buffer[sizeof(int)];
     fp = fopen(adc_path, "r");
     if (!fp) {
-        HILOG_ERROR(LOG_CORE, "adc_channel path error\n");
-        printf("adc_channel path error\n");
-        return ADC_PATH_ERROR;
+        perror("fopen");
+        return ADC_ERROR;
     }
     (void)fread(buffer, sizeof(buffer), 1, fp);
     (void)fclose(fp);
