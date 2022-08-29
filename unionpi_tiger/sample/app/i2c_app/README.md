@@ -35,7 +35,7 @@ NAPI在 unionman\unionpi_Tiger\sample\app\gpioled_app\README.md 中有详细介�
     },
 ```
 
-打开`unionpi_tiger/sample/app/i2c_app/ohos.build`文件，在`"parts":`中添加下列语句
+打开`unionpi_tiger/sample/napi/napisubsys/ohos.build`文件，在`"parts":`中添加下列语句
 
 ```json
         "i2cnapipart": {
@@ -94,7 +94,7 @@ NAPI在 unionman\unionpi_Tiger\sample\app\gpioled_app\README.md 中有详细介�
 
 ![3](../figures/i2c/3.png)
 
-(3).将位于`unionman\unionpi_tiger\sample\napi`中的`@ohos.i2cnapidemo.d.ts`复制并放在`X:\Users\XXXXX\AppData\Local\OpenHarmony\Sdk\ets\3.1.6.6\api`文件夹内
+(3).将位于`unionman\unionpi_tiger\sample\napi\napisubsys`中的`@ohos.i2cnapidemo.d.ts`复制并放在`X:\Users\XXXXX\AppData\Local\OpenHarmony\Sdk\ets\3.1.6.6\api`文件夹内
 
 *此路径是由SDK安装目录决定，如不清楚自己路径可打开DevEco Studio—工具—SDK管理—外观和行为—OpenHarmony SDK中查看*
 
