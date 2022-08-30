@@ -16,26 +16,26 @@
 
 {
   "app": {
-    "signingConfigs": [
-      {
-        "name": "default",
-        "material": {
-          "certpath": "C:\\Users\\jiadong.wu\\.ohos\\config\\openharmony\\auto_ohos_default.cer",
-          "storePassword": "0000001AF5B5222385299F25F68898B76FDEF2115465AE25C4AB1D23AEF53BB83AB6C4B78919D420B94A",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001A69228CA8C9ED739DAC89D15B0FDB4617E82A574FCD9056DB46217E8B0695A6B2AF67C55B0EA2",
-          "profile": "C:\\Users\\jiadong.wu\\.ohos\\config\\openharmony\\auto_ohos_default_com.example.ets_adc1.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\jiadong.wu\\.ohos\\config\\openharmony\\auto_ohos_default.p12"
-        }
-      }
-    ],
     "compileSdkVersion": 8,
     "compatibleSdkVersion": 8,
     "products": [
       {
         "name": "default",
-        "signingConfig": "default",
+        "signingConfig": "default"
+      }
+    ],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "material": {
+          "certpath": "C:\\Users\\jiadong.wu\\.ohos\\config\\openharmony\\auto_ohos_default.cer",
+          "storePassword": "0000001A1AA5F495EB43A2318ACD319A434DEBF1CF8D7C950EB3EFC1B036175A6C94A05EB5F304F93044",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001A47792E71EE66ADE104C7E9E9BE41C41375B7B5D1E22EF3C71E07C0882568B1DD8FA88F64407D",
+          "profile": "C:\\Users\\jiadong.wu\\.ohos\\config\\openharmony\\auto_ohos_default_com.example.ets_i2c.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\jiadong.wu\\.ohos\\config\\openharmony\\auto_ohos_default.p12"
+        }
       }
     ]
   },
