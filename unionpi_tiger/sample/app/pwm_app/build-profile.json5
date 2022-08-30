@@ -1,0 +1,55 @@
+/* Copyright 2022 Unionman Technology Co., Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "material": {
+          "certpath": "C:\\Users\\bin.zeng\\.ohos\\config\\openharmony\\auto_ohos_default.cer",
+          "storePassword": "0000001B209F0034CF1A5ECAB357E5A2E1F05D876235B967E4942AE620030B7FB6810AE931D9ECD5F3B05E",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001BAE17A7A6F77F17555835E08491C603B088B6BEB57E8D14A560B10FB356C2EA3B2301DAFD547B46",
+          "profile": "C:\\Users\\bin.zeng\\.ohos\\config\\openharmony\\auto_ohos_default_com.example.myapplication.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\bin.zeng\\.ohos\\config\\openharmony\\auto_ohos_default.p12"
+        }
+      }
+    ],
+    "compileSdkVersion": 8,
+    "compatibleSdkVersion": 8,
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
