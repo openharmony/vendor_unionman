@@ -1,7 +1,7 @@
 {
   "app": {
     "vendor": "example",
-    "bundleName": "com.example.ets_adc1",
+    "bundleName": "com.example.ets_i2c",
     "version": {
       "code": 1000000,
       "name": "1.0.0"

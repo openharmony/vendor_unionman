@@ -9,12 +9,8 @@
       "value": "description"
     },
     {
-      "name": "MainAbility_label",
-      "value": "adc"
-    },
-    {
       "name": "MyAbility_label",
-      "value": "adc"
+      "value": "i2c读取温湿度实验"
     }
   ]
 }
