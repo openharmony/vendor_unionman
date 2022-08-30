@@ -21,22 +21,6 @@
 
 ### 2. 添加组件
 
-打开`vendor/unionman/unionpi_tiger/config.json`文件，在`"subsystems":`中添加下列语句
-
-**添加  pwmnapipart 子组件**
-
-```json
-    {
-      "subsystem": "napisubsys",
-      "components": [
-        {
-         "component": "pwmnapipart",
-         "features": []
-       }
-     ]
-    },
-```
-
 打开`unionpi_tiger/sample/napi/napisubsys/ohos.build`文件，在`"parts":`中添加下列语句
 
 ```json
@@ -52,10 +36,20 @@
 
 ### 3.添加产品定义
 
-在`productdefine\common\products\ohos-arm64.json`，在`"parts": `中添加下列语句
+打开`vendor/unionman/unionpi_tiger/config.json`文件，在`"subsystems":`中添加下列语句
+
+**添加  pwmnapipart 子组件**
 
 ```json
-"napisubsys:pwmnapipart":{},
+    {
+      "subsystem": "napisubsys",
+      "components": [
+        {
+         "component": "pwmnapipart",
+         "features": []
+       }
+     ]
+    },
 ```
 
 **注意：在这些配置文件中，不要多加空行、符号，可能会导致开发板无法开机**
