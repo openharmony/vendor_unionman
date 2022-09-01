@@ -45,14 +45,14 @@ root {
                     */
 
                     /*array index, iface, mixer/mux, enable*/
-                    0,  0,  0,  0,
-                    1,  1,  0,  0,
-                    2,  0,  0,  0,
-                    3,  1,  0,  0,
-                    4,  2,  0,  0,
-                    5,  2,  0,  0,
-                    8,  6,  0,  0,
-                    9,  6,  0,  0,
+                    0,  2,  0,  1,
+                    1,  2,  0,  1,
+                    2,  2,  0,  1,
+                    3,  2,  0,  1,
+                    4,  2,  0,  1,
+                    5,  2,  0,  1,
+                    8,  2,  0,  1,
+                    9,  2,  0,  1,
                 ];
 
                 /* reg, rreg, shift, rshift, min, max, mask, invert, value */
@@ -68,32 +68,42 @@ root {
                 ];
 
                 ctrlSapmParamsSeqConfig = [
-                    0xFF,    0xFF,    0,     0,    0x00,    0xFF,    0xFF,    0,    0x00,     //LPGA MIC 0 -- connect MIC
-                    0xFF,    0xFF,    0,     0,    0x00,    0xFF,    0xFF,    0,    0x00,     //RPGA MIC 0 -- connect MIC
-                    0xFF,    0xFF,    0,     0,    0x00,    0xFF,    0xFF,    0,    0x00,     //dacl to dacr mixer
-                    0xFF,    0xFF,    0,     0,    0x00,    0xFF,    0xFF,    0,    0x00,     //dacr to dacl mixer
+                    0xFF,    0xFF,    0,     0,    0x00,    0x1,    0x1,    1,    0x00,     //LPGA MIC  -- connect MIC1
+                    0xFF,    0xFF,    0,     0,    0x00,    0x1,    0x1,    1,    0x00,     //RPGA MIC  -- connect MIC2
+                    0xFF,    0xFF,    0,     0,    0x00,    0x1,    0x1,    1,    0x00,     //Speaker1 Switch -- connect speaker
+                    0xFF,    0xFF,    0,     0,    0x00,    0x1,    0x1,    1,    0x00,     //Headphone1 Switch -- connect hpl
+                    0xFF,    0xFF,    0,     0,    0x00,    0x1,    0x1,    1,    0x00,     //Headphone2 Switch -- connect hpr
                 ];
-        		/*
+                /*
                  电源管理组件配置
-                 componentName: 功能名称，{"ADCL", "ADCR", "DACL", "DACR", "LPGA", "RPGA", "SPKL", "SPKR", "MIC"} 数组索引。
-                 sapmType,compNameIndex,reg, mask,shift,invert, kcontrolNews,kcontrolsNum
+                 reg is 0xFFFF: component has no sapm register bit
+                 sapmType, compNameIndex, reg, mask, shift, invert, kcontrolNews, kcontrolsNum
                 */
                 sapmComponent = [
-                    10,    0,    0xFF,    0xFF,    0,     0,     0,     0, //ADCL
-                    10,    1,    0xFF,    0xFF,    0,     0,     0,     0, //ADCR
-                    11,    2,    0xFF,    0xFF,    0,     0,     0,     0, //DACL
-                    11,    3,    0xFF,    0xFF,    0,     0,     0,     0, //DACR
-                    15,    6,    0xFF,    0xFF,    0,     0,     0,     0, //SPKL
-                    15,    7,    0xFF,    0xFF,    0,     0,     0,     0, //SPKR
-                    0,     8,    0xFF,    0xFF,    0,     0,     0,     0  //MIC
+                    10,      0,     0xFFFF,       0x1,     0,     0,     0,     0,  //ADCL
+                    10,      1,     0xFFFF,       0x1,     0,     0,     0,     0,  //ADCR
+                    11,     32,     0xFFFF,    0xFFFF,     0,     0,     0,     0,  //DAC1
+                    11,     33,     0xFFFF,    0xFFFF,     0,     0,     0,     0,  //DAC2
+                    11,     34,     0xFFFF,    0xFFFF,     0,     0,     0,     0,  //DAC3
+                    6,      52,     0xFFFF,    0xFFFF,     0,     0,     3,     1,  //SPKL PGA
+                    6,      54,     0xFFFF,    0xFFFF,     0,     0,     4,     1,  //HPL PGA
+                    6,      55,     0xFFFF,    0xFFFF,     0,     0,     5,     1,  //HPR PGA
+                    15,      6,     0xFFFF,    0xFFFF,     0,     0,     0,     0,  //SPK
+                    14,     10,     0xFFFF,    0xFFFF,     0,     0,     0,     0,  //HPL
+                    14,     11,     0xFFFF,    0xFFFF,     0,     0,     0,     0,  //HPR
+                    6,       4,     0xFFFF,    0xFFFF,     0,     0,     1,     1,  //LPGA
+                    6,       5,     0xFFFF,    0xFFFF,     0,     0,     2,     1,  //RPGA
+                    13,     40,     0xFFFF,    0xFFFF,     0,     0,     0,     0,  //MIC1
+                    13,     41,     0xFFFF,       0x1,     0,     0,     0,     0   //MIC2
                 ];
 
                 /*g_audioSapmCfgNameList: array index, iface, mixer/mux, enable*/
                 sapmConfig = [
-                    0,    5,    0,    1,
-                    1,    5,    0,    1,
-                    2,    0,    0,    1,
-                    3,    0,    0,    1
+                    0,     2,    0,    1,
+                    1,     2,    0,    1,
+                    24,    2,    0,    1,
+                    28,    2,    0,    1,
+                    29,    2,    0,    1
                 ];
             }
         }
