@@ -21,20 +21,6 @@ NAPI在 unionman\unionpi_Tiger\sample\app\gpioled_app\README.md 中有详细介�
 
 #### 二.添加组件
 
-打开`vendor/unionman/unionpi_tiger/config.json`文件，在`"subsystems":`中添加下列语句
-
-```json
-    {
-      "subsystem": "napisubsys",
-      "components": [
-        {
-          "component": "i2cnapipart",
-          "features": []
-        }
-      ]
-    },
-```
-
 打开`unionpi_tiger/sample/napi/napisubsys/ohos.build`文件，在`"parts":`中添加下列语句
 
 ```json
@@ -48,14 +34,20 @@ NAPI在 unionman\unionpi_Tiger\sample\app\gpioled_app\README.md 中有详细介�
         }
 ```
 
-
-
 #### 三.添加产品定义
 
-在`productdefine\common\products\ohos-arm64.json`，在`"parts": `中添加下列语句
+打开`vendor/unionman/unionpi_tiger/config.json`文件，在`"subsystems":`中添加下列语句
 
-```
- "napisubsys:i2cnapipart":{},
+```json
+    {
+      "subsystem": "napisubsys",
+      "components": [
+        {
+          "component": "i2cnapipart",
+          "features": []
+        }
+      ]
+    },
 ```
 
 #### 四.编译烧录
