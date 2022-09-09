@@ -17,20 +17,6 @@
 
 ### 二.添加组件
 
-打开`vendor/unionman/unionpi_tiger/config.json`文件，在`"subsystems":`中添加下列语句
-
-```json
-    {
-      "subsystem": "napisubsys",
-      "components": [
-        {
-          "component": "adc_component",
-          "features": []
-        }
-      ]
-    },
-```
-
 打开`vendor/unionman/unionpi_tiger/sample/napi/napisubsys/ohos.build`文件，修改为
 
 ```json
@@ -53,11 +39,21 @@
 
 ### 三.添加产品定义
 
-打开`productdefine/common/products/ohos-arm64.json`，在`"parts": `中添加下列语句
+打开`vendor/unionman/unionpi_tiger/config.json`文件，在`"subsystems":`中添加下列语句
 
 ```json
-"napisubsys:adc_component":{},
+    {
+      "subsystem": "napisubsys",
+      "components": [
+        {
+          "component": "adc_component",
+          "features": []
+        }
+      ]
+    },
 ```
+
+
 
 ### 四.编译 打包 烧录
 
