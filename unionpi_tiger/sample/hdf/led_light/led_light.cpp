@@ -45,7 +45,9 @@ int main(int argc, char* argv[])
 
     printf("Light count %d\n\r", count);
 
-    effect.lightBrightness = 0x000000FF; /* Only power led is valid */
+    effect.lightColor.colorValue.rgbColor.r = 0;
+    effect.lightColor.colorValue.rgbColor.g = 0;
+    effect.lightColor.colorValue.rgbColor.b = 255; /* Only power led is valid */
     effect.flashEffect.flashMode = LIGHT_FLASH_NONE;
     effect.flashEffect.onTime = onTime;
     effect.flashEffect.offTime = offTime;
