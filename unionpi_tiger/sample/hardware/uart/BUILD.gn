@@ -15,10 +15,7 @@ import("//build/ohos.gni")
 import("//build/ohos/ndk/ndk.gni")
 
 config("warns") {
-  cflags = [
-    "-Wno-unused-variable",
-    "-Wno-implicit-function-declaration",
-  ]
+  cflags = [ "-Werror" ]
 }
 
 ohos_executable("uart_test") {
@@ -28,15 +25,8 @@ ohos_executable("uart_test") {
     "serial_uart.c",
   ]
 
-  include_dirs =
-      [ "//base/hiviewdfx/hilog/interfaces/native/innerkits/include" ]
-
   configs = [ ":warns" ]
 
-  external_deps = [
-    "c_utils:utils",
-    "hiviewdfx_hilog_native:libhilog",
-  ]
-
   install_images = [ "system" ]
+  part_name = "unionman_products"
 }
