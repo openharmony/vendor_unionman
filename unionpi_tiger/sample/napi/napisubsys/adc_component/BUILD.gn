@@ -22,7 +22,6 @@ ohos_shared_library("adc_napi") {
   include_dirs = [
     "//foundation/ace/napi/interfaces/kits",
     "//base/hiviewdfx/hilog/interfaces/native/innerkits/include",
-    "//utils/native/base/include/securec.h",
   ]
 
   sources = [
@@ -35,8 +34,8 @@ ohos_shared_library("adc_napi") {
 
   deps = [ "//foundation/arkui/napi:ace_napi" ]
   external_deps = [
+    "c_utils:utils",
     "hiviewdfx_hilog_native:libhilog",
-    "utils_base:utils",
   ]
   relative_install_dir = "module"
 
@@ -54,11 +53,9 @@ ohos_executable("sample_server") {
 
   configs = [ ":warns" ]
 
-  deps = [ "//utils/native/base:utils" ]
-
   external_deps = [
+    "c_utils:utils",
     "hiviewdfx_hilog_native:libhilog",
-    "utils_base:utils",
   ]
 
   install_images = [ "system" ]
