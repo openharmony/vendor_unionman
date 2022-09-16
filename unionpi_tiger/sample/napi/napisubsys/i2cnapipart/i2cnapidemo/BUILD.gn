@@ -16,7 +16,7 @@ import("//build/ohos.gni")
 ohos_shared_library("i2cnapidemo") {
   include_dirs = [
     "//foundation/ace/napi/interfaces/kits",
-    "//utils/native/base/include",
+    "//commonlibrary/c_utils/base/include",
     "//base/hiviewdfx/hilog/interfaces/native/innerkits/include",
   ]
 
@@ -25,12 +25,12 @@ ohos_shared_library("i2cnapidemo") {
     "i2cnapidemo.cpp",
   ]
 
-  deps = [
-    "//foundation/arkui/napi:ace_napi",
-    "//utils/native/base:utils",
-  ]
+  deps = [ "//foundation/arkui/napi:ace_napi" ]
 
-  external_deps = [ "hiviewdfx_hilog_native:libhilog" ]
+  external_deps = [
+    "c_utils:utils",
+    "hiviewdfx_hilog_native:libhilog",
+  ]
 
   relative_install_dir = "module"
 
