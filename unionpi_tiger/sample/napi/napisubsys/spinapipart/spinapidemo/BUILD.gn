@@ -20,7 +20,6 @@ ohos_shared_library("spitest") {
   include_dirs = [
     "//foundation/ace/napi/interfaces/kits",
     "//base/hiviewdfx/hilog/interfaces/native/innerkits/include",
-    "//utils/native/base/include/securec.h",
   ]
 
   sources = [
@@ -32,8 +31,8 @@ ohos_shared_library("spitest") {
 
   deps = [ "//foundation/arkui/napi:ace_napi" ]
   external_deps = [
+    "c_utils:utils",
     "hiviewdfx_hilog_native:libhilog",
-    "utils_base:utils",
   ]
   relative_install_dir = "module"
 

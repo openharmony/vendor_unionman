@@ -21,12 +21,12 @@ ohos_shared_library("gpioled") {
     "um_gpio.c",
   ]
 
-  deps = [
-    "//foundation/arkui/napi:ace_napi",
-    "//utils/native/base:utils",
-  ]
+  deps = [ "//foundation/arkui/napi:ace_napi" ]
 
-  external_deps = [ "hiviewdfx_hilog_native:libhilog" ]
+  external_deps = [
+    "c_utils:utils",
+    "hiviewdfx_hilog_native:libhilog",
+  ]
 
   relative_install_dir = "module"
   subsystem_name = "napisubsys"
