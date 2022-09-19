@@ -1,0 +1,55 @@
+/* Copyright 2022 Unionman Technology Co., Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "material": {
+          "certpath": "C:\\Users\\jiadong.wu\\.ohos\\config\\openharmony\\auto_ohos_default.cer",
+          "storePassword": "0000001A97C959EDA805ACB51C8C9163D49ABE5382D5BB62DE8AFC8B89773F3AE3DC9AC83064C34B4466",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001AC5D8DAFCA4C0430B9FBEB4AF82C4A8BB1A94E8A6A9AE9D2AE1C76C509F004D6A3CF03114B5D8",
+          "profile": "C:\\Users\\jiadong.wu\\.ohos\\config\\openharmony\\auto_ohos_default_com.example.myapplication.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\jiadong.wu\\.ohos\\config\\openharmony\\auto_ohos_default.p12"
+        }
+      }
+    ],
+    "compileSdkVersion": 8,
+    "compatibleSdkVersion": 8,
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
