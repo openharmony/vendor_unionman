@@ -1,46 +1,39 @@
-# UART外设
+# 手势识别及触摸传感器串口读取demo
 
-串口工具或者直接将rt、tx短接即可，注意要保持读写的波特率一致。详细例子参考：sample/uart
+## 购买外设
 
-## 设备定义
+[**Gravity: 手势识别带触摸传感器**](https://www.dfrobot.com.cn/goods-1994.html)
 
-```java
-#define UART_TTL_NAME	"/dev/ttyS4"
-```
+![](../figures/uart/1.jpg)
 
-图1 ttl
-![](../figures/uart_ttl.png)
+## 连线
 
-```java
-#define UART_EXT_TTL_NAME	"/dev/ttyACM0"
-```
+- 红线 -- 3.3V
+- 黑线 -- GND
+- 绿线 -- RX
 
-图2 ext ttl
-![](../figures/uart_ext_ttl.png)
+连线实物图
 
-```java
-#define UART_485_NAME	"/dev/ttyACM1"
-```
+![](../figures/uart/2.jpg)
 
-图3 rs485
-![](../figures/uart_rs485.png)
+## 编译运行
 
-## 打开串口设备
+1) 编译 打包 见https://gitee.com/openharmony/device_board_unionman/tree/master/unionpi_tiger#%E7%BC%96%E8%AF%91%E4%B8%8E%E8%B0%83%E8%AF%95
 
-```java
-fd = open(uart_dev, O_RDWR);
-```
+3. 打开`cmd窗口`利用hdc_std工具传输文件 (获取hdc_std工具可参考https://ost.51cto.com/posts/10190)
 
-## 设置波特率
+   `hdc_std file send Z:\openharmony\OpenHarmony-3.1-release\out\a311d\device_a311d\unionman_products\uart_test /data`
 
-```java
-ret = uartDevInit(fd, 115200);
-```
+4. 与开发板交互
 
-## 写数据
+   `hdc_std shell`
 
-```java
-ret = write(fd, send_data + send_len, need_send_len)
-```
+5. 修改权限
+`chmod 777 data/uart_test`
 
-**注**：出现rx，tx接上后串口工具没有接收到数据，可交换下rx，tx接口尝试
+6. 运行！
+`./data/uart_test`
+
+## 结果
+
+![](../figures/uart/3.png)
