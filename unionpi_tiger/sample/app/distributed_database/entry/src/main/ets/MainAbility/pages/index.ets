@@ -104,7 +104,7 @@ struct Index {
       distributedData.createKVManager(kvManagerConfig).then((manager) => {
         console.log("xxxxxx createKVManager success");
         kvManager = manager;
-        this.my_getKVStroe();
+        this.my_getKVStore();
       }).catch((err) => {
         console.log("xxxxxx createKVManager err: " + JSON.stringify(err));
       });
@@ -113,7 +113,7 @@ struct Index {
     }
   }
 
-  private my_getKVStroe() {
+  private my_getKVStore() {
     try {
       const options = {
         createIfMissing: true,
