@@ -1,0 +1,44 @@
+{
+  "color": [
+    {
+      "name": "background_grey",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "background_blue",
+      "value": "#FF0A59F7"
+    },
+    {
+      "name": "placeholderColor_grey",
+      "value": "#40000000"
+    },
+    {
+      "name": "background_white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "background_green",
+      "value": "#00D400"
+    },
+    {
+      "name": "cancelGrey",
+      "value": "#F8F8F8"
+    },
+    {
+      "name": "background_black",
+      "value": "#000000"
+    },
+    {
+      "name": "background_red",
+      "value": "#FF0000"
+    },
+    {
+      "name": "noteItemColor_blue",
+      "value": "#DBE4F5"
+    },
+    {
+      "name": "checked_blue",
+      "value": "#0A58F6"
+    }
+  ]
+}
