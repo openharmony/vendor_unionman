@@ -1,0 +1,116 @@
+{
+  "string": [
+    {
+      "name": "entry_desc",
+      "value": "description"
+    },
+    {
+      "name": "MainAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "MainAbility_label",
+      "value": "SmartCtrlControl"
+    },
+    {
+      "name": "openHumidifier",
+      "value": "打开加湿器"
+    },
+    {
+      "name": "closeHumidifier",
+      "value": "关闭加湿器"
+    },
+    {
+      "name": "startWatering",
+      "value": "开始浇水"
+    },
+    {
+      "name": "deleteSure",
+      "value": "确定删除"
+    },
+    {
+      "name": "devices",
+      "value": "设备"
+    },
+    {
+      "name": "delete",
+      "value": "删除"
+    },
+    {
+      "name": "closed",
+      "value": "已关闭"
+    },
+    {
+      "name": "opened",
+      "value": "已开启"
+    },
+    {
+      "name": "stow",
+      "value": "收起"
+    },
+    {
+      "name": "equipmentServices",
+      "value": "设备服务"
+    },
+    {
+      "name": "currentState",
+      "value": "当前状态"
+    },
+    {
+      "name": "moreProducts",
+      "value": "更多产品"
+    },
+    {
+      "name": "partsReplacement",
+      "value": "配件更换"
+    },
+    {
+      "name": "humidity",
+      "value": "湿度"
+    },
+    {
+      "name": "intelligentMode",
+      "value": "智能模式"
+    },
+    {
+      "name": "quietMode",
+      "value": "静音模式"
+    },
+    {
+      "name": "humiditySetting",
+      "value": "湿度设定"
+    },
+    {
+      "name": "timingSwitch",
+      "value": "定时开关机"
+    },
+    {
+      "name": "scheduleAbility_description",
+      "value": "eTS_Empty Ability"
+    },
+    {
+      "name": "entry_ScheduleAbility",
+      "value": "entry_ScheduleAbility"
+    },
+    {
+      "name": "smartLight",
+      "value": "灯光控制"
+    },
+    {
+      "name": "quickControl",
+      "value": "快速控制"
+    },
+    {
+      "name": "smartCurtain",
+      "value": "窗帘控制"
+    },
+    {
+      "name": "smart_temp_and_hum_meter",
+      "value": "智能温湿度计"
+    },
+    {
+      "name": "family_memo",
+      "value": "家庭备忘录"
+    }
+  ]
+}
