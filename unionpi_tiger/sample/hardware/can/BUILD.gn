@@ -29,8 +29,12 @@ ohos_executable("canconfig") {
     "libsocketcan.c",
   ]
 
-  include_dirs =
-      [ "//base/hiviewdfx/hilog/interfaces/native/innerkits/include" ]
+  include_dirs = [
+    "//base/hiviewdfx/hilog/interfaces/native/innerkits/include",
+    "//third_party/libnl/include",
+  ]
+
+  deps = [ "//third_party/libnl:libnl_share" ]
 
   configs = [ ":warns" ]
 
