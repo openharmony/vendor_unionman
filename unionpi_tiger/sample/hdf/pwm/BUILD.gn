@@ -39,7 +39,7 @@ ohos_executable("pwm") {
   ]
 
   install_enable = true
-  install_images = [ "vendor" ]
+  install_images = [ chipset_base_dir ]
   module_install_dir = "bin"
   part_name = "unionman_products"
 }
