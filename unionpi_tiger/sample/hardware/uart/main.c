@@ -28,23 +28,23 @@ static int fd;
 void *_serial_input_task(void)
 {
     int i = 0;
-    int ret = -1;
+    int ret = ERR;
     int buf = 0;
-    int recv[4] = {0};
+    int recv[FRAME_LEN] = {0};
 
     printf("Gesture Sensor Ready!\n");
     while (1) {
         for (i = 0; i < FRAME_LEN; i++) {
             ret = read(fd, &buf, 1);
-            if (ret == -1) {
-                printf("read err\n");
+            if (ret == ERR) {
+                perror("read error\n");
                 exit(0);
             }
             recv[i] = buf;
         }
         ret = data_proce(recv);
-        if (ret == -1) {
-            printf("data process error\n");
+        if (ret == ERR) {
+            perror("data process error\n");
             exit(0);
         }
     }
@@ -53,24 +53,26 @@ void *_serial_input_task(void)
 int main(int argc, char **argv)
 {
     char *uart_dev = UART_TTL_NAME;
-    int ret = -1;
+    int ret = ERR;
 
     fd = open(uart_dev, O_RDWR);
-    if (fd == -1) {
-        printf("open file error\n");
+    if (fd == ERR) {
+        perror("open file fail\n");
         return ERR;
     }
     ret = uart_init(fd, 9600L);
-    if (ret == -1) {
-        printf("uart init error\n");
+    if (ret == ERR) {
+        perror("uart init error\n");
         return ERR;
     }
 
-    // 创建线程  一直执行读操作
+    // 创建线程  一直执行读串口的操作
     pthread_t pid_t;
     pthread_create(&pid_t, NULL, (void *)_serial_input_task, 0);
 
-    while (1) {}
+    while (1) {
+        sleep(10L);
+    }
     close(fd);
 
     return 0;
