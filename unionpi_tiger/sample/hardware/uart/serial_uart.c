@@ -15,11 +15,31 @@
 
 #include <termios.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "serial_uart.h"
+
+// 转换波特率
+speed_t conver_baudrate(int baudrate)
+{
+    switch (baudrate) {
+        case 9600L:
+            return B9600;
+        case 19200L:
+            return B19200;
+        case 38400L:
+            return B38400;
+        case 115200L:
+            return B115200;
+        case 1152000L:
+            return B1152000;
+        default:
+            return 1152000L;
+    }
+}
 
 void set_baud(int fd, int baud)
 {
-    int ret = -1;
+    int ret = ERR;
     struct termios opt;
 
     tcgetattr(fd, &opt); // tcgetattr用来获取终端参数，将从终端获得的信息fd，保存到opt结构体中
@@ -28,9 +48,9 @@ void set_baud(int fd, int baud)
     cfsetospeed(&opt, baud);
 
     ret = tcsetattr(fd, TCSANOW, &opt); // 设置终端参数到opt中，使之立即生效
-    if (ret == -1) {
+    if (ret == ERR) {
         perror("tcsetattr fd");
-        return;
+        exit(0);
     }
 
     tcflush(fd, TCIOFLUSH); // 刷清缓冲区
@@ -39,6 +59,11 @@ void set_baud(int fd, int baud)
 // 设置数据位
 int setup_data_bits(int setup_databits, struct termios *options_databits)
 {
+        if (options_databits == NULL) {
+        perror("setup_data_bits error");
+        return ERR;
+    }
+
     switch (setup_databits) {
         case 5L:
             options_databits->c_cflag |= CS5;
@@ -53,9 +78,9 @@ int setup_data_bits(int setup_databits, struct termios *options_databits)
             options_databits->c_cflag |= CS8;
             break;
         default:
-            return -1;
+            return ERR;
     }
-    return 1;
+    return OK;
 }
 
 // 设置校验位
@@ -95,20 +120,20 @@ int set_params_parity(int setup_parity, struct termios *options_parity)
             break;
 
         default:
-            return -1;
+            return ERR;
     }
-    return 1;
+    return OK;
 }
 
 // 设置校验位
 int set_params(int fd, int databits, int stopbits, int parity)
 {
     struct termios options;
-    int ret = 0;
+    int ret = ERR;
 
     if (tcgetattr(fd, &options) != 0) {
-        perror("tcgetattr fail");
-        return -1;
+        perror("tcgetattr fail\n");
+        return ERR;
     }
 
     options.c_iflag = 0;
@@ -117,14 +142,14 @@ int set_params(int fd, int databits, int stopbits, int parity)
     // setup data bits
     options.c_cflag &= ~CSIZE;
     ret = setup_data_bits(databits, &options);
-    if (ret == -1) {
-        return -1;
+    if (ret == ERR) {
+        return ERR;
     }
 
     // parity
     ret = set_params_parity(parity, &options);
-    if (ret == -1) {
-        return -1;
+    if (ret == ERR) {
+        return ERR;
     }
 
     // stop bits/
@@ -132,13 +157,11 @@ int set_params(int fd, int databits, int stopbits, int parity)
         case 1:
             options.c_cflag &= ~CSTOPB;
             break;
-
         case 2L:
             options.c_cflag |= CSTOPB;
             break;
-
         default:
-            return -1;
+            return ERR;
     }
 
     // 请求发送和清除发送
@@ -149,29 +172,10 @@ int set_params(int fd, int databits, int stopbits, int parity)
 
     tcflush(fd, TCIFLUSH);
     if (tcsetattr(fd, TCSANOW, &options) != 0) {
-        return -1;
+        return ERR;
     }
 
-    return 0;
-}
-
-// 转换波特率
-speed_t conver_baudrate(int baudrate)
-{
-    switch (baudrate) {
-        case 9600L:
-            return B9600;
-        case 19200L:
-            return B19200;
-        case 38400L:
-            return B38400;
-        case 115200L:
-            return B115200;
-        case 1152000L:
-            return B1152000;
-        default:
-            return 1152000L;
-    }
+    return OK;
 }
 
 // 设置波特率
@@ -180,17 +184,18 @@ int uart_init(int fd, int uartBaud)
     set_baud(fd, conver_baudrate(uartBaud));
     // uart param /
     if (set_params(fd, 8L, 1, 'n')) {
-        printf("Set uart parameters fail.\n");
-        return -1;
+        perror("set uart parameters fail\n");
+        return ERR;
     }
-    return 0;
+    return OK;
 }
 
 // 传感器数据处理
 int data_proce(int *recv)
 {
     if (recv == NULL) {
-        printf("data proce error");
+        perror("receive data error");
+        return ERR;
     }
     
     if ((recv[0] == RECV_HEAD) && (recv[3L] == RECV_END) && (recv[1] == (0xff - recv[2L]))) {
@@ -232,8 +237,8 @@ int data_proce(int *recv)
                 printf("get event touch5\n");
                 break;
             default:
-                printf("receive data error\n");
-                break;
+                perror("no such event\n");
+                return ERR;
         }
         return OK;
     }
