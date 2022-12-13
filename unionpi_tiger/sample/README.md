@@ -2,20 +2,26 @@
 
 基础样例列表如下
 
-|  No  | 样例名称                  | 路径                                                         |
-| :--: | ------------------------- | ------------------------------------------------------------ |
-|  1   | GPIO控制                  | [unionpi_tiger/sample/hardware/gpio](https://gitee.com/openharmony/vendor_unionman/tree/master/unionpi_tiger/sample/hardware/gpio) |
-|  2   | PWM舵机调试               | [unionpi_tiger/sample/hardware/pwm](https://gitee.com/openharmony/vendor_unionman/tree/master/unionpi_tiger/sample/hardware/pwm) |
-|  3   | ADC设备读取采样数据       | [unionpi_tiger/sample/hardware/adc](https://gitee.com/openharmony/vendor_unionman/tree/master/unionpi_tiger/sample/hardware/adc) |
-|  4   | I2C读写及温湿度传感器使用 | [unionpi_tiger/sample/hardware/i2c](https://gitee.com/openharmony/vendor_unionman/tree/master/unionpi_tiger/sample/hardware/i2c) |
-|  5   | SPI读写                   | [unionpi_tiger/sample/hardware/spi](https://gitee.com/openharmony/vendor_unionman/tree/master/unionpi_tiger/sample/hardware/spi) |
+|  No  | 样例名称                  | 路径                  |
+| :--: | ------------------------- | --------------------- |
+|  1   | GPIO控制                  | [gpio](hardware/gpio) |
+|  2   | PWM舵机调试               | [pwm](hardware/pwm)   |
+|  3   | ADC设备读取采样数据       | [adc](hardware/adc)   |
+|  4   | I2C读写及温湿度传感器使用 | [i2c](hardware/i2c)   |
+|  5   | SPI读写                   | [spi](hardware/spi)   |
 
 进阶样例列表如下
 
-|  No  | 样例名称                         | 路径                                                         |
-| :--: | :------------------------------- | ------------------------------------------------------------ |
-|  1   | HAP应用——控制GPIO                | [unionpi_tiger/sample/app/gpioled_app](https://gitee.com/openharmony/vendor_unionman/tree/master/unionpi_tiger/sample/app/gpioled_app) |
-|  2   | HAP应用——控制舵机                | [unionpi_tiger/sample/app/pwm_app](https://gitee.com/openharmony/vendor_unionman/tree/master/unionpi_tiger/sample/app/pwm_app) |
-|  3   | HAP应用——读取ADC采样数据         | [unionpi_tiger/sample/app/adc_app](https://gitee.com/openharmony/vendor_unionman/tree/master/unionpi_tiger/sample/app/adc_app) |
-|  4   | HAP应用——I2C读取温湿度传感器数据 | [unionpi_tiger/sample/app/i2c_app](https://gitee.com/openharmony/vendor_unionman/tree/master/unionpi_tiger/sample/app/i2c_app) |
-|  5   | HAP应用——SPI读写                 | [unionpi_tiger/sample/app/spi_app](https://gitee.com/openharmony/vendor_unionman/tree/master/unionpi_tiger/sample/app/spi_app) |
+|  No  | 样例名称                       | 路径                                                         |
+| :--: | :----------------------------- | ------------------------------------------------------------ |
+|  1   | 基于NAPI框架控制LED灯          | [gpioled_app](app/gpioled_app)                               |
+|  2   | 基于NAPI框架和HDF框架控制LED灯 | [gpioled_HDF_app](app/gpioled_HDF_app)                       |
+|  3   | 控制舵机                       | [pwm_app](app/pwm_app)                                       |
+|  4   | 读取ADC采样数据                | [adc_app](app/adc_app)                                       |
+|  5   | I2C读取温湿度传感器数据        | [i2c_app](app/i2c_app)                                       |
+|  6   | SPI读写                        | [spi_app](app/spi_app)                                       |
+|  7   | 分布式综合应用                 | [Distributed_integrated_application](app/Distributed_integrated_application) |
+|  8   | 分布式数据库                   | [distributed_database](app/distributed_database)             |
+|  9   | 智能中控屏                     | [SmartCtrlControl](app/SmartCtrlControl)                     |
+|  10  | 分布式视频播放器               | [DistributedVideoPlayer](https://gitee.com/umspark/app_sample/tree/master/DistributedVideoPlayer) |
+
