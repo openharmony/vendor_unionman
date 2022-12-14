@@ -54,6 +54,7 @@
             </policy>
         </policylist>
         <filefilterlist> 
+            <filteritem type="filename" name="NOTICE" desc="Temp files"/>
             <filefilter name="binaryFileTypePolicyFilter" desc="Filters for binary file policies">
             <filteritem type="filename" name="*.png|*.jpg|*.txt" desc="desc files"/>
             </filefilter>
