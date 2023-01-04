@@ -69,6 +69,10 @@
             "name": "devattest_service",
             "uid": "root",
             "gid": "root"
+        },
+        {
+            "name": "hdcd",
+            "uid": "root"
         }
     ]
 }
