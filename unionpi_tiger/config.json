@@ -8,6 +8,7 @@
   "api_version": 8,
   "board": "unionpi_tiger",
   "enable_ramdisk": true,
+  "enable_absystem": false,
   "build_selinux": true,
   "build_seccomp": true,
   "inherit": [ "productdefine/common/inherit/rich.json", "productdefine/common/inherit/chipset_common.json" ],
@@ -99,13 +100,24 @@
           ]
         }
       ]
-    },
+    },    
     {
       "subsystem": "ai",
       "components": [
         {
           "component": "mindspore",
           "features": []
+        }
+      ]
+    },
+    {
+      "subsystem": "msdp",
+      "components": [
+        {
+          "component": "device_status",
+          "features": [
+            "fusion_interaction_coordination = false"
+          ]
         }
       ]
     }
