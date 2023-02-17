@@ -7,6 +7,7 @@
             uid = "";
             gid = [""];
             caps = [""];
+            critical = [];
             template device {
                 template deviceNode {
                     policy = 0;
@@ -75,6 +76,7 @@
                 device0 :: deviceNode {
                     policy = 2;
                     priority = 80;
+                    preload = 2;
                     moduleName = "libusbfn.z.so";
                     serviceName = "usbfn";
                     deviceMatchAttr = "usbfn_driver";
@@ -84,6 +86,7 @@
                 device0 :: deviceNode {
                     policy = 2;
                     priority = 81;
+                    preload = 2;
                     moduleName = "libusbfn_cdcecm.z.so";
                     serviceName = "usbfn_cdcecm";
                     deviceMatchAttr = "usbfn_cdcecm_driver";
@@ -93,9 +96,20 @@
                 device0 :: deviceNode {
                     policy = 2;
                     priority = 100;
+                    preload = 2;
                     moduleName = "libusbfn_cdcacm.z.so";
                     serviceName = "usbfn_cdcacm";
                     deviceMatchAttr = "usbfn_cdcacm_driver";
+                }
+            }
+            mtp_device :: device {
+                device0 :: deviceNode {
+                    policy = 2;
+                    priority = 90;
+                    preload = 2;
+                    moduleName = "libusbfn_mtp_driver.z.so";
+                    serviceName = "usbfn_mtp_interface_service";
+                    deviceMatchAttr = "usbfn_mtp_interface_driver";
                 }
             }
             usb_device :: device {
