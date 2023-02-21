@@ -31,13 +31,15 @@
       ]
     },
     {
-      "subsystem": "graphic",
+      "subsystem": "hdf",
       "components": [
         {
-          "component": "graphic_standard",
-          "features": [
-            "graphic_standard_feature_ace_enable_gpu = true"
-          ]
+          "component": "drivers_interface_ril",
+          "features": []
+        },
+        {
+          "component": "drivers_peripheral_ril",
+          "features":[]
         }
       ]
     },
@@ -97,6 +99,15 @@
             "enable_ohos_startup_init_feature_ab_partition = false",
             "enable_ohos_startup_init_feature_loader = false"
           ]
+        }
+      ]
+    },
+    {
+    "subsystem": "ai",
+    "components": [
+        {
+          "component": "mindspore",
+          "features": []
         }
       ]
     }
