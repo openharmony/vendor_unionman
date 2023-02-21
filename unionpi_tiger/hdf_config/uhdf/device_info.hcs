@@ -7,6 +7,7 @@
             uid = "";
             gid = [""];
             caps = [""];
+            critical = [];
             template device {
                 template deviceNode {
                     policy = 0;
@@ -147,7 +148,7 @@
                     policy = 2;
                     priority = 100;
                     moduleName = "libwifi_hdi_c_device.z.so";
-                    serviceName = "wlan_hal_service";
+                    serviceName = "wlan_interface_service";
                 }
             }
         }
@@ -192,7 +193,7 @@
                     policy = 2;
                     priority = 100;
                     moduleName = "libaudio_manager_service.z.so";
-                    serviceName = "idl_audio_service";
+                    serviceName = "audio_manager_service";
                 }
             }
         }
@@ -406,12 +407,13 @@
             hostName = "partitionslot_host";
             priority = 100;
             uid = "useriam";
-            gid = "useriam";
+            gid = ["useriam", "update"];
             caps = ["DAC_OVERRIDE", "DAC_READ_SEARCH"];
             partitionslot_device :: device {
                 device0 :: deviceNode {
                     policy = 2;
                     priority = 100;
+                    preload = 2;
                     moduleName = "libpartitionslot_driver.z.so";
                     serviceName = "partition_slot_service";
                 }
