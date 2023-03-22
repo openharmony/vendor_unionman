@@ -19,7 +19,7 @@
         },
         {
             "name": "media_service",
-            "gid": ["root", "system"]
+            "gid": ["system"]
         },
         {
             "name": "misc",
