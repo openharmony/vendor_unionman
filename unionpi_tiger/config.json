@@ -60,6 +60,10 @@
             "ace_engine_feature_enable_accessibility = true",
             "ace_engine_feature_enable_web = true"
           ]
+        },
+        {
+          "component": "ui_appearance",
+          "features": []
         }
       ]
     },
@@ -100,7 +104,18 @@
           ]
         }
       ]
-    },    
+    },
+    {
+      "subsystem": "window",
+      "components": [
+        {
+          "component": "window_manager",
+          "features": [
+            "window_manager_dayu210_resource_config = false"
+         ]
+        }
+      ]
+    },
     {
       "subsystem": "ai",
       "components": [
@@ -118,6 +133,18 @@
           "features": [
             "fusion_interaction_coordination = false"
           ]
+        }
+      ]
+    },
+    {
+      "subsystem": "communication",
+      "components": [
+        {
+          "component": "wifi",
+          "features": [
+            "wifi_feature_non_seperate_p2p = false",
+            "wifi_feature_non_hdf_driver = true"
+         ]
         }
       ]
     }
