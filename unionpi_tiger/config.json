@@ -32,13 +32,15 @@
       ]
     },
     {
-      "subsystem": "graphic",
+      "subsystem": "hdf",
       "components": [
         {
-          "component": "graphic_standard",
-          "features": [
-            "graphic_standard_feature_ace_enable_gpu = true"
-          ]
+          "component": "drivers_interface_ril",
+          "features": []
+        },
+        {
+          "component": "drivers_peripheral_ril",
+          "features":[]
         }
       ]
     },
@@ -88,7 +90,27 @@
         {
           "component": "drivers_peripheral_audio",
           "features": [
+            "drivers_peripheral_audio_full_test_suite = false",
             "drivers_peripheral_audio_alsa_lib = false"
+          ]
+        },
+        {
+          "component": "drivers_peripheral_codec",
+          "features": [
+            "drivers_peripheral_codec_support_omx = false",
+            "drivers_peripheral_codec_use_omx = false"
+          ]
+        },
+        {
+          "component": "drivers_peripheral_display",
+          "features": [
+            "drivers_peripheral_display_community = true"
+          ]
+        },
+        {
+          "component": "hdf_core",
+          "features": [
+            "hdf_core_platform_test_support = false"
           ]
         }
       ]
