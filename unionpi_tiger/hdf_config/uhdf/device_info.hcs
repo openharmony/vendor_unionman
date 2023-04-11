@@ -32,6 +32,13 @@
                     moduleName = "libsample_driver.z.so";
                     serviceName = "sample_driver_service";
                 }
+                device1 :: deviceNode {
+                    policy = 2;
+                    priority = 100;
+                    preload = 2;
+                    moduleName = "libsample1_driver.z.so";
+                    serviceName = "sample1_driver_service";
+                }
             }
         }
         bluetooth :: host {
@@ -205,8 +212,16 @@
                 device0 :: deviceNode {
                     policy = 2;
                     priority = 100;
-                    moduleName = "libaudio_manager_service.z.so";
+                    moduleName = "libaudio_primary_driver.z.so";
                     serviceName = "audio_manager_service";
+                }
+            }
+            effect_device :: device {
+                  device0 :: deviceNode {
+                      policy = 2;
+                      priority = 100;
+                      moduleName = "libeffect_model_service.z.so";
+                      serviceName = "effect_model_service";
                 }
             }
         }
@@ -252,16 +267,29 @@
                 }
             }
         }
-
-        display_gralloc :: host {
-            hostName = "disp_gralloc_host";
+        display_composer :: host {
+            hostName = "composer_host";
             priority = 40;
-            input_device :: device {
+            uid = ["composer_host"];
+            gid = ["composer_host", "graphics", "vendor_mpp_driver"];
+            composer_device :: device {
                 device0 :: deviceNode {
                     policy = 2;
                     priority = 160;
-                    moduleName = "libhdi_display_gralloc_stub.z.so";
-                    serviceName = "hdi_display_gralloc_service";
+                    moduleName = "libdisplay_composer_driver_1.0.z.so";
+                    serviceName = "display_composer_service";
+                }
+            }
+        }
+        allocator :: host {
+            hostName = "allocator_host";
+            priority = 40;
+            allocator_device :: device {
+                device0 :: deviceNode {
+                    policy = 2;
+                    priority = 160;
+                    moduleName = "liballocator_driver_1.0.z.so";
+                    serviceName = "allocator_service";
                 }
             }
         }
@@ -421,7 +449,6 @@
             priority = 100;
             uid = "useriam";
             gid = ["useriam", "update"];
-            caps = ["DAC_OVERRIDE", "DAC_READ_SEARCH"];
             partitionslot_device :: device {
                 device0 :: deviceNode {
                     policy = 2;

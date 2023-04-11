@@ -421,8 +421,8 @@
         audio :: host {
             hostName = "audio_host";
             priority = 110;
-            device_dai0 :: device {
-                device0 :: deviceNode {
+            device_dai :: device {
+                device_primary :: deviceNode {
                     policy = 1;
                     priority = 50;
                     preload = 0;
@@ -432,8 +432,8 @@
                     deviceMatchAttr = "hdf_dai_driver";
                 }
             }
-            device_codec_0 :: device {
-                device0 :: deviceNode {
+            device_codec :: device {
+                device_primary :: deviceNode {
                     policy = 1;
                     priority = 50;
                     preload = 0;
@@ -455,7 +455,7 @@
                 }
             }
             device_dma :: device {
-                device0 :: deviceNode {
+                device_primary :: deviceNode {
                     policy = 1;
                     priority = 50;
                     preload = 0;
@@ -466,7 +466,7 @@
                 }
             }
             device_audio :: device {
-                device0 :: deviceNode {
+                device_primary :: deviceNode {
                     policy = 2;
                     priority = 60;
                     preload = 0;
