@@ -18,5 +18,6 @@ group("hdf") {
     "gpio:gpio",
     "led_light:led_light",
     "pwm:pwm",
+    "sensor:sensor",
   ]
 }
