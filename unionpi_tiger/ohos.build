@@ -2,7 +2,8 @@
   "parts": {
     "product_unionpi_tiger": {
       "module_list": [
-        "//vendor/unionman/unionpi_tiger/hals/audio:hdf_audio_config"
+        "//vendor/unionman/unionpi_tiger/hals/audio:hdf_audio_config",
+        "//vendor/unionman/unionpi_tiger/hdf_config/uhdf:hdf_config"
       ]
     }
   }
