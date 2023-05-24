@@ -140,7 +140,6 @@
         {
           "component": "window_manager",
           "features": [
-            "window_manager_dayu200_resource_config = false",
             "window_manager_dayu210_resource_config = false"
          ]
         }
