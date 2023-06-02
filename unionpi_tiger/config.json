@@ -140,7 +140,6 @@
         {
           "component": "window_manager",
           "features": [
-            "window_manager_dayu200_resource_config = false",
             "window_manager_dayu210_resource_config = false"
          ]
         }
@@ -175,6 +174,18 @@
             "wifi_feature_non_seperate_p2p = false",
             "wifi_feature_non_hdf_driver = true"
          ]
+        }
+      ]
+    },
+    {
+      "subsystem": "multimedia",
+      "components": [
+        {
+          "component": "audio_framework",
+          "features": [
+            "audio_framework_feature_dtmf_tone = true",
+            "audio_framework_feature_opensl_es = true"
+          ]
         }
       ]
     }
