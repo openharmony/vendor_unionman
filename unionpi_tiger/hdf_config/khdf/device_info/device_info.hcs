@@ -370,10 +370,21 @@
                     deviceMatchAttr = "hdf_sensor_temperature_driver";
                 }
             }
-            device_temperature_sht30 :: device {
+            device_temperature_aht20 :: device {
                 device0 :: deviceNode {
                     policy = 1;
                     priority = 140;
+                    preload = 2;
+                    permission = 0664;
+                    moduleName = "HDF_SENSOR_TEMPERATURE_AHT20";
+                    serviceName = "hdf_temperature_aht20";
+                    deviceMatchAttr = "hdf_sensor_temperature_aht20_driver";
+                }
+            }
+            device_temperature_sht30 :: device {
+                device0 :: deviceNode {
+                    policy = 1;
+                    priority = 150;
                     preload = 0;
                     permission = 0664;
                     moduleName = "HDF_SENSOR_TEMPERATURE_SHT30";
@@ -384,7 +395,7 @@
             device_sensor_humidity :: device {
                 device0 :: deviceNode {
                     policy = 1;
-                    priority = 150;
+                    priority = 160;
                     preload = 0;
                     permission = 0664;
                     moduleName = "HDF_SENSOR_HUMIDITY";
@@ -392,10 +403,21 @@
                     deviceMatchAttr = "hdf_sensor_humidity_driver";
                 }
             }
+            device_humidity_aht20 :: device {
+                device0 :: deviceNode {
+                    policy = 1;
+                    priority = 170;
+                    preload = 2;
+                    permission = 0664;
+                    moduleName = "HDF_SENSOR_HUMIDITY_AHT20";
+                    serviceName = "hdf_humidity_aht20";
+                    deviceMatchAttr = "hdf_sensor_humidity_aht20_driver";
+                }
+            }
             device_humidity_sht30 :: device {
                 device0 :: deviceNode {
                     policy = 1;
-                    priority = 160;
+                    priority = 180;
                     preload = 0;
                     permission = 0664;
                     moduleName = "HDF_SENSOR_HUMIDITY_SHT30";
