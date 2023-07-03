@@ -86,7 +86,7 @@ ohos_shared_library("gpioled") {
     "//utils/native/base:utils",
   ]
 
-  external_deps = [ "hiviewdfx_hilog_native:libhilog" ]
+  external_deps = [ "hilog:libhilog" ]
 
   relative_install_dir = "module"
   subsystem_name = "napisubsys"

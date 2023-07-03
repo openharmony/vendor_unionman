@@ -25,7 +25,7 @@ ohos_shared_library("gpioled") {
 
   external_deps = [
     "c_utils:utils",
-    "hiviewdfx_hilog_native:libhilog",
+    "hilog:libhilog",
   ]
 
   relative_install_dir = "module"
