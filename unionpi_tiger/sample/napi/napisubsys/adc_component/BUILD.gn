@@ -35,7 +35,7 @@ ohos_shared_library("adc_napi") {
   deps = [ "//foundation/arkui/napi:ace_napi" ]
   external_deps = [
     "c_utils:utils",
-    "hiviewdfx_hilog_native:libhilog",
+    "hilog:libhilog",
   ]
   relative_install_dir = "module"
 
@@ -55,7 +55,7 @@ ohos_executable("sample_server") {
 
   external_deps = [
     "c_utils:utils",
-    "hiviewdfx_hilog_native:libhilog",
+    "hilog:libhilog",
   ]
 
   install_images = [ "system" ]

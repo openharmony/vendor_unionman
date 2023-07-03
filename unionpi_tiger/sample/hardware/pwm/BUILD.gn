@@ -31,7 +31,7 @@ ohos_executable("pwm_test") {
 
   external_deps = [
     "c_utils:utils",
-    "hiviewdfx_hilog_native:libhilog",
+    "hilog:libhilog",
   ]
 
   install_images = [ "system" ]
