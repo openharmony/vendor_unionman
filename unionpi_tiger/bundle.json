@@ -1,0 +1,39 @@
+{
+    "name": "@ohos/product_unionpi_tiger",
+    "description": "product_unionpi_tiger",
+    "version": "4.0",
+    "license": "Apache License 2.0",
+    "private": false,
+    "segment": {
+      "destPath": "vendor/unionman/unionpi_tiger"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+      "name": "product_unionpi_tiger",
+      "subsystem": "product",
+      "adapted_system_type": ["standard"],
+      "deps": {
+        "components": [
+          "hilog",
+          "c_utils",
+          "hdf_core"
+        ],
+        "third_party": [
+        ]
+      },
+      "build": {
+        "sub_component": [
+            "//vendor/unionman/unionpi_tiger/custom_config:custom_config",
+            "//vendor/unionman/unionpi_tiger/hals/audio:hdf_audio_config",
+            "//vendor/unionman/unionpi_tiger/hdf_config/uhdf:hdf_config",
+            "//vendor/unionman/unionpi_tiger/power_config:power_config",
+            "//vendor/unionman/unionpi_tiger/resourceschedule:resourceschedule",
+            "//vendor/unionman/unionpi_tiger/sample:sample_group"
+        ],
+        "test": [
+        ],
+        "inner_kits": []
+      }
+    }
+}
