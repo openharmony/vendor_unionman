@@ -60,6 +60,9 @@
             </filefilter>
             <filefilter name="defaultFilter" desc="Files not to check">
             <filteritem type="filepath" name="unionpi_tiger/power_config/power_mode_config.xml" desc=""/>
+            <filteritem type="filepath" name="unionpi_tiger/custom_config/bootanimation/bootanimation_custom_config.json" desc=""/>
+            <filteritem type="filepath" name="unionpi_tiger/custom_config/window/display_manager_config.xml" desc=""/>
+            <filteritem type="filepath" name="unionpi_tiger/custom_config/window/window_manager_config.xml" desc=""/>
             </filefilter>
         </filefilterlist>
     </oatconfig>
