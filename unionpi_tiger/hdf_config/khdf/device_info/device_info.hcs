@@ -32,6 +32,22 @@
         platform :: host {
             hostName = "platform_host";
             priority = 50;
+            device_adc :: device {
+                device0 :: deviceNode {
+                    policy = 2;
+                    priority = 60;
+                    permission = 0644;
+                    moduleName = "HDF_PLATFORM_ADC_MANAGER";
+                    serviceName = "HDF_PLATFORM_ADC_MANAGER";
+            }
+                device1 :: deviceNode {
+                    policy = 0;
+                    priority = 65;
+                    permission = 0644;
+                    moduleName = "linux_adc_adapter";
+                    deviceMatchAttr = "linux_adc_adapter";
+                }
+            }
             device_gpio :: device {
                 device0 :: deviceNode {
                     policy = 2;

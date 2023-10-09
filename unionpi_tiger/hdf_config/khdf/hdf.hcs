@@ -1,5 +1,6 @@
 #include "device_info/device_info.hcs"
 #include "platform/adc_config_linux.hcs"
+#include "platform/a311d_adc_config.hcs"
 #include "platform/pwm_config.hcs"
 #include "platform/a311d_watchdog_config.hcs"
 #include "platform/a311d_uart_config.hcs"
