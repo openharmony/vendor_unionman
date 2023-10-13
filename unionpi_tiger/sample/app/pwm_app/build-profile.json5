@@ -15,20 +15,6 @@
  */
 {
   "app": {
-    "signingConfigs": [
-      {
-        "name": "default",
-        "material": {
-          "certpath": "C:\\Users\\bin.zeng\\.ohos\\config\\openharmony\\auto_ohos_default.cer",
-          "storePassword": "0000001B209F0034CF1A5ECAB357E5A2E1F05D876235B967E4942AE620030B7FB6810AE931D9ECD5F3B05E",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001BAE17A7A6F77F17555835E08491C603B088B6BEB57E8D14A560B10FB356C2EA3B2301DAFD547B46",
-          "profile": "C:\\Users\\bin.zeng\\.ohos\\config\\openharmony\\auto_ohos_default_com.example.myapplication.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\bin.zeng\\.ohos\\config\\openharmony\\auto_ohos_default.p12"
-        }
-      }
-    ],
     "compileSdkVersion": 8,
     "compatibleSdkVersion": 8,
     "products": [
