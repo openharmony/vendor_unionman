@@ -1,0 +1,17 @@
+{
+	"searchStatus":	0,
+	"errMsg":	"success",
+	"checkResults":	[{
+			"versionCode":	"2",
+			"packageType":	1,
+			"descriptPackageId":	"abcdefg123456789",
+			"url":	"http://192.168.31.147:8002/api/updater",
+			"versionName":	"YH-A35BWDS32232",
+			"verifyInfo":	"dhjsafgasjkfhjaksfhawioio",
+			"size":	23214
+		}],
+	"descriptInfo":	[{
+			"descriptionType":	0,
+			"content":	"http://192.168.31.147:8002/api/appdown"
+		}]
+}
