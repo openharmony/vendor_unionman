@@ -50,20 +50,41 @@
         <licensefile></licensefile>
         <policylist>
             <policy name="projectPolicy" desc="">
-                <policyitem type="copyright" name="Unionman Technology Co., Ltd." path=".*" desc="Unionman copyright"/>
+                <policyitem filefilter="copyrightPolicyFilter" type="copyright" name="Unionman Technology Co., Ltd." path=".*" desc="Unionman copyright"/>
+                <policyitem filefilter="copyrightPolicyFilter" type="license" name="MIT" path=".*" desc="allow MIT" />
+                <policyitem filefilter="copyrightPolicyFilter" type="copyright" name=" Copyright (C) 2017 okdshin" path=".*" desc="okdshin copyright"/>
             </policy>
         </policylist>
         <filefilterlist> 
             <filteritem type="filename" name="NOTICE" desc="Temp files"/>
             <filefilter name="binaryFileTypePolicyFilter" desc="Filters for binary file policies">
-            <filteritem type="filename" name="*.png|*.jpg|*.txt" desc="desc files"/>
+                <filteritem type="filename" name="*.png|*.jpg|*.txt|*.gif|*.ico" desc="desc files"/>
             </filefilter>
             <filefilter name="defaultFilter" desc="Files not to check">
-            <filteritem type="filepath" name="unionpi_tiger/power_config/power_mode_config.xml" desc=""/>
-            <filteritem type="filepath" name="unionpi_tiger/custom_config/bootanimation/bootanimation_custom_config.json" desc=""/>
-            <filteritem type="filepath" name="unionpi_tiger/custom_config/window/display_manager_config.xml" desc=""/>
-            <filteritem type="filepath" name="unionpi_tiger/custom_config/window/window_manager_config.xml" desc=""/>
+                <filteritem type="filepath" name="unionpi_tiger/power_config/power_mode_config.xml" desc=""/>
+                <filteritem type="filepath" name="unionpi_tiger/custom_config/bootanimation/bootanimation_custom_config.json" desc=""/>
+                <filteritem type="filepath" name="unionpi_tiger/custom_config/window/display_manager_config.xml" desc=""/>
+                <filteritem type="filepath" name="unionpi_tiger/custom_config/window/window_manager_config.xml" desc=""/>
             </filefilter>
+            <filefilter name="defaultPolicyFilter" desc="License文件头校验策略的过滤条件" >
+                <filteritem type="filename" name="oh-package.json5" desc="OpenHarmony工程编译入口脚本，无需添加License头"/>
+                <filteritem type="filename" name="hvigorw" desc="OpenHarmony工程编译入口脚本，无需添加License头"/>
+                <filteritem type="filename" name="hvigorfile.ts" desc="OpenHarmony工程编译脚本相关，无需添加License头"/>
+                <filteritem type="filename" name="hvigorfile.js" desc="OpenHarmony工程编译脚本相关，无需添加License头"/>
+                <filteritem type="filename" name="hvigorw.bat" desc="OpenHarmony工程编译配置文件，无需添加License头"/>
+                <filteritem type="filename" name="hvigor-config.json5" desc="OpenHarmony工程编译配置文件，无需添加License头"/>
+                <filteritem type="filename" name="hvigor-wrapper.js" desc="OpenHarmony工程编译配置文件，无需添加License头"/>
+            </filefilter>
+            <filefilter name="copyrightPolicyFilter" desc="Copyright文件头校验策略的过滤条件" >
+                <filteritem type="filename" name="oh-package.json5" desc="OpenHarmony工程编译入口脚本，无需添加版权头"/>
+                <filteritem type="filename" name="hvigorw" desc="OpenHarmony工程编译入口脚本，无需添加版权头"/>
+                <filteritem type="filename" name="hvigorw.bat" desc="OpenHarmony工程编译配置文件，无需添加版权头"/>
+                <filteritem type="filename" name="hvigorfile.ts" desc="OpenHarmony工程编译脚本相关，无需添加版权头"/>
+                <filteritem type="filename" name="hvigorfile.js" desc="OpenHarmony工程编译脚本相关，无需添加版权头"/>
+                <filteritem type="filename" name="hvigor-config.json5" desc="OpenHarmony工程编译配置文件，无需添加版权头"/>
+                <filteritem type="filename" name="hvigor-wrapper.js" desc="OpenHarmony工程编译配置文件，无需添加版权头"/>
+            </filefilter>
+            
         </filefilterlist>
     </oatconfig>
 </configuration>
