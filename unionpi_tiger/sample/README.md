@@ -23,5 +23,4 @@
 |  7   | 分布式综合应用                 | [Distributed_integrated_application](app/Distributed_integrated_application) |
 |  8   | 分布式数据库                   | [distributed_database](app/distributed_database)             |
 |  9   | 智能中控屏                     | [SmartCtrlControl](app/SmartCtrlControl)                     |
-|  10  | 分布式视频播放器               | [DistributedVideoPlayer](https://gitee.com/umspark/app_sample/tree/master/DistributedVideoPlayer) |
 
