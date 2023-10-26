@@ -1,0 +1,23 @@
+{
+	"checkResults" : 
+	[
+		{
+			"descriptPackageId" : "abcdefg123456789",
+			"packageType" : 1,
+			"size" : 746366152,
+			"url" : "http://127.0.0.1:80/api/download/OpenHarmony.img",
+			"verifyInfo" : "3e47c7cc88c96a3010d9d98f5453d7524c9219daaccf7d4c9449df32f3b8e06a",
+			"versionCode" : "1",
+			"versionName" : "opharmony 4.0.0"
+		}
+	],
+	"descriptInfo" : 
+	[
+		{
+			"content" : "修复了一些bug",
+			"descriptionType" : 0
+		}
+	],
+	"errMsg" : "success",
+	"searchStatus" : 0
+}
