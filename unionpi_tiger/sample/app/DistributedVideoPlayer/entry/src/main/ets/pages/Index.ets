@@ -22,10 +22,12 @@ import { TitleBar } from '../common/TitleBar';
 import { toTime } from '../utils/utils';
 import { RemoteDeviceModel } from '../model/RemoteDeviceModel';
 import { KvStoreModel } from '../model/KvStoreModel';
+import Logger from '../model/Logger';
 import MediaUtils from '../utils/MediaUtils';
-import DistributedDataModel from '../model/DistributedDataModel';
 import AVPlayerUtils from '../utils/AVPlayerUtils';
+import DistributedDataModel from '../model/DistributedDataModel';
 
+const TAG: string = "Index";
 const EXIT: string = 'exit';
 const DATA_CHANGE: string = 'dataChange';
 const PlaybackSpeed: string[] = ['0.75X', '1.0X', '1.25X', '1.75X', '2.0X'];
@@ -99,6 +101,7 @@ struct Index {
   private fd: number = undefined
   private listener = mediaQuery.matchMediaSync('screen and (min-aspect-ratio: 1.5) or (orientation: landscape)')
   onLand = (mediaQueryResult) => {
+    Logger.info(TAG, `onLand: mediaQueryResult.matches= ${mediaQueryResult.matches}`)
     if (mediaQueryResult.matches) {
       this.isLand = true
     } else {
@@ -125,9 +128,13 @@ struct Index {
     this.getVideos()
     // 订阅DATA_CHANGE类型的数据变更通知
     this.kvStoreModel.setOnMessageReceivedListener(DATA_CHANGE, value => {
+      Logger.info(TAG, `DATA_CHANGE ${value}`)
       if (globalThis.isDistributed) {
         if (value.search(EXIT) !== -1) {
-          globalThis.context.terminateSelf();
+          Logger.info(TAG, `EXIT ${EXIT}`)
+          globalThis.context.terminateSelf((error) => {
+            Logger.error(TAG, `terminateSelf finished, error= ${error}`)
+          });
         } else {
           let video = JSON.parse(value)
           globalThis.dataChange = true
@@ -139,6 +146,7 @@ struct Index {
           }
           this.SpeedIndex = video.SpeedIndex
           this.isPlay = video.isPlay
+          Logger.info(TAG, `title:${this.title},currentTime:${this.currentTime},SpeedIndex:${this.SpeedIndex},isPlay:${this.isPlay},firstHop:${globalThis.firstHop}`)
           globalThis.dataChange = false
         }
       }
@@ -151,6 +159,7 @@ struct Index {
   }
 
   startAbilityCallBack = (key) => {
+    Logger.info(TAG, `startAbilityCallBack ${key}`)
     if (DATA_CHANGE === key) {
       globalThis.deviceID = "local"
       globalThis.firstHop = true
@@ -166,7 +175,10 @@ struct Index {
   async getVideos() {
     this.mediaDataSource['dataArray'] = []
     let fileList = await this.mediaUtil.getFileAssetsFromType(mediaLibrary.MediaType.VIDEO)
+    Logger.info(TAG, 'getVideos fileList:' + JSON.stringify(fileList))
     this.mediaList = this.mediaDataSource['dataArray'] = fileList
+    Logger.info(TAG, 'getVideos mediaList:' + JSON.stringify(this.mediaList))
+    Logger.info(TAG, 'getVideos mediaDataSource:' + JSON.stringify(this.mediaDataSource['dataArray']))
     this.mediaDataSource.notifyDataReload()
     if (!globalThis.isDistributed) {
       this.title = this.mediaList[this.videoIndex].displayName.replace('.mp4', '')
@@ -174,6 +186,7 @@ struct Index {
   }
 
   dataChange() {
+    Logger.info(TAG, `dataChange, title = ${this.title}, currentTime = ${this.currentTime}, SpeedIndex = ${this.SpeedIndex}, isPlay = ${this.isPlay}`)
     if (this.isPlay) {
       this.playVideo()
     } else {
@@ -201,26 +214,32 @@ struct Index {
   }
 
   async initVideo() {
-    this.mediaList.forEach((file, index) => {
-      if (file.displayName.replace('.mp4', '') === this.title) {
-        this.fileAsset = file
-        this.videoIndex = index
+    Logger.info(TAG, 'initVideo')
+    try {
+      this.mediaList.forEach((file, index) => {
+        if (file.displayName.replace('.mp4', '') === this.title) {
+          this.fileAsset = file
+          this.videoIndex = index
+        }
+      })
+      let fdPath = await this.prepareVideo()
+      await this.avPlayer.initVideoPlayer(fdPath, this.surfaceId)
+      if (globalThis.firstHop && globalThis.isDistributed) {
+        this.setCurrentTime()
       }
-    })
-    let fdPath = await this.prepareVideo()
-    await this.avPlayer.initVideoPlayer(fdPath, this.surfaceId)
-    if (globalThis.firstHop && globalThis.isDistributed) {
-      this.setCurrentTime()
-    }
-    if (globalThis.firstHop && globalThis.deviceID === "remote") {
-      this.dataChange()
-      globalThis.firstHop = false
-      let video = new DistributedDataModel(this.title, this.currentTime, this.SpeedIndex, this.isPlay, false)
-      this.kvStoreModel.put(DATA_CHANGE, JSON.stringify(video))
+      if (globalThis.firstHop && globalThis.deviceID === "remote") {
+        this.dataChange()
+        globalThis.firstHop = false
+        let video = new DistributedDataModel(this.title, this.currentTime, this.SpeedIndex, this.isPlay, false)
+        this.kvStoreModel.put(DATA_CHANGE, JSON.stringify(video))
+      }
+    } catch (error) {
+      Logger.info(TAG, `initVideo error ${JSON.stringify(error)}`)
     }
   }
 
   async prepareVideo() {
+    Logger.info(TAG, 'prepareVideo')
     this.fd = await this.fileAsset.open('Rw')
     this.ratio = this.fileAsset.width / this.fileAsset.height
     this.mXComponentController.setXComponentSurfaceSize({
@@ -234,6 +253,7 @@ struct Index {
   }
 
   async resetVideo() {
+    Logger.info(TAG, 'resetVideo')
     if (globalThis.firstHop) {
       return
     }
@@ -250,6 +270,7 @@ struct Index {
   }
 
   async playVideo() {
+    Logger.info(TAG, 'playVideo')
     this.avPlayer.setTimeUpdateCallBackCallBack((time: number) => {
       this.currentTime = time / 1000
     })
@@ -263,6 +284,7 @@ struct Index {
   }
 
   clearVideoPlayer() {
+    Logger.info(TAG, 'clearVideoPlayer')
     if (this.avPlayer) {
       this.avPlayer.stop()
       this.avPlayer.release()
@@ -273,12 +295,14 @@ struct Index {
   }
 
   setCurrentTime() {
+    Logger.info(TAG, 'setCurrentTime')
     this.avPlayer.seek(this.currentTime)
     this.isLoading = false
     this.distributedDataSync()
   }
 
   setSpeed() {
+    Logger.info(TAG, 'setSpeed')
     this.avPlayer.setSpeed(this.SpeedIndex)
     this.distributedDataSync()
   }
@@ -373,6 +397,7 @@ struct Index {
               .optionFont({ size: 16 })
               .optionFontColor("#7F007DFF")
               .onSelect((index: number, value: string) => {
+                Logger.info(TAG, `index ${index}`)
                 this.SpeedIndex = index
               })
 
@@ -429,5 +454,8 @@ struct Index {
     .sideBarWidth(350)
     .minSideBarWidth(200)
     .maxSideBarWidth(400)
+    .onChange((value: boolean) => {
+      Logger.info('status:' + value)
+    })
   }
 }
