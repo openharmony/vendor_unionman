@@ -15,7 +15,10 @@
  *
  */
 
+import Logger from '../model/Logger';
 import deviceManager from '@ohos.distributedHardware.deviceManager';
+
+const TAG: string = 'DeviceDialog';
 
 @CustomDialog
 export struct DeviceDialog {
@@ -51,8 +54,10 @@ export struct DeviceDialog {
                 .width('7%')
                 .checked(index === this.selectedIndex ? true : false)
                 .onChange(() => {
+                  Logger.info(TAG, `select device: ${item.deviceId}`)
                   if (index === this.selectedIndex) {
-                    return;
+                    Logger.info(TAG, 'index === this.selectedIndex')
+                    return
                   }
                   this.selectedIndex = index !== undefined ? index : 0
                   if (this.controller !== undefined) {

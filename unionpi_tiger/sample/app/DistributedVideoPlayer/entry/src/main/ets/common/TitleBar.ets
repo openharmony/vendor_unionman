@@ -18,9 +18,11 @@ import router from '@ohos.router';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import promptAction from '@ohos.promptAction';
 import deviceManager from '@ohos.distributedHardware.deviceManager';
+import Logger from '../model/Logger';
 import { DeviceDialog } from '../common/DeviceDialog';
 import { RemoteDeviceModel } from '../model/RemoteDeviceModel';
 
+const TAG = 'TitleBar';
 const DATA_CHANGE = 'dataChange';
 const EXIT = 'exit';
 const ONE_THOUSAND: number = 1000;
@@ -48,20 +50,26 @@ export struct TitleBar {
   }
 
   selectDevice() {
+    Logger.info(TAG, `start ability device:${JSON.stringify(this.deviceLists[this.selectedIndex])}`)
     if (this.remoteDeviceModel === null || this.remoteDeviceModel.discoverLists.length <= 0 || this.remoteDeviceModel.deviceLists.includes(this.deviceLists[this.selectedIndex])) {
       this.startAbility(this.deviceLists[this.selectedIndex].deviceId)
       this.clearSelectState()
       return
     }
+    Logger.info(TAG, 'start ability, needAuth')
     this.remoteDeviceModel.authenticateDevice(this.deviceLists[this.selectedIndex], (device: deviceManager.DeviceInfo) => {
+      Logger.info(TAG, 'auth and online finished' + JSON.stringify(device))
       this.startAbility(device.deviceId)
     })
+    Logger.info(TAG, 'start ability2 ......')
     this.clearSelectState()
   }
 
   selectedIndexChange = (index: number) => {
+    Logger.info(TAG, 'selectedIndexChange')
     this.selectedIndex = index
     if (this.selectedIndex === 0) {
+      Logger.info(TAG, 'stop ability')
       this.startAbilityCallBack(EXIT)
       globalThis.isDistributed = false
       if (this.dialogController !== null) {
@@ -73,7 +81,12 @@ export struct TitleBar {
     this.selectDevice()
   }
 
+  /**
+   * 启动远程设备
+   * @param deviceId
+   */
   async startAbility(deviceId) {
+    Logger.info(TAG, `startAbility deviceId: ${deviceId}`)
     await globalThis.context.startAbility({
       bundleName: 'com.unionman.distributedvideoplayer',
       abilityName: 'EntryAbility',
@@ -83,6 +96,7 @@ export struct TitleBar {
         deviceID: "remote"
       }
     }).then((data) => {
+      Logger.info(TAG, `start ability finished: ${JSON.stringify(data)}`)
       promptAction.showToast({ message: "流转成功" })
       globalThis.isDistributed = true
       // 等待对端KvStore启动再同步数据
@@ -90,11 +104,14 @@ export struct TitleBar {
         this.startAbilityCallBack(DATA_CHANGE)
       }, 2000)
     }).catch((err) => {
+      Logger.error(TAG, `start ability err: ${JSON.stringify(err)}`);
     });
   }
 
   showDialog() {
+    // 注册监听回调，发现设备或查找到已认证设备会弹窗显示
     this.remoteDeviceModel.registerDeviceListCallback(() => {
+      Logger.info(TAG, 'registerDeviceListCallback, callback entered')
       this.deviceLists = []
       this.deviceLists.push({
         deviceId: '0',
@@ -104,10 +121,14 @@ export struct TitleBar {
         range: ONE_THOUSAND
       })
       let deviceTempList = this.remoteDeviceModel.deviceLists.concat(this.remoteDeviceModel.discoverLists)
+      Logger.info(TAG, `this.remoteDeviceModel.deviceTempList.length${deviceTempList.length}`)
       for (let i = 0; i < deviceTempList.length; i++) {
+        Logger.info(TAG, `device ${i}/${deviceTempList.length} deviceId= ${deviceTempList[i].deviceId}, deviceName= ${deviceTempList[i].deviceName}, deviceType= ${deviceTempList[i].deviceType}`)
         this.deviceLists.push(deviceTempList[i])
         AppStorage.Set('deviceLists', this.deviceLists)
+        Logger.info(TAG, 'deviceLists push end')
       }
+      Logger.info(TAG, 'CustomDialogController start')
       if (this.dialogController !== null) {
         this.dialogController.close()
         this.dialogController = null
@@ -128,6 +149,7 @@ export struct TitleBar {
         alignment: this.isLand ? DialogAlignment.Center : DialogAlignment.Bottom
       })
       this.dialogController.open()
+      Logger.info(TAG, 'CustomDialogController end')
     })
   }
 
