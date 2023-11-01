@@ -17,6 +17,7 @@
 import router from '@ohos.router';
 import i2cnapidemo from '@ohos.i2cnapidemo';
 import prompt from '@ohos.prompt';
+import promptAction from '@ohos.promptAction';
 
 // 自定义按钮组件
 @Extend(Button)
@@ -61,6 +62,7 @@ struct Second {
         Button('confirm')
           .backgroundColor('#ffffffff')
           .fontColor('#ff020202')
+          .id('modeConfirm_button')
           .onClick(() => {
             this.handlePopup = !this.handlePopup
             this.popupMessage = "The current Mps is " + this.Mps[this.select1] + "\n" +
@@ -68,14 +70,14 @@ struct Second {
               "Are you sure to refresh?";
             if (i2cnapidemo.ReadTemperatureC() <= 800) {
               i2cnapidemo.ModeSet(this.select1, this.select2);
-              prompt.showToast({
+              promptAction.showToast({
                 message: "模式选择成功", // 显示文本
                 duration: 500, // 显示时长
                 bottom: 100 // 距离底部的距离
               })
             }
             else {
-              prompt.showToast({
+              promptAction.showToast({
                 message: "模式选择失败，请检查连线", // 显示文本
                 duration: 1000, // 显示时长
                 bottom: 100 // 距离底部的距离
@@ -86,6 +88,7 @@ struct Second {
         Button('cancel')
           .backgroundColor('#ffffffff')
           .fontColor('#ff030303')
+          .id('Mode_cancel')
           .onClick(() => {
             this.handlePopup = !this.handlePopup
           })
@@ -126,6 +129,7 @@ struct Second {
               .margin({
                 bottom: 10
               })
+              .id('Mps_TextPicker')
 
             // TextPicker组件选择刷新率
             TextPicker({ range: this.Repeatability, selected: this.select2 })
@@ -139,6 +143,7 @@ struct Second {
               })
               .width('50%')
               .height('100%')
+              .id('Repeatability_TextPicker')
           }
           .height('50%')
         }
@@ -150,14 +155,17 @@ struct Second {
             .fontSize(20)
             .fontWeight(FontWeight.Bold)
             .textAlign(TextAlign.Center)
+            .id('TempC')
           Text("华氏度：" + this.ReadTemperatureF.toFixed(2) + "°F")
             .fontSize(20)
             .fontWeight(FontWeight.Bold)
             .textAlign(TextAlign.Center)
+            .id('TempF')
           Text("湿度：" + this.ReadHumidity.toFixed(2) + "%RH")
             .fontSize(20)
             .fontWeight(FontWeight.Bold)
             .textAlign(TextAlign.Center)
+            .id('Hum')
         }
         .width('50%')
       }
@@ -182,17 +190,18 @@ struct Second {
           })
           .width('20%')
           .height('10%')
+          .id('softReset_button')
           .onClick(() => {
             if (i2cnapidemo.ReadTemperatureC() <= 800) {
               i2cnapidemo.SoftReset();
-              prompt.showToast({
+              promptAction.showToast({
                 message: "启动/重启成功", // 显示文本
                 duration: 500, // 显示时长
                 bottom: 100 // 距离底部的距离
               })
             }
             else {
-              prompt.showToast({
+              promptAction.showToast({
                 message: "启动失败，请检查连线", // 显示文本
                 duration: 1000, // 显示时长
                 bottom: 100 // 距离底部的距离
@@ -207,6 +216,7 @@ struct Second {
           })
           .width('20%')
           .height('10%')
+          .id('modeSet_button')
           .onClick(() => {
             this.handlePopup = !this.handlePopup
           })
@@ -231,11 +241,16 @@ struct Second {
           })
           .width('16%')
           .height('10%')
+          .id('getTemp_Button')
           .onClick(() => {
             if (i2cnapidemo.ReadTemperatureC() <= 800) {
+              if(this.intervalID)
+              {
+                clearInterval(this.intervalID)
+              }
               this.startWork();
               console.info(" i2cvalue " + this.ReadTemperatureC + "\n" + this.ReadHumidity + "\n" + this.ReadTemperatureF);
-              prompt.showToast({
+              promptAction.showToast({
                 message: "获取成功", // 显示文本
                 duration: 500, // 显示时长
                 bottom: 100 // 距离底部的距离
@@ -243,7 +258,7 @@ struct Second {
             }
             else {
               clearInterval(this.intervalID);
-              prompt.showToast({
+              promptAction.showToast({
                 message: "获取失败，请检查连线", // 显示文本
                 duration: 1000, // 显示时长
                 bottom: 100 // 距离底部的距离
@@ -255,6 +270,7 @@ struct Second {
           .ButtonStyle()
           .width('16%')
           .height('10%')// 返回按钮绑定onClick事件，点击按钮时返回到第一页
+          .id('back_button')
           .onClick(() => {
             clearInterval(this.intervalID); // 销毁定时器
             router.back()
