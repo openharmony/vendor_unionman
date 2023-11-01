@@ -15,8 +15,12 @@
  *
  */
 
+import image from '@ohos.multimedia.image';
+import fileio from '@ohos.fileio';
+import promptAction from '@ohos.promptAction';
 import mediaLibrary from '@ohos.multimedia.mediaLibrary';
 import Logger from '../model/Logger';
+import DateTimeUtil from './DateTimeUtil';
 
 const TAG: string = 'MediaUtils';
 
@@ -26,6 +30,41 @@ export default class MediaUtils {
 
   constructor() {
     this.mediaLib = mediaLibrary.getMediaLibrary(globalThis.context)
+  }
+
+  async createAndGetFile() {
+    let mediaTest = mediaLibrary.getMediaLibrary(globalThis.context)
+    let info = {
+      prefix: 'IMG_', suffix: '.jpg', directory: mediaLibrary.DirectoryType.DIR_IMAGE
+    }
+    let dateTimeUtil = new DateTimeUtil()
+    let name = `${dateTimeUtil.getDate()}_${dateTimeUtil.getTime()}`
+    let displayName = `${info.prefix}${name}${info.suffix}`
+    let publicPath = await mediaTest.getPublicDirectory(info.directory)
+    Logger.info(TAG, `publicPath = ${publicPath}`)
+    return await mediaTest.createAsset(mediaLibrary.MediaType.IMAGE, displayName, publicPath)
+  }
+
+  async savePicture(data) {
+    Logger.info(TAG, `savePicture`)
+    let packOpts: image.PackingOption = {
+      format: "image/jpeg", quality: 100
+    }
+    let imagePackerApi = image.createImagePacker()
+    let arrayBuffer = await imagePackerApi.packing(data, packOpts)
+    let fileAsset = await this.createAndGetFile()
+    let fd = await fileAsset.open('Rw')
+    imagePackerApi.release()
+    try {
+      await fileio.write(fd, arrayBuffer)
+    } catch (err) {
+      Logger.error(`write failed, code is ${err.code}, message is ${err.message}`)
+    }
+    await fileAsset.close(fd)
+    Logger.info(TAG, `write done`)
+    promptAction.showToast({
+      message: '图片保存成功', duration: 1000
+    })
   }
 
   async getFileAssetsFromType(mediaType: number) {
