@@ -15,12 +15,15 @@
  *
  */
 import router from '@ohos.router';
+import screenshot from '@ohos.screenshot';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import promptAction from '@ohos.promptAction';
 import deviceManager from '@ohos.distributedHardware.deviceManager';
 import Logger from '../model/Logger';
+import MediaUtils from '../utils/MediaUtils';
 import { DeviceDialog } from '../common/DeviceDialog';
 import { RemoteDeviceModel } from '../model/RemoteDeviceModel';
+import { ScreenshotDialog } from '../common/ScreenshotDialog';
 
 const TAG = 'TitleBar';
 const DATA_CHANGE = 'dataChange';
@@ -33,9 +36,17 @@ export struct TitleBar {
   @Prop isLand: boolean
   @State selectedIndex: number = 0
   @StorageLink('deviceLists') deviceLists: Array<deviceManager.DeviceInfo> = []
+  @State screenshotUrl: PixelMap = undefined
   private startAbilityCallBack: (key) => void
   private remoteDeviceModel: RemoteDeviceModel = null
   private dialogController: CustomDialogController = null
+  private mediaUtil: MediaUtils = new MediaUtils()
+  screenshotDialogController: CustomDialogController = new CustomDialogController({
+    builder: ScreenshotDialog({ screenshotUrl: $screenshotUrl }),
+    autoCancel: true,
+    customStyle: true,
+    offset: { dx: -100, dy: 100 }
+  })
 
   aboutToAppear() {
     AppStorage.SetOrCreate('deviceLists', this.deviceLists)
@@ -170,6 +181,22 @@ export struct TitleBar {
         .maxLines(1)
 
       Blank()
+
+      Image($r("app.media.ic_controlcenter_screenshot_filled"))
+        .height('60%')
+        .margin({ right: 8 })
+        .width(this.isLand ? '6%' : '8%')
+        .objectFit(ImageFit.Contain)
+        .onClick(() => {
+          var screenshotOptions = {};
+          screenshot.save(screenshotOptions).then((pixelMap: PixelMap) => {
+            this.screenshotUrl = pixelMap
+            this.mediaUtil.savePicture(pixelMap)
+            this.screenshotDialogController.open()
+          }).catch((err) => {
+            Logger.error('Failed to save screenshot: ' + JSON.stringify(err));
+          });
+        })
 
       Image($r("app.media.ic_hop"))
         .height('60%')

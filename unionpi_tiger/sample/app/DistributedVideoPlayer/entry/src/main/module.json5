@@ -60,6 +60,9 @@
         }
       },
       {
+        "name": "ohos.permission.CAPTURE_SCREEN"
+      },
+      {
         "name": "ohos.permission.READ_MEDIA",
         "reason": "$string:media_reason",
         "usedScene": {
