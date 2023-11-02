@@ -79,6 +79,7 @@ struct Index {
   @State @Watch('showControlBarEvent') controls: number = Visibility.Visible;
   // 是否显示侧边栏
   @State showSideBar: boolean = false
+  @State showPlaybackProgress: boolean = false
   @State currentTime: number = 0
   @State duration: number = 0
   @State kvStoreModel: KvStoreModel = new KvStoreModel()
@@ -108,6 +109,10 @@ struct Index {
       this.isLand = false
     }
   }
+  startX: number
+  startY: number
+  moveX: number
+  moveY: number
 
   @Builder TabBuilder(index: number, text: string) {
     Column() {
@@ -423,6 +428,14 @@ struct Index {
         .alignItems(HorizontalAlign.Start)
         .visibility(this.controls)
 
+        if (this.showPlaybackProgress) {
+          Text(toTime(this.currentTime) + '/' + toTime(this.duration))
+            .fontColor(Color.White)
+            .padding(12)
+            .backgroundColor('#CC000000')
+            .borderRadius(8)
+        }
+
         if (this.isLoading) {
           Column() {
             LoadingProgress()
@@ -447,6 +460,47 @@ struct Index {
           this.showSideBar = false
         }
       })
+      .priorityGesture(
+        GestureGroup(GestureMode.Exclusive,
+          TapGesture({ count: 2 })
+            .onAction(() => {
+              this.isPlay = !this.isPlay
+            }),
+          PanGesture({ direction: PanDirection.Left | PanDirection.Right })
+            .onActionStart((event: GestureEvent) => {
+              Logger.info(TAG, 'PlaybackEvent Pan start')
+              this.startX = event.offsetX
+            })
+            .onActionUpdate((event: GestureEvent) => {
+              Logger.info(TAG, 'PlaybackEvent Pan update')
+              // 右滑
+              if (event.offsetX - this.startX > 0) {
+                this.startX = event.offsetX
+                this.showPlaybackProgress = true
+                if (this.currentTime === this.duration) {
+                  return
+                } else {
+                  this.currentTime += 1
+                }
+              } // 左滑
+              else if (event.offsetX - this.startX < 0) {
+                this.startX = event.offsetX
+                this.showPlaybackProgress = true
+                if (this.currentTime === 0) {
+                  return
+                } else {
+                  this.currentTime -= 1
+                }
+              }
+            })
+            .onActionEnd(() => {
+              Logger.info(TAG, 'PlaybackEvent Pan end')
+              this.showPlaybackProgress = false
+              this.isLoading = true
+              this.setCurrentTime()
+            })
+        )
+      )
     }
     .showSideBar(this.showSideBar)
     .showControlButton(false)
