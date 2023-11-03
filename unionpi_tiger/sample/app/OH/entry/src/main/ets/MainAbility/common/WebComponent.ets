@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-
+// @ts-nocheck
 import web_webview from '@ohos.web.webview'
 import prompt from '@system.prompt';
 
@@ -38,20 +38,24 @@ export struct WebComponent {
           .fontSize(20)
         Row({ space: 10 }) {
           Button("刷新")
+            .id("update")
             .onClick(() => {
               this.webController.refresh();
             })
           Button("前进")
+            .id("go")
             .onClick(() => {
               this.webController.forward();
             })
 
           Button("后退")
+            .id("back")
             .onClick(() => {
               this.webController.backward();
             })
 
           Button("清除记录")
+            .id("clean")
             .onClick(() => {
               this.webController.clearHistory();
             })
@@ -59,6 +63,7 @@ export struct WebComponent {
 
         Row({ space: 10 }) {
           Button('getCookie')
+            .id("getCookie")
             .onClick(() => {
               try {
                 let value = web_webview.WebCookieManager.getCookie(this.webTitle);
@@ -71,6 +76,7 @@ export struct WebComponent {
             })
 
           Button('清除会话cookie')
+            .id("cleanCookie")
             .onClick(() => {
               web_webview.WebCookieManager.deleteSessionCookie();
             })
@@ -91,6 +97,7 @@ export struct WebComponent {
               this.inputValue = value;
             })
           Button('发送')
+            .id("send")
             .onClick(() => {
               try {
                 web_webview.WebCookieManager.setCookie(this.webTitle, this.inputValue);
@@ -104,6 +111,7 @@ export struct WebComponent {
         }
 
         Button('保存当前页面')
+          .id("save")
           .onClick(() => {
             let webAsyncController = new web_webview.WebAsyncController(this.webController);
             webAsyncController.storeWebArchive("/data/storage/el2/base/", true)
@@ -134,6 +142,7 @@ export struct WebComponent {
           })
 
         Button('postMessage')
+          .id("postMessage")
           .onClick(() => {
             try {
               // 1、创建两个消息端口。
@@ -165,6 +174,7 @@ export struct WebComponent {
 
         // 4、使用应用侧的端口给另一个已经发送到html的端口发送消息。
         Button('SendDataToHTML')
+          .id("SendDataToHTML")
           .onClick(() => {
             try {
               if (this.ports && this.ports[1]) {
