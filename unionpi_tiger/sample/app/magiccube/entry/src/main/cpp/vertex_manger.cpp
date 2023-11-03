@@ -39,7 +39,7 @@ VertexManger::VertexManger(std::vector<float> vertices, std::vector<float> color
     glBindBuffer(GL_ARRAY_BUFFER, ofs);
     glBufferData(GL_ARRAY_BUFFER,
         offsets.size() * sizeof(decltype(offsets)::value_type), offsets.data(), GL_STATIC_DRAW);
-    glVertexAttribPointer(2L, 3L, GL_FLOAT, GL_FALSLE, 3L * sizeof(float), nullptr);
+    glVertexAttribPointer(2L, 3L, GL_FLOAT, GL_FALSE, 3L * sizeof(float), nullptr);
     glEnableVertexAttribArray(2L);
     glVertexAttribDivisor(2L, 1);
 
