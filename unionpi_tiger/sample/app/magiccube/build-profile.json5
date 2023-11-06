@@ -20,17 +20,17 @@
         "compileSdkVersion": 10,
         "compatibleSdkVersion": 10,
         "runtimeOS": "OpenHarmony",
-        "signingConfig": "default",
+        "signingConfig": "default"
       }
     ],
     "buildModeSet": [
       {
-        "name": "debug",
+        "name": "debug"
       },
       {
         "name": "release"
       }
-    ]
+    ],
   },
   "modules": [
     {

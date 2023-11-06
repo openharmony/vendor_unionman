@@ -17,12 +17,19 @@
 #define VERTEXMANGER_H
 
 #include <vector>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+enum class Axis { X, Y, Z };
+
+enum class Direction { Left, Middle, Right };
+
 class VertexManger {
 public:
     VertexManger(std::vector<float> vertices, std::vector<float> colors, std::vector<float> offsets);
     ~VertexManger();
     void draw();
-
+    void twist(Axis axis, Direction dir);
 protected:
     unsigned int vao;
     unsigned int vbo;
@@ -32,5 +39,7 @@ protected:
     std::vector<float> vertices;
     std::vector<float> colors;
     std::vector<float> offsets;
+    std::vector<glm::mat4> translat;
+    void twistOneBlock(unsigned int blockIndex, Axis axis);
 };
 #endif
