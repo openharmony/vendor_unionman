@@ -15,33 +15,51 @@
 
 #include "vertex_manger.h"
 #include <GLES3/gl31.h>
+constexpr double precision = 0.000001f;
 VertexManger::VertexManger(std::vector<float> vertices, std::vector<float> colors, std::vector<float> offsets)
-    : vertices(vertices), colors(colors), offsets(offsets)
+    : vertices(vertices), colors(colors), offsets(offsets), translat(offsets.size()/3L, glm::mat4(1.0f))
 {
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER,
-        vertices.size() * sizeof(decltype(vertices)::value_type), vertices.data(), GL_STATIC_DRAW);
+    glBufferData(
+        GL_ARRAY_BUFFER, vertices.size() * sizeof(decltype(vertices)::value_type), vertices.data(), GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3L, GL_FLOAT, GL_FALSE, 3L * sizeof(float), nullptr);
     glEnableVertexAttribArray(0);
 
     glGenBuffers(1, &co);
     glBindBuffer(GL_ARRAY_BUFFER, co);
-    glBufferData(GL_ARRAY_BUFFER,
-        colors.size() * sizeof(decltype(colors)::value_type), colors.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(decltype(colors)::value_type), colors.data(), GL_STATIC_DRAW);
     glVertexAttribPointer(1, 3L, GL_FLOAT, GL_FALSE, 3L * sizeof(float), nullptr);
     glEnableVertexAttribArray(1);
 
     glGenBuffers(1, &ofs);
     glBindBuffer(GL_ARRAY_BUFFER, ofs);
-    glBufferData(GL_ARRAY_BUFFER,
-        offsets.size() * sizeof(decltype(offsets)::value_type), offsets.data(), GL_STATIC_DRAW);
+    glBufferData(
+        GL_ARRAY_BUFFER, offsets.size() * sizeof(decltype(offsets)::value_type), offsets.data(), GL_STATIC_DRAW);
     glVertexAttribPointer(2L, 3L, GL_FLOAT, GL_FALSE, 3L * sizeof(float), nullptr);
     glEnableVertexAttribArray(2L);
     glVertexAttribDivisor(2L, 1);
+
+    glGenBuffers(1, &tran);
+    glBindBuffer(GL_ARRAY_BUFFER, tran);
+    glBufferData(
+        GL_ARRAY_BUFFER, translat.size() * sizeof(decltype(translat)::value_type), translat.data(), GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(3L, 4L, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), nullptr);
+    glEnableVertexAttribArray(3L);
+    glVertexAttribPointer(4L, 4L, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), reinterpret_cast<void*>(16L));
+    glEnableVertexAttribArray(4L);
+    glVertexAttribPointer(5L, 4L, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), reinterpret_cast<void*>(16L * 2L));
+    glEnableVertexAttribArray(5L);
+    glVertexAttribPointer(6L, 4L, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), reinterpret_cast<void*>(16L * 3L));
+    glEnableVertexAttribArray(6L);
+
+    glVertexAttribDivisor(3L, 1);
+    glVertexAttribDivisor(4L, 1);
+    glVertexAttribDivisor(5L, 1);
+    glVertexAttribDivisor(6L, 1);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -62,4 +80,45 @@ void VertexManger::draw()
     glBindVertexArray(vao);
     glDrawArraysInstanced(GL_TRIANGLES, 0, vertices.size() / 3L, offsets.size() / 3L);
     glBindVertexArray(0);
+}
+
+void VertexManger::twist(Axis axis, Direction dir)
+{
+    unsigned int index = static_cast<unsigned int>(axis);
+    for (unsigned int i = 0; i < offsets.size() / 3L; i++) {
+        glm::vec4 block(offsets[i * 3L], offsets[i * 3L + 1], offsets[i * 3L + 2L], 1.0f);
+        glm::mat4 blockTran = translat[i];
+        block = block * blockTran;
+        switch (dir) {
+            case Direction::Left:
+                if (block[index] < -precision) {
+                    twistOneBlock(i, axis);
+                }
+                break;
+            case Direction::Middle:
+                if (std::fabs(block[index]) < precision) {
+                    twistOneBlock(i, axis);
+                }
+                break;
+            case Direction::Right:
+                if (block[index] > precision) {
+                    twistOneBlock(i, axis);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    glBindBuffer(GL_ARRAY_BUFFER, tran);
+    glBufferData(
+        GL_ARRAY_BUFFER, translat.size() * sizeof(decltype(translat)::value_type), translat.data(), GL_DYNAMIC_DRAW);
+}
+
+void VertexManger::twistOneBlock(unsigned int blockIndex, Axis axis)
+{
+    unsigned int axisIndex = static_cast<unsigned int>(axis);
+    glm::mat4& block = translat[blockIndex];
+    glm::vec3 rotationAxis(0, 0, 0);
+    rotationAxis[axisIndex] = 1.0f;
+    block = glm::rotate(block, glm::radians(90.0f), rotationAxis);
 }
