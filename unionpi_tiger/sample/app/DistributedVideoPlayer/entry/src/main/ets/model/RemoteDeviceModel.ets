@@ -16,6 +16,7 @@
  */
 
 import Logger from './Logger';
+import promptAction from '@ohos.promptAction';
 import deviceManager from '@ohos.distributedHardware.deviceManager';
 
 const TAG = 'RemoteDeviceModel';
@@ -227,6 +228,15 @@ export class RemoteDeviceModel {
       } catch (error) {
         Logger.error(TAG, `authenticateDevice throw error, code=${error.code} message=${error.message}`)
       }
+    }
+  }
+
+  unAuthenticateDevice(device) {
+    try {
+      this.deviceManager.unAuthenticateDevice(device);
+      promptAction.showToast({ message: '解除中，请稍后...', duration: 3000 })
+    } catch (err) {
+      Logger.error(TAG, "unAuthenticateDevice errCode:" + err.code + ",errMessage:" + err.message);
     }
   }
 }

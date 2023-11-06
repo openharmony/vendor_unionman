@@ -17,6 +17,7 @@
 
 import mediaLibrary from '@ohos.multimedia.mediaLibrary';
 import mediaQuery from '@ohos.mediaquery';
+import preferences from '@ohos.data.preferences';
 import MediaDataSource from '../common/BasicDataSource';
 import { TitleBar } from '../common/TitleBar';
 import { toTime } from '../utils/utils';
@@ -31,6 +32,8 @@ const TAG: string = "Index";
 const EXIT: string = 'exit';
 const DATA_CHANGE: string = 'dataChange';
 const PlaybackSpeed: string[] = ['0.75X', '1.0X', '1.25X', '1.75X', '2.0X'];
+const PREFERENCES_NAME = 'setting';
+let preferenceSetting: preferences.Preferences = null;
 
 @Component
 struct localVideoItem {
@@ -88,6 +91,8 @@ struct Index {
   @State isLand: boolean = false
   // 是否正在加载
   @State isLoading: boolean = true;
+  // 流转模式
+  @StorageLink('continuationMode') continuationMode: string = 'continuation'
   // 控制栏定时器id
   private controlBarTimeoutID: number
   private tabsController: TabsController = new TabsController()
@@ -161,6 +166,8 @@ struct Index {
     }
     globalThis.deviceID = AppStorage.Get('deviceID')
     this.listener.on('change', this.onLand)
+    preferenceSetting = await preferences.getPreferences(globalThis.context, PREFERENCES_NAME)
+    this.continuationMode = <string> await preferenceSetting.get('continuationMode', 'continuation')
   }
 
   startAbilityCallBack = (key) => {
@@ -171,6 +178,9 @@ struct Index {
       let video = new DistributedDataModel(this.title, this.currentTime, this.SpeedIndex, this.isPlay, true)
       this.isPlay = false
       this.kvStoreModel.put(DATA_CHANGE, JSON.stringify(video))
+      if (this.continuationMode == 'continuation') {
+        globalThis.context.terminateSelf()
+      }
     }
     if (EXIT === key) {
       this.kvStoreModel.put(DATA_CHANGE, EXIT)
