@@ -1,4 +1,5 @@
 /*
+/*
  * Copyright 2023 Unionman Technology Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,6 +45,7 @@ OpenglDraw* AppNapi::getOpenglDraw(void)
 {
     return openglDraw;
 }
+
 static int Normalize(int angle)
 {
     int ret = angle % CIRCUMFERENCE_DEGREE;
@@ -528,4 +530,20 @@ napi_value AppNapi::Export(napi_env env, napi_value exports)
     };
     NAPI_CALL(env, napi_define_properties(env, exports, sizeof(desc) / sizeof(desc[0]), desc));
     return exports;
+}
+
+napi_value AppNapi::Twist(napi_env env, napi_callback_info info)
+{
+    size_t argc = 2L;
+    napi_value args[2L] = { nullptr };
+
+    napi_get_cb_info(env, info, &argc, args, nullptr, nullptr);
+
+    uint32_t value1, value2;
+    napi_get_value_uint32(env, args[0], &value1);
+    napi_get_value_uint32(env, args[1], &value2);
+    Axis axis = static_cast<Axis>(value1);
+    Direction direction = static_cast<Direction>(value2);
+    openglDraw->twist(axis, direction);
+    return nullptr;
 }
