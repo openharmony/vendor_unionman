@@ -45,12 +45,13 @@ namespace {
     "layout (location = 0) in vec3 aPos;\n"
     "layout (location = 1) in vec3 aColor;\n"
     "layout (location = 2) in vec3 aOffset;\n"
+    "layout (location = 3) in mat4 aTranslat;\n"
     "uniform mat4 rotateX;\n"
     "uniform mat4 rotateY;\n"
     "out vec3 ourColor;\n"
     "void main()\n"
     "{\n"
-    "   gl_Position = rotateX * rotateY * vec4(aPos + aOffset, 1.0);\n"
+    "   gl_Position = vec4(aPos + aOffset, 1.0)* aTranslat * rotateX * rotateY;\n"
     "   ourColor = aColor;\n"
     "}\n\0";
 
@@ -268,4 +269,14 @@ int32_t OpenglDraw::Quit(void)
 
     LOGE("Quit success.");
     return 0;
+}
+
+void OpenglDraw::twist(Axis axis, Direction dir)
+{
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    vertexManger->twist(axis, dir);
+    shader->use();
+    vertexManger->draw();
+    eglSwapBuffers(mEGLDisplay, mEGLSurface);
 }

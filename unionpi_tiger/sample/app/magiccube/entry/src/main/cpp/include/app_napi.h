@@ -39,6 +39,7 @@ public:
 
     // Exposed to JS developers by NAPI
     static napi_value UpdateAngle(napi_env env, napi_callback_info info);
+    static napi_value Twist(napi_env env, napi_callback_info info);
     static napi_value Quit(napi_env env, napi_callback_info info);
 
     // xts interfaces

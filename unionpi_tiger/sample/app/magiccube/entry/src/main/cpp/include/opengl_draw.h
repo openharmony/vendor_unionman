@@ -28,8 +28,9 @@ public:
     int32_t Init(EGLNativeWindowType windowHandle, int windowWidth, int windowHeight);
     void Update(void);
     int32_t Quit(void);
-    float angleX = 30.0f;
-    float angleY = 45.0f;
+    void twist(Axis axis, Direction dir);
+    float angleX = -45.0f;
+    float angleY = 30.0f;
 protected:
     EGLNativeWindowType mEglWindow;
     EGLDisplay mEGLDisplay = EGL_NO_DISPLAY;
