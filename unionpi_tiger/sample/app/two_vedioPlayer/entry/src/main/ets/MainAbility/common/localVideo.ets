@@ -25,7 +25,7 @@ import inputMonitor from '@ohos.multimodalInput.inputMonitor';
 
 @Component
 export struct localVideo {
-  src: string = "data/1.mp4";
+  src: Resource = $r('app.media.EP11');
 
   @State videoIndex: number = 0
   @State SpeedIndex: number = 1
@@ -131,9 +131,9 @@ export struct localVideo {
 
   timeToString(time){
     let second = Math.floor(time%60)
-    let minute = Math.floor
+    let minute = Math.floor(time/60)
 
-    return hour+':'+minute+':'+second
+    return minute+':'+second
   }
   build() {
     Stack({ alignContent: Alignment.Bottom }) {
@@ -226,6 +226,7 @@ export struct localVideo {
         Row() {
           Image(this.isPlay ? $r('app.media.ic_public_pause') : $r('app.media.ic_public_play'))
             //Image($r('app.media.ic_public_play'))
+            .id("Play")
             .width(32)
             .height(32)
             .focusable(false)
@@ -244,6 +245,7 @@ export struct localVideo {
             max: this.duration,
             step: 1,
           })
+            .id("Slider")
             .width('54%')
             .blockColor(Color.White)
             .trackColor(Color.Gray)
