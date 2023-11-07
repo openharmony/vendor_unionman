@@ -20,8 +20,8 @@ import { KeyCode } from '@ohos.multimodalInput.keyCode'
 @Entry
 @Component
 struct Index {
-  @State localSrc: string = 'data/2.mp4';
-  @State ipSrc: string = 'data/2.mp4';
+  @State localSrc: Resource = $r('app.media.EP11');
+  @State ipSrc: Resource = $r('app.media.EP11');
   build() {
     Stack({alignContent: Alignment.TopEnd}){
       Stack({alignContent: Alignment.Center}){
@@ -31,13 +31,13 @@ struct Index {
       }
       .width('100%')
       .height('100%')
-//      Stack({alignContent: Alignment.Center}){
-//        ipVideo({
-//          src:this.ipSrc
-//        });
-//      }
-//      .width('40%')
-//      .height('40%')
+     Stack({alignContent: Alignment.Center}){
+       ipVideo({
+         src:this.ipSrc
+       });
+     }
+     .width('40%')
+     .height('40%')
     }
 
     .width('100%')

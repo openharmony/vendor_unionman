@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.samples.myapplication",
+    "bundleName": "com.samples.two_videoPlayer",
     "vendor": "example",
     "version": {
       "code": 1000000,
