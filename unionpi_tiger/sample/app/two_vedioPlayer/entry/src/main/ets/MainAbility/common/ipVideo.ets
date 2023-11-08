@@ -21,7 +21,7 @@ import window from '@ohos.window';
 @Component
 export struct ipVideo {
 
-  src: string ="param://persist.ipcamera.demo.uri";
+  src:  Resource = $r('app.media.EP11');;
 
   @State videoIndex: number = 0
   @State SpeedIndex: number = 1
