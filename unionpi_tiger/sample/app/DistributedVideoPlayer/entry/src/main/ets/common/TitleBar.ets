@@ -206,6 +206,16 @@ export struct TitleBar {
         .onClick(() => {
           this.showDialog()
         })
+
+      Image($r("app.media.ic_settings"))
+        .height('60%')
+        .width(this.isLand ? '6%' : '8%')
+        .objectFit(ImageFit.Contain)
+        .onClick(() => {
+          router.pushUrl({
+            url: 'pages/Settings'
+          })
+        })
     }
     .width('100%')
     .height(this.isLand ? '10%' : '8%')
