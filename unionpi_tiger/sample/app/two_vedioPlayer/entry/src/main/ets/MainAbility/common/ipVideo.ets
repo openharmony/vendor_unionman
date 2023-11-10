@@ -20,14 +20,11 @@ import window from '@ohos.window';
 
 @Component
 export struct ipVideo {
-
-  src:  Resource = $r('app.media.EP11');;
+  src: Resource = $r('app.media.EP11');
 
   @State videoIndex: number = 0
   @State SpeedIndex: number = 1
-
-
-  @State title: string ="网络摄像头";
+  @State title: string = "网络摄像头";
   // 当前视频播放速率
   @State currentProgressRate: number = 1;
   @State autoPlays: boolean = true;
@@ -52,11 +49,12 @@ export struct ipVideo {
 
   controller: VideoController = new VideoController();
   scroller: Scroller = new Scroller()
-  setScreenKeepOn(){
+
+  setScreenKeepOn() {
     //获取当前窗口
     var windowClass = null;
     let promise = window.getTopWindow();
-    promise.then((data)=> {
+    promise.then((data) => {
       console.info('XXXXX Succeeded in obtaining the top window. Data: ' + JSON.stringify(data));
       windowClass = data;
 
@@ -66,19 +64,20 @@ export struct ipVideo {
       console.log("XXXXX setKeepScreenOn")
       promise.then(() => {
         console.info('XXXXX Succeeded in setting the screen to be always on.');
-      }).catch((err)=>{
+      }).catch((err) => {
         console.info('XXXXX Failed to set the screen to be always on. Cause:  ' + JSON.stringify(err));
 
       });
 
-    }).catch((err)=>{
+    }).catch((err) => {
       console.error('XXXXX Failed to obtain the top window. Cause: ' + JSON.stringify(err));
     })
   }
-  changeFullScreen(){
+
+  changeFullScreen() {
     this.isFullScreen = !this.isFullScreen
     //获取当前窗口
-    var FullScreen  =  this.isFullScreen;
+    var FullScreen = this.isFullScreen;
     var windowClass = null;
     let promise = window.getTopWindow();
     promise.then((data) => {
@@ -115,7 +114,7 @@ export struct ipVideo {
   }
 
   build() {
-    Stack({alignContent: Alignment.TopStart}) {
+    Stack({ alignContent: Alignment.TopStart }) {
       Video({
         src: this.src,
         currentProgressRate: this.currentProgressRate,
@@ -148,26 +147,26 @@ export struct ipVideo {
           this.currentTime = e.time
         })
         .gesture(
-        TapGesture({ count: 1 })
-          .onAction(() => {
-            if (this.controls) {
-              this.controls = 0;
-            } else {
-              this.controls = 1;
-            }
-          })
+          TapGesture({ count: 1 })
+            .onAction(() => {
+              if (this.controls) {
+                this.controls = 0;
+              } else {
+                this.controls = 1;
+              }
+            })
         )
         .gesture(
-        TapGesture({ count: 2 })
-          .onAction(() => {
-            if (this.isPlay) {
-              this.isPlay = !this.isPlay
-              this.controller.pause();
-            } else {
-              this.isPlay = !this.isPlay
-              this.controller.start();
-            }
-          })
+          TapGesture({ count: 2 })
+            .onAction(() => {
+              if (this.isPlay) {
+                this.isPlay = !this.isPlay
+                this.controller.pause();
+              } else {
+                this.isPlay = !this.isPlay
+                this.controller.start();
+              }
+            })
         )
       //        .border({ width: 1, color: 'red', style: BorderStyle.Solid })
 
