@@ -52,6 +52,7 @@ struct Setting {
         Image($r("app.media.ic_back"))
           .width('8%')
           .height('50%')
+          .id("back")
           .margin({ right: 4 })
           .objectFit(ImageFit.Contain)
           .onClick(() => {
@@ -96,6 +97,7 @@ struct Setting {
           .checked(this.continuationMode == 'synchronization' ? true : false)
           .height(25)
           .width(25)
+          .id("synchronization")
           .onChange((isChecked: boolean) => {
             if (isChecked) {
               this.continuationMode = 'synchronization'
