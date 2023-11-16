@@ -367,6 +367,7 @@ struct Index {
             Image(this.isPlay ? $r("app.media.ic_pause") : $r("app.media.ic_play"))
               .width(36)
               .height(36)
+              .id("play")
               .flexShrink(0)
               .margin({ right: 10 })
               .onClick(() => {
@@ -400,6 +401,7 @@ struct Index {
               { value: PlaybackSpeed[2] },
               { value: PlaybackSpeed[3] },
               { value: PlaybackSpeed[4] }])
+              .id("speed")
               .flexShrink(0)
               .backgroundColor('#00000000')
               .margin({ left: 10, right: 10 })
