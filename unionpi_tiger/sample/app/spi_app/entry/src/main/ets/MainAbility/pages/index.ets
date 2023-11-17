@@ -170,6 +170,7 @@ struct ComponentTest {
                     .fontColor('#808080')
                     .height(50)
                     .textAlign(TextAlign.Center)
+                    .id("clean_up_button")
                     .onClick(() => {
                       this.erase_controller.open();
                     })
@@ -186,10 +187,11 @@ struct ComponentTest {
                   .backgroundColor('#808080')
 
                 if(um_spi.sync_get_MB_Free()){
-                  Text("剩余空间：" + um_spi.sync_get_MB_Free() + "%")
+                  Text("剩余空间:" + um_spi.sync_get_MB_Free() + "%")
                     .fontSize(15)
                     .fontColor('#808080')
                     .height(20)
+                    .id("MB_Free")
                 }
 
                 if(this.sum_list == 0){
