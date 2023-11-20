@@ -286,6 +286,9 @@ struct Index {
 
   async playVideo() {
     Logger.info(TAG, 'playVideo')
+    if (globalThis.firstHop) {
+      return
+    }
     this.avPlayer.setTimeUpdateCallBackCallBack((time: number) => {
       this.currentTime = time / 1000
     })
