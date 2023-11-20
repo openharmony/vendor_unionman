@@ -1,0 +1,64 @@
+/* Copyright 2023 Unionman Technology Co., Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "material": {
+          "certpath": "C:\\Users\\dongmin.wang\\.ohos\\config\\openharmony\\auto_ohos_default_i2c_app_com.example.i2c_app.cer",
+          "storePassword": "0000001B56CAC53873B53E819D5A288E59D6EFDF48703EB80C5C534C0D4F72BC224676098FA83689392CB7",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B02EAE93CF2AFF055225AC38F3D00B5CA7A76108B3A5CAA175C081E1FBC17662B4CEF1DA9D9CB11",
+          "profile": "C:\\Users\\dongmin.wang\\.ohos\\config\\openharmony\\auto_ohos_default_i2c_app_com.example.i2c_app.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\dongmin.wang\\.ohos\\config\\openharmony\\auto_ohos_default_i2c_app_com.example.i2c_app.p12"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compileSdkVersion": 10,
+        "compatibleSdkVersion": 10,
+        "runtimeOS": "OpenHarmony"
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug"
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
