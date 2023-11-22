@@ -24,18 +24,6 @@
       }
     ],
     "signingConfigs": [
-      {
-        "name": "default",
-        "material": {
-          "certpath": "C:\\Users\\dongmin.wang\\.ohos\\config\\openharmony\\auto_ohos_default_pwm_app_com.unionman.pwm_app.cer",
-          "storePassword": "0000001A88785E075F8C0F40EEB455BF12A83D240722FA84C75489DED0A4852E2E73E3A4864715070FF4",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001A0979F5170CC22FC7CCD5646E95778FB3A4DB0A9C57633CD31BBF2374DBF899B1452BA918956B",
-          "profile": "C:\\Users\\dongmin.wang\\.ohos\\config\\openharmony\\auto_ohos_default_pwm_app_com.unionman.pwm_app.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\dongmin.wang\\.ohos\\config\\openharmony\\auto_ohos_default_pwm_app_com.unionman.pwm_app.p12"
-        }
-      }
     ]
   },
   "modules": [
