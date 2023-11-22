@@ -16,18 +16,6 @@
 {
   "app": {
     "signingConfigs": [
-      {
-        "name": "default",
-        "material": {
-          "certpath": "C:\\Users\\dongmin.wang\\.ohos\\config\\openharmony\\auto_ohos_default_i2c_app_com.example.i2c_app.cer",
-          "storePassword": "0000001B56CAC53873B53E819D5A288E59D6EFDF48703EB80C5C534C0D4F72BC224676098FA83689392CB7",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001B02EAE93CF2AFF055225AC38F3D00B5CA7A76108B3A5CAA175C081E1FBC17662B4CEF1DA9D9CB11",
-          "profile": "C:\\Users\\dongmin.wang\\.ohos\\config\\openharmony\\auto_ohos_default_i2c_app_com.example.i2c_app.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\dongmin.wang\\.ohos\\config\\openharmony\\auto_ohos_default_i2c_app_com.example.i2c_app.p12"
-        }
-      }
     ],
     "products": [
       {
