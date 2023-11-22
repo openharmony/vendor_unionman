@@ -1,4 +1,4 @@
-# two_vedioPlayer应用
+# two_videoPlayer应用
 
 ### 介绍
 视频播放的主要工作是将视频数据转码并输出到设备进行播放，同时管理播放任务。本文将对视频播放全流程、视频切换、视频循环播放等场景开发进行介绍说明。
@@ -31,7 +31,7 @@ VideoPlay/src/main/ets/
 
 ### 相关权限
 
-不涉及。
+ohos.permission.INTERNET(网络权限)
 
 ### 依赖
 不涉及。
@@ -40,6 +40,6 @@ VideoPlay/src/main/ets/
 
 1.本示例仅支持标准系统上运行,需要联网才能够播放网络视频;
 
-2.本示例已适配API9版本SDK,版本号：3.2.11.10,镜像版本号：OpenHarmony4.0.7.5;
+2.本示例已适配API10版本SDK,版本号：4.0.10.13,镜像版本号：OpenHarmony4.0.7.5;
 
-3.本示例需要使用DevEco Studio 3.1 Beta2 (Build Version: 3.1.0.400, built on April 7, 2023)才可编译运行。
+3.本示例需要使用DevEco Studio 4.0 (构建版本：4.0.0.400, 构建 2023年8月2日)才可编译运行。
