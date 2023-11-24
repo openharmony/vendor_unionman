@@ -12,10 +12,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 #include <drogon/drogon.h>
+#include<thread>
+#include<untils/tcp_server.h>
+static void runUpdateServer()
+{
+    boost::asio::io_context io_context;
+    TcpServer tcpServer(io_context);
+    io_context.run();
+}
 int main()
 {
+    std::thread thread(runUpdateServer);
     drogon::app().loadConfigFile("config.json").run();
+    thread.detach();
     return 0;
 }
