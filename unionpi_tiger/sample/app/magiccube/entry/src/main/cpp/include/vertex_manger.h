@@ -22,14 +22,18 @@
 #include <glm/gtc/type_ptr.hpp>
 enum class Axis { X, Y, Z };
 
-enum class Direction { Left, Middle, Right };
+enum class Face { Left, Middle, Right };
+
+enum class RotateDir : int { clockwise = -1, Counterclockwise = 1 };
 
 class VertexManger {
 public:
     VertexManger(std::vector<float> vertices, std::vector<float> colors, std::vector<float> offsets);
     ~VertexManger();
     void draw();
-    void twist(Axis axis, Direction dir);
+    void twist(Axis axis, Face face, glm::mat4 view, RotateDir dir);
+    void twist(Axis axis, Face face, RotateDir dir = RotateDir::Counterclockwise);
+
 protected:
     unsigned int vao;
     unsigned int vbo;
@@ -39,7 +43,8 @@ protected:
     std::vector<float> vertices;
     std::vector<float> colors;
     std::vector<float> offsets;
-    std::vector<glm::mat4> translat;
-    void twistOneBlock(unsigned int blockIndex, Axis axis);
+    std::vector<glm::mat4> translate;
+    void twistOneBlock(unsigned int blockIndex, Axis axis, RotateDir dir);
+    void twistOneBlock(unsigned int blockIndex, glm::vec3 axis, RotateDir dir);
 };
 #endif
