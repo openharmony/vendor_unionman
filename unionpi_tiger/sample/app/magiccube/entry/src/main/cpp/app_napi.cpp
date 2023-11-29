@@ -1,5 +1,4 @@
 /*
-/*
  * Copyright 2023 Unionman Technology Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +13,13 @@
  * limitations under the License.
  */
 
+#include <bits/alltypes.h>
 #include <cstdint>
-
-#include "log.h"
 #include "napi_manager.h"
 #include "native_common.h"
-
 #include "opengl_draw.h"
+#include "log.h"
 #include "app_napi.h"
-
 std::unordered_map<std::string, AppNapi*> AppNapi::instance_;
 OH_NativeXComponent_Callback AppNapi::callback_;
 static OpenglDraw* openglDraw;
@@ -44,16 +41,6 @@ OH_NativeXComponent_MouseEvent_Callback AppNapi::mouseEventcallback_;
 OpenglDraw* AppNapi::getOpenglDraw(void)
 {
     return openglDraw;
-}
-
-static int Normalize(int angle)
-{
-    int ret = angle % CIRCUMFERENCE_DEGREE;
-    if (ret < 0) {
-        ret += CIRCUMFERENCE_DEGREE;
-    }
-
-    return ret;
 }
 
 static void OnSurfaceCreatedCB(OH_NativeXComponent* component, void* window)
@@ -277,9 +264,7 @@ void AppNapi::DispatchMouseEvent(OH_NativeXComponent* component, void* window)
 napi_value AppNapi::UpdateAngle(napi_env env, napi_callback_info info)
 {
     LOGE("Update");
-    size_t requireArgc = 2;
     size_t argc = 2;
-    int speed = 6;
     napi_value args[2] = { nullptr };
 
     napi_get_cb_info(env, info, &argc, args, nullptr, nullptr);
@@ -296,22 +281,7 @@ napi_value AppNapi::UpdateAngle(napi_env env, napi_callback_info info)
     double offsetY;
     napi_get_value_double(env, args[1], &offsetY);
 
-    float angleX, angleY;
-
-    if (offsetY < 0) {
-        angleX = openglDraw->angleX + speed;
-    } else {
-        angleX = openglDraw->angleX - speed;
-    }
-
-    if (offsetX < 0) {
-        angleY = openglDraw->angleY + speed;
-    } else {
-        angleY = openglDraw->angleY - speed;
-    }
-
-    openglDraw->angleX = Normalize(angleX);
-    openglDraw->angleY = Normalize(angleY);
+    openglDraw->route(offsetX, offsetY);
     openglDraw->Update();
 
     napi_value ret;
@@ -534,16 +504,27 @@ napi_value AppNapi::Export(napi_env env, napi_value exports)
 
 napi_value AppNapi::Twist(napi_env env, napi_callback_info info)
 {
-    size_t argc = 2L;
-    napi_value args[2L] = { nullptr };
+    size_t argc = 4L;
+    napi_value args[4L] = { nullptr };
 
     napi_get_cb_info(env, info, &argc, args, nullptr, nullptr);
 
-    uint32_t value1, value2;
+    uint32_t value1, value2, value3, value4;
     napi_get_value_uint32(env, args[0], &value1);
     napi_get_value_uint32(env, args[1], &value2);
+    napi_get_value_uint32(env, args[2L], &value3);
+    napi_get_value_uint32(env, args[3L], &value4);
     Axis axis = static_cast<Axis>(value1);
-    Direction direction = static_cast<Direction>(value2);
-    openglDraw->twist(axis, direction);
+    Face face = static_cast<Face>(value2);
+    RotateDir dir = static_cast<RotateDir>(value3);
+    TwistMode mode = static_cast<TwistMode>(value4);
+    openglDraw->twist(mode, axis, face, dir);
+    openglDraw->Update();
+    return nullptr;
+}
+napi_value AppNapi::resetAngle(napi_env env, napi_callback_info info)
+{
+    openglDraw->resetAngle();
+    openglDraw->Update();
     return nullptr;
 }

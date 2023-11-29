@@ -16,21 +16,23 @@
 #ifndef OpenglDraw_H
 #define OpenglDraw_H
 
-#include <cstdint>
-#include <string>
-#include <GLES3/gl3.h>
+
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
-#include "vertex_manger.h"
+#include <GLES3/gl3.h>
+#include <cstdint>
+#include <string>
 #include "shader.h"
+#include "vertex_manger.h"
+enum class TwistMode { regular, free };
 class OpenglDraw {
 public:
     int32_t Init(EGLNativeWindowType windowHandle, int windowWidth, int windowHeight);
     void Update(void);
     int32_t Quit(void);
-    void twist(Axis axis, Direction dir);
-    float angleX = -45.0f;
-    float angleY = 30.0f;
+    void twist(TwistMode mode, Axis axis, Face face, RotateDir dir = RotateDir::Counterclockwise);
+    void resetAngle();
+    void route(float x, float y);
 protected:
     EGLNativeWindowType mEglWindow;
     EGLDisplay mEGLDisplay = EGL_NO_DISPLAY;
@@ -42,9 +44,11 @@ protected:
     GLint mRotationLocation;
     GLint mTranslationLocation;
     GLint mMoveOriginLocation;
-    
+
     VertexManger* vertexManger = nullptr;
     Shader* shader = nullptr;
+
+    glm::mat4 routeMat;
 };
 
 #endif // OpenglDraw_H

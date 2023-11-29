@@ -15,6 +15,8 @@
 
 #include "opengl_draw.h"
 #include <cmath>
+#include "glm/gtx/rotate_vector.hpp"
+#include "glm/gtx/vector_angle.inl"
 #include "log.h"
 namespace {
     EGLConfig getConfig(EGLDisplay eglDisplay)
@@ -46,12 +48,11 @@ namespace {
     "layout (location = 1) in vec3 aColor;\n"
     "layout (location = 2) in vec3 aOffset;\n"
     "layout (location = 3) in mat4 aTranslat;\n"
-    "uniform mat4 rotateX;\n"
-    "uniform mat4 rotateY;\n"
+    "uniform mat4 rotate;\n"
     "out vec3 ourColor;\n"
     "void main()\n"
     "{\n"
-    "   gl_Position = vec4(aPos + aOffset, 1.0)* aTranslat * rotateX * rotateY;\n"
+    "   gl_Position = vec4(aPos + aOffset, 1.0) * aTranslat * rotate;\n"
     "   ourColor = aColor;\n"
     "}\n\0";
 
@@ -199,6 +200,7 @@ int32_t OpenglDraw::Init(EGLNativeWindowType handle, int width, int height)
     glViewport(0, 0, width, height);
     LOGI("window size is %{public}d %{public}d", width, height);
     glEnable(GL_DEPTH_TEST);
+    routeMat = glm::mat4(1.0f);
     vertexManger = new VertexManger(vertices, colors, offsets);
     shader = new Shader(vertexShader, fragmentShader);
     LOGI("Init success.");
@@ -207,35 +209,10 @@ int32_t OpenglDraw::Init(EGLNativeWindowType handle, int width, int height)
 }
 void OpenglDraw::Update()
 {
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClearColor(0, 0, 0, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    constexpr float pi = 3.1415926535;
-
-    /* y轴旋转度 */
-    float radianY = -(angleY * pi) / 180.0;
-    float cosY = cosf(radianY);
-    float sinY = sinf(radianY);
-    float matY[] = {
-        cosY, 0, -sinY, 0,
-        0, 1, 0, 0,
-        sinY, 0, cosY, 0,
-        0, 0, 0, 1
-    };
+    shader->setMat4fv("rotate", glm::value_ptr(routeMat));
     shader->use();
-    shader->setMat4fv("rotateY", matY);
-
-    /* x轴旋转度 */
-    float radianX = -(angleX * pi) / 180.0;
-    float cosX = cosf(radianX);
-    float sinX = sinf(radianX);
-    float matX[] = {
-        1, 0, 0, 0,
-        0, cosX, -sinX, 0,
-        0, sinX, cosX, 0,
-        0, 0, 0, 1
-    };
-    shader->setMat4fv("rotateX", matX);
     vertexManger->draw();
     eglSwapBuffers(mEGLDisplay, mEGLSurface);
 }
@@ -271,12 +248,22 @@ int32_t OpenglDraw::Quit(void)
     return 0;
 }
 
-void OpenglDraw::twist(Axis axis, Direction dir)
+void OpenglDraw::twist(TwistMode mode, Axis axis, Face face, RotateDir dir)
 {
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    vertexManger->twist(axis, dir);
-    shader->use();
-    vertexManger->draw();
-    eglSwapBuffers(mEGLDisplay, mEGLSurface);
+    if (mode == TwistMode::regular) {
+        vertexManger->twist(axis, face, routeMat, dir);
+    } else if (mode == TwistMode::free) {
+        vertexManger->twist(axis, face, dir);
+    }
+}
+
+void OpenglDraw::route(float x, float y)
+{
+    routeMat = glm::rotate(routeMat, glm::radians(x), glm::vec3(0, 1.0f, 0));
+    routeMat = glm::rotate(routeMat, glm::radians(y), glm::vec3(1.0f, 0, 0));
+}
+
+void OpenglDraw::resetAngle()
+{
+    routeMat = glm::mat4(1.0f);
 }
