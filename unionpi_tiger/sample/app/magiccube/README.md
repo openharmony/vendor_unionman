@@ -2,6 +2,7 @@
 ## 实现介绍
 本例使用Native XComponent作为opengl的自定义绘制画板，使用opengl es 3.0标准进行魔方的绘制。通过滑动屏幕，可以对魔方进行旋转变换，可借此观察魔方的各个部分。在右侧菜单选择旋转轴与旋转面，点击旋转，左侧的魔方相应面便会按旋转轴逆时针旋转90°
 ![2.jpg](../figures/magiccube/2.jpg)
+![3.jpg](../figures/magiccube/3.jpg)
 ## 运行环境要求
 本示例仅支持在标准系统上运行。  
 * 系统要求：openharmony 4.0 Beta2及以上
@@ -35,18 +36,20 @@ target_link_libraries(tetrahedron_napi PUBLIC uv)
 ### 导入依赖库
 由于扭动部分需要进行矩阵运算，所以使用了[glm](https://github.com/g-truc/glm)作为矩阵运算库，glm是一个纯头文件库，因此运行sample时下载glm到`entry/src/main/cpp/include`即可
 ### 编写opengl实现部分
-创建一个OpenglDraw类，实现以下public成员函数，并定义旋转轴和旋转面的枚举类
+创建一个OpenglDraw类，实现以下public成员函数，并定义旋转轴和旋转面，旋转方向的枚举类
 ```C++
 enum class Axis { X, Y, Z };
 
-enum class Direction { Left, Middle, Right };
+enum class Face { Left, Middle, Right };
 
-int32_t Init(EGLNativeWindowType windowHandle, int windowWidth, int windowHeight);
+enum class RotateDir : int { clockwise = -1, Counterclockwise = 1 };
+
+int32_t Init(EGLNativeWindowType windowHandle, int windowWidth,int windowHeight);
 void Update(void);
 int32_t Quit(void);
-void twist(Axis axis, Direction dir);
-float angleX = -45.0f;
-float angleY = 30.0f;
+void twist(TwistMode mode, Axis axis, Face face, RotateDir dir = RotateDir::Counterclockwise);
+void resetAngle();
+void route(float x,float y);
 ```
 #### 初始化opengl环境
 首先Init函数在`AppNapi`类的`OnSurfaceCreated`回调中调用，该回调将参数类型强制类型转换后传入init函数:
@@ -93,6 +96,7 @@ int attrib3_list[] = {
 mEGLContext = eglCreateContext(mEGLDisplay, mEGLConfig, mSharedEGLContext, attrib3_list);
 eglMakeCurrent(mEGLDisplay, mEGLSurface, mEGLSurface, mEGLContext)
 glViewport(0, 0, width, height);
+routeMat = glm::mat4(1.0f);
 glEnable(GL_DEPTH_TEST);
 vertexManger = new VertexManger(vertices, colors, offsets);
 shader = new Shader(vertexShader, fragmentShader);
@@ -105,27 +109,31 @@ return 0;
 #### 旋转魔方
 napi提供了`updateAngle`方法，传入两个参数，分别是滑动时在x轴偏移的距离与y轴偏移的距离,然后根据距离乘以一个旋转速度转化为平移的角度值，然后更新`OpenglDraw`类的`angleX`，`angleY`字段,调用`update()`更新图像。`OpenglDraw`类的`update()`函数会读取`angleX`，`angleY`字段，转换为弧度值，计算sin,cos生成对应的旋转矩阵，然后送入顶点着色器的`uniform`中，再调用绘制函数，绘制时着色器便会乘以这个旋转矩阵完成旋转变换。
 ##### 扭动魔方
-napi提供了`twist`方法，传入两个参数，分别是扭动的旋转轴以及旋转面的枚举，先遍历魔方的每个小正方体的中心点坐标，找到需要旋转的小正方体(旋转面如为左面则旋转轴对应到坐标的分量小于0，中间面则等于0，右面则大于0),找到符合的小正方体后，调用`twistOneBlock`方法旋转这个小正方体，只需要取出小正方体对应的旋转矩阵，乘以逆时针旋转90°的旋转矩阵后即可，然后调用`draw`方法重新绘制旋转后的魔方图像。
+napi提供了`twist`方法，传入四个参数，分别是扭动的旋转轴以及旋转面,旋转方向,视角模式的枚举
+###### 自由视角模式
+当处于自由视角模式时，先遍历魔方的每个小正方体的中心点坐标，找到需要旋转的小正方体(旋转面如为左面则旋转轴对应到坐标的分量小于0，中间面则等于0，右面则大于0),找到符合的小正方体后，调用`twistOneBlock`方法旋转这个小正方体，只需要取出小正方体对应的旋转矩阵，乘以逆时针或者顺时针旋转90°的旋转矩阵后即可，然后调用`draw`方法重新绘制旋转后的魔方图像。
+###### 固定视角模式
+当处于固定视角模式时，由于视角所在的x,y轴是已经旋转后的相对于摄像机的x,y轴，并不同于自由视角模式的世界坐标系。相对于摄像机的坐标系是用世界坐标系的坐标乘于旋转矩阵得到的，因此通过相对于摄像机的坐标系求出对应的世界坐标系需要做相应的逆运算，也就是用相对于摄像机的坐标系坐标乘以旋转矩阵的逆矩阵得到。获得世界坐标系的旋转轴后，步骤与自由视角模式相同。
 #### ets编写
-在ui中添加一个`XComponent`控件给opengl提供画板,设置其id,`type`设置为surface,`libraryname`设置为magiccube,库名并不用带lib前缀和.so后缀。然后添加`gesture`控件方法添加触摸监听，传入`PanGesture`使用滑动触摸的监听，在`onActionUpdate`(滑动中)回调中，调用libmagiccube.so中napi提供的`updateAngle`方法来旋转魔方的位置，这样就能实现滑动旋转魔方的效果。在右侧新增俩个选择框，一个文本框和一个按钮，选择框用于选择旋转面和旋转轴，在按钮点击的回调事件中调用`twist`方法，传入旋转轴和旋转面即可完成扭动。
+在ui中添加一个`XComponent`控件给opengl提供画板,设置其id,`type`设置为surface,`libraryname`设置为magiccube,库名并不用带lib前缀和.so后缀。自由视角模式需要添加`gesture`控件方法添加触摸监听，传入`PanGesture`使用滑动触摸的监听，在`onActionUpdate`(滑动中)回调中，调用libmagiccube.so中napi提供的`updateAngle`方法来旋转魔方的位置，这样就能实现滑动旋转魔方的效果。在右侧新增俩个选择框，一个文本框和一个按钮，选择框用于选择旋转面和旋转轴，在按钮点击的回调事件中调用`twist`方法，传入旋转轴和旋转面即可完成扭动。固定视角模式需要添加在`onActionStart`(滑动开始)回调，记录开始滑动的x坐标和y坐标，添加`onActionEnd`(滑动结束)回调，根据开始滑动的坐标以及现在的坐标，计算滑动的方向以及滑动的面，然后调用`twist`方法进行扭动。
 ### 注意事项
 在遍历魔方的每个小正方体的中心点坐标，找到需要旋转的小正方体时，由于坐标都是以单精度浮点数存储的，因此在进行矩阵运算时可能会发生精度损失，因此不能直接去判断小于0，等于0或者大于0。而是要考虑误差情况。代码如下：
 ```C++
 constexpr double precision = 0.000001f;
-switch (dir) {
-    case Direction::Left:
+switch (face) {
+    case Face::Left:
         if (block[index] < -precision) {
-            twistOneBlock(i, axis);
+            twistOneBlock(i, axis, dir);
         }
         break;
-    case Direction::Middle:
+    case Face::Middle:
         if (std::fabs(block[index]) < precision) {
-            twistOneBlock(i, axis);
+            twistOneBlock(i, axis, dir);
         }
         break;
-    case Direction::Right:
+    case Face::Right:
         if (block[index] > precision) {
-            twistOneBlock(i, axis);
+            twistOneBlock(i, axis, dir);
         }
         break;
     default:
