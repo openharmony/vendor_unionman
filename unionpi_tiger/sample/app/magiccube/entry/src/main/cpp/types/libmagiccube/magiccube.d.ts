@@ -12,19 +12,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-declare namespace magiccube{
-  enum Axis{
-    X,
-    Y,
-    Z
-  }
-  enum Direction{
-    Left,
-    Middle,
-    Right
-  }
-
-  function updateAngle(offsetX:number, offsetY:number): void;
-  function twist(axis:Axis, dir:Direction): void;
+export enum RotateDir {
+  clockwise,
+  Counterclockwise
 }
-export default magiccube;
+
+export enum Axis {
+  X,
+  Y,
+  Z
+}
+
+export enum Face {
+  Left,
+  Middle,
+  Right
+}
+
+export enum Mode {
+  Regular,
+  Free
+}
+
+export function resetAngle(): void;
+
+export function updateAngle(offsetX: number, offsetY: number): void;
+
+export function twist(axis: Axis, face: Face, dir: RotateDir, mode: Mode): void;
