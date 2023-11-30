@@ -3,13 +3,23 @@
 ​		https://cmake.org/download/
 ​		注：版本要高于3.5.1
 ​	2、 安装cmake
-​		tar -xvf cmake-3.*.*.tar
-​		cd cmake-3.*.*
-​		./bootstrap 
-​		make
-​		make install
+
+```
+tar -xvf cmake-3.*.*.tar
+cd cmake-3.*.*
+./bootstrap 
+make
+make install
+```
+
+
 ​	3、 验证是否安装成功
-​		cmake --version
+
+```
+cmake --version
+```
+
+
 ​		显示cmake 版本即为成功
 
 # 二、配置编译工具链
