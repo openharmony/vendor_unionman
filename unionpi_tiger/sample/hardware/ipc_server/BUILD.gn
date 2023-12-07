@@ -13,21 +13,20 @@
 
 import("//build/ohos.gni")
 import("//build/ohos/ndk/ndk.gni")
-import("./sample.gni")
 
 SUBSYSTEM_DIR = "//foundation/communication/ipc"
 IPC_CORE_ROOT = "$SUBSYSTEM_DIR/ipc/native"
 BUND = true
 
 ohos_prebuilt_etc("Applist.json") {
-  source = "//vendor/yarward/rk3566/sample/hardware/ipc_server/Applist.json"
-  part_name = "product_unionpi_tiger"
+  source = "Applist.json"
+  part_name = "unionman_products"
 }
 
 ohos_prebuilt_executable("get_faultlog.sh") {
-  source = "//vendor/yarward/rk3566/sample/hardware/ipc_server/get_faultlog.sh"
+  source = "get_faultlog.sh"
   module_install_dir = "bin"
-  part_name = "product_unionpi_tiger"
+  part_name = "unionman_products"
   install_enable = true
 }
 
@@ -57,7 +56,7 @@ ohos_executable("ipc_shell_server") {
     "//third_party/bounds_checking_function:libsec_static",
     "//third_party/cJSON:cjson",
   ]
-  part_name = "product_unionpi_tiger"
+  part_name = "unionman_products"
 }
 group("ipc_shell") {
   deps = [

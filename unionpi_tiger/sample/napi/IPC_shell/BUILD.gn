@@ -41,7 +41,7 @@ ohos_shared_library("ipcnapi") {
 
   relative_install_dir = "module"
 
-  part_name = "product_unionpi_tiger"
+  part_name = "unionman_products"
 
   install_enable = true
 
