@@ -198,7 +198,6 @@ std::string ShellAbility::executeCommand(const std::string &dummy)
     ZLOGW(LABEL, "%{public}s: popen successful", __func__);
     return result;
 }
-int Shellbility::SystemExe
 
 static void AddPermission()
 {
