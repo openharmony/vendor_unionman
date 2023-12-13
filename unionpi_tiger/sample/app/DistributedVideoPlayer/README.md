@@ -22,9 +22,9 @@
 
 | 首页                                  | 视频列表                           |
 | ------------------------------------- | ---------------------------------- |
-| ![](figures/README/Index.jpeg)        | ![](figures/README/VideoList.jpeg) |
+| ![](screenshots/Index.jpeg)        | ![](screenshots/VideoList.jpeg) |
 | **设备弹窗**                          | **设置**                           |
-| ![](figures/README/DeviceDialog.jpeg) | ![](screenshots/Settings.jpeg)     |
+| ![](screenshots/DeviceDialog.jpeg) | ![](screenshots/Settings.jpeg)     |
 
 使用说明
 
