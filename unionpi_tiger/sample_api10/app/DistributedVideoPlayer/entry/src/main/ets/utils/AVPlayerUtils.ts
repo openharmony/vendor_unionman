@@ -23,11 +23,13 @@ export default class AVPlayerUtils {
   private avPlayer: media.AVPlayer = undefined
   private avPlayerState: string = ''
   private playPath: string = ''
+  private surfaceID: string = ''
   private timeUpdateCallBack: (time: number) => void = undefined
 
   async initVideoPlayer(playSrc: string, surfaceID: string) {
     await this.release()
     this.playPath = playSrc
+    this.surfaceID = surfaceID
     // 创建avPlayer实例对象
     this.avPlayer = await media.createAVPlayer()
     Logger.info(TAG, 'createVideoPlayer')
@@ -41,9 +43,6 @@ export default class AVPlayerUtils {
         this.timeUpdateCallBack(time)
       }
     });
-    this.avPlayer.surfaceId = surfaceID
-    Logger.info(TAG, 'setDisplaySurface')
-    await this.avPlayer.prepare();
     Logger.info(TAG, 'init VideoPlayer finish')
   }
 
@@ -69,6 +68,9 @@ export default class AVPlayerUtils {
         case 'initialized': // avplayer 设置播放源后触发该状态上报
           Logger.info(TAG, 'AVPlayer state initialized called.');
           this.avPlayerState = 'initialized';
+          this.avPlayer.surfaceId = this.surfaceID;
+          Logger.info(TAG, 'setDisplaySurface');
+          this.avPlayer.prepare();
           break;
         case 'prepared': // prepare调用成功后上报该状态机
           Logger.info(TAG, 'AVPlayer state prepared called.');
