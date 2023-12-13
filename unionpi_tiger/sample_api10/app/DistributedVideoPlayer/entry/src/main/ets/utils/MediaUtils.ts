@@ -17,23 +17,26 @@
 
 import image from '@ohos.multimedia.image';
 import fileio from '@ohos.fileio';
+import common from '@ohos.app.ability.common';
 import promptAction from '@ohos.promptAction';
 import mediaLibrary from '@ohos.multimedia.mediaLibrary';
 import Logger from '../model/Logger';
 import DateTimeUtil from './DateTimeUtil';
+import { GlobalThis } from './globalThis';
 
 const TAG: string = 'MediaUtils';
+let context = GlobalThis.getInstance().getObject("context") as common.UIAbilityContext;
 
 export default class MediaUtils {
   private mediaList: Array<mediaLibrary.FileAsset> = []
   private mediaLib: mediaLibrary.MediaLibrary = undefined
 
   constructor() {
-    this.mediaLib = mediaLibrary.getMediaLibrary(globalThis.context)
+    this.mediaLib = mediaLibrary.getMediaLibrary(context)
   }
 
   async createAndGetFile() {
-    let mediaTest = mediaLibrary.getMediaLibrary(globalThis.context)
+    let mediaTest = mediaLibrary.getMediaLibrary(context)
     let info = {
       prefix: 'IMG_', suffix: '.jpg', directory: mediaLibrary.DirectoryType.DIR_IMAGE
     }
