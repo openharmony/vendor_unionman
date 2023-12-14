@@ -58,7 +58,7 @@
         <filefilterlist> 
             <filteritem type="filename" name="NOTICE" desc="Temp files"/>
             <filefilter name="binaryFileTypePolicyFilter" desc="Filters for binary file policies">
-                <filteritem type="filename" name="*.png|*.jpg|*.txt|*.gif|*.ico" desc="desc files"/>
+                <filteritem type="filename" name="*.png|*.jpg|*.jpeg|*.mp4|*.mp3|*.wav|*.txt|*.gif|*.ico" desc="desc files"/>
             </filefilter>
             <filefilter name="defaultFilter" desc="Files not to check">
                 <filteritem type="filepath" name="unionpi_tiger/power_config/power_mode_config.xml" desc=""/>
