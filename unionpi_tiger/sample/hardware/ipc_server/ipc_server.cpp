@@ -49,6 +49,7 @@ using namespace OHOS;
 // 定义消息码
 static HiviewDFX::HiLogLabel LABEL = {LOG_APP, 0x0003, "ShellServer"};
 const int ABILITY_SHELL = 4;
+const int ABILITY_YLOLO = 5;
 
 class IShellAbility : public IRemoteBroker {
 public:
@@ -172,6 +173,17 @@ int ShellAbilityStub::OnRemoteRequest(uint32_t code, MessageParcel &data, Messag
                 return -1;
             }
         }
+        case ABILITY_YLOLO: {
+            int ver = bmgrGetUersNameForUidAndVerify();
+            if (ver == 0) {
+                std::string dummy = data.ReadString();
+                std::string result = yolo5s(dummy);
+                reply.WriteString(result);
+                return 0;
+            } else {
+                return -1;
+            }
+        }
         default:
             return IPCObjectStub::OnRemoteRequest(code, data, reply, option);
     }
@@ -196,6 +208,26 @@ std::string ShellAbility::executeCommand(const std::string &dummy)
     }
     pclose(pipe);
     ZLOGW(LABEL, "%{public}s: popen successful", __func__);
+    return result;
+}
+
+std::string ShellAbility::yolo5s(const std::string &dummy)
+{
+    std::string cmd = "ld-linux-aarch64.so.1 /bin/sdk19_64 etc/yolov5s.nb "+ dummy + " 2>&1";
+    char buffer[128];
+    std::string result = "successful:";
+    FILE *pipe = popen(cmd.c_str(), "r");
+
+    if (!pipe) {
+        ZLOGW(LABEL, "%{public}s: popen error", __func__);
+        std::cerr << "命令执行失败" << std::endl;
+        return "erro";
+    }
+
+    while (fgets(buffer, sizeof(buffer), pipe) != nullptr) {
+        result += buffer;
+    }
+    pclose(pipe);
     return result;
 }
 
