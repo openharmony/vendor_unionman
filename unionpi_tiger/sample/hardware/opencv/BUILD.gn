@@ -1,4 +1,4 @@
-# Copyright (c) 2023 Unionman Technology Co., Ltd.
+# Copyright (c) 2022 Unionman Technology Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -10,40 +10,34 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 import("//build/ohos.gni")
 import("//build/ohos/ndk/ndk.gni")
+
 config("warns") {
   cflags = [ "-Werror" ]
 }
 
-ohos_shared_library("ipcnapi") {
+ohos_executable("opencv_test") {
   include_dirs = [
-    "//foundation/ace/napi/interfaces/kits",
     "//commonlibrary/c_utils/base/include",
-    "//base/hiviewdfx/hilog/interfaces/native/innerkits/include",
-    "//third_party/bounds_checking_function/include",
+    "//vendor/unionman/unionpi_tiger/sample/third_party/opencv/include/opencv4",
   ]
-
-  sources = [ "ipc.cpp" ]
-
+  sources = [ "main.cpp" ]
   deps = [
-    "//drivers/hdf_core/adapter/uhdf2/platform:libhdf_platform",
-    "//foundation/arkui/napi:ace_napi",
+    "//vendor/unionman/unionpi_tiger/sample/third_party/opencv:opencv",
+    "//vendor/unionman/unionpi_tiger/sample/third_party/opencv:opencv_3rdparty",
   ]
-
-  external_deps = [
-    "c_utils:utils",
-    "hiviewdfx_hilog_native:libhilog",
-    "ipc:ipc_core",
-    "ipc:ipc_single",
-    "samgr:samgr_proxy",
+  configs = [ ":warns" ]
+  cflags = [
+    "-fexceptions",
+    "-frtti",
   ]
-
-  relative_install_dir = "module"
-
-  part_name = "product_unionpi_tiger"
-
-  install_enable = true
-
+  remove_configs = [
+    "//build/config/compiler:no_exceptions",
+    "//build/config/compiler:no_rtti",
+  ]
+  external_deps = [ "c_utils:utils" ]
   install_images = [ "system" ]
+  part_name = "product_unionpi_tiger"
 }

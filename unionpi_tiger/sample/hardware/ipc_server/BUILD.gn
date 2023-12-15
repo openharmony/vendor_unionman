@@ -20,13 +20,13 @@ BUND = true
 
 ohos_prebuilt_etc("Applist.json") {
   source = "Applist.json"
-  part_name = "unionman_products"
+  part_name = "product_unionpi_tiger"
 }
 
 ohos_prebuilt_executable("get_faultlog.sh") {
   source = "get_faultlog.sh"
   module_install_dir = "bin"
-  part_name = "unionman_products"
+  part_name = "product_unionpi_tiger"
   install_enable = true
 }
 
@@ -56,7 +56,7 @@ ohos_executable("ipc_shell_server") {
     "//third_party/bounds_checking_function:libsec_static",
     "//third_party/cJSON:cjson",
   ]
-  part_name = "unionman_products"
+  part_name = "product_unionpi_tiger"
 }
 group("ipc_shell") {
   deps = [
