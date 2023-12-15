@@ -62,15 +62,25 @@ static int use_dma = 0;
 static int input_width = 0, input_high = 0;
 static int display_width = 640, display_high = 480;
 nn_input inData;
+static std::string changeFileName(const std::string& filePath, const std::string& newFileName)
+{
+    size_t lastSlashPos = filePath.find_last_of('/');
+    if (lastSlashPos != std::string::npos) {
+        std::string pathBeforeFileName = filePath.substr(0, lastSlashPos + 1);
+        std::string newPath = pathBeforeFileName + newFileName;
+        return newPath;
+    } else {
+        std::cerr << "Invalid file path format." << std::endl;
+        return "erro";
+    }
+}
 
 int run_network(void *qcontext, unsigned char *qrawdata, int fbmode, unsigned char *fbbuf)
 {
     img_classify_out_t *cls_out = nullptr;
     obj_detect_out_t *obj_detect_out = nullptr;
-
     nn_output *outdata = nullptr;
     aml_module_t modelType;
-
     int sz = 1;
     int j;
     unsigned int i = 0;
@@ -190,7 +200,9 @@ int run_network(void *qcontext, unsigned char *qrawdata, int fbmode, unsigned ch
     }
 #ifdef USE_OPENCV
 
-    cv::imwrite("out_obj_det.bmp", img);
+    std::string modifiedPath = changeFileName(jpath, "out.bmp");
+    std::strcpy(jpath, modifiedPath.c_str());
+    cv::imwrite(jpath, img);
 
     img2.release();
 #endif
@@ -295,7 +307,9 @@ void *net_thread_func(void *args)
     char img_name[64];
     char *ptr;
 #endif
-
+    int newWidth = 640;
+    int newHeight = 640;
+    // 调用函数，不需要获取返回值
     rawdata = get_jpeg_rawData(jpath, input_width, input_high);
     ret = run_network(context, rawdata, AML_IN_PICTURE, nullptr);
 

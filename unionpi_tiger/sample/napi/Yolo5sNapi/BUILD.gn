@@ -1,4 +1,4 @@
-# Copyright (c) 2023 Unionman Technology Co., Ltd.
+# Copyright (c) 2022 Unionman Technology Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -16,7 +16,7 @@ config("warns") {
   cflags = [ "-Werror" ]
 }
 
-ohos_shared_library("ipcnapi") {
+ohos_shared_library("yolo5snapi") {
   include_dirs = [
     "//foundation/ace/napi/interfaces/kits",
     "//commonlibrary/c_utils/base/include",
@@ -24,7 +24,7 @@ ohos_shared_library("ipcnapi") {
     "//third_party/bounds_checking_function/include",
   ]
 
-  sources = [ "ipc.cpp" ]
+  sources = [ "yolo5s.cpp" ]
 
   deps = [
     "//drivers/hdf_core/adapter/uhdf2/platform:libhdf_platform",
