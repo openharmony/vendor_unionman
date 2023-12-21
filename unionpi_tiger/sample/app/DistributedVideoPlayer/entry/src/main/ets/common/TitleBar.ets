@@ -167,6 +167,7 @@ export struct TitleBar {
   build() {
     Row() {
       Image($r("app.media.ic_back"))
+        .id("back")
         .height('60%')
         .margin({ right: 4 })
         .width(this.isLand ? '6%' : '8%')
@@ -183,10 +184,10 @@ export struct TitleBar {
       Blank()
 
       Image($r("app.media.ic_controlcenter_screenshot_filled"))
+        .id("screenshot")
         .height('60%')
         .margin({ right: 8 })
         .width(this.isLand ? '6%' : '8%')
-        .id("screenshot")
         .objectFit(ImageFit.Contain)
         .onClick(() => {
           var screenshotOptions = {};
@@ -200,9 +201,9 @@ export struct TitleBar {
         })
 
       Image($r("app.media.ic_hop"))
+        .id("hop")
         .height('60%')
         .width(this.isLand ? '6%' : '8%')
-        .id("selDevBtn")
         .margin({ right: 8 })
         .objectFit(ImageFit.Contain)
         .onClick(() => {
@@ -210,9 +211,9 @@ export struct TitleBar {
         })
 
       Image($r("app.media.ic_settings"))
+        .id("settings")
         .height('60%')
         .width(this.isLand ? '6%' : '8%')
-        .id("setting")
         .objectFit(ImageFit.Contain)
         .onClick(() => {
           router.pushUrl({
