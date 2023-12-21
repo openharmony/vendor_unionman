@@ -368,9 +368,9 @@ struct Index {
 
           Flex({ direction: FlexDirection.Row, justifyContent: FlexAlign.SpaceEvenly, alignItems: ItemAlign.Center }) {
             Image(this.isPlay ? $r("app.media.ic_pause") : $r("app.media.ic_play"))
+              .id("playBtn")
               .width(36)
               .height(36)
-              .id("play")
               .flexShrink(0)
               .margin({ right: 10 })
               .onClick(() => {
@@ -387,6 +387,7 @@ struct Index {
               max: this.duration,
               step: 1,
             })
+              .id("slider")
               .blockColor(Color.White)
               .trackColor(Color.Gray)
               .selectedColor(Color.White)
@@ -404,7 +405,7 @@ struct Index {
               { value: PlaybackSpeed[2] },
               { value: PlaybackSpeed[3] },
               { value: PlaybackSpeed[4] }])
-              .id("speed")
+              .id("playbackSpeed")
               .flexShrink(0)
               .backgroundColor('#00000000')
               .margin({ left: 10, right: 10 })
@@ -422,6 +423,7 @@ struct Index {
               })
 
             Image($r("app.media.ic_public_view_list"))
+              .id("viewList")
               .width(36)
               .aspectRatio(1)
               .flexShrink(0)
@@ -465,6 +467,7 @@ struct Index {
           }
         }
       }
+      .id("container")
       .width('100%')
       .height('100%')
       .backgroundColor(Color.Black)

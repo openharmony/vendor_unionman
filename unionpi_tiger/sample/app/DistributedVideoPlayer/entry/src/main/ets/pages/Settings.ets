@@ -50,9 +50,9 @@ struct Setting {
     Column() {
       Row() {
         Image($r("app.media.ic_back"))
+          .id("settings_back")
           .width('8%')
           .height('50%')
-          .id("back")
           .margin({ right: 4 })
           .objectFit(ImageFit.Contain)
           .onClick(() => {
@@ -79,6 +79,7 @@ struct Setting {
         Blank()
 
         Radio({ value: 'continuation', group: 'continuationMode' })
+          .id("continuation")
           .checked(this.continuationMode == 'continuation' ? true : false)
           .height(25)
           .width(25)
@@ -94,10 +95,10 @@ struct Setting {
           .fontSize(20)
 
         Radio({ value: 'synchronization', group: 'continuationMode' })
+          .id("synchronization")
           .checked(this.continuationMode == 'synchronization' ? true : false)
           .height(25)
           .width(25)
-          .id("synchronization")
           .onChange((isChecked: boolean) => {
             if (isChecked) {
               this.continuationMode = 'synchronization'
