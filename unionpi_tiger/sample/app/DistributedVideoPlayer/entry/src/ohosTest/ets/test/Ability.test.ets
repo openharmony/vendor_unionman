@@ -14,161 +14,385 @@
  * limitations under the License.
  *
  */
-import hilog from '@ohos.hilog';
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium'
-import abilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
+import AbilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
 import { Driver, ON } from '@ohos.UiTest';
+import resourceManager from '@ohos.resourceManager';
+import Logger from '../../../main/ets/model/Logger';
 
-const BUNDLE = "com.unionman.distributedvideoplayer";
-const ABILITY_NAME = "EntryAbility";
-const TAG = "DistributedvideoplayerTest";
-const DOMAIN = 0xF811;
+const BUNDLE = 'DistributedVideoPlayer_';
+
+const DELAY_TIME = 1000;
+const DELAY_TIME_FiVE = 500;
+let driver: Driver = Driver.create();
+
+// 获取AbilityDelegator
+let abilityDelegatorRegistry = AbilityDelegatorRegistry.getAbilityDelegator();
+// 启动后获取app上下文
+let context: Context;
+// 启动后获取resourceManager
+let manager: resourceManager.ResourceManager;
+
+// 通过 resource 验证有没有这个组件 有的话点击一下
+async function checkButtonAndClickWithTextByResource(text: Resource) {
+  let atom: string = await manager.getStringValue(text);
+  await driver.assertComponentExist(ON.text(atom));
+  let button = await driver.findComponent(ON.text(atom));
+  await button.click();
+  await driver.delayMs(DELAY_TIME_FiVE);
+  Logger.info(BUNDLE + atom);
+}
+
+// 通过 ID 滑动 slider
+async function drawSliderWithId(text: string) {
+  let atom = text;
+  await driver.assertComponentExist(ON.id(atom));
+  let slider = await driver.findComponent(ON.id(atom));
+  let rect = await slider.getBoundsCenter();
+  await driver.drag(rect.x - 100, rect.y, rect.x + 100, rect.y, 800)
+  await driver.delayMs(DELAY_TIME_FiVE);
+  Logger.info(BUNDLE + atom);
+}
+
+// 通过text验证有没有这个组件 有的话点击一下
+async function checkButtonAndClickWithText(text: string) {
+  let atom = text;
+  await driver.assertComponentExist(ON.text(atom));
+  let button = await driver.findComponent(ON.text(atom));
+  await button.click();
+  await driver.delayMs(DELAY_TIME);
+  Logger.info(BUNDLE + atom);
+}
+
+// 通过id验证有没有这个组件 有的话点击一下
+async function checkButtonAndClickWithID(text: string) {
+  let atom = text;
+  await driver.assertComponentExist(ON.id(atom));
+  let button = await driver.findComponent(ON.id(atom));
+  await button.click();
+  await driver.delayMs(DELAY_TIME_FiVE);
+  Logger.info(BUNDLE + atom);
+}
+
+// 通过id验证有没有这个组件 有的话点击一下
+async function checkButtonAndDoubleClickWithID(text: string) {
+  let atom = text;
+  await driver.assertComponentExist(ON.id(atom));
+  let button = await driver.findComponent(ON.id(atom));
+  await button.doubleClick();
+  await driver.delayMs(DELAY_TIME_FiVE);
+  Logger.info(BUNDLE + atom);
+}
+
+// 展开Select并选择
+async function clickSelectIDAndSelectText(toggleId: string, selectText: string) {
+  { //展开
+    let atom = toggleId;
+    await checkButtonAndClickWithID(atom);
+  }
+  { //选择
+    let atom = selectText;
+    await checkButtonAndClickWithText(atom);
+  }
+}
 
 export default function abilityTest() {
-  let driver = Driver.create();
-  let delegator = abilityDelegatorRegistry.getAbilityDelegator();
-  describe('ActsAbilityTest', function () {
+  describe('ActsAbilityTest', () => {
     // Defines a test suite. Two parameters are supported: test suite name and test suite function.
-    beforeAll(function () {
+    beforeAll(() => {
       // Presets an action, which is performed only once before all test cases of the test suite start.
       // This API supports only one parameter: preset action function.
-      delegator.startAbility({
-        bundleName: BUNDLE,
-        abilityName: ABILITY_NAME
-      }, (err) => {
-        hilog.info(DOMAIN, TAG, `${BUNDLE} startAbility end err ${JSON.stringify(err)}`);
-      })
     })
-    beforeEach(function () {
+    beforeEach(() => {
       // Presets an action, which is performed before each unit test case starts.
       // The number of execution times is the same as the number of test cases defined by **it**.
       // This API supports only one parameter: preset action function.
     })
-    afterEach(function () {
+    afterEach(() => {
       // Presets a clear action, which is performed after each unit test case ends.
       // The number of execution times is the same as the number of test cases defined by **it**.
       // This API supports only one parameter: clear action function.
     })
-    afterAll(function () {
+    afterAll(() => {
       // Presets a clear action, which is performed after all test cases of the test suite end.
       // This API supports only one parameter: clear action function.
     })
-    //测试进入设置页面并设置分布式流转模式
-    it("setDistributedMode", 0, async (done) => {
-      hilog.info(DOMAIN, TAG, "setDistributedMode_0 start");
-      try {
-        //进入时等待3s,方便点击页面上的授权按钮
-        await driver.delayMs(3000);
-        //找到并点击设置页面按钮
-        await driver.assertComponentExist(ON.id("setting"));
-        let settingBtn = await driver.findComponent(ON.id("setting"));
-        await settingBtn.click();
-        //等待1s来打开设置页面
-        await driver.delayMs(1000);
+    it("assertContain", 0, () => {
 
-        //找到并点击多端协同按钮
-        await driver.assertComponentExist(ON.id("synchronization"));
-        let synchronizationRdo = await driver.findComponent(ON.id("synchronization"));
-        await synchronizationRdo.click();
-        //等待1s反应
-        await driver.delayMs(1000);
+      Logger.info("Sample_DistributedVideoPlayer test start")
+      /**
+       * 打开应用
+       */
+      it(BUNDLE + 'StartAbility_001', 0, async (done: Function) => {
+        let testName = 'StartAbility';
+        Logger.info(BUNDLE + testName + ' begin');
+        let abilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator()
+        try {
+          await abilityDelegator.startAbility({
+            bundleName: 'com.unionman.distributedvideoplayer',
+            abilityName: 'EntryAbility'
+          })
 
-        //找到并点击左上角的返回按钮
-        await driver.assertComponentExist(ON.id("back"));
-        let backBtn = await driver.findComponent(ON.id("back"));
-        await backBtn.click();
-        //等待1s以返回主页面
-        await driver.delayMs(1000);
-      } catch (err) {
-        hilog.error(DOMAIN, TAG, "throw error! error code:%{public}d error info:%{public}s", err.code, err.message);
-        expect().assertFail();
-      }
-      hilog.info(DOMAIN, TAG, "setDistributedMode_0 end");
-      done();
-    })
-    //测试选择分布式流转设备
-    it("selectDistributedDevice", 1, async (done) => {
-      hilog.info(DOMAIN, TAG, "setDistributedMode_1 start");
-      try {
-        //找到并点击选择设备按钮
-        await driver.assertComponentExist(ON.id("selDevBtn"));
-        let selDevBtn = await driver.findComponent(ON.id("selDevBtn"));
-        await selDevBtn.click();
-        //等待1s以打开对话框
-        await driver.delayMs(1000);
+          context = abilityDelegatorRegistry.getAppContext();
+          manager = context.resourceManager;
 
-        /*
-        * 点击第二个设备，由于对话框的子控件暂时没找到办法获取
-        * 所以用了绝对坐标进行模拟点击
-        */
-        await driver.click(608, 266);
-        //等待1s给他时间反应
-        await driver.delayMs(1000);
-        done();
-      } catch (err) {
-        hilog.error(DOMAIN, TAG, "throw error! error code:%{public}d error info:%{public}s", err.code, err.message);
-        expect().assertFail();
-      }
-      hilog.info(DOMAIN, TAG, "setDistributedMode_1 end");
-    })
-    //测试分布式视频流转播放
-    it("startDistributedPlay", 2, async (done) => {
-      hilog.info(DOMAIN, TAG, "startDistributedPlay_2 start");
-      try {
-        //找到并点击选择播放键
-        await driver.assertComponentExist(ON.id("play"));
-        let playBtn = await driver.findComponent(ON.id("play"));
-        await playBtn.click();
-        //等待1s反应
-        await driver.delayMs(1000);
-        done();
-      } catch (err) {
-        hilog.error(DOMAIN, TAG, "throw error! error code:%{public}d error info:%{public}s", err.code, err.message);
-        expect().assertFail();
-      }
-      hilog.info(DOMAIN, TAG, "startDistributedPlay_2 end");
-    })
-    //测试分布式视频速度设置
-    it("setSpeed", 3, async (done) => {
-      hilog.info(DOMAIN, TAG, "setSpeed_3 start");
-      try {
-        //找到并点击速度按钮
-        await driver.assertComponentExist(ON.id("speed"));
-        let speedSel=await driver.findComponent(ON.id("speed"));
-        await speedSel.click();
-        //等待1s反应
-        await driver.delayMs(1000);
+          done();
+        } catch (exception) {
+          Logger.info(BUNDLE, `StartAbility_001 end ${JSON.stringify(exception)}`);
+          expect(0).assertEqual(exception.code);
+          done();
+        }
+        Logger.info(BUNDLE + testName + ' end');
+      })
 
-        /*
-        * 点击倍速2。0，由于选择框的子控件暂时没找到办法获取
-        * 所以用了绝对坐标进行模拟点击
-        */
-        await driver.click(649,409);
-        //等待400ms反应
-        await driver.delayMs(400);
-        done();
-      } catch (err) {
-        hilog.error(DOMAIN, TAG, "throw error! error code:%{public}d error info:%{public}s", err.code, err.message);
-        expect().assertFail();
-      }
-      hilog.info(DOMAIN, TAG, "setSpeed_3 end");
-    })
-    //测试分布式视频截图功能
-    it("startScreenshot", 4, async (done) => {
-      hilog.info(DOMAIN, TAG, "startScreenshot_4 start");
-      try {
-        //找到并点击截屏按钮
-        await driver.assertComponentExist(ON.id("screenshot"));
-        let scBtn = await driver.findComponent(ON.id("screenshot"));
-        await scBtn.click();
-        //等待1s反应
-        await driver.delayMs(1000);
-        done();
-      } catch (err) {
-        hilog.error(DOMAIN, TAG, "throw error! error code:%{public}d error info:%{public}s", err.code, err.message);
-        expect().assertFail();
-      }
-      hilog.info(DOMAIN, TAG, "startScreenshot_4 end");
+      /**
+       * 获取权限
+       */
+      it(BUNDLE + 'RequestPermissionFunction_001', 0, async () => {
+        let testName = 'RequestPermissionFunction';
+        Logger.info(BUNDLE + testName + ' begin');
+        await driver.delayMs(DELAY_TIME);
+
+        // 获取多设备协同权限
+        await checkButtonAndClickWithTextByResource($r('app.string.permit'));
+        // 获取文件读写权限
+        await checkButtonAndClickWithTextByResource($r('app.string.permit'));
+        Logger.info(BUNDLE + testName + ' end');
+      })
+
+      /**
+       * 关闭应用
+       */
+      it(BUNDLE + 'StopAbility_001', 0, async (done: Function) => {
+        let testName = 'StopAbility';
+        Logger.info(BUNDLE + testName + ' begin');
+        try {
+          await checkButtonAndClickWithID("back");
+          await driver.delayMs(DELAY_TIME);
+
+          done();
+        } catch (exception) {
+          Logger.info(BUNDLE, `StopAbility_001 end ${JSON.stringify(exception)}`);
+          expect(0).assertEqual(exception.code);
+          done();
+        }
+        Logger.info(BUNDLE + testName + ' end');
+      })
+
+      /**
+       * 打开应用
+       */
+      it(BUNDLE + 'StartAbility_002', 0, async (done: Function) => {
+        let testName = 'StartAbility';
+        Logger.info(BUNDLE + testName + ' begin');
+        let abilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator()
+        try {
+          await abilityDelegator.startAbility({
+            bundleName: 'com.unionman.distributedvideoplayer',
+            abilityName: 'EntryAbility'
+          })
+
+          done();
+        } catch (exception) {
+          Logger.info(BUNDLE, `StartAbility_002 end ${JSON.stringify(exception)}`);
+          expect(0).assertEqual(exception.code);
+          done();
+        }
+        Logger.info(BUNDLE + testName + ' end');
+      })
+
+      /**
+       * 单击播放按钮
+       */
+      it(BUNDLE + 'PlayVideo_001', 0, async () => {
+        let testName = 'PlayVideo';
+        Logger.info(BUNDLE + testName + ' begin');
+        await driver.delayMs(DELAY_TIME);
+
+        // 播放
+        await checkButtonAndClickWithID('playBtn');
+        await driver.delayMs(DELAY_TIME);
+
+        // 暂停
+        await checkButtonAndClickWithID('playBtn');
+        await driver.delayMs(DELAY_TIME);
+
+        Logger.info(BUNDLE + testName + ' end');
+      });
+
+      /**
+       * 双击页面
+       */
+      it(BUNDLE + 'PlayVideo_002', 0, async () => {
+        let testName = 'PlayVideo';
+        Logger.info(BUNDLE + testName + ' begin');
+
+        // 播放
+        await checkButtonAndDoubleClickWithID('container');
+        await driver.delayMs(DELAY_TIME);
+
+        // 暂停
+        await checkButtonAndDoubleClickWithID('container');
+        await driver.delayMs(DELAY_TIME);
+
+        // 播放
+        await checkButtonAndDoubleClickWithID('container');
+        await driver.delayMs(DELAY_TIME);
+
+        Logger.info(BUNDLE + testName + ' end');
+      });
+
+      /**
+       * 滑动Slider进度条
+       */
+      it(BUNDLE + 'Slider_001', 0, async () => {
+        let testName = 'Slider';
+        Logger.info(BUNDLE + testName + ' begin');
+
+        await drawSliderWithId("slider");
+        await driver.delayMs(DELAY_TIME);
+
+        Logger.info(BUNDLE + testName + ' end');
+      });
+
+      /**
+       * 左右滑动屏幕
+       */
+      it(BUNDLE + 'Swipe_001', 0, async () => {
+        let testName = 'Swipe';
+        Logger.info(BUNDLE + testName + ' begin');
+
+        // 左滑
+        await driver.swipe(500, 200, 200, 200, 600);
+        await driver.delayMs(DELAY_TIME);
+
+        // 右滑
+        await driver.swipe(200, 200, 500, 200, 600);
+        await driver.delayMs(DELAY_TIME);
+
+        Logger.info(BUNDLE + testName + ' end');
+      });
+
+      /**
+       * 调整倍速
+       */
+      it(BUNDLE + 'PlaybackSpeed_001', 0, async () => {
+        let testName = 'PlaybackSpeed';
+        Logger.info(BUNDLE + testName + ' begin');
+
+        // 单击屏幕显示控制栏
+        await checkButtonAndClickWithID('container');
+        await driver.delayMs(DELAY_TIME);
+
+        // 选择2.0X倍速
+        await clickSelectIDAndSelectText('playbackSpeed', '2.0X');
+        await driver.delayMs(DELAY_TIME);
+
+        // 单击屏幕显示控制栏
+        await checkButtonAndClickWithID('container');
+
+        // 选择0.75X倍速
+        await clickSelectIDAndSelectText('playbackSpeed', '0.75X');
+        await driver.delayMs(DELAY_TIME);
+
+        Logger.info(BUNDLE + testName + ' end');
+      });
+
+      /**
+       * 展开视频列表
+       */
+      it(BUNDLE + 'ShwoVideoList_001', 0, async () => {
+        let testName = 'ShwoVideoList';
+        Logger.info(BUNDLE + testName + ' begin');
+        await driver.delayMs(DELAY_TIME);
+
+        // 单击屏幕显示控制栏
+        await checkButtonAndClickWithID('container');
+        await driver.delayMs(DELAY_TIME);
+
+        // 点击展开视频列表
+        await checkButtonAndClickWithID("viewList");
+        await driver.delayMs(DELAY_TIME);
+
+        // 单击隐藏视频列表 固定坐标只支持UnionPi-Tiger，其他设备需要调整
+        await driver.click(200, 200);
+        await driver.delayMs(DELAY_TIME);
+
+        Logger.info(BUNDLE + testName + ' end');
+      });
+
+      /**
+       * 截图
+       */
+      it(BUNDLE + 'Screenshot_001', 0, async () => {
+        let testName = 'Screenshot';
+        Logger.info(BUNDLE + testName + ' begin');
+        await driver.delayMs(DELAY_TIME);
+
+        // 单击屏幕显示控制栏
+        await checkButtonAndClickWithID('container');
+        await driver.delayMs(DELAY_TIME);
+
+        // 单击截图图标
+        await checkButtonAndClickWithID('screenshot');
+        await driver.delayMs(DELAY_TIME);
+
+        // 单击隐藏截图窗口 固定坐标只支持UnionPi-Tiger，其他设备需要调整
+        await driver.click(800, 200);
+        await driver.delayMs(DELAY_TIME);
+
+        Logger.info(BUNDLE + testName + ' end');
+      });
+
+      /**
+       * 测试选择设备弹窗是否能正常弹出
+       */
+      it(BUNDLE + 'ShwoDeviceDialog_001', 0, async () => {
+        let testName = 'ShwoDeviceDialog';
+        Logger.info(BUNDLE + testName + ' begin');
+        await driver.delayMs(DELAY_TIME);
+
+        // 单击屏幕显示控制栏
+        await checkButtonAndClickWithID('container');
+        await driver.delayMs(DELAY_TIME);
+
+        // 单击流转图标
+        await checkButtonAndClickWithID('hop');
+        await driver.delayMs(DELAY_TIME);
+
+        // 点击取消
+        await checkButtonAndClickWithTextByResource($r('app.string.cancel'));
+        await driver.delayMs(DELAY_TIME);
+
+        Logger.info(BUNDLE + testName + ' end');
+      });
+
+      /**
+       * 设置流转模式
+       */
+      it(BUNDLE + 'SetContinuationMode_001', 0, async () => {
+        let testName = 'SetContinuationMode';
+        Logger.info(BUNDLE + testName + ' begin');
+        await driver.delayMs(DELAY_TIME);
+
+        // 单击屏幕显示控制栏
+        await checkButtonAndClickWithID('container');
+        await driver.delayMs(DELAY_TIME);
+
+        // 单击设置图标
+        await checkButtonAndClickWithID('settings');
+        await driver.delayMs(DELAY_TIME);
+
+        // 选择多端协同模式
+        await checkButtonAndClickWithID('synchronization');
+        await driver.delayMs(DELAY_TIME);
+
+        // 返回
+        await checkButtonAndClickWithID('settings_back');
+        await driver.delayMs(DELAY_TIME);
+
+        Logger.info(BUNDLE + testName + ' end');
+      });
     })
   })
 }
