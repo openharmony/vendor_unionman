@@ -14,11 +14,11 @@
     },
     {
       "name": "permit",
-      "value": "permit"
+      "value": "允许"
     },
     {
       "name": "cancel",
-      "value": "cancel"
+      "value": "取消"
     }
   ]
 }
