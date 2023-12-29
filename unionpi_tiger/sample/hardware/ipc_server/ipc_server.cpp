@@ -50,11 +50,14 @@ using namespace OHOS;
 static HiviewDFX::HiLogLabel LABEL = {LOG_APP, 0x0003, "ShellServer"};
 const int ABILITY_SHELL = 4;
 const int ABILITY_YLOLO = 5;
+const int ABILITY_LENET = 6;
 
 class IShellAbility : public IRemoteBroker {
 public:
     DECLARE_INTERFACE_DESCRIPTOR(u"shell.Ability");
     virtual std::string executeCommand(const std::string &dummy) = 0; // 定义业务函数
+    virtual std::string yolo5s(const std::string &dummy) = 0;
+    virtual std::string lenet(const std::string &dummy) = 0;
 };
 
 class ShellAbilityStub : public IRemoteStub<IShellAbility> {
@@ -66,6 +69,8 @@ public:
 class ShellAbility : public ShellAbilityStub {
 public:
     std::string executeCommand(const std::string &dummy) override;
+    std::string yolo5s(const std::string &dummy) override;
+    std::string lenet(const std::string &dummy) override;
 };
 
 // 读取文件内容到缓冲区
@@ -180,6 +185,17 @@ int ShellAbilityStub::OnRemoteRequest(uint32_t code, MessageParcel &data, Messag
                 std::string result = yolo5s(dummy);
                 reply.WriteString(result);
                 return 0;
+            } else {
+                return -1;
+            }
+        }
+        case ABILITY_LENET: {
+            int ver = bmgrGetUersNameForUidAndVerify();
+            if (ver == 0) {
+            std::string dummy = data.ReadString();
+            std::string result = lenet(dummy);
+            reply.WriteString(result);
+            return 0;
             } else {
                 return -1;
             }
