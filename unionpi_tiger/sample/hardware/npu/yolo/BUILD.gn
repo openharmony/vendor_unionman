@@ -22,6 +22,19 @@ ohos_prebuilt_etc("yolov5s") {
   source = "yolov5s.nb"
   part_name = "product_unionpi_tiger"
 }
+
+ohos_prebuilt_etc("lenetn") {
+  source = "lenet.nb"
+  part_name = "product_unionpi_tiger"
+}
+
+ohos_prebuilt_executable("lenet") {
+  source = "lenet"
+  module_install_dir = "bin"
+  install_enable = true
+  part_name = "product_unionpi_tiger"
+}
+
 ohos_prebuilt_executable("sdk19_64") {
   source = "sdk19_64"
   module_install_dir = "bin"
@@ -161,6 +174,8 @@ group("npu_dep") {
   deps = [
     ":galcore",
     ":ld-linux-aarch64",
+    ":lenet",
+    ":lenetn",
     ":libArchModelSw",
     ":libCLC",
     ":libGAL",
