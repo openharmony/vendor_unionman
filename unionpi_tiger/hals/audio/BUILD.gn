@@ -31,9 +31,19 @@ ohos_prebuilt_etc("audio_policy_config") {
   part_name = "product_unionpi_tiger"
 }
 
+ohos_prebuilt_etc("audio_policy_config_new") {
+  source = "config/audio_policy_config_new.xml"
+
+  relative_install_dir = "audio"
+  install_images = [ chipset_base_dir ]
+  subsystem_name = "product_unionpi_tiger"
+  part_name = "product_unionpi_tiger"
+}
+
 group("hdf_audio_config") {
   deps = [
     ":audio_policy_config",
+    ":audio_policy_config_new",
     ":hdf_audio_path_json",
   ]
 }
