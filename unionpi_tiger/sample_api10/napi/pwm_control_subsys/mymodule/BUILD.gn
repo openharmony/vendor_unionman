@@ -1,0 +1,8 @@
+import("//build/ohos.gni")
+
+group("mygroup")
+{
+    deps = [
+        "pwm_control:control_demo"
+    ]
+}
