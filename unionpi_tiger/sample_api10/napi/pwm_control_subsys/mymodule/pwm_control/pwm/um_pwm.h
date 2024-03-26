@@ -24,7 +24,7 @@ extern "C"
 #define PWM_ERR (-1)
 #define PWM_WRONOG_CHANNEL (-2)
 #define PWM_FILE_NOT_EXIST (-3)
-
+#define PWM_SPRINTF_ERR (-4)
 // pwm enable
 #define PWM_NOT_ENABLED 0
 #define PWM_IS_ENABLED 1
