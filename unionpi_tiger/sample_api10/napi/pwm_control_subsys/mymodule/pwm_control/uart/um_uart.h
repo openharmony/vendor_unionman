@@ -58,6 +58,6 @@ int UmSleepSet(int value);
 
 #ifdef __cplusplus
 }
-#endif 
+#endif
 
 #endif // endif __UM_PWM_H__

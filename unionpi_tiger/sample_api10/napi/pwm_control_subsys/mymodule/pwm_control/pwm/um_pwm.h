@@ -101,6 +101,6 @@ int UmGetPwmPolarity(int pwmChannel);
 int UmIsPwmEnabled(int pwmChannel);
 #ifdef __cplusplus
 }
-#endif 
+#endif
 
 #endif // endif __UM_PWM_H__
