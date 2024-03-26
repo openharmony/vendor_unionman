@@ -28,19 +28,19 @@ extern "C"
  * 作用：初始化串口
  * 参数：无
  */
-int um_init_uart(void);
+int UmInitUart(void);
 /*
  * 作用：获取串口数据
  * 参数：无
  * 返回值：串口数据
  */
-int um_get_uart(void);
+int UmGetUart(void);
 /*
  * 作用：设置传感器休眠
  * 参数：1 -> 进入休眠 ， 0 -> 退出休眠
  * 返回值：0 -> 成功， -1 -> 失败
  */
-int um_sleep_set(int value);
+int UmSleepSet(int value);
 
 #ifdef __cplusplus
 }

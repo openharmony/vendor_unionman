@@ -35,37 +35,37 @@ extern "C"
  * 作用：初始化引脚，生成对应的引脚目录
  * 参数：pwmChannel 为选择的引脚
  */
-int um_init_pmw(int pwmChannel);
+int UmInitPwm(int pwmChannel);
 
 /*
  * 设置pwm的溢出值
  * 参数：pwmChannel 为选择的引脚，period 为溢出值
  */
-int um_set_pwm_period(int pwmChannel, int period);
+int UmSetPwmPeriod(int pwmChannel, int period);
 
 /*
  * 设置pwm一个周期高电平时间
  * 参数：pwmChannel 为选择的引脚，dutyCycle 为一个周期高电平的值
  */
-int um_set_pwm_dutyCycle(int pwmChannel, int dutyCycle);
+int UmSetPwmDutyCycle(int pwmChannel, int dutyCycle);
 
 /*
  * 设置pwm的极性
  * 参数：pwmChannel 为选择的引脚，polarity 为极性
  */
-int um_set_pwm_polarity(int pwmChannel, int polarity);
+int UmSetPwmPolarity(int pwmChannel, int polarity);
 
 /*
  * 打开pwm引脚，使其使能
  * 参数：pwmChannel 为选择的引脚，isEnable 为开关值
  */
-int um_set_pwm_enable(int pwmChannel, int isEnable);
+int UmSetPwmEnable(int pwmChannel, int isEnable);
 
 /*
  * 得到pwm的溢出值
  * 参数：pwmChannel 为选择的引脚
  */
-int um_get_pwm_period(int pwmChannel);
+int UmGetPwmPeriod(int pwmChannel);
 
 /*
  * 得到pwm的一个周期高电平的值

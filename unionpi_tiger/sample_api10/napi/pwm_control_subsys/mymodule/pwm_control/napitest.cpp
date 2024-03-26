@@ -6,12 +6,13 @@
 #include "./pwm/um_pwm.h"
 #include "./uart/um_uart.h"
 //用于在各个线程之间传递数据
-struct AddonData{
-    napi_async_work async_work = nullptr;// 异步工作项
-    napi_deferred deferred = nullptr;// 用于Promise的resolve、reject处理
-    napi_ref callback = nullptr; // 回调函数
-    int args[2] = {0};  //设置传参
-    int result =0;  //设置返回值
+struct AddonData
+{
+    napi_async_work async_work = nullptr;   // 异步工作项
+    napi_deferred deferred = nullptr;   // 用于Promise的resolve、reject处理
+    napi_ref callback = nullptr;    // 回调函数
+    int args[2] = {0};      //设置传参
+    int result = 0;     //设置返回值
 };
 
 //Execute线程 业务逻辑函数
@@ -19,10 +20,11 @@ static void uart_get_execute(napi_env env, void *data)
 {
     AddonData *addonData = (AddonData *)data;
 
-    addonData->result = um_get_uart();
+    addonData->result = UmGetUart();
 }
 //业务逻辑处理完成回调函数
-static void uart_get_complete(napi_env env, napi_status status, void *data) {
+static void uart_get_complete(napi_env env, napi_status status, void *data) 
+{
     //获取data数据
     AddonData *addOnData = (AddonData *) data;
     napi_value callback = nullptr;
@@ -56,7 +58,6 @@ static napi_value uart_get(napi_env env, napi_callback_info info)
     napi_value thisArg = nullptr;
     NAPI_CALL(env, napi_get_cb_info(env, info, &argc, args, &thisArg, nullptr));
 
-
     // 异步工作项上下文用户数据，传递到异步工作项的execute、complete中传递数据
     auto addonData = new AddonData{
         .async_work = nullptr,
@@ -83,17 +84,15 @@ static napi_value uart_get(napi_env env, napi_callback_info info)
 //串口初始化 - 同步函数
 static napi_value uart_init(napi_env env, napi_callback_info info)
 {
-    size_t argc = 0; //参数个数 
-    //napi_value argv[0] = { 0 }; //参数定义 
-    napi_value thisVar = nullptr; //JS对象的this参数 
-    void* data = nullptr; //回调数据指针 
+    size_t argc = 0;     //参数个数 
+    napi_value thisVar = nullptr;   //JS对象的this参数 
+    void* data = nullptr;    //回调数据指针 
 
     /* 根据环境变量获取参数 */ 
     napi_get_cb_info(env, info, &argc, nullptr, &thisVar, &data); 
         
-    
     //业务代码
-    int ret= um_init_uart();
+    int ret= UmInitUart();
     
     //将结果返回,转换回NAPI类型
     napi_value result;
@@ -112,7 +111,6 @@ static napi_value pwm_set(napi_env env, napi_callback_info info)
     /* 根据环境变量获取参数 */ 
     napi_get_cb_info(env, info, &argc, argv, &thisVar, &data); 
         
-    
     //NAPI类型转换C/C++数据类型
     int value;
     NAPI_CALL(env,napi_get_value_int32(env,argv[0],&value));
@@ -120,13 +118,12 @@ static napi_value pwm_set(napi_env env, napi_callback_info info)
     //业务代码
     int ret = 0;
     value += 50; //转换成0-100
-    int final_duty=500000+value*20000;
+    int final_duty=500000L+value*20000L;
     
-    um_init_pmw(PWM1);
-    um_set_pwm_period(PWM1, 20000000L);
-    um_set_pwm_dutyCycle(PWM1, final_duty);
-    um_set_pwm_enable(PWM1,PWM_IS_ENABLED);
-    // ret = get_pwm_dutyCycle(PWM1);
+    UmInitPwm(PWM1);
+    UmSetPwmPeriod(PWM1, 20000000L);
+    UmSetPwmDutyCycle(PWM1, final_duty);
+    UmSetPwmEnable(PWM1,PWM_IS_ENABLED);
     
     //将结果返回,转换回NAPI类型
     napi_value result;
@@ -136,23 +133,21 @@ static napi_value pwm_set(napi_env env, napi_callback_info info)
 //传感器休眠 - 同步函数
 static napi_value uart_sleep(napi_env env, napi_callback_info info)
 {
-    size_t argc = 1; //参数个数 
-    napi_value argv[1] = { 0 }; //参数定义 
-    napi_value thisVar = nullptr; //JS对象的this参数 
-    void* data = nullptr; //回调数据指针 
+    size_t argc = 1;    //参数个数 
+    napi_value argv[1] = { 0 };     //参数定义 
+    napi_value thisVar = nullptr;   //JS对象的this参数 
+    void* data = nullptr;   //回调数据指针 
 
-    /* 根据环境变量获取参数 */ 
+    //根据环境变量获取参数
     napi_get_cb_info(env, info, &argc, argv, &thisVar, &data); 
         
-    
-    
     //NAPI类型转换C/C++数据类型
     int value;
     NAPI_CALL(env,napi_get_value_int32(env,argv[0],&value));
     
     //业务代码
-    int ret=0;
-    ret=um_sleep_set(value);
+    int ret = 0;
+    ret=UmSleepSet(value);
     
     //将结果返回,转换回NAPI类型
     napi_value result;

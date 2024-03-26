@@ -10,12 +10,11 @@
 #include "um_uart.h"
 
 static int fd;
-int um_init_uart(void)
+int UmInitUart(void)
 {
     char uart_dev[12] = "/dev/ttyS1";
     fd = open(uart_dev,O_RDWR);
-    if(fd == ERR)
-    {
+    if (fd == ERR) {
         return ERR;
     }
 
@@ -41,8 +40,7 @@ int um_init_uart(void)
     cfsetispeed(&options,B9600);
     cfsetospeed(&options,B9600);
     // 设置终端参数到opt中，使之立即生效
-    if(tcsetattr(fd,TCSANOW,&options) !=0)
-    {
+    if (tcsetattr(fd,TCSANOW,&options) != 0) {
         return ERR;
     }
     tcflush(fd, TCIOFLUSH); // 刷清缓冲区
@@ -50,19 +48,18 @@ int um_init_uart(void)
     return OK;
 }
 
-int um_get_uart(void)
+int UmGetUart(void)
 {
     int buf = 0;
     int i = 0;
     int ret = ERR;
     int recv[4];
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < 4L; i++) {
         ret = read(fd, &buf, 1);    //0.1s超时退出
         if (ret == ERR) {
             break;
         }
-        if(buf == RECV_HEAD)    //若buf为起始位，设置i为0
-        {
+        if (buf == RECV_HEAD) {    //若buf为起始位，设置i为0
             i = 0;
         }
         recv[i] = buf;
@@ -76,27 +73,23 @@ int um_get_uart(void)
     return ERR;
 }
 
-int um_sleep_set(int value)
+int UmSleepSet(int value)
 {
-    int send_data[5]={0xAA,0x52,0x00,0x00,0x55};
+    int sendData[5] = {0xAA,0x52,0x00,0x00,0x55};
     int ret = 0;
-    if(value == 1)  //休眠
-    {
-        send_data[2]=0x00;
-        send_data[3]=0x52;
-    }else if(value == 0)    //唤醒
-    {
-        send_data[2]=0xFF;
-        send_data[3]=0xAD;
+    if(value == 1) {     //休眠
+        sendData[2] = 0x00;
+        sendData[3] = 0x52;
+    } else if (value == 0) {     //唤醒
+        sendData[2] = 0xFF;
+        sendData[3] = 0xAD;
     }
-    for(int i = 0;i < 5;i++)
-    {
-        ret=write(fd,send_data + i,1);
-        if(ret < 0)
-        {
+    for (int i = 0; i < 5; i++) {
+        ret = write(fd,sendData + i,1);
+        if (ret < 0) {
             return ERR;
         }
-        usleep(250);    //需要每一个字节之间间隔200ms以上
+        usleep(250L);    //需要每一个字节之间间隔200us以上
     }
     return OK;
 }
