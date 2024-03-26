@@ -6,27 +6,27 @@
 #include "hilog/log.h"
 #include "um_pwm.h"
 
-int um_init_pmw(int pwmChannel)
+int UmInitPwm(int pwmChannel)
 {
-    char pwm_file_name[128] = {0};
-    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
+    char pwmFileName[128] = {0};
+    (void)memset_s(pwmFileName, sizeof(pwmFileName), 0, sizeof(pwmFileName));
 
-    if (PWM1 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/export", PWM1_PEX);
-    } else if (PWM2 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/export", PWM2_PEX);
+    if (pwmChannel == PWM1) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/export", PWM1_PEX);
+    } else if (pwmChannel == PWM2) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/export", PWM2_PEX);
     } else {
         HILOG_ERROR(LOG_CORE, "PWM WRONOG CHANEEL\n");
         return PWM_WRONOG_CHANNEL;
     }
 
-    if (access(pwm_file_name, F_OK) != 0) {
+    if (access(pwmFileName, F_OK) != 0) {
         HILOG_ERROR(LOG_CORE, "PWM EXPORT FILE NOT EXIST\n");
         return PWM_FILE_NOT_EXIST;
     }
 
     FILE *fp = NULL;
-    fp = fopen(pwm_file_name, "w");
+    fp = fopen(pwmFileName, "w");
     if (!fp) {
         HILOG_ERROR(LOG_CORE, "Failed to open export file!");
         return PWM_FILE_NOT_EXIST;
@@ -37,27 +37,27 @@ int um_init_pmw(int pwmChannel)
     return 0;
 }
 
-int um_set_pwm_period(int pwmChannel, int period)
+int UmSetPwmPeriod(int pwmChannel, int period)
 {
-    char pwm_file_name[128] = {0};
-    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
+    char pwmFileName[128] = {0};
+    (void)memset_s(pwmFileName, sizeof(pwmFileName), 0, sizeof(pwmFileName));
 
-    if (PWM1 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/period", PWM1_PEX);
-    } else if (PWM2 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/period", PWM2_PEX);
+    if (pwmChannel == PWM1) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/period", PWM1_PEX);
+    } else if (pwmChannel == PWM2) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/period", PWM2_PEX);
     } else {
         HILOG_ERROR(LOG_CORE, "PWM WRONOG CHANEEL\n");
         return PWM_WRONOG_CHANNEL;
     }
 
-    if (access(pwm_file_name, F_OK) != 0) {
+    if (access(pwmFileName, F_OK) != 0) {
         HILOG_ERROR(LOG_CORE, "PWM PERIOD FILE NOT EXIST\n");
         return PWM_FILE_NOT_EXIST;
     }
 
     FILE *fp = NULL;
-    fp = fopen(pwm_file_name, "r+");
+    fp = fopen(pwmFileName, "r+");
     if (!fp) {
         HILOG_ERROR(LOG_CORE, "Failed to open period file!");
         return PWM_FILE_NOT_EXIST;
@@ -71,27 +71,27 @@ int um_set_pwm_period(int pwmChannel, int period)
     return 0;
 }
 
-int um_set_pwm_dutyCycle(int pwmChannel, int dutyCycle)
+int UmSetPwmDutyCycle(int pwmChannel, int dutyCycle)
 {
-    char pwm_file_name[128] = {0};
-    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
+    char pwmFileName[128] = {0};
+    (void)memset_s(pwmFileName, sizeof(pwmFileName), 0, sizeof(pwmFileName));
 
-    if (PWM1 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/duty_cycle", PWM1_PEX);
-    } else if (PWM2 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/duty_cycle", PWM2_PEX);
+    if (pwmChannel == PWM1) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/duty_cycle", PWM1_PEX);
+    } else if (pwmChannel == PWM2) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/duty_cycle", PWM2_PEX);
     } else {
         HILOG_ERROR(LOG_CORE, "PWM WRONOG CHANEEL\n");
         return PWM_WRONOG_CHANNEL;
     }
 
-    if (access(pwm_file_name, F_OK) != 0) {
+    if (access(pwmFileName, F_OK) != 0) {
         HILOG_ERROR(LOG_CORE, "PWM DUTY_CYCLE FILE NOT EXIST\n");
         return PWM_FILE_NOT_EXIST;
     }
 
     FILE *fp = NULL;
-    fp = fopen(pwm_file_name, "r+");
+    fp = fopen(pwmFileName, "r+");
     if (!fp) {
         HILOG_ERROR(LOG_CORE, "Failed to open duty_cycle file!");
         return PWM_FILE_NOT_EXIST;
@@ -105,27 +105,27 @@ int um_set_pwm_dutyCycle(int pwmChannel, int dutyCycle)
     return 0;
 }
 
-int um_set_pwm_polarity(int pwmChannel, int polarity)
+int UmSetPwmPolarity(int pwmChannel, int polarity)
 {
-    char pwm_file_name[128] = {0};
-    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
+    char pwmFileName[128] = {0};
+    (void)memset_s(pwmFileName, sizeof(pwmFileName), 0, sizeof(pwmFileName));
 
-    if (PWM1 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/polarity", PWM1_PEX);
-    } else if (PWM2 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/polarity", PWM2_PEX);
+    if (pwmChannel == PWM1) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/polarity", PWM1_PEX);
+    } else if (pwmChannel == PWM2) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/polarity", PWM2_PEX);
     } else {
         HILOG_ERROR(LOG_CORE, "PWM WRONOG CHANEEL\n");
         return PWM_WRONOG_CHANNEL;
     }
 
-    if (access(pwm_file_name, F_OK) != 0) {
+    if (access(pwmFileName, F_OK) != 0) {
         HILOG_ERROR(LOG_CORE, "PWM POKARITY FILE NOT EXIST\n");
         return PWM_FILE_NOT_EXIST;
     }
 
     FILE *fp = NULL;
-    fp = fopen(pwm_file_name, "rw+");
+    fp = fopen(pwmFileName, "rw+");
     if (!fp) {
         HILOG_ERROR(LOG_CORE, "Failed to open polarity file!");
         return PWM_FILE_NOT_EXIST;
@@ -141,48 +141,48 @@ int um_set_pwm_polarity(int pwmChannel, int polarity)
     return 0;
 }
 
-int um_set_pwm_enable(int pwmChannel, int isEnable)
+int UmSetPwmEnable(int pwmChannel, int isEnable)
 {
     char buffer[256] = {0};
-    char pwm_file_name[128] = {0};
-    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
+    char pwmFileName[128] = {0};
+    (void)memset_s(pwmFileName, sizeof(pwmFileName), 0, sizeof(pwmFileName));
 
-    if (PWM1 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/enable", PWM1_PEX);
-    } else if (PWM2 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/enable", PWM2_PEX);
+    if (pwmChannel == PWM1) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/enable", PWM1_PEX);
+    } else if (pwmChannel == PWM2) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/enable", PWM2_PEX);
     } else {
         HILOG_ERROR(LOG_CORE, "PWM WRONOG CHANEEL\n");
         return PWM_WRONOG_CHANNEL;
     }
 
-    if (access(pwm_file_name, F_OK) != 0) {
+    if (access(pwmFileName, F_OK) != 0) {
         HILOG_ERROR(LOG_CORE, "PWM ENABLE FILE NOT EXIST\n");
         return PWM_FILE_NOT_EXIST;
     }
 
-    (void)snprintf_s(buffer, sizeof(buffer), sizeof(buffer), "echo %d > %s", isEnable, pwm_file_name);
+    (void)snprintf_s(buffer, sizeof(buffer), sizeof(buffer), "echo %d > %s", isEnable, pwmFileName);
     system(buffer);
 
     return 0;
 }
 
-int um_get_pwm_period(int pwmChannel)
+int UmGetPwmPeriod(int pwmChannel)
 {
     int ret = 0;
-    char pwm_file_name[128] = {0};
-    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
+    char pwmFileName[128] = {0};
+    (void)memset_s(pwmFileName, sizeof(pwmFileName), 0, sizeof(pwmFileName));
 
-    if (PWM1 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/period", PWM1_PEX);
-    } else if (PWM2 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/period", PWM2_PEX);
+    if (pwmChannel == PWM1) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/period", PWM1_PEX);
+    } else if (pwmChannel == PWM2) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/period", PWM2_PEX);
     } else {
         HILOG_ERROR(LOG_CORE, "PWM WRONOG CHANEEL\n");
         return PWM_WRONOG_CHANNEL;
     }
 
-    if (access(pwm_file_name, F_OK) != 0) {
+    if (access(pwmFileName, F_OK) != 0) {
         HILOG_ERROR(LOG_CORE, "PWM PERIOD FILE NOT EXIST\n");
         return PWM_FILE_NOT_EXIST;
     }
@@ -190,7 +190,7 @@ int um_get_pwm_period(int pwmChannel)
     FILE *fp = NULL;
     char buffer[32] = {0};
     (void)memset_s(buffer, sizeof(buffer), 0, sizeof(buffer));
-    fp = fopen(pwm_file_name, "r");
+    fp = fopen(pwmFileName, "r");
     if (!fp) {
         HILOG_ERROR(LOG_CORE, "Failed to open period file!");
         return PWM_FILE_NOT_EXIST;
@@ -206,18 +206,18 @@ int um_get_pwm_period(int pwmChannel)
 int um_get_pwm_dutyCycle(int pwmChannel)
 {
     int ret = 0;
-    char pwm_file_name[128] = {0};
-    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
-    if (PWM1 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/duty_cycle", PWM1_PEX);
-    } else if (PWM2 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/duty_cycle", PWM2_PEX);
+    char pwmFileName[128] = {0};
+    (void)memset_s(pwmFileName, sizeof(pwmFileName), 0, sizeof(pwmFileName));
+    if (pwmChannel == PWM1) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/duty_cycle", PWM1_PEX);
+    } else if (pwmChannel == PWM2) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/duty_cycle", PWM2_PEX);
     } else {
         HILOG_ERROR(LOG_CORE, "PWM WRONOG CHANEEL\n");
         return PWM_WRONOG_CHANNEL;
     }
 
-    if (access(pwm_file_name, F_OK) != 0) {
+    if (access(pwmFileName, F_OK) != 0) {
         HILOG_ERROR(LOG_CORE, "PWM DUTY_CYCLE FILE NOT EXIST\n");
         return PWM_FILE_NOT_EXIST;
     }
@@ -225,7 +225,7 @@ int um_get_pwm_dutyCycle(int pwmChannel)
     FILE *fp = NULL;
     char buffer[32] = {0};
     (void)memset_s(buffer, sizeof(buffer), 0, sizeof(buffer));
-    fp = fopen(pwm_file_name, "r");
+    fp = fopen(pwmFileName, "r");
     if (!fp) {
         HILOG_ERROR(LOG_CORE, "Failed to open duty_cycle file!");
         return PWM_FILE_NOT_EXIST;
@@ -241,19 +241,19 @@ int um_get_pwm_dutyCycle(int pwmChannel)
 int um_get_pwm_polarity(int pwmChannel)
 {
     int ret = 0;
-    char pwm_file_name[128] = {0};
-    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
+    char pwmFileName[128] = {0};
+    (void)memset_s(pwmFileName, sizeof(pwmFileName), 0, sizeof(pwmFileName));
 
-    if (PWM1 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/polarity", PWM1_PEX);
-    } else if (PWM2 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/polarity", PWM2_PEX);
+    if (pwmChannel == PWM1) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/polarity", PWM1_PEX);
+    } else if (pwmChannel == PWM2) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/polarity", PWM2_PEX);
     } else {
         HILOG_ERROR(LOG_CORE, "PWM WRONOG CHANEEL\n");
         return PWM_WRONOG_CHANNEL;
     }
 
-    if (access(pwm_file_name, F_OK) != 0) {
+    if (access(pwmFileName, F_OK) != 0) {
         HILOG_ERROR(LOG_CORE, "PWM POLARITY FILE NOT EXIST\n");
         return PWM_FILE_NOT_EXIST;
     }
@@ -261,7 +261,7 @@ int um_get_pwm_polarity(int pwmChannel)
     FILE *fp = NULL;
     char buffer[32] = {0};
     (void)memset_s(buffer, sizeof(buffer), 0, sizeof(buffer));
-    fp = fopen(pwm_file_name, "r");
+    fp = fopen(pwmFileName, "r");
     if (!fp) {
         HILOG_ERROR(LOG_CORE, "Failed to open polarity file!");
         return PWM_FILE_NOT_EXIST;
@@ -285,19 +285,19 @@ int um_get_pwm_polarity(int pwmChannel)
 int um_is_pwm_enabled(int pwmChannel)
 {
     int ret = 0;
-    char pwm_file_name[128] = {0};
-    (void)memset_s(pwm_file_name, sizeof(pwm_file_name), 0, sizeof(pwm_file_name));
+    char pwmFileName[128] = {0};
+    (void)memset_s(pwmFileName, sizeof(pwmFileName), 0, sizeof(pwmFileName));
 
-    if (PWM1 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/enable", PWM1_PEX);
-    } else if (PWM2 == pwmChannel) {
-        (void)sprintf_s(pwm_file_name, sizeof(pwm_file_name), "%s/pwm0/enable", PWM2_PEX);
+    if (pwmChannel == PWM1) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/enable", PWM1_PEX);
+    } else if (pwmChannel == PWM2) {
+        (void)sprintf_s(pwmFileName, sizeof(pwmFileName), "%s/pwm0/enable", PWM2_PEX);
     } else {
         HILOG_ERROR(LOG_CORE, "PWM WRONOG CHANEEL\n");
         return PWM_WRONOG_CHANNEL;
     }
 
-    if (access(pwm_file_name, F_OK) != 0) {
+    if (access(pwmFileName, F_OK) != 0) {
         HILOG_ERROR(LOG_CORE, "PWM ENABLE FILE NOT EXIST\n");
         return PWM_FILE_NOT_EXIST;
     }
@@ -305,7 +305,7 @@ int um_is_pwm_enabled(int pwmChannel)
     FILE *fp = NULL;
     char buffer[32] = {0};
     (void)memset_s(buffer, sizeof(buffer), 0, sizeof(buffer));
-    fp = fopen(pwm_file_name, "r");
+    fp = fopen(pwmFileName, "r");
     if (!fp) {
         HILOG_ERROR(LOG_CORE, "Failed to open enable file!");
         return PWM_FILE_NOT_EXIST;

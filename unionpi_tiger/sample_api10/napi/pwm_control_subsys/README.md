@@ -110,7 +110,7 @@ OH版本：OpenHarmony4.0
 
 ### 六、修改系统配置文件
 
-APP需要使用开发板 pwm 的系统文件，就需要系统文件的权限修改成可读写状态。但是APP不够权限进行修改系统文件权限，因此我们需要在开机初始化时使用root用户进行修改权限。
+APP需要使用开发板 pwm 的系统文件，就需要系统文件的权限修改成可读写状态。但是APP不够权限进行修改系统文件权限，因此需要在开机初始化时使用root用户进行修改权限。
 
 打开 `device\board\unionman\unionpi_tiger\config\init\arm\init.A311D.cfg` 文件，在 **"jobs - name ：init" 的 "cmds"** 中添加下面语句
 
@@ -146,7 +146,7 @@ APP需要使用开发板 pwm 的系统文件，就需要系统文件的权限修
 
 3、替换full-sdk：[ 如何替换full-SDK](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/faqs/full-sdk-switch-guide.md)
 
-![image-20240325085442081](../figures/pwm_control_subsys/2.png)
+![image-2](../figures/pwm_control_subsys/2.png)
 
 **下载release SDK方法：**
 
@@ -159,7 +159,7 @@ APP需要使用开发板 pwm 的系统文件，就需要系统文件的权限修
 3、 解压后进入到`ohos-sdk\windows`路径
 
 4、将当前路径下的五个压缩包解压到OpenHarmony SDK目录下的API10目录`C:\Users\xxx\AppData\Local\OpenHarmony\Sdk\10\
-![image-20240325085900836](../figures/pwm_control_subsys/4.png)
+![image-4](../figures/pwm_control_subsys/4.png)
 ### 二、导入D.TS文件
 
 将位于`unionpi_tiger/sample_api10/napi/pwm_control_subsys/@ohos.control_demo.d.ts`接口定义文件，复制到OpenHarmony SDK目录下的API目录`C:\Users\xxx\AppData\Local\OpenHarmony\Sdk\10\ets\api`。
@@ -168,9 +168,9 @@ APP需要使用开发板 pwm 的系统文件，就需要系统文件的权限修
 
 ### 三、编译烧录应用
 
-1、 使用鸿蒙应用开发工具：DevEco studio；打开同一目录下的`APP`文件夹项目
+1、 使用OpenHarmony应用开发工具：DevEco studio；打开同一目录下的`APP`文件夹项目
 
-2、 使用Micro USB数据线连接PC与开发板OTG口并接通电源后点击Run即可![image-20240325154927361](../figures/pwm_control_subsys/5.png)
+2、 使用Micro USB数据线连接PC与开发板OTG口并接通电源后点击Run即可![image-5](../figures/pwm_control_subsys/5.png)
 
 ## 连线
 
@@ -185,8 +185,8 @@ APP需要使用开发板 pwm 的系统文件，就需要系统文件的权限修
   * 红线 -- 3.3V
 * 连线实物图：
 
-![3219def7290a34d1c9e27c17166d9d8](../figures/pwm_control_subsys/1.jpg)
+![1](../figures/pwm_control_subsys/1.jpg)
 
 ## 演示效果
 
-![image-20240325161109896](../figures/pwm_control_subsys/6.png)
+![image-6](../figures/pwm_control_subsys/6.png)
