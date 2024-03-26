@@ -71,19 +71,19 @@ int UmGetPwmPeriod(int pwmChannel);
  * 得到pwm的一个周期高电平的值
  * 参数：pwmChannel 为选择的引脚
  */
-int um_get_pwm_dutyCycle(int pwmChannel);
+int UmGetPwmDutyCycle(int pwmChannel);
 
 /*
  * 得到pwm的极性
  * 参数：pwmChannel 为选择的引脚
  */
-int um_get_pwm_polarity(int pwmChannel);
+int UmGetPwmPolarity(int pwmChannel);
 
 /*
  * 查看pwm的引脚使能值
  * 参数：pwmChannel 为选择的引脚
  */
-int um_is_pwm_enabled(int pwmChannel);
+int UmIsPwmEnabled(int pwmChannel);
 #ifdef __cplusplus
 }
 #endif 

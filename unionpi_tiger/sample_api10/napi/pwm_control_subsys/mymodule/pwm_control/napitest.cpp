@@ -1,13 +1,12 @@
-#include <string.h>
-#include <stdio.h>
+#include <cstring>
+#include <cstdio>
 #include "napi/native_node_api.h"
 #include "napi/native_api.h"
 
 #include "./pwm/um_pwm.h"
 #include "./uart/um_uart.h"
 //用于在各个线程之间传递数据
-struct AddonData
-{
+struct AddonData {
     napi_async_work async_work = nullptr;   // 异步工作项
     napi_deferred deferred = nullptr;   // 用于Promise的resolve、reject处理
     napi_ref callback = nullptr;    // 回调函数
@@ -88,15 +87,15 @@ static napi_value uart_init(napi_env env, napi_callback_info info)
     napi_value thisVar = nullptr;   //JS对象的this参数 
     void* data = nullptr;    //回调数据指针 
 
-    /* 根据环境变量获取参数 */ 
+    //根据环境变量获取参数
     napi_get_cb_info(env, info, &argc, nullptr, &thisVar, &data); 
         
     //业务代码
-    int ret= UmInitUart();
+    int ret = UmInitUart();
     
     //将结果返回,转换回NAPI类型
     napi_value result;
-    NAPI_CALL(env,napi_create_int32(env,ret,&result));
+    NAPI_CALL(env, napi_create_int32(env, ret, &result));
     return result; //返回JS对象 
 }
 
@@ -104,37 +103,37 @@ static napi_value uart_init(napi_env env, napi_callback_info info)
 static napi_value pwm_set(napi_env env, napi_callback_info info)
 {
     size_t argc = 1; //参数个数 
-    napi_value argv[1] = { 0 }; //参数定义 
+    napi_value argv[1] = {0}; //参数定义 
     napi_value thisVar = nullptr; //JS对象的this参数 
     void* data = nullptr; //回调数据指针 
 
-    /* 根据环境变量获取参数 */ 
+    //根据环境变量获取参数
     napi_get_cb_info(env, info, &argc, argv, &thisVar, &data); 
         
     //NAPI类型转换C/C++数据类型
     int value;
-    NAPI_CALL(env,napi_get_value_int32(env,argv[0],&value));
+    NAPI_CALL(env, napi_get_value_int32(env, argv[0], &value));
     
     //业务代码
     int ret = 0;
     value += 50; //转换成0-100
-    int final_duty=500000L+value*20000L;
+    int finalDuty=500000L + value * 20000L;
     
     UmInitPwm(PWM1);
     UmSetPwmPeriod(PWM1, 20000000L);
-    UmSetPwmDutyCycle(PWM1, final_duty);
-    UmSetPwmEnable(PWM1,PWM_IS_ENABLED);
+    UmSetPwmDutyCycle(PWM1, finalDuty);
+    UmSetPwmEnable(PWM1, PWM_IS_ENABLED);
     
     //将结果返回,转换回NAPI类型
     napi_value result;
-    NAPI_CALL(env,napi_create_int32(env,ret,&result));
+    NAPI_CALL(env, napi_create_int32(env, ret, &result));
     return result; 
 }
 //传感器休眠 - 同步函数
 static napi_value uart_sleep(napi_env env, napi_callback_info info)
 {
     size_t argc = 1;    //参数个数 
-    napi_value argv[1] = { 0 };     //参数定义 
+    napi_value argv[1] = {0};     //参数定义 
     napi_value thisVar = nullptr;   //JS对象的this参数 
     void* data = nullptr;   //回调数据指针 
 
@@ -143,15 +142,15 @@ static napi_value uart_sleep(napi_env env, napi_callback_info info)
         
     //NAPI类型转换C/C++数据类型
     int value;
-    NAPI_CALL(env,napi_get_value_int32(env,argv[0],&value));
+    NAPI_CALL(env, napi_get_value_int32(env, argv[0], &value));
     
     //业务代码
     int ret = 0;
-    ret=UmSleepSet(value);
+    ret = UmSleepSet(value);
     
     //将结果返回,转换回NAPI类型
     napi_value result;
-    NAPI_CALL(env,napi_create_int32(env,ret,&result));
+    NAPI_CALL(env, napi_create_int32(env, ret, &result));
     return result; //返回JS对象 
 }
 /**********以下步骤为注册操作*************/
@@ -160,10 +159,10 @@ static napi_value uart_sleep(napi_env env, napi_callback_info info)
 static napi_value register_init(napi_env env, napi_value exports)
 {
     napi_property_descriptor desc[] = {
-      DECLARE_NAPI_FUNCTION("uart_get", uart_get),
-      DECLARE_NAPI_FUNCTION("uart_init", uart_init),
-      DECLARE_NAPI_FUNCTION("uart_sleep", uart_sleep),
-      DECLARE_NAPI_FUNCTION("pwm_set", pwm_set),    //TS和CPP对应函数，第一个参数就是TS里的函数名，TS定义需一致
+        DECLARE_NAPI_FUNCTION("uart_get", uart_get),
+        DECLARE_NAPI_FUNCTION("uart_init", uart_init),
+        DECLARE_NAPI_FUNCTION("uart_sleep", uart_sleep),
+        DECLARE_NAPI_FUNCTION("pwm_set", pwm_set),    //TS和CPP对应函数，第一个参数就是TS里的函数名，TS定义需一致
     };
     NAPI_CALL(env, napi_define_properties(env, exports, sizeof(desc) / sizeof(desc[0]), desc));
     return exports;
@@ -176,10 +175,11 @@ static napi_module napitestModule = {
     .nm_filename = nullptr,
     .nm_register_func = register_init,  //接口注册函数
     .nm_modname = "control_demo",  //定义模块 对应import test_demo ，和.d.ts里面的namespace一致
-    .nm_priv = ((void * ) 0),
+    .nm_priv = ((void* ) 0),
     .reserved = {0},
 };
 
-extern "C" __attribute__((constructor)) void napitestModuleRegister(void) {
+extern "C" __attribute__((constructor)) void NapitestModuleRegister(void) 
+{
     napi_module_register(&napitestModule);  //接口注册函数
 }

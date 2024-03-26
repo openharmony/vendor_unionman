@@ -1,27 +1,27 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <unistd.h>
 #include <string>
-#include <string.h>
+#include <cstring>
 #include <sys/types.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <termios.h>
 #include "um_uart.h"
 
-static int fd;
+static int g_fd;
 int UmInitUart(void)
 {
-    char uart_dev[12] = "/dev/ttyS1";
-    fd = open(uart_dev,O_RDWR);
-    if (fd == ERR) {
+    char uartDev[12] = "/dev/ttyS1";
+    g_fd = open(uartDev, O_RDWR);
+    if (g_fd == ERR) {
         return ERR;
     }
 
     struct termios options;
-    tcgetattr(fd,&options);
+    tcgetattr(g_fd, &options);
     
-    tcflush(fd,TCIOFLUSH);  // 刷清缓冲区
+    tcflush(g_fd, TCIOFLUSH);  // 刷清缓冲区
     options.c_iflag = 0;
     options.c_oflag = 0;
     // options.c_cflag | = ( CLOCAL | CREAD );//(本地连接（不改变端口所有者)|接收使能)
@@ -37,13 +37,13 @@ int UmInitUart(void)
     options.c_cc[VTIME] = 1L;   //超时时间1*0.1s
     options.c_cc[VMIN] = 0;
 
-    cfsetispeed(&options,B9600);
-    cfsetospeed(&options,B9600);
+    cfsetispeed(&options, B9600);
+    cfsetospeed(&options, B9600);
     // 设置终端参数到opt中，使之立即生效
-    if (tcsetattr(fd,TCSANOW,&options) != 0) {
+    if (tcsetattr(g_fd,TCSANOW,&options) != 0) {
         return ERR;
     }
-    tcflush(fd, TCIOFLUSH); // 刷清缓冲区
+    tcflush(g_fd, TCIOFLUSH); // 刷清缓冲区
 
     return OK;
 }
@@ -55,7 +55,7 @@ int UmGetUart(void)
     int ret = ERR;
     int recv[4];
     for (i = 0; i < 4L; i++) {
-        ret = read(fd, &buf, 1);    //0.1s超时退出
+        ret = read(g_fd, &buf, 1);    //0.1s超时退出
         if (ret == ERR) {
             break;
         }
@@ -63,29 +63,27 @@ int UmGetUart(void)
             i = 0;
         }
         recv[i] = buf;
-        if ((recv[0] == RECV_HEAD) && (recv[3L] == RECV_END) && (recv[1] == (0xff - recv[2L]))) //校验
-        {
+        if ((recv[0] == RECV_HEAD) && (recv[3L] == RECV_END) && (recv[1] == (0xff - recv[2L]))) {    //校验
             return recv[1];
         }
     }
-    
     
     return ERR;
 }
 
 int UmSleepSet(int value)
 {
-    int sendData[5] = {0xAA,0x52,0x00,0x00,0x55};
+    int sendData[5] = {0xAA, 0x52, 0x00, 0x00, 0x55};
     int ret = 0;
-    if(value == 1) {     //休眠
+    if (value == 1) {     //休眠
         sendData[2] = 0x00;
         sendData[3] = 0x52;
     } else if (value == 0) {     //唤醒
         sendData[2] = 0xFF;
         sendData[3] = 0xAD;
     }
-    for (int i = 0; i < 5; i++) {
-        ret = write(fd,sendData + i,1);
+    for (int i = 0; i < 5L; i++) {
+        ret = write(g_fd, sendData + i, 1);
         if (ret < 0) {
             return ERR;
         }
