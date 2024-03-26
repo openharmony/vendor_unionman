@@ -203,7 +203,7 @@ int UmGetPwmPeriod(int pwmChannel)
     return ret;
 }
 
-int um_get_pwm_dutyCycle(int pwmChannel)
+int UmGetPwmDutyCycle(int pwmChannel)
 {
     int ret = 0;
     char pwmFileName[128] = {0};
@@ -238,7 +238,7 @@ int um_get_pwm_dutyCycle(int pwmChannel)
     return ret;
 }
 
-int um_get_pwm_polarity(int pwmChannel)
+int UmGetPwmPolarity(int pwmChannel)
 {
     int ret = 0;
     char pwmFileName[128] = {0};
@@ -282,7 +282,7 @@ int um_get_pwm_polarity(int pwmChannel)
     return ret;
 }
 
-int um_is_pwm_enabled(int pwmChannel)
+int UmIsPwmEnabled(int pwmChannel)
 {
     int ret = 0;
     char pwmFileName[128] = {0};
