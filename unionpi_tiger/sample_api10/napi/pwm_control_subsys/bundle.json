@@ -1,0 +1,35 @@
+{
+  "name": "@ohos/mymodule",
+  "description": "mymodule",
+  "version": "4.0",
+  "license": "Apache License 2.0",
+  "private": false,
+  "segment": {
+    "destPath": "pwm_control_subsys"
+  },
+  "dirs": {},
+  "scripts": {},
+  "component": {
+    "name": "mymodule",
+    "subsystem": "pwm_control_subsys",
+    "adapted_system_type": [
+      "standard"
+    ],
+    "deps": {
+      "components": [
+        "hilog",
+        "c_utils",
+        "hdf_core",
+        "napi"
+      ],
+      "third_party": []
+    },
+    "build": {
+      "sub_component": [
+        "//pwm_control_subsys/mymodule:mygroup"
+      ],
+      "test": [],
+      "inner_kits": []
+    }
+  }
+}

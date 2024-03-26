@@ -1,0 +1,34 @@
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+# 共享库名字需要和 @ohos.xxx.d.ts 一致
+ohos_shared_library("control_demo")
+{
+    sources = [
+        "napitest.cpp",
+        "pwm/um_pwm.c",
+        "uart/um_uart.cpp"
+    ]
+    include_dirs = [
+        ".",
+        "//third_party/node/src",
+    ]
+    external_deps = [
+         "napi:ace_napi",
+         "c_utils:utils",
+         "hilog:libhilog",
+    ]
+    remove_configs = [ "//build/config/compiler:no_rtti" ]
+    cflags=[
+        "-Werror"
+    ]
+    cflags_cc=[
+        "-frtti",
+    ]
+    ldflags = [
+    ]
+    
+    relative_install_dir = "module"
+    part_name = "mymodule"
+    subsystem_name = "pwm_control_subsys"
+}

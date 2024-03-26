@@ -1,0 +1,18 @@
+{
+  "apiType": "stageMode",
+  "buildOption": {
+    "sourceOption": {
+      "workers": [
+        './src/main/ets/workers/UART_GET_Worker.ts'
+      ]
+    }
+  },
+  "targets": [
+    {
+      "name": "default",
+    },
+    {
+      "name": "ohosTest",
+    }
+  ]
+}
