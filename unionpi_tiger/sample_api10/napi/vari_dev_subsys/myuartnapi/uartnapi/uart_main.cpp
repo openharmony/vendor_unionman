@@ -13,7 +13,6 @@
  * limitations under the License.
  *
  */
-
 #include <cstdio>
 #include <unistd.h>
 #include <cstring>
@@ -27,71 +26,74 @@
 #include "napi/native_api.h"
 #include "napi/native_node_api.h"
 
-static int fd = -1;
-static int init_flag = 0;
+static int g_fd = -1;
+static int g_initFlag = 0;
 constexpr int OPENERR = -1;
 constexpr int INITERR = -2;
 constexpr int FRAME_LEN = 4;
 const char UART_TTL_NAME[] = "/dev/ttyS1";
 /*
  *0. 定义异步线程执行中需要的上下文环境
-*/
-struct UartData {
-    //异步 worker
+ */
+struct UartData
+{
+    // 异步 worker
     napi_async_work asyncWork = nullptr;
-    //对应JS端的callback函数
+    // 对应JS端的callback函数
     napi_ref callback = nullptr;
-    //返回的结果
+    // 返回的结果
     std::string result = "";
 };
 
 /*
- * 4.uart_init_napi具体方法实现，同步方法
+ * 4.UartInit具体方法实现，同步方法
  */
-static napi_value uart_init_napi(napi_env env, napi_callback_info info)
+static napi_value UartInit(napi_env env, napi_callback_info info)
 {
-    //c/c++的类型转化为napi_value,ret=0
+    // c/c++的类型转化为napi_value,ret=0
     napi_value ret = nullptr;
     NAPI_CALL(env, napi_create_int32(env, 0, &ret));
-    if (init_flag) {
+    if (g_initFlag) {
         HILOG_INFO(LOG_CORE, "already init");
         return ret;
     }
-    //打开串口
-    const char *uart_dev = UART_TTL_NAME;
-    fd = open(uart_dev, O_RDWR);
-    if (fd == -1) {
+    // 打开串口
+    const char *uartDev = UART_TTL_NAME;
+    g_fd = open(uartDev, O_RDWR);
+    if (g_fd == -1) {
         HILOG_DEBUG(LOG_CORE, "open file error");
-        NAPI_CALL(env, napi_create_int32(env, OPENERR, &ret));//打开文件失败返回错误码-1
+        // 打开文件失败返回错误码-1
+        NAPI_CALL(env, napi_create_int32(env, OPENERR, &ret)); 
         return ret;
     }
-    if ((uart_init(fd)) == -1) {
-        close(fd);
-        fd = -1;
+    if ((UartInit(g_fd)) == -1) {
+        close(g_fd);
+        g_fd = -1;
         HILOG_DEBUG(LOG_CORE, "uart init error");
-        NAPI_CALL(env, napi_create_int32(env, INITERR, &ret));//串口初始化失败则返回错误码-2
+        // 串口初始化失败则返回错误码-2
+        NAPI_CALL(env, napi_create_int32(env, INITERR, &ret)); 
         return ret;
         return ret;
     }
-    init_flag = 1;
+    g_initFlag = 1;
 
     return ret;
 }
 
 /*
- *8. uart_close_napi同步NAPI实现方法，关闭串口
-*/
-static napi_value uart_close_napi(napi_env env, napi_callback_info info)
+ *8. UartClose同步NAPI实现方法，关闭串口
+ */
+static napi_value UartClose(napi_env env, napi_callback_info info)
 {
     napi_value ret = nullptr;
     NAPI_CALL(env, napi_create_int32(env, 0, &ret));
-    if (!init_flag) {
+    if (!g_initFlag) {
         HILOG_INFO(LOG_CORE, "Not initialized yet");
         return ret;
     }
-    close(fd);
-    fd = -1;
-    init_flag = 0;
+    close(g_fd);
+    g_fd = -1;
+    g_initFlag = 0;
     return ret;
 }
 
@@ -106,9 +108,10 @@ static std::string uart_task(void)
     int recv[4] = {0};
 
     printf("Gesture Sensor Ready!\n");
-    for (i = 0; i < FRAME_LEN; i++) {
-        ret = read(fd, &buf, 1);
-        if (ret == -1) {
+    for (i = 0; i < FRAME_LEN; i++)
+    {
+        ret = read(g_fd, &buf, 1);
+        if (ret == -1){
             printf("read err\n");
             exit(0);
         }
@@ -130,13 +133,13 @@ static void uartExecuteCB(napi_env env, void *data)
 {
     UartData *uartData = (UartData *)data;
     // 执行复杂计算，不阻塞主线程。
-    uartData->result=uart_task();
+    uartData->result = uart_task();
 }
 
 /*
- *7.uartCallbackComplete()异步任务完成后回到主线程中执行
+ *7.UartCallBackComplete()异步任务完成后回到主线程中执行
  */
-static void uartCallbackCompleteCB(napi_env env, napi_status status, void *data)
+static void UartCallBackCompleteCB(napi_env env, napi_status status, void *data)
 {
     UartData *uartData = (UartData *)data;
     napi_value callback = nullptr;
@@ -159,11 +162,11 @@ static void uartCallbackCompleteCB(napi_env env, napi_status status, void *data)
 }
 
 /*
- *5.uartcallback具体方法实现
+ *5.UartCallBack具体方法实现
  解释：首先从 napi_callback_info 中读取 napi_value 类型的参数放入到 args 中，然后从 args 中读取参数并把 napi_value 类型转换成 C++ 类型后进行加操作
         env:环境
 */
-static napi_value uartcallback(napi_env env, napi_callback_info info)
+static napi_value UartCallBack(napi_env env, napi_callback_info info)
 {
     size_t argc = 1;
     napi_value args[1];
@@ -171,18 +174,18 @@ static napi_value uartcallback(napi_env env, napi_callback_info info)
     // 调用napi_get_cb_info方法，从 info 中读取传递进来的参数放入args里
     NAPI_CALL(env, napi_get_cb_info(env, info, &argc, args, &thisArg, nullptr));
     // 异步工作项上下文用户数据，传递到异步工作项的execute、complete中传递数据
-    auto uartData = new UartData {
+    auto uartData = new UartData{
         .asyncWork = nullptr,
     };
-    //call back的回调方式，需要创建call back的引用
-   
+    // call back的回调方式，需要创建call back的引用
+
     NAPI_CALL(env, napi_create_reference(env, args[0], 1, &uartData->callback));
     // 创建async work，创建成功后通过最后一个参数接收async work的handle
     napi_value resourceName = nullptr;
-    //创建一个异步任务,
-    //napi_create_async_work() 方法的第 3 、 4 个参数需要注意，uartdoInBackground() 方法是在异步线程中执行的，uartCallbackComplete() 方法在异步线程结束后切换到主线程中执行。
-    napi_create_string_utf8(env, "uartcallback", NAPI_AUTO_LENGTH, &resourceName);
-    napi_create_async_work(env, nullptr, resourceName, uartExecuteCB, uartCallbackCompleteCB, (void *)uartData,
+    // 创建一个异步任务,
+    // napi_create_async_work() 方法的第 3 、 4 个参数需要注意，uartdoInBackground() 方法是在异步线程中执行的，UartCallBackComplete() 方法在异步线程结束后切换到主线程中执行。
+    napi_create_string_utf8(env, "UartCallBack", NAPI_AUTO_LENGTH, &resourceName);
+    napi_create_async_work(env, nullptr, resourceName, uartExecuteCB, UartCallBackCompleteCB, (void *)uartData,
                            &uartData->asyncWork);
     // 将刚创建的async work加到队列，由底层去调度执行
     napi_queue_async_work(env, uartData->asyncWork);
@@ -193,15 +196,14 @@ static napi_value uartcallback(napi_env env, napi_callback_info info)
 }
 
 /*
- * 3.方法映射
+ * 3.方法映射,北向→南向
  */
 static napi_value registerUartnapi(napi_env env, napi_value exports)
 {
     napi_property_descriptor desc[] = {
-        DECLARE_NAPI_FUNCTION("uart_init_napi", uart_init_napi),
-        DECLARE_NAPI_FUNCTION("uart_close_napi", uart_close_napi),
-        DECLARE_NAPI_FUNCTION("uartcallback", uartcallback)
-    };
+        DECLARE_NAPI_FUNCTION("uart_init_napi", UartInit),
+        DECLARE_NAPI_FUNCTION("uart_close_napi", UartClose),
+        DECLARE_NAPI_FUNCTION("uartcallback", UartCallBack)};
     NAPI_CALL(env, napi_define_properties(env, exports, sizeof(desc) / sizeof(desc[0]), desc));
     return exports;
 }
@@ -214,8 +216,8 @@ static napi_module uartnapiModule = {
     .nm_flags = 0,
     .nm_filename = nullptr,
     .nm_register_func = registerUartnapi,
-    .nm_modname = "uartnapi",  // 模块名,要与BUILD.gn里的一样
-    .nm_priv = ((void *) 0),
+    .nm_modname = "uartnapi", // 模块名,要与BUILD.gn里的一样
+    .nm_priv = ((void *)0),
     .reserved = {0},
 };
 
@@ -224,5 +226,5 @@ static napi_module uartnapiModule = {
  */
 extern "C" __attribute__((constructor)) void RegisterUartnapiModule(void)
 {
-    napi_module_register(&uartnapiModule);  // 接口注册函数
+    napi_module_register(&uartnapiModule); // 接口注册函数
 }
