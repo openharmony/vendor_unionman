@@ -1,3 +1,0 @@
-3/14/2024, 10:53:27 AM at checkGenerate [/snapshot/napi_generator/src/gen/cmd_gen.js(95:13)] [INF] check file []
-3/14/2024, 10:53:29 AM at formatCode [/snapshot/napi_generator/src/gen/generate.js(158:17)] [INF] Warning: clang-format does not exist, can not format cpp file.
-3/14/2024, 10:53:29 AM at Object.<anonymous> [/snapshot/napi_generator/src/gen/cmd_gen.js(122:13)] [INF] success

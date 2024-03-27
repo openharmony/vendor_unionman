@@ -13,8 +13,17 @@
  * limitations under the License.
  *
  */
-import abilityTest from './Ability.test';
 
-export default function testsuite() {
-  abilityTest();
+/**
+ * ADCNAPI 命名空间提供了与 ADC 数据获取相关的 NAPI 接口。
+ */
+declare namespace adcnapi {
+    /**
+     * 获取指定通道的 ADC 数据值。
+     * @param {number} channel ADC 通道号。
+     * @returns {number} 获取到的 ADC 数据值。
+     */
+    function GetAdcValue(channel: number): number;
 }
+
+export default adcnapi;

@@ -1,3 +1,19 @@
+/* Copyright 2024 Unionman Technology Co., Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 import prompt from '@system.prompt'             //文本弹窗模块
 import loading1 from './loadingComponent_part1';//自定义加载UI模块
 import pwm_napi from '@ohos.mypwm'              //PWM_Napi模块
@@ -80,7 +96,7 @@ struct HelloNAPI {
   })
 
   private get_Temperature(){
-    this.adc_value = adc_target.get_adc_value(this.adc_channel+1)
+    this.adc_value = adc_target.GetAdcValue(this.adc_channel+1)
     this.temperature=this.adc_value  * 0.042
   }
   //温度刷新定时器

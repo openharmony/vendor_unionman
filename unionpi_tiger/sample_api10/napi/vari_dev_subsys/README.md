@@ -9,7 +9,7 @@
  	1. 搭载OpenHarmony-4.0-Release版本的Unionpi Tiger开发板
  	2. OpenHarmony-4.0-Release版本的全量代码
 
-​	从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
+​	从版本分支获取源码。可获取该版本分支的新源码，包括版本发布后在该分支的合入。
 
 ```
 repo init -u git@gitee.com:openharmony/manifest.git -b OpenHarmony-4.0-Release --no-repo-verify
@@ -109,7 +109,7 @@ vari_dev_subsys								#子系统
 
 1. **新增子系统vari_dev_subsys**
 
-   在OpenHarmony源码根目录下创建一个目录`vari_dev_subsys`作为子系统的目录。把新增的子系统配置到`build/subsystem_config.json`中。
+   在OpenHarmony源码根目录下任意位置创建一个目录`vari_dev_subsys`作为子系统的目录。把新增的子系统配置到`build/subsystem_config.json`中。
 
    ![image-20240326141500416](images/image-20240326141500416.png)
 
@@ -165,7 +165,7 @@ vari_dev_subsys								#子系统
         "adapted_system_type": [ "standard" ],
         "rom": "10KB",
         "ram": "10KB",
-        "deps": {							#部件依赖的其他部件
+        "deps": {							#部件依赖的外部依赖
             "components": [
                 "c_utils",
                 "napi",
@@ -270,7 +270,7 @@ Windows终端：
 
 7. **编译烧录**
 
-见 [https://gitee.com/openharmony/device_board_unionman/blob/master/unionpi_tiger/README_zh.md#%E7%BC%96%E8%AF%91%E4%B8%8E%E8%B0%83%E8%AF%95](https://gitee.com/openharmony/device_board_unionman/blob/master/unionpi_tiger/README_zh.md#编译与调试)
+见 [编译烧录unionman-tiger](https://gitee.com/openharmony/device_board_unionman/blob/OpenHarmony-v4.0-Release/unionpi_tiger/README_zh.md#编译与调试)
 
 如果已经烧录了镜像为了节约时间也可以直接将编译出的**三个文件**用HDC工具发送到开发板指定位置：
 
@@ -312,7 +312,7 @@ ets
 
 参考资料：
 
-[如何更换OpenHarmony SDK API 10-鸿蒙开发者社区-51CTO.COM](https://ost.51cto.com/posts/25171)
+[如何更换OpenHarmony SDK API 1-51CTO.COM](https://ost.51cto.com/posts/25171)
 
 坑点：不要去每日构建流水线下载SDK，会经常报错出现奇奇怪怪的问题。亲测有效！！！
 
@@ -321,19 +321,19 @@ ets
 
 应该去官方下载稳定的系统镜像、SDK等资源：
 
-[zh-cn/release-notes/Readme.md · OpenHarmony/docs - Gitee.com](https://gitee.com/openharmony/docs/blob/master/zh-cn/release-notes/Readme.md)
+[zh-cn/release-notes/Readme.md · OpenHarmony/docs - Gitee.com](https://gitee.com/openharmony/docs/blob/OpenHarmony-v4.0-Release/zh-cn/release-notes/Readme.md)
 
 ![image-20240306143226778](images/image-20240306143226778.png)
 
 ![image-20240306143313691](images/image-20240306143313691.png)
 
-打开DevEco Studio，菜单Tools->SDK Manager，查看Studio中配置的OpenHarmony SDK的路径位置，我的环境上该路径为：D:\installed-software\OpenHarmony-sdk。当前目录下已经有API9的SDK，我们需要新增下api10的SDK，创建一个名称为10的目录，如下：
+打开DevEco Studio，菜单Tools->SDK Manager，查看Studio中配置的OpenHarmony SDK的路径位置，环境上该路径为：D:\installed-software\OpenHarmony-sdk。当前目录下已经有API9的SDK，需要新增下api10的SDK，创建一个名称为10的目录，如下：
 
-![如何更换OpenHarmony SDK API 10-鸿蒙开发者社区](images/resize,w_555,h_209.png)
+![如何更换OpenHarmony SDK API 10](images/resize,w_555,h_209.png)
 
 复制SDK压缩包然后，全选这5个zip压缩包，解压到当前位置。如果遇到弹窗是否覆盖，覆盖即可。如图：
 
-![如何更换OpenHarmony SDK API 10-鸿蒙开发者社区](images/resize,w_820,h_349.png)
+![如何更换OpenHarmony SDK API 10](images/resize,w_820,h_349.png)
 
 再打开DevEco Studio就可以看到看到新的API，如图：
 
@@ -476,7 +476,7 @@ struct CustomDialogExample {
   controller: CustomDialogController
   build() {
     Column() {
-      Text('我是内容')
+      Text('内容')
       .fontSize(20)
       .margin({ top: 10, bottom: 10 })
     }
@@ -484,10 +484,10 @@ struct CustomDialogExample {
 }
 ```
 
-需要注意的是：我们需要把这个自定义弹窗的代码放到我们需要使用的页面里面，就像这样：
+需要注意的是：需要把这个自定义弹窗的代码放到需要使用的页面里面，就像这样：
 自定义弹窗中主要有两个需要写的：
-**controller**：控制我们的自定义弹窗的
-**build函数**:和我们主界面是一模一样的，没有区别，直接和主页面一样写代码即可。
+**controller**：控制自定义弹窗的
+**build函数**:和主界面是一模一样的，没有区别，直接和主页面一样写代码即可。
 
 编写在主界面之上
 
@@ -508,8 +508,8 @@ dialogController: CustomDialogController = new CustomDialogController({
 3、autoCancel，boolean，否，是否允许点击遮障层退出。默认值：true
 4、alignment，DialogAlignment，否，弹窗在竖直方向上的对齐方式。默认值：DialogAlignment.Default
 5、offset，Offset，否，弹窗相对alignment所在位置的偏移量。
-6、customStyle，boolean，否，弹窗容器样式是否自定义。默认值：false，弹窗容器的宽度根据栅格系统自适应，不跟随子节点；高度自适应子节点，最大为窗口高度的90%；圆角为24vp。
-7、gridCount，number，否，弹窗宽度占栅格宽度的个数。默认为按照窗口大小自适应，异常值按默认值处理，最大栅格数为系统最大栅格数。
+6、customStyle，boolean，否，弹窗容器样式是否自定义。默认值：false，弹窗容器的宽度根据栅格系统自适应，不跟随子节点；高度自适应子节点；圆角为24vp。
+7、gridCount，number，否，弹窗宽度占栅格宽度的个数。默认为按照窗口大小自适应，异常值按默认值处理。
 
 ##### 3.点击与onClick事件绑定的组件使弹窗弹出
 
