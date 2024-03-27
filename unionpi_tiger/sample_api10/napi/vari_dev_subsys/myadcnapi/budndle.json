@@ -1,0 +1,38 @@
+{
+    "name": "@ohos/myadcnapi",
+    "description": "myadcnapi example.",
+    "version": "4.0",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "vari_dev_subsys/myadcnapi/src"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "myadcnapi",
+        "subsystem": "vari_dev_subsys",
+        "syscap": [],
+        "features": [],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "rom": "10KB",
+        "ram": "10KB",
+        "deps": {
+            "components": [
+                "c_utils",
+                "napi",
+                "hilog"
+            ],
+            "third_party": []
+        },
+        "build": {
+            "sub_component": [
+                "//vari_dev_subsys/myadcnapi/src:adcnapi"
+            ],
+            "inner_kits": [],
+            "test": []
+        }
+    }
+}

@@ -1,0 +1,33 @@
+import("//build/ohos.gni")
+
+ohos_shared_library("adcnapi")
+{
+    sources = [
+        "adcnapi_middle.cpp",
+        "adcnapi.cpp",
+        "tool_utility.cpp",
+        "adc.c"
+    ]
+    include_dirs = [
+        ".",
+        "//third_party/node/src",
+        "//commonlibrary/c_utils/base/include"
+    ]
+   
+    external_deps=[
+        "napi:ace_napi",
+        "c_utils:utils"
+    ]
+    remove_configs = [ "//build/config/compiler:no_rtti" ]
+    cflags=[
+    ]
+    cflags_cc=[
+        "-frtti",
+    ]
+    ldflags = [
+    ]
+    
+    relative_install_dir = "module"
+    part_name = "myadcnapi"
+    subsystem_name = "vari_dev_subsys"
+}

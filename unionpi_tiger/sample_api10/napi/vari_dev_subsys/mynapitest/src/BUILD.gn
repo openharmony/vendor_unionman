@@ -1,0 +1,28 @@
+import("//build/ohos.gni")
+
+ohos_shared_library("my_hello_napi")
+{
+    sources = [
+        "my_hello_napi_middle.cpp",
+        "my_hello_napi.cpp",
+        "tool_utility.cpp",
+    ]
+    include_dirs = [
+        ".",
+        "//third_party/node/src",
+    ]
+    external_deps=[
+        "napi:ace_napi",
+    ]
+    remove_configs = [ "//build/config/compiler:no_rtti" ]
+    cflags=[
+    ]
+    cflags_cc=[
+        "-frtti",
+    ]
+    ldflags = [
+    ]
+    
+    relative_install_dir = "module"
+    part_name = "mynapitest"
+}

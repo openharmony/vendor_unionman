@@ -1,0 +1,34 @@
+import("//build/ohos.gni")
+ohos_shared_library("mypwm")
+{
+    sources = [
+        "mypwm_middle.cpp",
+        "mypwm.cpp",
+        "tool_utility.cpp",
+        "um_pwm.c"
+    ]
+    include_dirs = [
+        ".",
+        "//third_party/node/src",
+        "//foundation/ace/napi/interfaces/kits",
+        "//commonlibrary/c_utils/base/include",
+        "//base/hiviewdfx/hilog/interfaces/native/innerkits/include",
+    ]
+    external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "napi:ace_napi"
+  ]
+    remove_configs = [ "//build/config/compiler:no_rtti" ]
+    cflags=[
+    ]
+    cflags_cc=[
+        "-frtti",
+    ]
+    ldflags = [
+    ]
+    
+    relative_install_dir = "module"
+    part_name = "mypwmnapi"
+    subsystem_name = "vari_dev_subsys"
+}
