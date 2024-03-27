@@ -35,7 +35,7 @@ const char UART_TTL_NAME[] = "/dev/ttyS1";
 /*
  *0. 定义异步线程执行中需要的上下文环境
  */
-struct UartData{
+struct UartData {
     // 异步 worker
     napi_async_work asyncWork = nullptr;
     // 对应JS端的callback函数
