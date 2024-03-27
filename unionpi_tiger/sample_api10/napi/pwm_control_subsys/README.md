@@ -50,6 +50,44 @@ OH版本：OpenHarmony4.0
 ### 一、新建子系统
 
 在OpenHarmony根目录下创建`pwm_control_subsys`文件夹
+在此文件夹下，新建`bundle.json`文件，将以下代码复制到`bundle.json`
+``` json
+{
+  "name": "@ohos/mymodule",
+  "description": "mymodule",
+  "version": "4.0",
+  "license": "Apache License 2.0",
+  "private": false,
+  "segment": {
+    "destPath": "pwm_control_subsys"
+  },
+  "dirs": {},
+  "scripts": {},
+  "component": {
+    "name": "mymodule",
+    "subsystem": "pwm_control_subsys",
+    "adapted_system_type": [
+      "standard"
+    ],
+    "deps": {
+      "components": [
+        "hilog",
+        "c_utils",
+        "hdf_core",
+        "napi"
+      ],
+      "third_party": []
+    },
+    "build": {
+      "sub_component": [
+        "//pwm_control_subsys/mymodule:mygroup"
+      ],
+      "test": [],
+      "inner_kits": []
+    }
+  }
+}
+```
 
 ### 二、添加子系统
 
@@ -84,7 +122,7 @@ OH版本：OpenHarmony4.0
 
 ### 五、编译烧录
 
-全量编译烧录请参考[ 九联Unionpi-Tiger开发套件](https://gitee.com/openharmony/device_board_unionman/blob/master/unionpi_tiger/README_zh.md#编译与调试)
+全量编译烧录请参考文档内的使用说明[device_board_unionman](https://gitee.com/openharmony/device_board_unionman)
 
 > OpenHarmony提供了单独编译组件，加快编译速度
 >
@@ -144,13 +182,13 @@ APP需要使用开发板 pwm 的系统文件，就需要系统文件的权限修
 
 2、编译成功后导出out/sdk/packages/ohos-sdk/目录下的文件即可
 
-3、替换full-sdk：[ 如何替换full-SDK](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/faqs/full-sdk-switch-guide.md)
+3、替换full-sdk：[ 如何替换full-SDK](https://gitee.com/openharmony/docs/blob/OpenHarmony-4.0-Release/zh-cn/application-dev/faqs/full-sdk-switch-guide.md)
 
 ![image-2](../figures/pwm_control_subsys/2.png)
 
 **下载release SDK方法：**
 
-若不方便编译SDK，还可以选择直接在[zh-cn/release-notes · OpenHarmony/docs](https://gitee.com/openharmony/docs/tree/master/zh-cn/release-notes)此处选择OpenHarmony相对应版本的SDK进行下载
+若不方便编译SDK，还可以选择直接在[OpenHarmony Release Notes](https://gitee.com/openharmony/docs/tree/OpenHarmony-4.0-Release/zh-cn/release-notes)此处选择OpenHarmony相对应版本的SDK进行下载
 
 1、 解压文件`ohos-sdk-windows_linux-public.tar.gz`
 

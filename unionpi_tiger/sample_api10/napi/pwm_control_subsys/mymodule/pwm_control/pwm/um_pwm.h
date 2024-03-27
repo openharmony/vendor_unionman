@@ -19,7 +19,7 @@
 #ifdef __cplusplus
 extern "C"
 {
-#endif 
+#endif
 // errno
 #define PWM_ERR (-1)
 #define PWM_WRONOG_CHANNEL (-2)
