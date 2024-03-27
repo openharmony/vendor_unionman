@@ -16,8 +16,8 @@
 #include "napi/native_api.h"
 #include "napi/native_node_api.h"
 
-static const int initDuty = 500000L;
-static const int maxDuty = 2500000L;
+static const int INIT_DUTY = 500000L;
+static const int MAX_DUTY = 2500000L;
 
 #ifdef __cplusplus
 #include "um_pwm.h"
@@ -25,8 +25,7 @@ extern "C"
 {
 #endif
 
-    struct PwmOnData
-    {
+    struct PwmOnData{
         napi_async_work asyncWork = nullptr; // 异步工作项
         napi_deferred deferred = nullptr;    // 用于Promise的resolve、reject处理
         napi_ref callback = nullptr;         // 回调函数
@@ -44,13 +43,13 @@ extern "C"
         int curDuty = 0;                // 当前的占空比
         double curAngle = 0;            // 当前角度
 
-        set_pwm_period(pwmPex, maxDuty);                             // 设置周期
-        double pwmDuty = 1.0 * initDuty * pwmAngle / 45L + initDuty; // 换算成占空比
+        set_pwm_period(pwmPex, MAX_DUTY);                             // 设置周期
+        double pwmDuty = 1.0 * INIT_DUTY * pwmAngle / 45L + INIT_DUTY; // 换算成占空比
         set_pwm_dutyCycle(pwmPex, static_cast<int>(pwmDuty));        // 设置占空比
         set_pwm_enable(pwmPex, 1);                                   // 输出PWM
 
         curDuty = get_pwm_dutyCycle(pwmPex);
-        curAngle = 1.0 * (curDuty - initDuty) / initDuty * 45L;
+        curAngle = 1.0 * (curDuty - INIT_DUTY) / INIT_DUTY * 45L;
         pwmData->result = static_cast<int>(curAngle); // C++更安全的强制类型转化
     }
 

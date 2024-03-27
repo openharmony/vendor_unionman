@@ -35,50 +35,44 @@ constexpr int EVT_TOUCH5 = 0x25;
 std::string data_proce(int *recv)
 {
     std::string ret;
-    if (recv == NULL)
-    {
-        printf("data proce error");
-    }
-    if ((recv[0] == RECV_HEAD) && (recv[3L] == RECV_END) && (recv[1] == (0xff - recv[2L])))
-    {
-        switch (recv[1])
-        {
-        case EVT_BACK:
-            ret = "手势识别为向后";
-            break;
-        case EVT_FORWARD:
-            ret = "手势识别为向前";
-            break;
-        case EVT_RIGHT:
-            ret = "手势识别为向右";
-            break;
-        case EVT_LEFT:
-            ret = "手势识别为向左";
-            break;
-        case EVT_PULLUP:
-            ret = "手势识别为上拉";
-            break;
-        case EVT_PULLDOWN:
-            ret = "手势识别为下压";
-            break;
-        case EVT_TOUCH1:
-            ret = "触摸点1";
-            break;
-        case EVT_TOUCH2:
-            ret = "触摸点2";
-            break;
-        case EVT_TOUCH3:
-            ret = "触摸点3";
-            break;
-        case EVT_TOUCH4:
-            ret = "触摸点4";
-            break;
-        case EVT_TOUCH5:
-            ret = "触摸点5";
-            break;
-        default:
-            ret = "数据错误";
-            break;
+    if ((recv[0] == RECV_HEAD) && (recv[3L] == RECV_END) && (recv[1] == (0xff - recv[2L]))) {
+        switch (recv[1]) {
+            case EVT_BACK:
+                ret = "手势识别为向后";
+                break;
+            case EVT_FORWARD:
+                ret = "手势识别为向前";
+                break;
+            case EVT_RIGHT:
+                ret = "手势识别为向右";
+                break;
+            case EVT_LEFT:
+                ret = "手势识别为向左";
+                break;
+            case EVT_PULLUP:
+                ret = "手势识别为上拉";
+                break;
+            case EVT_PULLDOWN:
+                ret = "手势识别为下压";
+                break;
+            case EVT_TOUCH1:
+                ret = "触摸点1";
+                break;
+            case EVT_TOUCH2:
+                ret = "触摸点2";
+                break;
+            case EVT_TOUCH3:
+                ret = "触摸点3";
+                break;
+            case EVT_TOUCH4:
+                ret = "触摸点4";
+                break;
+            case EVT_TOUCH5:
+                ret = "触摸点5";
+                break;
+            default:
+                ret = "数据错误";
+                break;
         }
     }
     ret = "错误";

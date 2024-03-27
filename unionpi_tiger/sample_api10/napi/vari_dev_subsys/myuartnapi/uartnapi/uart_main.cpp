@@ -35,8 +35,7 @@ const char UART_TTL_NAME[] = "/dev/ttyS1";
 /*
  *0. 定义异步线程执行中需要的上下文环境
  */
-struct UartData
-{
+struct UartData{
     // 异步 worker
     napi_async_work asyncWork = nullptr;
     // 对应JS端的callback函数
@@ -63,7 +62,7 @@ static napi_value UartInit(napi_env env, napi_callback_info info)
     if (g_fd == -1) {
         HILOG_DEBUG(LOG_CORE, "open file error");
         // 打开文件失败返回错误码-1
-        NAPI_CALL(env, napi_create_int32(env, OPENERR, &ret)); 
+        NAPI_CALL(env, napi_create_int32(env, OPENERR, &ret));
         return ret;
     }
     if ((UartInit(g_fd)) == -1) {
@@ -71,8 +70,7 @@ static napi_value UartInit(napi_env env, napi_callback_info info)
         g_fd = -1;
         HILOG_DEBUG(LOG_CORE, "uart init error");
         // 串口初始化失败则返回错误码-2
-        NAPI_CALL(env, napi_create_int32(env, INITERR, &ret)); 
-        return ret;
+        NAPI_CALL(env, napi_create_int32(env, INITERR, &ret));
         return ret;
     }
     g_initFlag = 1;
@@ -108,10 +106,9 @@ static std::string uart_task(void)
     int recv[4] = {0};
 
     printf("Gesture Sensor Ready!\n");
-    for (i = 0; i < FRAME_LEN; i++)
-    {
+    for (i = 0; i < FRAME_LEN; i++) {
         ret = read(g_fd, &buf, 1);
-        if (ret == -1){
+        if (ret == -1) {
             printf("read err\n");
             exit(0);
         }
@@ -183,7 +180,8 @@ static napi_value UartCallBack(napi_env env, napi_callback_info info)
     // 创建async work，创建成功后通过最后一个参数接收async work的handle
     napi_value resourceName = nullptr;
     // 创建一个异步任务,
-    // napi_create_async_work() 方法的第 3 、 4 个参数需要注意，uartdoInBackground() 方法是在异步线程中执行的，UartCallBackComplete() 方法在异步线程结束后切换到主线程中执行。
+    // napi_create_async_work() 方法的第 3 、 4 个参数需要注意，
+    //uartExecuteCB() 方法是在异步线程中执行的，UartCallBackCompleteCB() 方法在异步线程结束后切换到主线程中执行。
     napi_create_string_utf8(env, "UartCallBack", NAPI_AUTO_LENGTH, &resourceName);
     napi_create_async_work(env, nullptr, resourceName, uartExecuteCB, UartCallBackCompleteCB, (void *)uartData,
                            &uartData->asyncWork);

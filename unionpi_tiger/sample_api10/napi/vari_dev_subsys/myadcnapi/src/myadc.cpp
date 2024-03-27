@@ -32,11 +32,11 @@ extern "C"
     int GetAdcData(int channel, int *value)
     {
         char adcPath[128];
-        (void)memset(adcPath, 0, sizeof(adcPath)); // 数组清空
+        memset_s(adcPath, 0, sizeof(adcPath)); // 数组清空
         if (channel == 1) {
-            sprintf(adcPath, "%s", ADC_CHANNEL_1);
+            sprintf_s(adcPath, "%s", ADC_CHANNEL_1);
         } else {
-            sprintf(adcPath, "%s", ADC_CHANNEL_2);
+            sprintf_s(adcPath, "%s", ADC_CHANNEL_2);
         }
 
         FILE *fp = fopen(adcPath, "r"); // 只读打开文件
@@ -109,7 +109,7 @@ extern "C"
 /*
  * 2.注册模块
  */
-extern "C" __attribute__((constructor)) void Registeradc_napiModule(void)
+extern "C" __attribute__((constructor)) void RegisteradcNapiModule(void)
 {
     napi_module_register(&adc_napiModule); // 接口注册函数
 }
