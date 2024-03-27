@@ -32,11 +32,17 @@ extern "C"
     int GetAdcData(int channel, int *value)
     {
         char adcPath[128];
-        memset_s(adcPath, 0, sizeof(adcPath)); // 数组清空
+        errno_t err = memset_s(adc_path, sizeof(adc_path), 0, sizeof(adc_path));
+        if (err != 0) {
+            // 内存清零操作失败
+            perror("memset_s");
+            // 处理错误情况，比如退出函数或返回错误码
+            return -1;
+        }
         if (channel == 1) {
-            sprintf_s(adcPath, "%s", ADC_CHANNEL_1);
+            sprintf_s(adcPath, sizeof(adcPath), "%s", ADC_CHANNEL_1);
         } else {
-            sprintf_s(adcPath, "%s", ADC_CHANNEL_2);
+            sprintf_s(adcPath, sizeof(adcPath), "%s", ADC_CHANNEL_2);
         }
 
         FILE *fp = fopen(adcPath, "r"); // 只读打开文件
@@ -46,7 +52,15 @@ extern "C"
         }
 
         char buffer[sizeof(int)];             // 从文件中读取到的数据
-        fread(buffer, sizeof(buffer), 1, fp); // 读取数据的个数为1
+        size_t num_read = fread(buffer, sizeof(buffer), 1, fp);
+        if (num_read != 1) {
+            // 读取数据失败
+            if (feof(fp)) {
+                perror("Reach the end of the file");
+            } else if (ferror(fp)) {
+                perror("fread");
+            }
+        }
         if (fclose(fp) == 0) {
             return 0;                         // 文件成功关闭，返回成功状态
         } else {

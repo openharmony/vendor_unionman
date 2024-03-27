@@ -25,7 +25,7 @@ extern "C"
 {
 #endif
 
-    struct PwmOnData{
+    struct PwmOnData {
         napi_async_work asyncWork = nullptr; // 异步工作项
         napi_deferred deferred = nullptr;    // 用于Promise的resolve、reject处理
         napi_ref callback = nullptr;         // 回调函数
