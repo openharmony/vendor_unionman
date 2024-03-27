@@ -1,0 +1,24 @@
+
+import("//build/ohos.gni")
+
+ohos_shared_library("uartnapi") {
+  include_dirs = [ 
+    "//foundation/arkui/napi/interfaces/kits"
+     ]
+
+  sources = [
+    "uart_main.cpp",
+    "uart.cpp",
+  ]
+
+
+  external_deps = [ 
+    "hilog:libhilog",
+    "c_utils:utils",
+    "napi:ace_napi"
+   ]
+
+  relative_install_dir = "module"
+  subsystem_name = "vari_dev_subsys"
+  part_name = "myuartnapi"
+}
