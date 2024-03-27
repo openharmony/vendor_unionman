@@ -71,9 +71,6 @@ int UmGetUart(void)
         if (ret == ERR) {
             break;
         }
-        if (buf == RECV_HEAD) {    //若buf为起始位，设置i为0
-            i = 0;
-        }
         recv[i] = buf;
         if ((recv[0] == RECV_HEAD) && (recv[3L] == RECV_END) && (recv[1] == (0xff - recv[2L]))) {    //校验
             return recv[1];
