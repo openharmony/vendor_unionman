@@ -84,7 +84,8 @@ static napi_value uart_get(napi_env env, napi_callback_info info)
     napi_value resourceName = nullptr;
     napi_create_string_utf8(env, "uart_get", NAPI_AUTO_LENGTH, &resourceName);   // ，上下文的xx对象，字符长度，异步资源标识符
     // ， ，异步资源标识符，业务逻辑函数，业务完成函数，addonData传递数据，返回当前函数调用创建的异步工作项
-    napi_create_async_work(env, nullptr, resourceName, uart_get_execute, uart_get_complete, (void *)addonData, &addonData->async_work);
+    napi_create_async_work(env, nullptr, resourceName, uart_get_execute, uart_get_complete, (void *)addonData,
+                            &addonData->async_work);
 
     // 将刚创建的async work加到队列，由底层去调度执行
     napi_queue_async_work(env, addonData->async_work);

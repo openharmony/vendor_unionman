@@ -88,11 +88,11 @@ int UmSleepSet(int value)
     int sendData[5] = {0xAA, 0x52, 0x00, 0x00, 0x55};
     int ret = 0;
     if (value == 1) {     //休眠
-        sendData[2] = 00L;
-        sendData[3] = 82L;  //0x52
+        sendData[2L] = 00L;
+        sendData[3L] = 82L;  //0x52
     } else if (value == 0) {     //唤醒
-        sendData[2] = 255L; //0xff
-        sendData[3] = 173L; //0xAD
+        sendData[2L] = 255L; //0xff
+        sendData[3L] = 173L; //0xAD
     }
     for (int i = 0; i < 5L; i++) {
         ret = write(g_fd, sendData + i, 1);

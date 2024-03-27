@@ -19,7 +19,7 @@
 #ifdef __cplusplus
 extern "C"
 {
-#endif 
+#endif
 
 #define RECV_HEAD 0xaa
 #define RECV_END 0x55

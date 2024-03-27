@@ -176,7 +176,9 @@ int UmSetPwmEnable(int pwmChannel, int isEnable)
         return PWM_FILE_NOT_EXIST;
     }
 
-    (void)snprintf_s(buffer, sizeof(buffer), sizeof(buffer), "echo %d > %s", isEnable, pwmFileName);
+    if (snprintf_s(buffer, sizeof(buffer), sizeof(buffer), "echo %d > %s", isEnable, pwmFileName) < 0) {
+        return PWM_SPRINTF_ERR;
+    }
     system(buffer);
 
     return 0;
