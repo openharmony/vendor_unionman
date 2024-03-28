@@ -15,7 +15,7 @@ OH版本：OpenHarmony4.0
 ## 代码框架
 
 ```c
-├── APP				//应用开发代码
+├── unionpi_tiger/sample_api10/app/pwm_control_app				//应用开发代码
     ├── entry
        └── src
            ├── main
@@ -27,20 +27,19 @@ OH版本：OpenHarmony4.0
            │   │       └── Index.ets         // 主要代码
            │   ├── module.json5              // 配置文件
     └── ...
-├── @ohos.control_demo.d.ts    
-└── pwm_control_subsys  //设备开发代码
-    ├── bundle.json		//组件规则
-    └── mymodule
-        ├── BUILD.gn	//模块组
-        └── pwm_control
-            ├── BUILD.gn	//模块规则
-            ├── napitest.cpp	//主函数
-            ├── pwm		//pwm驱动
-            │   ├── um_pwm.c
-            │   └── um_pwm.h
-            └── uart	//uart驱动
-                ├── um_uart.cpp
-                └── um_uart.h
+└── unionpi_tiger/sample_api10/napi/pwm_control_subsys
+    ├── @ohos.control_demo.d.ts
+        └── mymodule
+            ├── BUILD.gn	//模块组
+            └── pwm_control
+                ├── BUILD.gn	//模块规则
+                ├── napitest.cpp	//主函数
+                ├── pwm		//pwm驱动
+                │   ├── um_pwm.c
+                │   └── um_pwm.h
+                └── uart	//uart驱动
+                    ├── um_uart.cpp
+                    └── um_uart.h
 ```
 
 ## 设备开发
