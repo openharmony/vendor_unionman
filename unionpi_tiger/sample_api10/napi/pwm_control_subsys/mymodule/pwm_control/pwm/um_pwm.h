@@ -76,29 +76,6 @@ int UmSetPwmPolarity(int pwmChannel, int polarity);
  */
 int UmSetPwmEnable(int pwmChannel, int isEnable);
 
-/*
- * 得到pwm的溢出值
- * 参数：pwmChannel 为选择的引脚
- */
-int UmGetPwmPeriod(int pwmChannel);
-
-/*
- * 得到pwm的一个周期高电平的值
- * 参数：pwmChannel 为选择的引脚
- */
-int UmGetPwmDutyCycle(int pwmChannel);
-
-/*
- * 得到pwm的极性
- * 参数：pwmChannel 为选择的引脚
- */
-int UmGetPwmPolarity(int pwmChannel);
-
-/*
- * 查看pwm的引脚使能值
- * 参数：pwmChannel 为选择的引脚
- */
-int UmIsPwmEnabled(int pwmChannel);
 #ifdef __cplusplus
 }
 #endif

@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 declare namespace control_demo{
-
     /**
      * @description 获取串口数据(异步)
      * @param callback >0 -> 成功，-1 -> 失败
@@ -36,7 +35,6 @@ declare namespace control_demo{
      * @returns 状态，默认为0
      */
     function pwm_set(value:number):number;
-    
 }
 
 export default control_demo;
