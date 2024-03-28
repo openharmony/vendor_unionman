@@ -1,0 +1,64 @@
+/* Copyright 2024 Unionman Technology Co., Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "material": {
+          "certpath": "C:\\Users\\zhengyi.liang\\.ohos\\config\\openharmony\\auto_ohos_default_MyApplication4_com.example.myapplication.cer",
+          "storePassword": "0000001ADA578A47EC18CEE0CB80859DA9D6B49E90C01CF99B8B5364FBC6A49A8F00EEFC7C3A719E5673",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001A5606C96ED6CF4BD27B5E1B0510413E89BB61F557382717545987FE93796CB3C34860037BFAAD",
+          "profile": "C:\\Users\\zhengyi.liang\\.ohos\\config\\openharmony\\auto_ohos_default_MyApplication4_com.example.myapplication.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\zhengyi.liang\\.ohos\\config\\openharmony\\auto_ohos_default_MyApplication4_com.example.myapplication.p12"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compileSdkVersion": 10,
+        "compatibleSdkVersion": 10,
+        "runtimeOS": "OpenHarmony",
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
