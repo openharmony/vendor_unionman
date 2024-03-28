@@ -23,18 +23,6 @@ extern "C"
 
 #define RECV_HEAD 0xaa
 #define RECV_END 0x55
-#define EVT_RIGHT 0x01
-#define EVT_LEFT 0x02
-#define EVT_BACK 0x03
-#define EVT_FORWARD 0x04
-#define EVT_PULLUP 0x05
-#define EVT_PULLDOWN 0x06
-#define EVT_PULLREMOVE 0x07
-#define EVT_TOUCH1 0x21
-#define EVT_TOUCH2 0x22
-#define EVT_TOUCH3 0x23
-#define EVT_TOUCH4 0x24
-#define EVT_TOUCH5 0x25
 #define OK 0
 #define ERR (-1)
 

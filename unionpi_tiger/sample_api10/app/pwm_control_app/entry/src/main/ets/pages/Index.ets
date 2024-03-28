@@ -13,23 +13,7 @@
  * limitations under the License.
  */
 import promptAction from '@ohos.promptAction';
-import { backgroundInit } from './init';
 import control_demo from '@ohos.control_demo';
-
-enum GESTURE_CONTROL {
-  EVT_RIGHT = 0x01,
-  EVT_LEFT = 0x02,
-  EVT_BACK = 0x03,
-  EVT_FORWARD = 0x04,
-  EVT_PULLUP = 0x05,
-  EVT_PULLDOWN = 0x06,
-  EVT_PULLREMOVE = 0x07,
-  EVT_TOUCH1 = 0x21,
-  EVT_TOUCH2 = 0x22,
-  EVT_TOUCH3 = 0x23,
-  EVT_TOUCH4 = 0x24,
-  EVT_TOUCH5 = 0x25
-}
 
 const GESTURE_CONTROL_STRING = new Map<number, string>();
 GESTURE_CONTROL_STRING.set(0x01, "RIGHT")
@@ -45,7 +29,6 @@ GESTURE_CONTROL_STRING.set(0x23, "TOUCH3")
 GESTURE_CONTROL_STRING.set(0x24, "TOUCH4")
 GESTURE_CONTROL_STRING.set(0x25, "TOUCH5")
 
-
 class UartData {
   id: number;
   data: number;
@@ -55,6 +38,34 @@ class UartData {
     this.id = id;
     this.data = data;
     this.desc = desc;
+  }
+}
+
+@Component
+struct backgroundInit{
+  @State message: string = 'PWM Control'
+  build() {
+
+    Stack({ alignContent: Alignment.Center }) {
+      Stack({ alignContent: Alignment.Center }) {
+
+        Image($rawfile('4.jpg'))// Image($r('app.media.icon'))
+          .width('100%')
+          .height('100%')
+          .border({ width: 1 })
+          .objectFit(ImageFit.Cover)
+          .margin(15)
+        // 保持宽高比进行缩小或者放大，使得图片两边都大于或等于显示边界。
+        Text(this.message)
+          .fontSize(50)
+          .fontWeight(FontWeight.Bold)
+          .fontColor(0xffffff)
+          .offset({ x: 200, y: -50 })
+      }
+      Text("触摸2：舵机速度-10").fontSize(16).fontColor(0xFFFFFF).offset({ x: 200, y: 90 })
+      Text("触摸1：舵机速度+10").fontSize(16).fontColor(0xFFFFFF).offset({ x: 200, y: 65 })
+      Text("触摸3：舵机停转").fontSize(16).fontColor(0xFFFFFF).offset({ x: 200, y: 115 })
+    }
   }
 }
 
@@ -73,7 +84,6 @@ struct Index {
   // 串口数据index和数组
   @State uart_data_id: number = 0
   @State uart_data_arr: Array<UartData> = []
-
   private scroller: Scroller = new Scroller()
 
   @Builder
@@ -81,8 +91,7 @@ struct Index {
     Column() {
       // 初始化设置
       Row() {
-        Text("初始化")
-          .fontSize(20)
+        Text("初始化").fontSize(20)
 
         Toggle({ type: ToggleType.Switch, isOn: false })
           .width(50)
@@ -110,12 +119,10 @@ struct Index {
       Row() {
         // 循环检测组件
         Row() {
-          Text("循环检测")
-            .fontSize(20)
+          Text("循环检测").fontSize(20)
 
           Toggle({ type: ToggleType.Switch, isOn: $$this.Toggle_uart_get_isOn })
-            .width(50)
-            .height(50)
+            .width(50).height(50)
             .selectedColor(0x7db6bf)
             .onChange((isOn: Boolean) => {
               if (isOn) {
@@ -128,25 +135,22 @@ struct Index {
                       this.uart_data_id++; // idex加一
                     }
                     switch (result) {
-                      case GESTURE_CONTROL.EVT_TOUCH1:
+                      case 0x21:
                         this.pwm_value += 10
                         control_demo.pwm_set(this.pwm_value)
                         break;
-                      case GESTURE_CONTROL.EVT_TOUCH2:
+                      case 0x22:
                         this.pwm_value -= 10
                         control_demo.pwm_set(this.pwm_value)
                         break;
-                      case GESTURE_CONTROL.EVT_TOUCH3:
+                      case 0x23:
                         this.pwm_value = 0
                         control_demo.pwm_set(this.pwm_value)
                         break;
                       default:
                         break;
                     }
-
-                    console.log("uart_get:" + result.toFixed(0))
                   })
-                  console.log('delay 1s');
                 }, 1000);
               } else {
                 clearInterval(this.interval);
@@ -160,12 +164,10 @@ struct Index {
 
         // 休眠组件
         Row() {
-          Text("休眠")
-            .fontSize(20)
+          Text("休眠").fontSize(20)
 
           Toggle({ type: ToggleType.Switch, isOn: $$this.Toggle_uart_sleep_isOn })
-            .width(50)
-            .height(50)
+            .width(50).height(50)
             .selectedColor(0x7db6bf)
             .onChange((isOn: Boolean) => {
               if (isOn) {
@@ -189,16 +191,11 @@ struct Index {
       .justifyContent(FlexAlign.SpaceEvenly)
     }
   }
-
-
-
   build() {
 
     Stack({ alignContent: Alignment.Center }) {
       // 背景渲染
       backgroundInit({ message: "Pwm Control" })
-
-
       //pwm控制
       Row() {
         Slider({
@@ -209,10 +206,9 @@ struct Index {
           style: SliderStyle.InSet,
           direction: Axis.Horizontal,
           reverse: false
-        })// .showTips(true)
+        })
           .showSteps(true)
-          .width(200)
-          .height(60)
+          .width(200).height(60)
           .trackColor(0x3c4c4d)
           .selectedColor(0x7db6bf)
           .onChange((value: number, mode: SliderChangeMode) => {
@@ -241,16 +237,14 @@ struct Index {
           }, (item: UartData) => item.id.toString())
 
         }
-        .width("80%")
-        .height("80%")
+        .width("80%").height("80%")
         .alignListItem(ListItemAlign.Start)
         .scrollBar(BarState.On)
         .edgeEffect(EdgeEffect.Spring)
         .sticky(StickyStyle.Footer)
       }
       .offset({ x: -200, y: 25 })
-      .width(200)
-      .height(250)
+      .width(200).height(250)
       .backgroundColor(0xA1A3B4)
       .border({ radius: 9 })
       .opacity(0.8)
@@ -271,8 +265,6 @@ struct Index {
           this.Panel_isOn = false
         }
       })
-
     }.width('100%').height('100%').margin({ top: 0 })
-
   }
 }

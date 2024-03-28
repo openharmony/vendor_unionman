@@ -28,18 +28,14 @@ extern "C"
 // pwm enable
 #define PWM_NOT_ENABLED 0
 #define PWM_IS_ENABLED 1
-
 // pwm polarity
 #define PWM_POLARITY_NORMAL 0
 #define PWM_POLARITY_INVERSED 1
-
 #define PWM1 1
 #define PWM2 2
-
 // pwm的引脚目录
 #define PWM1_PEX "/sys/class/pwm/pwmchip0"
 #define PWM2_PEX "/sys/class/pwm/pwmchip2"
-
 // Hilog
 #undef LOG_DOMAIN
 #undef LOG_TAG
@@ -51,25 +47,21 @@ extern "C"
  * 参数：pwmChannel 为选择的引脚
  */
 int UmInitPwm(int pwmChannel);
-
 /*
  * 设置pwm的溢出值
  * 参数：pwmChannel 为选择的引脚，period 为溢出值
  */
 int UmSetPwmPeriod(int pwmChannel, int period);
-
 /*
  * 设置pwm一个周期高电平时间
  * 参数：pwmChannel 为选择的引脚，dutyCycle 为一个周期高电平的值
  */
 int UmSetPwmDutyCycle(int pwmChannel, int dutyCycle);
-
 /*
  * 设置pwm的极性
  * 参数：pwmChannel 为选择的引脚，polarity 为极性
  */
 int UmSetPwmPolarity(int pwmChannel, int polarity);
-
 /*
  * 打开pwm引脚，使其使能
  * 参数：pwmChannel 为选择的引脚，isEnable 为开关值
