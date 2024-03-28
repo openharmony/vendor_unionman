@@ -46,12 +46,6 @@
 extern "C" {
 #endif
     /*
-    * 作用：初始化引脚，生成对应的引脚目录
-    * 参数：pwmChannel 为选择的引脚
-    */
-    int init_pmw(int pwmChannel);
-
-    /*
     * 设置pwm的溢出值
     * 参数：pwmChannel 为选择的引脚，period 为溢出值
     */
@@ -64,41 +58,17 @@ extern "C" {
     int set_pwm_dutyCycle(int pwmChannel, int dutyCycle);
 
     /*
-    * 设置pwm的极性
-    * 参数：pwmChannel 为选择的引脚，polarity 为极性
-    */
-    int set_pwm_polarity(int pwmChannel, int polarity);
-
-    /*
     * 打开pwm引脚，使其使能
     * 参数：pwmChannel 为选择的引脚，isEnable 为开关值
     */
     int set_pwm_enable(int pwmChannel, int isEnable);
 
     /*
-    * 得到pwm的溢出值
-    * 参数：pwmChannel 为选择的引脚
-    */
-    int get_pwm_period(int pwmChannel);
-
-    /*
     * 得到pwm的一个周期高电平的值
     * 参数：pwmChannel 为选择的引脚
     */
     int get_pwm_dutyCycle(int pwmChannel);
-
-    /*
-    * 得到pwm的极性
-    * 参数：pwmChannel 为选择的引脚
-    */
-    int get_pwm_polarity(int pwmChannel);
-
-    /*
-    * 查看pwm的引脚使能值
-    * 参数：pwmChannel 为选择的引脚
-    */
-    int is_pwm_enabled(int pwmChannel);
-
+ 
     #ifdef __cplusplus
     }
     #endif
