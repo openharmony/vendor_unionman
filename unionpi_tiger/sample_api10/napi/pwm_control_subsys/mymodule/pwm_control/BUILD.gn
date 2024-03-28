@@ -39,7 +39,6 @@ ohos_shared_library("control_demo")
     ]
     ldflags = [
     ]
-    
     relative_install_dir = "module"
     part_name = "mymodule"
     subsystem_name = "pwm_control_subsys"

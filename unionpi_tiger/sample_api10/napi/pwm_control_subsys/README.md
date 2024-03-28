@@ -43,8 +43,6 @@ OH版本：OpenHarmony4.0
                 └── um_uart.h
 ```
 
-
-
 ## 设备开发
 
 ### 一、新建子系统
@@ -202,8 +200,6 @@ APP需要使用开发板 pwm 的系统文件，就需要系统文件的权限修
 
 将位于`unionpi_tiger/sample_api10/napi/pwm_control_subsys/@ohos.control_demo.d.ts`接口定义文件，复制到OpenHarmony SDK目录下的API目录`C:\Users\xxx\AppData\Local\OpenHarmony\Sdk\10\ets\api`。
 
-
-
 ### 三、编译烧录应用
 
 1、 使用OpenHarmony应用开发工具：DevEco studio；打开同一目录下的`APP`文件夹项目
@@ -222,9 +218,7 @@ APP需要使用开发板 pwm 的系统文件，就需要系统文件的权限修
   * 蓝线 -- TX
   * 红线 -- 3.3V
 * 连线实物图：
-
 ![1](../figures/pwm_control_subsys/1.jpg)
 
 ## 演示效果
-
 ![image-6](../figures/pwm_control_subsys/6.png)

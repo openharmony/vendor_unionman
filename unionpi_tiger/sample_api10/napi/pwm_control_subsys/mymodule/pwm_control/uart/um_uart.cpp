@@ -32,10 +32,8 @@ int UmInitUart(void)
     if (g_fd == ERR) {
         return ERR;
     }
-
     struct termios options;
     tcgetattr(g_fd, &options);
-    
     tcflush(g_fd, TCIOFLUSH);  // 刷清缓冲区
     options.c_iflag = 0;
     options.c_oflag = 0;
@@ -56,7 +54,6 @@ int UmInitUart(void)
         return ERR;
     }
     tcflush(g_fd, TCIOFLUSH); // 刷清缓冲区
-
     return OK;
 }
 
