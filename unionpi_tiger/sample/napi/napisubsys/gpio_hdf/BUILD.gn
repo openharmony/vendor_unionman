@@ -43,6 +43,5 @@ ohos_shared_library("gpio_hdf") {
   ]
 
   relative_install_dir = "module"
-  subsystem_name = "napisubsys"
-  part_name = "gpio_hdf"
+  subsystem_name = "product_unionman"
 }

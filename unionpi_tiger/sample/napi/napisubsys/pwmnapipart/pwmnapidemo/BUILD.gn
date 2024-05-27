@@ -32,6 +32,5 @@ ohos_shared_library("pwmtest") {
   ]
 
   relative_install_dir = "module"
-  subsystem_name = "pwmtest"
-  part_name = "pwmnapipart"
+  subsystem_name = "product_unionman"
 }

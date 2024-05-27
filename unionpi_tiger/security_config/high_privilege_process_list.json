@@ -15,7 +15,7 @@
         },
         {
             "name": "media_service",
-            "gid": ["system"]
+            "gid": ["root", "system"]
         },
         {
             "name": "misc",
@@ -24,11 +24,6 @@
         },
         {
             "name": "netsysnative",
-            "uid": "root",
-            "gid": "root"
-        },
-        {
-            "name": "nwebspawn",
             "uid": "root",
             "gid": "root"
         },
@@ -58,13 +53,18 @@
             "gid": "system"
         },
         {
-            "name": "devattest_service",
-            "uid": "root",
-            "gid": "root"
+            "name": "concurrent_task_service",
+            "uid": "system",
+            "gid": "system"
         },
         {
             "name": "hdcd",
             "uid": "root"
+        },
+        {
+            "name": "key_enable",
+            "uid": "root",
+            "gid": "root"
         }
     ]
 }

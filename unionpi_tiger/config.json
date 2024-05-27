@@ -9,7 +9,7 @@
   "board": "unionpi_tiger",
   "enable_ramdisk": true,
   "enable_absystem": false,
-  "build_selinux": true,
+  "build_selinux": false,
   "build_seccomp": true,
   "inherit": [ "productdefine/common/inherit/rich.json", "productdefine/common/inherit/chipset_common.json" ],
   "subsystems": [
@@ -27,6 +27,10 @@
       "components": [
         {
           "component": "netmanager_ext",
+          "features": []
+        },
+        {
+          "component": "bluetooth_service",
           "features": []
         }
       ]
@@ -91,7 +95,21 @@
           "component": "drivers_peripheral_audio",
           "features": [
             "drivers_peripheral_audio_feature_full_test_suite = false",
-            "drivers_peripheral_audio_feature_alsa_lib = false"
+            "drivers_peripheral_audio_feature_alsa_lib = false",
+            "drivers_peripheral_audio_feature_effect = false"
+          ]
+        },
+        {
+          "component": "drivers_peripheral_codec",
+          "features": [
+            "drivers_peripheral_codec_feature_support_omx_extend_test = false",
+            "drivers_peripheral_codec_feature_support_hdi_v1 = true"
+          ]
+        },
+        {
+          "component": "drivers_peripheral_display",
+          "features": [
+            "drivers_peripheral_display_community = true"
           ]
         },
         {
@@ -99,19 +117,6 @@
           "features": [
             "drivers_peripheral_wlan_feature_enable_HDF_NL80211 = false",
             "drivers_peripheral_wlan_feature_enable_HDF_UT = false"
-          ]
-        },
-        {
-          "component": "drivers_peripheral_codec",
-          "features": [
-            "drivers_peripheral_codec_feature_support_omx_extend_test = false",
-            "drivers_peripheral_codec_feature_support_hdi_v1 = false"
-          ]
-        },
-        {
-          "component": "drivers_peripheral_display",
-          "features": [
-            "drivers_peripheral_display_community = true"
           ]
         },
         {
@@ -135,19 +140,8 @@
       ]
     },
     {
-      "subsystem": "window",
-      "components": [
-        {
-          "component": "window_manager",
-          "features": [
-            "window_manager_dayu210_resource_config = false"
-         ]
-        }
-      ]
-    },
-    {
-      "subsystem": "ai",
-      "components": [
+    "subsystem": "ai",
+    "components": [
         {
           "component": "mindspore",
           "features": []
@@ -171,7 +165,7 @@
         {
           "component": "wifi",
           "features": [
-            "wifi_feature_non_seperate_p2p = false",
+            "wifi_feature_non_seperate_p2p = true",
             "wifi_feature_non_hdf_driver = true"
          ]
         }
@@ -185,6 +179,28 @@
           "features": [
             "audio_framework_feature_dtmf_tone = true",
             "audio_framework_feature_opensl_es = true"
+          ]
+        }
+      ]
+    },
+    {
+      "subsystem": "thirdparty",
+      "components": [
+        {
+          "component": "libuv",
+          "features": [
+            "use_ffrt = true"
+          ]
+        }
+      ]
+    },
+    {
+      "subsystem": "graphic",
+      "components": [
+        {
+          "component": "graphic_2d",
+          "features": [
+            "graphic_2d_feature_rs_enable_eglimage = true"
           ]
         }
       ]
