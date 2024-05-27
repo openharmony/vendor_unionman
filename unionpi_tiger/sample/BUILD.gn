@@ -17,5 +17,6 @@ group("sample_group") {
   deps = [
     "hardware:hardware",
     "hdf:hdf",
+    "napi:napi",
   ]
 }

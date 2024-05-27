@@ -19,7 +19,6 @@ config("warns") {
 }
 
 ohos_executable("adc_test") {
-  output_name = "adc_test"
   sources = [
     "main.c",
     "um_adc.c",
@@ -31,4 +30,5 @@ ohos_executable("adc_test") {
 
   external_deps = [ "c_utils:utils" ]
   install_images = [ "system" ]
+  part_name = "product_unionman"
 }
