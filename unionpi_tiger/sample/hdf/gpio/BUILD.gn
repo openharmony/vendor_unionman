@@ -14,7 +14,7 @@
 import("//build/ohos.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 
-ohos_executable("gpio") {
+ohos_executable("sample_gpio") {
   sources = [ "gpio.cpp" ]
 
   include_dirs = [
@@ -41,5 +41,6 @@ ohos_executable("gpio") {
   install_enable = true
   install_images = [ chipset_base_dir ]
   module_install_dir = "bin"
-  part_name = "unionman_products"
+
+  subsystem_name = "product_unionman"
 }

@@ -13,11 +13,13 @@
 
 import("//build/ohos.gni")
 
-group("hdf") {
+group("napi") {
   deps = [
-    "gpio:sample_gpio",
-    "led_light:sample_led_light",
-    "pwm:sample_pwm",
-    "sensor:sample_sensor",
+    "napisubsys/adc_component:adc_component",
+    "napisubsys/gpio_hdf:gpio_hdf",
+    "napisubsys/gpioled_part/gpioled_demo:gpioled",
+    "napisubsys/i2cnapipart/i2cnapidemo:i2cnapidemo",
+    "napisubsys/pwmnapipart/pwmnapidemo:pwmtest",
+    "napisubsys/spinapipart/spinapidemo:spitest",
   ]
 }
