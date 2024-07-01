@@ -1,7 +1,21 @@
+/*
+ * Copyright 2023 Unionman Technology Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 import data_rdb from '@ohos.data.rdb'
 
 const STORE_CONFIG = {name: "test.db"}
-const TAB_LOG = "log"
+const TAB_LOG = 'log'
 
 const CREATE_TABLE_LOG_CODE = `
     CREATE TABLE IF NOT EXISTS ${TAB_LOG} (
@@ -25,7 +39,7 @@ export function createTable(context: Context) {
     }
     rdbStore.executeSql(CREATE_TABLE_LOG_CODE, [], function(err) {
       if (err) {
-        console.log("ERROR: ExecuteSql failed, err: " + err)
+        console.log('ERROR: ExecuteSql failed, err: ' + err)
         return
       }
       console.log('SUCCESS: create table done.')
@@ -60,11 +74,11 @@ export function insertDataArr(context: Context, list: logItem[]): Promise<void> 
         console.log(`insert ${i}: ${list[i].time}`);
         await rdbStore.insert(TAB_LOG, value);
       } catch (err) {
-        console.log("ERROR: insert failed: " + err);
+        console.log('ERROR: insert failed: ' + err);
       }
     }
   }).catch((err) => {
-    console.log("ERROR: Get RdbStore failed, err: " + err);
+    console.log('ERROR: Get RdbStore failed, err: ' + err);
   });
 }
 
@@ -77,7 +91,9 @@ export function queryData(context: Context, page: number, indexOffset: number, p
 
     try {
       let resultSet = await rdbStore.querySql(querySqlString, [])
-      if (resultSet.rowCount == 0) return false
+      if (resultSet.rowCount == 0) {
+        return false
+      }
       let list: logItem[] = []
       resultSet.goToFirstRow()
       for (let i = 0; i < resultSet.rowCount; i++) {
@@ -92,11 +108,11 @@ export function queryData(context: Context, page: number, indexOffset: number, p
       resultSet.close()
       return list
     } catch (err) {
-      console.log("ERROR: query failed, err: " + err)
+      console.log('ERROR: query failed, err: ' + err)
       return false
     }
   }).catch((err) => {
-    console.error("ERROR: Get RdbStore failed, err: " + err)
+    console.error('ERROR: Get RdbStore failed, err: ' + err)
     return false
   })
 }
