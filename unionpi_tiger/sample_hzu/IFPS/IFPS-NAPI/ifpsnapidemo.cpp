@@ -1,3 +1,18 @@
+/* Copyright 2023 Unionman Technology Co., Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 #include <cstdio>
 #include <cstring>
 #include <unistd.h>
@@ -27,14 +42,15 @@ static float TemperatureF;
 static const uint16_t device_addr = 0x44;
 
 // 温湿度传感器 IIC 设备号
-char dev_name[] = "/dev/i2c-5";
+char 
+ = "/dev/i2c-5";
 
 // 同步方法实现温湿度传感器软重启
 static napi_value Sht3xSoftReset(napi_env env, napi_callback_info info)
 {
     int value;
     napi_value ret = nullptr;
-    value = SoftReset(dev_name, device_addr);
+    value = SoftReset(g_devName, device_addr);
     usleep(50L * 1000L);
     NAPI_CALL(env, napi_create_int32(env, value, &ret));
     return ret;
@@ -64,7 +80,7 @@ static napi_value Sht3xModeSet(napi_env env, napi_callback_info info)
     // 业务执行
     int value;
     napi_value ret = nullptr;
-    value = ModeSet(dev_name, device_addr, mps, repeatability);
+    value = ModeSet(g_devName, device_addr, mps, repeatability);
     usleep(20L * 1000L);
     NAPI_CALL(env, napi_create_int32(env, value, &ret));
     return ret;
@@ -75,7 +91,7 @@ static napi_value Sht3xReadData(napi_env env, napi_callback_info info)
 {
     int value;
     napi_value ret = nullptr;
-    value = ReadTempAndHum(dev_name, device_addr, &tempRH);
+    value = ReadTempAndHum(g_devName, device_addr, &tempRH);
     usleep(20L * 1000L);
     NAPI_CALL(env, napi_create_double(env, value, &ret));
     TemperatureC = tempRH.TemperatureC;
@@ -106,15 +122,12 @@ static napi_value Sht3xReadTemperatureF(napi_env env, napi_callback_info info)
     return tempF;
 }
 
-
-
-
 // 同步方法实现获取烟雾传感器adc值
 static napi_value Mq2GetAdcValue(napi_env env, napi_callback_info info)
 {
-    constexpr int adc_channel = 1;
+    constexpr int adcChannel = 1;
     int value = 0;
-    if (get_adc_data(adc_channel, &value) < 0) {
+    if (get_adc_data(adcChannel, &value) < 0) {
         value = -1;
     }
 
@@ -139,9 +152,9 @@ static napi_value Mq2GetPermission(napi_env env, napi_callback_info info)
 // 同步方法实现获取火焰传感器adc值
 static napi_value FlameSensorGetAdcValue(napi_env env, napi_callback_info info)
 {
-    constexpr int adc_channel = 2;
+    constexpr int adcChannel = 2;
     int value = 0;
-    if (get_adc_data(adc_channel, &value) < 0) {
+    if (get_adc_data(adcChannel, &value) < 0) {
         value = -1;
     }
 
@@ -242,9 +255,6 @@ static napi_value SetPwmStatus(napi_env env, napi_callback_info info)
     return promise;
 }
 
-
-
-
 // 注册接口
 static napi_value registerifpsNapiDemoApis(napi_env env, napi_value exports)
 {
@@ -265,8 +275,6 @@ static napi_value registerifpsNapiDemoApis(napi_env env, napi_value exports)
     NAPI_CALL(env, napi_define_properties(env, exports, sizeof(desc) / sizeof(desc[0]), desc));
     return exports;
 }
-
-
 
 // 模块定义
 static napi_module ifpsnapidemoModule = {

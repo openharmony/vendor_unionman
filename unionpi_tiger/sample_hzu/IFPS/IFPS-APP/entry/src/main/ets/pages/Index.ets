@@ -1,3 +1,17 @@
+/*
+ * Copyright 2023 Unionman Technology Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 import {createTable, insertData, queryData} from './DBManager'
 import systemDateTime from '@ohos.systemDateTime';
 import display from '@ohos.display'
@@ -154,23 +168,26 @@ struct Home {
       if(deviceStatus2 && !this.humidityStatus) {
         this.humidityStatus = true
         this.addData('3', `湿度低于${this.humidityThreshold}，三级警报!`)
-      }
-      else if(!deviceStatus2 && this.humidityStatus) {
+      } else if(!deviceStatus2 && this.humidityStatus)
+      {
         this.humidityStatus = false
       }
-      this.devicesData.push({"deviceName": "湿度传感器", "value": humidityValueString, "status": deviceStatus2})
+      this.devicesData.push({"deviceName": '湿度传感器', "value": humidityValueString, "status": deviceStatus2})
     }
 
-    this.devicesData.push({"deviceName": "舵机", "value": 'none', "status": false})
-    this.devicesData.push({"deviceName": "蜂鸣器", "value": 'none', "status": false})
-
-    // console.log(JSON.stringify(this.devicesData))
+    this.devicesData.push({"deviceName": '舵机', "value": 'none', "status": false})
+    this.devicesData.push({"deviceName": '蜂鸣器', "value": 'none', "status": false})
 
     // 更新主页警告状态
-    if(this.flameSensorStatus) this.systemStatus = 1
-    else if(this.smokeSensorStatus) this.systemStatus = 2
-    else if(this.temperatureStatus || this.humidityStatus) this.systemStatus = 3
-    else this.systemStatus = 0
+    if(this.flameSensorStatus) {
+     this.systemStatus = 1
+    } else if(this.smokeSensorStatus) {
+      this.systemStatus = 2
+    } else if(this.temperatureStatus || this.humidityStatus) {
+      this.systemStatus = 3
+    } else {
+      this.systemStatus = 0
+    }
     // 更新数据
     this.gridData = this.devicesData
   }
@@ -202,13 +219,13 @@ struct Home {
     queryData(getContext(this), this.page, this.indexOffset, this.pageSize)
       .then(data => {
         if(data){
-          if(this.page === 1)
+          if(this.page === 1) {
             this.logListData = data
-          else
+          } else {
             this.logListData = this.logListData.concat(data)
+          }
           this.page++
-        }
-        else {
+        } else {
           console.log('now last page')
         }
       })
@@ -260,8 +277,7 @@ struct Home {
           console.log(`now page ${this.page}`)
           this.query()
         })
-      }
-      else {
+      } else {
         Text('empty')
           .fontColor('#708090')
           .fontSize(this.dpi / 4)
@@ -345,8 +361,11 @@ struct Home {
                         .backgroundImageSize({ width: '100%', height: '100%' })
                         .onClick(() => {
                           // 弹窗
-                          if(index === 2) this.controller_dialog3.open()
-                          else this.controller_dialog4.open()
+                          if(index === 2) {
+                          this.controller_dialog3.open()
+                          } else {
+                            this.controller_dialog4.open()
+                          }
                         })
                     }
                     .width('90%').height('90%')
@@ -407,10 +426,9 @@ struct Home {
                           }catch(err) {
                             console.log('ERROR: setPwmStatus failed' + err)
                           }
-                        }
-                        else {
+                        } else {
                           prompt.showToast({
-                            message: "关闭蜂鸣器",
+                            message: '关闭蜂鸣器',
                           })
                           try {
                             ifpsnapidemo.SetPwmStatus(2, -90)
@@ -623,29 +641,43 @@ struct CustomDialogValueInput {
 }
 
 function getTextColor(x: number){
-  if(x === 1)
+  if(x === 1) {
     return Color.Red
-  if(x === 2)
+  }
+  if(x === 2) {
     return '#ffca3230'
-  if(x === 3)
+  }
+  if(x === 3) {
     return '#c55c2d'
-  else
+  } else {
     return Color.Green
+  }
 }
 function getStatusBackgroundColor(x: number) {
-  if(x > 0) return '#dfea50'
-  else return '#98ff98'
+  if(x > 0) {
+    return '#dfea50'
+  } else {
+    return '#98ff98'
+  }
 }
 function getStatusText(x: number){
-  if(x === 0) return '正常'
-  else return '异常'
+  if(x === 0) {
+    return '正常'
+  } else {
+    return '异常'
+  }
 }
 function getStatusTextColor(x: Boolean){
-  if(x) return Color.Red
-  else return Color.Green
+  if(x) {
+    return Color.Red
+  } else {
+    return Color.Green
+  }
 }
 function getNumberTextColor(x: number, y: number){
-  if(x > y) return Color.Red
+  if(x > y) {
+    return Color.Red
+  }
   return '#708090'
 }
 
@@ -795,7 +827,7 @@ function getFIREValue() {
 
   // 使用特定的公式将电压转换为 fire 值
   // 这里使用一个简单的示例，实际上应该根据传感器的特性来计算 fire 值
-  let fireValue = voltage * 10.; // 假设一个简单的线性关系
+  let fireValue = voltage * 10.0; // 假设一个简单的线性关系
 
   return fireValue;
 }

@@ -18,7 +18,7 @@
 
 6、MG996R舵机
 
-7、蜂鸣器
+7、无源蜂鸣器
 
 ### 温湿度传感器数据采集
 
@@ -33,8 +33,6 @@
 ### 火焰传感器数据采集
 
 通过ADC通道2采集ADC值，通过转换获取到的电压值判断是否检测到火焰
-
-[ADC通道2采集参考](https://gitee.com/openharmony/vendor_unionman/blob/master/unionpi_tiger/sample/hardware/adc/README.md)
 
 ### 蜂鸣器控制
 
@@ -349,6 +347,7 @@ extern "C" __attribute__((constructor)) void RegisterifpsNapidemoModule(void)
 ifpsnapidemo/BUILD.gn
 
 ```json
+
 import("//build/ohos.gni")
 import("//build/ohos/ndk/ndk.gni")
 
