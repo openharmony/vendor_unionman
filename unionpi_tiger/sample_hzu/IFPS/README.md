@@ -56,7 +56,7 @@
 
 ##### 文件目录
 
-![image-20240623135533871](C:\Users\JIANG_JH\AppData\Roaming\Typora\typora-user-images\image-20240623135533871.png)
+![image-20240623135533871](C:\Users\JIANG_JH\vendor_unionman\unionpi_tiger\sample_hzu\IFPS\README.assets\image-20240623135533871.png)
 
 ##### 编写ifpsnapidemo.cpp文件
 
@@ -399,11 +399,11 @@ ohos_executable("sample_server") {
 
 ohos4.0release/vendor/unionman/unionpi_tiger/bundle.json
 
-![image-20240623131529188](C:\Users\JIANG_JH\AppData\Roaming\Typora\typora-user-images\image-20240623131529188.png)
+![image-20240623131529188](C:\Users\JIANG_JH\vendor_unionman\unionpi_tiger\sample_hzu\IFPS\README.assets\image-20240623131529188.png)
 
 ohos4.0release/vendor/unionman/unionpi_tiger/sample/BUILD.gn
 
-![image-20240623131648032](C:\Users\JIANG_JH\AppData\Roaming\Typora\typora-user-images\image-20240623131648032.png)
+![image-20240623131648032](C:\Users\JIANG_JH\vendor_unionman\unionpi_tiger\sample_hzu\IFPS\README.assets\image-20240623131648032.png)
 
 #### 编写TS接口定义文件
 
@@ -488,9 +488,9 @@ hdc_std shell mount / -o rw,remount
 
 | 首页                                                         | 实况                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![image-20240701121821873](C:\Users\JIANG_JH\AppData\Roaming\Typora\typora-user-images\image-20240701121821873.png) | ![image-20240701121856786](C:\Users\JIANG_JH\AppData\Roaming\Typora\typora-user-images\image-20240701121856786.png) |
+| ![image-20240701121821873](C:\Users\JIANG_JH\vendor_unionman\unionpi_tiger\sample_hzu\IFPS\README.assets\image-20240701121821873.png) | ![image-20240701121856786](C:\Users\JIANG_JH\vendor_unionman\unionpi_tiger\sample_hzu\IFPS\README.assets\image-20240701121856786.png) |
 
 | 日志                                                         | 警报                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![image-20240701121919863](file://C:/Users/JIANG_JH/AppData/Roaming/Typora/typora-user-images/image-20240701121919863.png?lastModify=1719807427) | ![image-20240701114110446](file://C:/Users/JIANG_JH/AppData/Roaming/Typora/typora-user-images/image-20240701114110446.png?lastModify=1719807588) |
+| ![image-20240701121919863](C:\Users\JIANG_JH\vendor_unionman\unionpi_tiger\sample_hzu\IFPS\README.assets\image-20240701121919863.png) | ![image-20240701114110446](C:\Users\JIANG_JH\vendor_unionman\unionpi_tiger\sample_hzu\IFPS\README.assets\image-20240701114110446.png) |
 
