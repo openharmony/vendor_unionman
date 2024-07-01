@@ -157,7 +157,7 @@ struct Home {
       } else if(!deviceStatus1 && this.temperatureStatus) {
         this.temperatureStatus = false
       }
-      this.devicesData.push({'deviceName': "温度传感器", 'value': temperatureValueString, 'status': deviceStatus1})
+      this.devicesData.push({'deviceName': '温度传感器', 'value': temperatureValueString, 'status': deviceStatus1})
 
       const humidityValue = fSensorData.humidity
       const humidityValueString = fSensorData.humidity.toFixed(3)
