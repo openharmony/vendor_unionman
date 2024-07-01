@@ -148,22 +148,21 @@ struct Home {
     }
 
     // 温湿度
-    const sensorData_f = readTemperatureAndHumidity()
-    if(sensorData_f) {
-      const temperatureValue = sensorData_f.temperatureC
+    const fSensorData = readTemperatureAndHumidity()
+    if(fSensorData) {
+      const temperatureValue = fSensorData.temperatureC
       const temperatureValueString = temperatureValue.toFixed(3)
       const deviceStatus1 = temperatureValue > this.temperatureThreshold
       if(deviceStatus1 && !this.temperatureStatus) {
         this.temperatureStatus = true
         this.addData('3', `温度高于${this.temperatureThreshold}，三级警报!`)
-      }
-      else if(!deviceStatus1 && this.temperatureStatus) {
+      } else if(!deviceStatus1 && this.temperatureStatus) {
         this.temperatureStatus = false
       }
       this.devicesData.push({"deviceName": "温度传感器", "value": temperatureValueString, "status": deviceStatus1})
 
-      const humidityValue = sensorData_f.humidity
-      const humidityValueString = sensorData_f.humidity.toFixed(3)
+      const humidityValue = fSensorData.humidity
+      const humidityValueString = fSensorData.humidity.toFixed(3)
       const deviceStatus2 = humidityValue < this.humidityThreshold
       if(deviceStatus2 && !this.humidityStatus) {
         this.humidityStatus = true
@@ -193,8 +192,8 @@ struct Home {
   }
 
   addData(level_s: string, info_s: string) {
-    getTimeString().then(time_s => {
-      const item: logItem = {time: time_s, level: level_s, info: info_s}
+    getTimeString().then(sTime => {
+      const item: logItem = {time: sTime, level: level_s, info: info_s}
       insertData(getContext(this), item).then(() => {
         // 更新列表
         console.log(`update: ${JSON.stringify(item)}`);
@@ -328,8 +327,11 @@ struct Home {
                         .backgroundImageSize({ width: '100%', height: '100%' })
                         .onClick(() => {
                           // 弹窗
-                          if(index === 1) this.controller_dialog1.open()
-                          else this.controller_dialog2.open()
+                          if(index === 1) {
+                            this.controller_dialog1.open()
+                          } else {
+                            this.controller_dialog2.open()
+                          }
                         })
                     }
                     .width('90%').height('90%')
@@ -383,7 +385,7 @@ struct Home {
                         this.pwm1_start = isChecked
                         if(isChecked) {
                           prompt.showToast({
-                            message: "打开舵机", // 显示文本
+                            message: '打开舵机', // 显示文本
                           })
                           try {
                             ifpsnapidemo.SetPwmStatus(1, 90)
@@ -394,7 +396,7 @@ struct Home {
                         }
                         else {
                           prompt.showToast({
-                            message: "关闭舵机", // 显示文本
+                            message: '关闭舵机', // 显示文本
                           })
                           try {
                             ifpsnapidemo.SetPwmStatus(1, 0)
@@ -408,8 +410,7 @@ struct Home {
                   .width('100%')
                   .padding({ top: '3%' })
                   .justifyContent(FlexAlign.Center)
-                }
-                else if(index === 5){
+                } else if(index === 5){
                   // 蜂鸣器开关
                   Row() {
                     Toggle({ type: ToggleType.Switch, isOn: this.pwm2_start })
@@ -418,7 +419,7 @@ struct Home {
                         this.pwm2_start = !this.pwm2_start
                         if(isChecked) {
                           prompt.showToast({
-                            message: "打开蜂鸣器",
+                            message: '打开蜂鸣器',
                           })
                           try {
                             ifpsnapidemo.SetPwmStatus(2, 90)
@@ -759,7 +760,7 @@ function getPPMValue() {
 
     // 检查权限获取结果
     if (!permissionGranted) {
-      console.error("无法获取 ADC 值并且权限获取失败");
+      console.error('无法获取 ADC 值并且权限获取失败');
       return null; // 返回 null 表示无法获取 ppm 值
     }
 
@@ -773,7 +774,7 @@ function getPPMValue() {
 
     // 检查是否成功获取 ADC 值
     if (adcValue < 0) {
-      console.error("无法获取 ADC 值");
+      console.error('无法获取 ADC 值');
       return null; // 返回 null 表示无法获取 ppm 值
     }
   }
@@ -803,7 +804,7 @@ function getFIREValue() {
 
     // 检查权限获取结果
     if (!permissionGranted) {
-      console.error("无法获取 ADC 值并且权限获取失败");
+      console.error('无法获取 ADC 值并且权限获取失败');
       return null; // 返回 null 表示无法获取 ppm 值
     }
 
@@ -817,7 +818,7 @@ function getFIREValue() {
 
     // 检查是否成功获取 ADC 值
     if (adcValue < 0) {
-      console.error("无法获取 ADC 值");
+      console.error('无法获取 ADC 值');
       return null; // 返回 null 表示无法获取 fire 值
     }
   }

@@ -34,7 +34,7 @@ type logItem = {
 export function createTable(context: Context) {
   data_rdb.getRdbStore(context, STORE_CONFIG, 1, function (err, rdbStore) {
     if(err){
-      console.log("ERROR: Get RdbStore failed, err: " + err)
+      console.log('ERROR: Get RdbStore failed, err: ' + err)
       return
     }
     rdbStore.executeSql(CREATE_TABLE_LOG_CODE, [], function(err) {
@@ -54,10 +54,10 @@ export function insertData(context: Context, item: logItem): Promise<void> {
       console.log(`insert : ${item.time}`)
       rdbStore.insert(TAB_LOG, item)
     }catch (err){
-      console.log("ERROR: insert failed: " + err)
+      console.log('ERROR: insert failed: ' + err)
     }
   }).catch((err) => {
-    console.log("ERROR: Get RdbStore failed, err: " + err)
+    console.log('ERROR: Get RdbStore failed, err: ' + err)
   })
 }
 
@@ -82,7 +82,10 @@ export function insertDataArr(context: Context, list: logItem[]): Promise<void> 
   });
 }
 
-export function queryData(context: Context, page: number, indexOffset: number, pageSize: number): Promise<logItem[] | false> {
+export function queryData(context: Context,
+                          page: number,
+                          indexOffset: number,
+                          pageSize: number): Promise<logItem[] | false> {
   let promise = data_rdb.getRdbStore(context, STORE_CONFIG, 1)
   return promise.then(async (rdbStore) => {
     // 查询操作
