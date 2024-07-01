@@ -56,7 +56,7 @@
 
 ##### 文件目录
 
-![image-20240623135533871](README.assets\image-20240623135533871.png)
+![image-20240623135533871](README.assets/image-20240623135533871.png)
 
 ##### 编写ifpsnapidemo.cpp文件
 
@@ -399,11 +399,11 @@ ohos_executable("sample_server") {
 
 ohos4.0release/vendor/unionman/unionpi_tiger/bundle.json
 
-![image-20240623131529188](README.assets\image-20240623131529188.png)
+![image-20240623131529188](README.assets/image-20240623131529188.png)
 
 ohos4.0release/vendor/unionman/unionpi_tiger/sample/BUILD.gn
 
-![image-20240623131648032](README.assets\image-20240623131648032.png)
+![image-20240623131648032](README.assets/image-20240623131648032.png)
 
 #### 编写TS接口定义文件
 
@@ -486,11 +486,11 @@ hdc_std shell mount / -o rw,remount
 
 ### 演示效果
 
-|                                                              |                                                              |
+| 首页                                                         | 状态                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![image-20240701121821873.png](README.assets\image-20240701121821873.png) | ![image-20240701121856786](README.assets\image-20240701121856786.png) |
+| ![image-20240701121821873.png](README.assets/image-20240701121821873.png) | ![image-20240701121856786](README.assets/image-20240701121856786.png) |
 
 | 日志                                                         | 警报                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![image-20240701121919863](README.assets\image-20240701121919863.png) | ![image-20240701114110446](README.assets\image-20240701114110446.png) |
+| ![image-20240701121919863](README.assets/image-20240701121919863.png) | ![image-20240701114110446](README.assets/image-20240701114110446.png) |
 
