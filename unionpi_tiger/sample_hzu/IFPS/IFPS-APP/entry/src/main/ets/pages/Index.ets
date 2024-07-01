@@ -112,19 +112,18 @@ struct Home {
     }
 
     // 获取ppm(烟雾浓度)
-    const ppmValue_f = getPPMValue()
-    if(ppmValue_f){
-      const ppmValue = ppmValue_f
-      const ppmValueString = ppmValue_f.toFixed(3)
+    const fPpmValue = getPPMValue()
+    if(fPpmValue){
+      const ppmValue = fPpmValue
+      const ppmValueString = fPpmValue.toFixed(3)
       const deviceStatus = ppmValue > this.smokeSensorThreshold
       if(deviceStatus && !this.smokeSensorStatus) {
         this.smokeSensorStatus = true
         this.addData('2', '检测到可燃气体，二级警报!')
-      }
-      else if(!deviceStatus && this.smokeSensorStatus) {
+      } else if(!deviceStatus && this.smokeSensorStatus) {
         this.smokeSensorStatus = false
       }
-      this.devicesData.push({"deviceName": "烟雾传感器", "value": ppmValueString, "status": deviceStatus})
+      this.devicesData.push({'deviceName': '烟雾传感器', 'value': ppmValueString, 'status': deviceStatus})
     }
 
     // 获取火焰传感器 adc值
@@ -143,7 +142,7 @@ struct Home {
         this.flameSensorStatus = false
         this.pwm1_start = false
       }
-      this.devicesData.push({"deviceName": "火焰传感器", "value": fireValueString, "status": deviceStatus})
+      this.devicesData.push({'deviceName': '火焰传感器', 'value': fireValueString, 'status': deviceStatus})
     }
 
     // 温湿度
@@ -158,7 +157,7 @@ struct Home {
       } else if(!deviceStatus1 && this.temperatureStatus) {
         this.temperatureStatus = false
       }
-      this.devicesData.push({"deviceName": "温度传感器", "value": temperatureValueString, "status": deviceStatus1})
+      this.devicesData.push({'deviceName': "温度传感器", 'value': temperatureValueString, 'status': deviceStatus1})
 
       const humidityValue = fSensorData.humidity
       const humidityValueString = fSensorData.humidity.toFixed(3)
@@ -169,11 +168,11 @@ struct Home {
       } else if(!deviceStatus2 && this.humidityStatus) {
         this.humidityStatus = false
       }
-      this.devicesData.push({"deviceName": '湿度传感器', "value": humidityValueString, "status": deviceStatus2})
+      this.devicesData.push({'deviceName': '湿度传感器', 'value': humidityValueString, 'status': deviceStatus2})
     }
 
-    this.devicesData.push({"deviceName": '舵机', "value": 'none', "status": false})
-    this.devicesData.push({"deviceName": '蜂鸣器', "value": 'none', "status": false})
+    this.devicesData.push({'deviceName': '舵机', 'value': 'none', 'status': false})
+    this.devicesData.push({'deviceName': '蜂鸣器', 'value': 'none', 'status': false})
 
     // 更新主页警告状态
     if(this.flameSensorStatus) {
@@ -372,9 +371,7 @@ struct Home {
                     .justifyContent(FlexAlign.End)
                     .alignItems(HorizontalAlign.End)
                   }
-                }
-                // 舵机
-                else if(index === 4){
+                } else if(index === 4) {
                   // 舵机开关
                   Row() {
                     Toggle({ type: ToggleType.Switch, isOn: this.pwm1_start })
