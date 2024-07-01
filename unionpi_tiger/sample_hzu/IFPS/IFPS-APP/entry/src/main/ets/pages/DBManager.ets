@@ -14,7 +14,7 @@
  */
 import data_rdb from '@ohos.data.rdb'
 
-const STORE_CONFIG = {name: "test.db"}
+const STORE_CONFIG = {name: 'test.db'}
 const TAB_LOG = 'log'
 
 const CREATE_TABLE_LOG_CODE = `
@@ -100,9 +100,9 @@ export function queryData(context: Context,
       let list: logItem[] = []
       resultSet.goToFirstRow()
       for (let i = 0; i < resultSet.rowCount; i++) {
-        const time = resultSet.getString(resultSet.getColumnIndex("date"))
-        const level = resultSet.getString(resultSet.getColumnIndex("level"))
-        const info = resultSet.getString(resultSet.getColumnIndex("info"))
+        const time = resultSet.getString(resultSet.getColumnIndex('date'))
+        const level = resultSet.getString(resultSet.getColumnIndex('level'))
+        const info = resultSet.getString(resultSet.getColumnIndex('info'))
         resultSet.goToNextRow()
         const data: logItem = { time, level, info }
         list.push(data)

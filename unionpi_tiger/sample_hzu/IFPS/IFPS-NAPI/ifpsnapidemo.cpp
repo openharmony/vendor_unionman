@@ -30,14 +30,12 @@ static const int SERVO_MAX_DUTY = 2500000;
 
 #ifdef __cplusplus
 extern "C" {
-
 #endif
-
 // 温湿度传感器全局变量声明
-static sRHAndTemp_t tempRH;
-static float temperatureC;
-static float humidity;
-static float temperatureF;
+static sRHAndTemp_t g_tempRH;
+static float g_temperatureC;
+static float g_humidity;
+static float g_temperatureF;
 
 // 温湿度传感器 IIC 设备地址
 static const uint16_t device_addr = 0x44;
@@ -91,12 +89,12 @@ static napi_value Sht3xReadData(napi_env env, napi_callback_info info)
 {
     int value;
     napi_value ret = nullptr;
-    value = ReadTempAndHum(g_devName, device_addr, &tempRH);
+    value = ReadTempAndHum(g_devName, device_addr, &g_tempRH);
     usleep(20L * 1000L);
     NAPI_CALL(env, napi_create_double(env, value, &ret));
-    temperatureC = tempRH.temperatureC;
-    humidity = tempRH.humidity;
-    temperatureF = tempRH.temperatureF;
+    g_temperatureC = g_tempRH.g_temperatureC;
+    g_humidity = g_tempRH.g_humidity;
+    g_temperatureF = g_tempRH.g_temperatureF;
     return ret;
 }
 
@@ -104,21 +102,21 @@ static napi_value Sht3xReadData(napi_env env, napi_callback_info info)
 static napi_value Sht3xReadTemperatureC(napi_env env, napi_callback_info info)
 {
     napi_value tempC = nullptr;
-    NAPI_CALL(env, napi_create_double(env, temperatureC, &tempC));
+    NAPI_CALL(env, napi_create_double(env, g_temperatureC, &tempC));
     return tempC;
 }
 // 将湿度传到APP(运行此函数前需要运行Sht3xReadData函数)
 static napi_value Sht3xReadHumidity(napi_env env, napi_callback_info info)
 {
     napi_value hum = nullptr;
-    NAPI_CALL(env, napi_create_double(env, humidity, &hum));
+    NAPI_CALL(env, napi_create_double(env, g_humidity, &hum));
     return hum;
 }
 // 将华氏温度传到APP(运行此函数前需要运行Sht3xReadData函数)
 static napi_value Sht3xReadTemperatureF(napi_env env, napi_callback_info info)
 {
     napi_value tempF = nullptr;
-    NAPI_CALL(env, napi_create_double(env, temperatureF, &tempF));
+    NAPI_CALL(env, napi_create_double(env, g_temperatureF, &tempF));
     return tempF;
 }
 

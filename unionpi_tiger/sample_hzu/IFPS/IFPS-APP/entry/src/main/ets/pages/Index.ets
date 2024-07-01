@@ -128,10 +128,10 @@ struct Home {
     }
 
     // 获取火焰传感器 adc值
-    const fireValue_f = getFIREValue();
-    if(fireValue_f){
-      const fireValue = fireValue_f
-      const fireValueString = fireValue_f.toFixed(3)
+    const fFireValue = getFIREValue();
+    if(fFireValue){
+      const fireValue = fFireValue
+      const fireValueString = fFireValue.toFixed(3)
       const deviceStatus = fireValue < this.flameSensorThreshold
       if(deviceStatus && !this.flameSensorStatus) {
         this.flameSensorStatus = true
@@ -139,8 +139,7 @@ struct Home {
         // 自动开启舵机
         this.pwm1_start = true
 
-      }
-      else if(!deviceStatus && this.flameSensorStatus) {
+      } else if(!deviceStatus && this.flameSensorStatus) {
         this.flameSensorStatus = false
         this.pwm1_start = false
       }
@@ -167,8 +166,7 @@ struct Home {
       if(deviceStatus2 && !this.humidityStatus) {
         this.humidityStatus = true
         this.addData('3', `湿度低于${this.humidityThreshold}，三级警报!`)
-      } else if(!deviceStatus2 && this.humidityStatus)
-      {
+      } else if(!deviceStatus2 && this.humidityStatus) {
         this.humidityStatus = false
       }
       this.devicesData.push({"deviceName": '湿度传感器', "value": humidityValueString, "status": deviceStatus2})
@@ -191,9 +189,9 @@ struct Home {
     this.gridData = this.devicesData
   }
 
-  addData(level_s: string, info_s: string) {
+  addData(sLevel: string, sInfo: string) {
     getTimeString().then(sTime => {
-      const item: logItem = {time: sTime, level: level_s, info: info_s}
+      const item: logItem = {time: sTime, level: sLevel, info: sInfo}
       insertData(getContext(this), item).then(() => {
         // 更新列表
         console.log(`update: ${JSON.stringify(item)}`);
@@ -203,7 +201,7 @@ struct Home {
         AlertDialog.show(
           {
             title: '警告!',
-            message: info_s,
+            message: sInfo,
             autoCancel: true,
             alignment: DialogAlignment.Bottom,
             offset: { dx: 0, dy: -20 },
@@ -393,8 +391,7 @@ struct Home {
                           }catch(err) {
                             console.log('ERROR: SetPwmStatus failed' + err)
                           }
-                        }
-                        else {
+                        } else {
                           prompt.showToast({
                             message: '关闭舵机', // 显示文本
                           })
