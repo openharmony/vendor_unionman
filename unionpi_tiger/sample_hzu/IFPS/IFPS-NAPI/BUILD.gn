@@ -1,0 +1,45 @@
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+config("warns") {
+  cflags = [ "-Werror" ]
+}
+
+ohos_shared_library("ifpsnapidemo") {
+  include_dirs = [
+    "//foundation/ace/napi/interfaces/kits",
+    "//commonlibrary/c_utils/base/include",
+    "//base/hiviewdfx/hilog/interfaces/native/innerkits/include",
+  ]
+
+  sources = [
+    "i2cinterface.c",
+    "ifpsnapidemo.cpp",
+     "sample_client.c",
+    "um_adc.c",
+     "um_pwm.c",
+  ]
+
+ 
+  configs = [ ":warns" ]
+  
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+
+  part_name = "product_unionpi_tiger"
+}
+
+ohos_executable("sample_server") {
+  output_name = "sample_server_executable" 
+  sources = [ "sample_server.c" ]
+  include_dirs = [ "//base/hiviewdfx/hilog/interfaces/native/innerkits/include" ]
+  configs = [ ":warns" ]
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+  install_images = [ "system" ]
+}
