@@ -344,8 +344,7 @@ struct Home {
                         .fontSize(this.dpi / 3)
                         .fontColor(getNumberTextColor(item.value, this.temperatureThreshold))
                         .padding('5%')
-                    }
-                    else {
+                    } else {
                       Text(`${item.value}%`)
                         .fontSize(this.dpi / 3)
                         .fontColor(getNumberTextColor(item.value, this.humidityThreshold))
