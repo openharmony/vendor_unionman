@@ -22,9 +22,13 @@
 
 ### 温湿度传感器数据采集
 
+参考https://gitee.com/openharmony/vendor_unionman/tree/master/unionpi_tiger/sample/hardware/i2c
+
 ### 烟雾传感器数据采集
 
 通过ADC通道1采集ADC值，使用转换公式转换获取烟雾浓度，例程中仅使用简单的线性转换
+
+参考https://gitee.com/openharmony/vendor_unionman/tree/master/unionpi_tiger/sample/hardware/adc
 
 ### 火焰传感器数据采集
 
@@ -35,6 +39,8 @@
 使用PWM控制蜂鸣器，以发出不同频率的声音，对应不同的警报等级
 
 ### 舵机控制
+
+参考https://gitee.com/openharmony/vendor_unionman/tree/master/unionpi_tiger/sample/hardware/pwm
 
 ### NAPI
 
