@@ -482,5 +482,5 @@ hdc_std shell mount / -o rw,remount
 
 | 首页                                                         | 状态                                                         | 日志                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![image-20240701121821873.png](README.assets/image-20240701121821873.png) | ![image-20240701121856786](README.assets/image-20240701121856786.png) | ![image-20240702132100441](C:\Users\JIANG_JH\vendor_unionman\unionpi_tiger\sample_hzu\IFPS\README.assets\image-20240702132100441.png) |
+| ![image-20240701121821873.png](README.assets/image-20240701121821873.png) | ![image-20240701121856786](README.assets/image-20240701121856786.png) | ![image-20240702132100441](README.assets/image-20240702132100441.png) |
 
