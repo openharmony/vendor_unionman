@@ -335,9 +335,7 @@ struct Home {
                     .justifyContent(FlexAlign.End)
                     .alignItems(HorizontalAlign.End)
                   }
-                }
-                // 温湿度传感器
-                else if(index === 2 || index === 3) {
+                } else if(index === 2 || index === 3) {
                   Stack() {
                     if(index === 2) {
                       Text(`${item.value}°C`)
