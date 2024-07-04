@@ -1,0 +1,9 @@
+{
+  "src": [
+    "pages/Lamp",
+    "pages/camera",
+    "pages/Index",
+    "pages/Tem_Hum"
+
+  ]
+}
