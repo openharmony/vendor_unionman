@@ -1,0 +1,8 @@
+{
+  "src": [
+    "pages/Index",
+    "filemanager/pages/intelligentscenario",
+    "filemanager/pages/backhome",
+    "filemanager/pages/lefthome"
+  ]
+}
