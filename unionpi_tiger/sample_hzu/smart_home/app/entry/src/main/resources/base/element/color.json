@@ -1,0 +1,52 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "controlLight",
+      "value": "#4d5aaf"
+    },
+    {
+      "name": "closeLight",
+      "value": "#8caede"
+    },
+    {
+      "name": "openLight",
+      "value": "#7b7c7d"
+    },
+    {
+      "name": "lightALL",
+      "value": "#A5DEF1"
+    },
+    {
+      "name": "curtainModel",
+      "value": "#40aba9"
+    },
+    {
+      "name": "sliderOpen",
+      "value": "#182431"
+    },
+    {
+      "name": "sliderClose",
+      "value": "#007DFF"
+    },
+    {
+      "name": "openLightBack",
+      "value": "#4d5aaf"
+    },
+    {
+      "name": "textBackground",
+      "value": "#bbb2cb"
+    },
+    {
+      "name": "pickerColor",
+      "value": "#3a7b99"
+    },
+    {
+      "name": "returnColor",
+      "value": "#a25768"
+    }
+  ]
+}
