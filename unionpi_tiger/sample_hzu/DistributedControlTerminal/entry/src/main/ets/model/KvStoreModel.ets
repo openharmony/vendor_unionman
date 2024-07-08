@@ -17,17 +17,13 @@ import distributedData from '@ohos.data.distributedKVStore'
 import common from '@ohos.app.ability.common'
 import Logger from '../util/Logger'
 import { Callback } from '@ohos.base';
-
 const STORE_ID = 'etskvstore'
 const TAG = 'KvStoreModel'
 
 export class KvStoreModel {
   private kvManager?: distributedData.KVManager = undefined;
   private kvStore?: distributedData.SingleKVStore = undefined;
-
-  constructor() {
-  }
-
+  constructor() { }
   async createKvStore(callback: Callback<void>) {
     if ((typeof (this.kvStore) !== 'undefined')) {
       callback()
@@ -46,10 +42,8 @@ export class KvStoreModel {
     }
     Logger.info(TAG, 'ecreateKVManager end')
     let options: distributedData.Options = {
-      createIfMissing: true,
-      encrypt: false,
-      backup: false,
-      autoSync: true,
+      createIfMissing: true, encrypt: false,
+      backup: false, autoSync: true,
       kvStoreType: distributedData.KVStoreType.SINGLE_VERSION,
       securityLevel: distributedData.SecurityLevel.S1,
     }
@@ -63,7 +57,6 @@ export class KvStoreModel {
     }
     Logger.info(TAG, 'kvstorTAG,ekvManager.getKVStore end')
   }
-
   put(key: string, value: string) {
     if (this.kvStore) {
       Logger.debug(TAG, `kvStore.put ${key} = ${value}`);
@@ -77,8 +70,6 @@ export class KvStoreModel {
       })
     }
   }
-
-
   get(key: string, callback: Callback<string>) {
     if (this.kvStore) {
       Logger.debug(TAG, `kvStore.get ${key}`);
@@ -91,12 +82,8 @@ export class KvStoreModel {
       })
     }
   }
-
-
-  // 设置监听特定消息接收的方法，当特定键(msg)的数值变化时，执行回调函数(callback)
   setOnMessageReceivedListener(msg: string, callback: Callback<string>) {
-    // 记录日志，指示设置了消息接收监听器
-    Logger.info(TAG, `setOnMessageReceivedListener ${msg}`);
+    Logger.info(TAG, `setOnMessageReceivedListener ${msg}`);  // 记录日志，指示设置了消息接收监听器
     let self = this; // 将当前对象存储在self中，以便在回调函数中使用
     this.createKvStore(() => { // 创建键值存储后执行的回调函数
       Logger.info(TAG, 'kvStore.on(dataChange) begin'); // 记录日志，表示开始监听键值存储的数据变化

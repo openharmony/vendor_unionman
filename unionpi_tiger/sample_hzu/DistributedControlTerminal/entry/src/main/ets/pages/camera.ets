@@ -5,22 +5,21 @@ import pwmtest from '@ohos.pwmtest'
 import { KvStoreModel } from '../model/KvStoreModel';
 import Logger from '../util/Logger';
 
-const PWM = "pwm"
+const PWM = 'pwm'
 let kvStoreModel: KvStoreModel = new KvStoreModel() // 实例化键值存储模型
 const TAG = 'camera'
 
 @Entry
 @Component
 struct camera {
-  @State text: string = "0度"
+  @State text: string = '0度'
   @State index: number = 0
   @State@Watch('angleChange') angle: number = 0  // 使用 @State 来跟踪角度状态
 
   angleChange() {
-    console.log(TAG,"anglechange:"+this.angle);
+    console.log(TAG,'anglechange:'+this.angle);
     pwmtest.setPwmStatus(2, this.angle);
   }
-
   updateAngle(text: string) {
     let angle = 0;
     switch (text) {
@@ -42,16 +41,14 @@ struct camera {
   }
   aboutToAppear() {
     kvStoreModel.setOnMessageReceivedListener(PWM , (value) => {
-      // 记录日志，显示接收到NOTES_CHANGE消息的值
-      Logger.info(TAG, `PWM${value}`);
-          //做自己的操作
+      Logger.info(TAG, `PWM${value}`);  // 记录日志，显示接收到NOTES_CHANGE消息的值
           this.angle = JSON.parse(value);//从数据库中获得新变化的数据
         })
   }
 
   build() {
     Column() {
-      Text("angle:"+this.angle)
+      Text('angle:'+this.angle)
       Row() {
         Image($r('app.media.back'))
           .height(32)

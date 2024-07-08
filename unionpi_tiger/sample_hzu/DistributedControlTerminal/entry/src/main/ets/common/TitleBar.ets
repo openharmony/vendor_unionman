@@ -18,7 +18,6 @@ import { DeviceDialog } from '../common/Dialog'
 import { RemoteDeviceModel } from '../model/RemoteDeviceModel'
 import { DeviceDataModel } from '../model/DeviceDataModel'
 import Logger from '../util/Logger'
-
 const NOTES_CHANGE = 'notesChange'
 const EXIT = 'exit'
 const TAG = 'TitleBar'
@@ -27,7 +26,8 @@ const DEVICE_DISCOVERY_RANGE: number = 1000
 @Component
 export struct TitleBar {
   private selectedIndex: number = 0
-  private startAbilityCallBack: (key: string) => void = (key: string) => {};
+  private startAbilityCallBack: (key: string) => void = (key: string) => {
+  };
   private remoteDeviceModel: RemoteDeviceModel | null = null;
   private dialogController: CustomDialogController | null = null;
   @State deviceList: Array<DeviceDataModel> = []
@@ -39,7 +39,6 @@ export struct TitleBar {
     this.dialogShow = false
     this.dialogController!.close();
   }
-
   selectDevice() {
     Logger.info(TAG, 'start ability ......')
     this.isDistributed = true
@@ -51,7 +50,7 @@ export struct TitleBar {
     }
     Logger.info(TAG, 'start ability1, needAuth：')
     this.remoteDeviceModel.authenticateDevice(this.deviceList[this.selectedIndex], () => {
-      Logger.info(TAG, "auth and online finished")
+      Logger.info(TAG, 'auth and online finished')
       for (let i = 0; i < this.remoteDeviceModel!.deviceList.length; i++) {
         if (this.remoteDeviceModel!.deviceList[i].deviceName === this.deviceList[this.selectedIndex].deviceName) {
           this.startAbility(this.remoteDeviceModel!.deviceList[i].networkId as string);
@@ -61,12 +60,11 @@ export struct TitleBar {
     Logger.info(TAG, 'start ability2 ......')
     this.clearSelectState()
   }
-
   handleSelectDevice = (index: number) => {
     Logger.info(TAG, 'selectedIndexChange')
     this.selectedIndex = index
     if (this.selectedIndex === 0) {
-      Logger.info(TAG, "stop ability")
+      Logger.info(TAG, 'stop ability')
       this.dialogController!.close();
       this.startAbilityCallBack(EXIT)
       this.isDistributed = false
@@ -76,7 +74,6 @@ export struct TitleBar {
     }
     this.selectDevice()
   }
-
   startAbility(deviceId: string) {
     Logger.info(TAG, `startAbility deviceId:${deviceId}`)
     let context = getContext(this) as common.UIAbilityContext
@@ -94,17 +91,23 @@ export struct TitleBar {
       this.startAbilityCallBack(NOTES_CHANGE)
     }, 1000)
   }
-
   showDialog() {
     this.dialogShow = true
     this.remoteDeviceModel!.registerDeviceListCallback(() => {
       this.deviceList = []
       Logger.info(TAG, 'registerDeviceListCallback, callback entered')
       this.deviceList.push(new DeviceDataModel('0', 'Local device', '0', false, '', DEVICE_DISCOVERY_RANGE));
-      let deviceTempList = this.remoteDeviceModel!.discoverList.length > 0 ? this.remoteDeviceModel!.discoverList : this.remoteDeviceModel!.deviceList;
+      let deviceTempList = this.remoteDeviceModel!.discoverList.length > 0
+        ? this.remoteDeviceModel!.discoverList
+        : this.remoteDeviceModel!.deviceList;
       for (let i = 0; i < deviceTempList.length; i++) {
         Logger.info(TAG, `device ${i}/${deviceTempList.length} deviceId=${deviceTempList[i].deviceId} deviceName=${deviceTempList[i].deviceName} deviceType=${deviceTempList[i].deviceType}`)
-        this.deviceList.push(new DeviceDataModel(deviceTempList[i].deviceId, deviceTempList[i].deviceName, deviceTempList[i].deviceType, (this.selectedIndex === i), deviceTempList[i].networkId as string, DEVICE_DISCOVERY_RANGE));
+        this.deviceList.push(new DeviceDataModel(deviceTempList[i].deviceId,
+          deviceTempList[i].deviceName,
+          deviceTempList[i].deviceType,
+          (this.selectedIndex === i),
+          deviceTempList[i].networkId as string,
+          DEVICE_DISCOVERY_RANGE));
       }
       if (this.dialogShow) {
         this.dialogController!.close();

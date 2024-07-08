@@ -4,7 +4,7 @@
 
 本示例展示了在eTS中分布式数据管理的使用，包括KVManager对象实例的创建和KVStore数据流转的使用。
 
-通过设备管理接口[@ohos.distributedDeviceManager](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-distributedservice-kit/js-apis-distributedDeviceManager.md) ，实现设备之间的kvStore对象的数据传输交互；通过@ohos.i2cnapidemo、@ohos.adc_napi、@ohos.pwmtest等接口，实现实时温湿度显示、智能灯光功能和摄像头转动。
+通过设备管理接口@ohos.distributedDeviceManager ，实现设备之间的kvStore对象的数据传输交互；通过@ohos.i2cnapidemo、@ohos.adc_napi、@ohos.pwmtest等接口，实现实时温湿度显示、智能灯光功能和摄像头转动。
 
 ### 效果预览
 
@@ -46,11 +46,11 @@
 
 #### 管理Kvstore
 
-1、页面初始化时获取此应用所需能力：引入@ohos.data.distributedKVStore初始化kvstore数据库并对使用kvstore.on数据change进行监听，通过appstorge判断获取相应的key判断是否是分布式节点，[源码](https://gitee.com/openharmony/applications_app_samples/blob/master/code/SuperFeature/DistributedAppDev/Kvstore/entry/src/main/ets/pages/Index.ets) 。 
+1、页面初始化时获取此应用所需能力：引入@ohos.data.distributedKVStore初始化kvstore数据库并对使用kvstore.on数据change进行监听，通过appstorge判断获取相应的key判断是否是分布式节点。 
 
 2、如果是分布式节点，如果数据发生变化，处理数据并使用.noteDataSource()进行reload数据。
 
-3、页面通过kvStore对象进行增删改查会触发其他已连接设备的kvStore.on监听。
+3、页面通过kvStore对象进行增删改查会触发其它已连接设备的kvStore.on监听。
 
 #### 管理分布式设备（节点）
 
@@ -62,9 +62,9 @@
 
 ### 相关权限
 
-允许不同设备间的数据交换：[ohos.permission.DISTRIBUTED_DATASYNC](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/security/AccessToken/permissions-for-all.md#ohospermissiondistributed_datasync) 。
+允许不同设备间的数据交换：ohos.permission.DISTRIBUTED_DATASYNC。
 
-允许系统应用获取分布式设备的认证组网能力：[ohos.permission.ACCESS_SERVICE_DM](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/security/AccessToken/permissions-for-system-apps.md#ohospermissionaccess_service_dm)
+允许系统应用获取分布式设备的能力：ohos.permission.ACCESS_SERVICE_DM
 
 ### 依赖
 
@@ -74,11 +74,11 @@
 
 1.本示例仅支持标准系统上运行。
 
-3.本示例已适配API version 9版本FULL SDK，版本号：3.2.11.9,使用Full SDK时需要手动从镜像站点获取，并在DevEco Studio中替换，具体操作可参考[替换指南](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/faqs/full-sdk-switch-guide.md) 。
+3.本示例已适配API version 9版本FULL SDK，版本号：3.2.11.9,使用Full SDK时需要手动从镜像站点获取，并在DevEco Studio中替换 。
 
 4.本示例需要使用DevEco Studio 3.1 Beta2 (Build Version: 3.1.0.400, built on April 7, 2023)及以上版本才可编译运行。
 
-3.本示例需要使用[@ohos.distributedDeviceManager](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-distributedservice-kit/js-apis-distributedDeviceManager.md) 系统权限的系统接口。
+3.本示例需要使用@ohos.distributedDeviceManager系统权限的系统接口。
 
 ### 下载
 

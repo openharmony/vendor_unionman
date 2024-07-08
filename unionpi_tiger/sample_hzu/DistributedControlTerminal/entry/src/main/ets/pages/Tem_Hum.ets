@@ -4,11 +4,10 @@ import testNapi from 'libentry.so'
 import { KvStoreModel } from '../model/KvStoreModel';
 import Logger from '../util/Logger';
 import i2cnapidemo from '@ohos.i2cnapidemo';
-import constant from '@ohos.bluetooth.constant';
 import promptAction from '@ohos.promptAction';
 
 const TAG = 'Tem_Hum'
-const TEMC = "tem_c"
+const TEMC = 'tem_c'
 const TEMF = 'tem_f'
 const HUM = 'hum'
 let kvStoreModel: KvStoreModel = new KvStoreModel() // 实例化键值存储模型
@@ -16,68 +15,65 @@ let kvStoreModel: KvStoreModel = new KvStoreModel() // 实例化键值存储模�
 @Entry
 @Component
 struct Tem_Hum {
-  @State tem_c: number = 0;
-  @State tem_f: number = 0;
+  @State temC: number = 0;
+  @State temF: number = 0;
   @State hum: number = 0;
-  @State rtem_c: number = 0;
-  @State rtem_f: number = 0;
-  @State rhum: number = 0;
-  @State tem_Status: string = ' ';
-  @State hum_Status: string = ' ';
+  @State remoteTemC: number = 0;
+  @State remoteTemF: number = 0;
+  @State remoteHum: number = 0;
+  @State temStatus: string = ' ';
+  @State humStatus: string = ' ';
   @State local: number = 0;
   @State remote: number = 0;
   intervalID: number = 0;
-  @State BOn: promptAction.ShowToastOptions = { 'message': '本地已连接' }
-  @State BOff: promptAction.ShowToastOptions = { 'message': '远程已连接' }
+  @State putOnLocal: promptAction.ShowToastOptions = { 'message': '本地已连接' }
+  @State putOnRemote: promptAction.ShowToastOptions = { 'message': '远程已连接' }
 
   getValue() {
-    if (this.rtem_c >= 50) {
-      this.tem_Status = '警告：室温过高，谨防火灾'
+    if (this.remoteTemC >= 50) {
+      this.temStatus = '警告：室温过高，谨防火灾'
     }
-    if (this.rhum >= 80) {
-      this.hum_Status = '警告：湿度过高，谨防短路'
+    if (this.remoteHum >= 80) {
+      this.humStatus = '警告：湿度过高，谨防短路'
     }
-    if (this.rhum <= 40) {
-      this.hum_Status = '警告：空气干燥，谨防火灾'
+    if (this.remoteHum <= 40) {
+      this.humStatus = '警告：空气干燥，谨防火灾'
     }
-    if (this.rtem_c < 50) {
-      this.tem_Status = ' '
+    if (this.remoteTemC < 50) {
+      this.temStatus = ' '
     }
-    if (this.rhum < 80 && this.rhum > 40) {
-      this.hum_Status = ' '
+    if (this.remoteHum < 80 && this.remoteHum > 40) {
+      this.humStatus = ' '
     }
   }
-
   startWork() {
     this.intervalID = setInterval(() => {
       if (this.local == 1) {
         i2cnapidemo.SoftReset();
         i2cnapidemo.ModeSet(3, 1);
         i2cnapidemo.ReadData();
-        this.tem_c = i2cnapidemo.ReadTemperatureC();
+        this.temC = i2cnapidemo.ReadTemperatureC();
         this.hum = i2cnapidemo.ReadHumidity();
-        this.tem_f = i2cnapidemo.ReadTemperatureF();
-        kvStoreModel.put(TEMC, this.tem_c.toString())
-        kvStoreModel.put(TEMF, this.tem_f.toString())
+        this.temF = i2cnapidemo.ReadTemperatureF();
+        kvStoreModel.put(TEMC, this.temC.toString())
+        kvStoreModel.put(TEMF, this.temF.toString())
         kvStoreModel.put(HUM, this.hum.toString())
       }
       kvStoreModel.get('tem_c', (value) => {
-        this.rtem_c = JSON.parse(value); //从数据库中获得新变化的数据
+        this.remoteTemC = JSON.parse(value); //从数据库中获得新变化的数据
       });
       kvStoreModel.get('tem_f', (value) => {
-        this.rtem_f = JSON.parse(value); //从数据库中获得新变化的数据
+        this.remoteTemF = JSON.parse(value); //从数据库中获得新变化的数据
       });
       kvStoreModel.get('hum', (value) => {
-        this.rhum = JSON.parse(value); //从数据库中获得新变化的数据
+        this.remoteHum = JSON.parse(value); //从数据库中获得新变化的数据
       });
       this.getValue();
     }, 5000)
   }
-
   aboutToAppear() {
     kvStoreModel.setOnMessageReceivedListener(TAG, (value) => {
-      // 记录日志，显示接收到NOTES_CHANGE消息的值
-      Logger.info(TAG, `Tem_Hum${value}`);
+      Logger.info(TAG, `Tem_Hum${value}`);  // 记录日志，显示接收到NOTES_CHANGE消息的值
     })
   }
 
@@ -96,26 +92,26 @@ struct Tem_Hum {
             clearInterval(this.intervalID);
             router.back()
           })
-        Text("本地")
+        Text('本地')
           .onClick(() => {
             if (this.intervalID) {
               clearInterval(this.intervalID)
             }
             this.local = 1;
-            promptAction.showToast(this.BOn)
+            promptAction.showToast(this.putOnLocal)
             this.startWork();
           })
           .fontColor('#30ab76')
           .fontSize(20)
           .fontWeight(FontWeight.Medium)
           .margin({ top: 4, left: 100 })
-        Text("远程")
+        Text('远程')
           .onClick(() => {
             if (this.intervalID) {
               clearInterval(this.intervalID)
             }
             this.remote = 1;
-            promptAction.showToast(this.BOff)
+            promptAction.showToast(this.putOnRemote)
             this.startWork();
           })
           .fontColor('#30ab76')
@@ -124,7 +120,6 @@ struct Tem_Hum {
           .margin({ top: 4, left: 10 })
       }
       .margin({ top: 60, left: 20 })
-
       Row() {
         Column() {
           Row() {
@@ -139,10 +134,9 @@ struct Tem_Hum {
               .margin({ left: 10 })
           }
           .margin({ top: 50, left: 20 })
-
           Column() {
             Row() {
-              Text(this.rtem_c.toFixed(2))
+              Text(this.remoteTemC.toFixed(2))
                 .fontColor('#474747')
                 .fontSize(24)
                 .fontWeight(FontWeight.Medium)
@@ -152,9 +146,8 @@ struct Tem_Hum {
                 .margin({ top: -8, left: 20 })
             }
             .margin({ top: 20 })
-
             Row() {
-              Text(this.rtem_f.toFixed(2))
+              Text(this.remoteTemF.toFixed(2))
                 .fontColor('#474747')
                 .fontSize(24)
                 .fontWeight(FontWeight.Medium)
@@ -173,7 +166,6 @@ struct Tem_Hum {
           .alignItems(HorizontalAlign.Center)
         }
         .alignItems(HorizontalAlign.Start)
-
         Image($r('app.media.tem'))
           .height(200)
           .width(200)
@@ -198,7 +190,7 @@ struct Tem_Hum {
             .margin({ left: -10 })
             Column() {
               Row() {
-                Text(this.rhum.toFixed(2))
+                Text(this.remoteHum.toFixed(2))
                   .fontColor('#474747')
                   .fontSize(30)
                   .fontWeight(FontWeight.Medium)
@@ -221,11 +213,11 @@ struct Tem_Hum {
         }
       }
       Row() {
-        Text(this.tem_Status)
+        Text(this.temStatus)
           .fontColor('#FF0000')
           .fontSize(20)
           .fontWeight(FontWeight.Medium)
-        Text(this.hum_Status)
+        Text(this.humStatus)
           .fontColor('#FF0000')
           .fontSize(20)
           .fontWeight(FontWeight.Medium)
