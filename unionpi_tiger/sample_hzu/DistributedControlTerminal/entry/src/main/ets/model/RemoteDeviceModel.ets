@@ -17,7 +17,6 @@ import deviceManager from '@ohos.distributedDeviceManager';
 import Logger from '../util/Logger'
 import { BusinessError } from '@ohos.base';
 import { Callback } from '@ohos.base';
-
 let SUBSCRIBE_ID = 100
 const TAG: string = '[RemoteDeviceModel]'
 
@@ -30,7 +29,6 @@ export class RemoteDeviceModel {
 
   constructor() {
   }
-
   registerDeviceListCallback(callback: Callback<void>) {
     if (typeof (this.deviceManager) !== 'undefined') {
       this.registerDeviceListCallbackImplement(callback)
@@ -49,7 +47,6 @@ export class RemoteDeviceModel {
     }
     Logger.info(TAG, `deviceManager.createDeviceManager end`)
   }
-
   deviceStateChangeActionOnline(device: deviceManager.DeviceBasicInfo) {
     this.deviceList[this.deviceList.length] = device
     Logger.info(TAG, `online, device list=${JSON.stringify(this.deviceList)}`)
@@ -59,13 +56,12 @@ export class RemoteDeviceModel {
       this.authCallback = () => {};
     }
   }
-
   deviceStateChangeActionReady(device: deviceManager.DeviceBasicInfo) {
     if (this.deviceList.length <= 0) {
       this.callback()
       return
     }
-    let list: Array<deviceManager.DeviceBasicInfo> = new Array()
+    let list: deviceManager.DeviceBasicInfo[] = [];
     for (let i = 0; i < this.deviceList.length; i++) {
       if (this.deviceList[i].deviceId !== device.deviceId) {
         list[i] = device
@@ -75,7 +71,6 @@ export class RemoteDeviceModel {
     Logger.info(TAG, `ready, device list=${JSON.stringify(device)}`)
     this.callback()
   }
-
   deviceStateChangeActionOffline(device: deviceManager.DeviceBasicInfo) {
     if (this.deviceList.length <= 0) {
       this.callback()
@@ -90,7 +85,6 @@ export class RemoteDeviceModel {
     Logger.info(TAG, `offline, device list=${JSON.stringify(this.deviceList)}`)
     this.callback()
   }
-
   registerDeviceListCallbackImplement(callback: Callback<void>) {
     Logger.info(TAG, `registerDeviceListCallback`)
     this.callback = callback
@@ -150,7 +144,6 @@ export class RemoteDeviceModel {
     }
     this.startDeviceDiscovery()
   }
-
   deviceFound(data: deviceManager.DeviceBasicInfo) {
     for (let i = 0; i < this.discoverList.length; i++) {
       if (this.discoverList[i].deviceId === data.deviceId) {
@@ -162,7 +155,6 @@ export class RemoteDeviceModel {
     Logger.info(TAG, `deviceFound self.discoverList= ${this.discoverList}`)
     this.callback()
   }
-
   startDeviceDiscovery() {
     let discoverParam: Record<string, number> = {
       'discoverTargetType': 1
@@ -179,7 +171,6 @@ export class RemoteDeviceModel {
       Logger.error(TAG, `startDeviceDiscovery throw error, code: ${(error as BusinessError).code} message: ${(error as BusinessError).message}`);
     }
   }
-
   unregisterDeviceListCallback() {
     Logger.info(TAG, `stopDeviceDiscovery ${SUBSCRIBE_ID}`);
     if (this.deviceManager === undefined) {
@@ -204,7 +195,6 @@ export class RemoteDeviceModel {
     this.deviceList = [];
     this.discoverList = [];
   }
-
   authenticateDevice(device: deviceManager.DeviceBasicInfo, callBack: Callback<void>) {
     Logger.info(TAG, `authenticateDevice ${JSON.stringify(device)}`)
     for (let i = 0; i < this.discoverList.length; i++) {

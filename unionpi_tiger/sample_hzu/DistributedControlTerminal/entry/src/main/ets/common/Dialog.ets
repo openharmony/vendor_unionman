@@ -14,7 +14,6 @@
  */
 
 import { DeviceDataModel } from '../model/DeviceDataModel'
-
 @CustomDialog
 export struct DeviceDialog {
   controller: CustomDialogController
@@ -24,7 +23,6 @@ export struct DeviceDialog {
 
   build() {
     Column() {
-
       Text($r('app.string.check_device'))
         .fontSize(20)
         .width('100%')
@@ -57,7 +55,6 @@ export struct DeviceDialog {
         }, (item: DeviceDataModel) => item.deviceName)
       }
       .layoutWeight(1)
-
       Button() {
         Text($r('app.string.cancel'))
           .fontColor('#0D9FFB')
