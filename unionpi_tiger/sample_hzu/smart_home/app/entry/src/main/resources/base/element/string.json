@@ -1,0 +1,136 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "controlLight",
+      "value": "灯光控制"
+    },
+    {
+      "name": "frontLiving",
+      "value": "客厅前"
+    },
+    {
+      "name": "behindLiving",
+      "value": "客厅后"
+    },
+    {
+      "name": "bedroom",
+      "value": "卧室"
+    },
+    {
+      "name": "kitchen",
+      "value": "厨房"
+    },
+    {
+      "name": "controlCurtain",
+      "value": "窗帘控制"
+    },
+    {
+      "name": "temperature",
+      "value": "温度"
+    },
+    {
+      "name": "Humidity",
+      "value": "湿度"
+    },
+    {
+      "name": "timeLight",
+      "value": "灯光持续时间："
+    },
+    {
+      "name": "averageTemperature",
+      "value": "室内温度平均值："
+    },
+    {
+      "name": "averageHumidity",
+      "value": "室内湿度平均值："
+    },
+    {
+      "name": "openAll",
+      "value": "一键开灯"
+    },
+    {
+      "name": "closeAll",
+      "value": "一键关灯"
+    },
+    {
+      "name": "intelligentScenario",
+      "value": "智能场景"
+    },
+    {
+      "name": "backHome",
+      "value": "回家模式"
+    },
+    {
+      "name": "leftHome",
+      "value": "离家模式"
+    },
+    {
+      "name": "lighting",
+      "value": "采光模式"
+    },
+    {
+      "name": "shading",
+      "value": "遮光模式"
+    },
+    {
+      "name": "return",
+      "value": "返回"
+    },
+    {
+      "name": "refresh",
+      "value": "更新"
+    },
+    {
+      "name": "backHomeSelect",
+      "value": "回家开灯选择"
+    },
+    {
+      "name": "openSelectTime",
+      "value": "回家时间选择"
+    },
+    {
+      "name": "closeBackHome",
+      "value": "已关闭回家模式"
+    },
+    {
+      "name": "openBackHome",
+      "value": "已开启回家模式"
+    },
+    {
+      "name": "leftHomeSelect",
+      "value": "离家关灯选择"
+    },
+    {
+      "name": "closeSelectTime",
+      "value": "离家时间选择"
+    },
+    {
+      "name": "closeLeftHome",
+      "value": "已关闭离家模式"
+    },
+    {
+      "name": "openLeftHome",
+      "value": "已开启离家模式"
+    },
+    {
+      "name": "presentLight",
+      "value": "当前光照值："
+    },
+    {
+      "name": "presentSelect",
+      "value": "当前选择"
+    }
+  ]
+}
