@@ -1,0 +1,100 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "微聊"
+    },
+    {
+      "name": "OpenHarmony",
+      "value": "OpenHarmony"
+    },
+    {
+      "name": "WEILIAO",
+      "value": "WEILIAO"
+    },
+    {
+      "name": "Get_account_number",
+      "value": "请输入账号"
+    },
+    {
+      "name": "Get_password",
+      "value": "请输入密码"
+    },
+    {
+      "name": "login",
+      "value": "登录"
+    },
+    {
+      "name": "register",
+      "value": "注册"
+    },
+    {
+      "name": "Error_login",
+      "value": "账号或密码有误!"
+    },
+    {
+      "name": "mainPage_tabTitles_home",
+      "value": "微聊"
+    },
+    {
+      "name": "address_book_tabTitles",
+      "value": "通讯录"
+    },
+    {
+      "name": "MINE_BUTTON_TEXT",
+      "value": "+状态"
+    },
+    {
+      "name": "MINE_hCC_TEXT_WEILIAO_ACCOUNT",
+      "value": "微信号：Roger597"
+    },
+    {
+      "name": "MINE_hCC_TEXT_ACCOUNT_NAME",
+      "value": "单行道"
+    },
+    {
+      "name": "textInput_hint",
+      "value": "输入并点击------------------>"
+    },
+    {
+      "name": "send",
+      "value": "发送"
+    },
+    {
+      "name": "viewChatHistory",
+      "value": "查看聊天记录"
+    },
+    {
+      "name": "roomIp",
+      "value": "房间ip"
+    },
+    {
+      "name": "roomNumber",
+      "value": "房间号"
+    },
+    {
+      "name": "joinRoom",
+      "value": "进入房间"
+    },
+    {
+      "name": "chatMessage",
+      "value": "聊天记录"
+    },
+    {
+      "name": "buildRoom",
+      "value": "搭建房间"
+    },
+    {
+      "name": "FriendCircle",
+      "value": "朋友圈"
+    }
+  ]
+}
