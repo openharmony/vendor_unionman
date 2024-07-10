@@ -1,0 +1,616 @@
+{
+  "float": [
+    {
+      "name": "OpenHarmonyTop",
+      "value": "-100vp"
+    },
+    {
+      "name": "transparency_0_8",
+      "value": "0.8vp"
+    },
+    {
+      "name": "mainPage_baseTab_top",
+      "value": "4vp"
+    },
+    {
+      "name": "rowCustomComponent_MARGIN_L",
+      "value": "10vp"
+    },
+    {
+      "name": "mainPage_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "mainPage_tabTitles_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "imageCustomArrow_WIDTH",
+      "value": "13vp"
+    },
+    {
+      "name": "MINE_BUTTON_FONTSIZE",
+      "value": "14vp"
+    },
+    {
+      "name": "main_tab_fontSize",
+      "value": "15vp"
+    },
+    {
+      "name": "userKnowFontSize",
+      "value": "15vp"
+    },
+    {
+      "name": "rowCustomComponent_PADDING",
+      "value": "16vp"
+    },
+    {
+      "name": "rowCustomComponent_TEXT_FONTSIZE",
+      "value": "16vp"
+    },
+    {
+      "name": "headerCustomComponent_PADDING",
+      "value": "16vp"
+    },
+    {
+      "name": "headerCustomComponent_MARGIN_L",
+      "value": "16vp"
+    },
+    {
+      "name": "headerCustomComponent_TEXT_FONTSIZE",
+      "value": "16vp"
+    },
+    {
+      "name": "QRCode_WIDTH",
+      "value": "20vp"
+    },
+    {
+      "name": "QRCode_MARGIN_R",
+      "value": "20vp"
+    },
+    {
+      "name": "MINE_ACCOUNT_NAME_TEXT_FONTSIZE",
+      "value": "22vp"
+    },
+    {
+      "name": "imageCustomArrow_HEIGHT",
+      "value": "23vp"
+    },
+    {
+      "name": "MINE_BUTTON_H",
+      "value": "26vp"
+    },
+    {
+      "name": "rowCustomComponent_WH",
+      "value": "28vp"
+    },
+    {
+      "name": "mainPage_baseTab_size_height",
+      "value": "30vp"
+    },
+    {
+      "name": "userKnowRight",
+      "value": "50vp"
+    },
+    {
+      "name": "mainPage_baseTab_size_width",
+      "value": "50vp"
+    },
+    {
+      "name": "indexButtonHeight",
+      "value": "50vp"
+    },
+    {
+      "name": "textInputOfHeight",
+      "value": "50vp"
+    },
+    {
+      "name": "dividerCustom_Padding",
+      "value": "54vp"
+    },
+    {
+      "name": "mainPage_barHeight",
+      "value": "56vp"
+    },
+    {
+      "name": "indexButtonWidth",
+      "value": "80vp"
+    },
+    {
+      "name": "mineImageWH",
+      "value": "80vp"
+    },
+    {
+      "name": "mineImageBorderRadius",
+      "value": "80vp"
+    },
+    {
+      "name": "textInputOfWidth",
+      "value": "250vp"
+    },
+    {
+      "name": "headWidthAndHeight",
+      "value": "50vp"
+    },
+    {
+      "name": "agreement_title_width",
+      "value": "50vp"
+    },
+    {
+      "name": "agreement_title_fontSize",
+      "value": "30vp"
+    },
+    {
+      "name": "agreement_message_fontSize",
+      "value": "20vp"
+    },
+    {
+      "name": "chatInformation_borderRadius",
+      "value": "15vp"
+    },
+    {
+      "name": "chatInformation_usernameSize",
+      "value": "15vp"
+    },
+    {
+      "name": "chatInformation_list_padding",
+      "value": "16vp"
+    },
+    {
+      "name": "chatInformation_title_fontSize",
+      "value": "16vp"
+    },
+    {
+      "name": "chatInformation_title_margin",
+      "value": "10vp"
+    },
+    {
+      "name": "chatPage_textInput_height",
+      "value": "50vp"
+    },
+    {
+      "name": "chatPage_textInput_margin",
+      "value": "7vp"
+    },
+    {
+      "name": "chatPage_textInput_fontSize",
+      "value": "25vp"
+    },
+    {
+      "name": "chatPage_sendButton_borderRadius",
+      "value": "20vp"
+    },
+    {
+      "name": "chatPage_sendButton_height",
+      "value": "50vp"
+    },
+    {
+      "name": "chatPage_sendButton_margin",
+      "value": "7vp"
+    },
+    {
+      "name": "chatPage_sendHint_fontSize",
+      "value": "20vp"
+    },
+    {
+      "name": "chatPage_chatMessage_borderRadius",
+      "value": "15vp"
+    },
+    {
+      "name": "chatPage_chatMessage_fontSize",
+      "value": "20vp"
+    },
+    {
+      "name": "chatPage_chatMessage_margin",
+      "value": "15vp"
+    },
+    {
+      "name": "chatPage_chatMessage_padding_left",
+      "value": "10vp"
+    },
+    {
+      "name": "chatPage_chatMessage_padding_top",
+      "value": "5vp"
+    },
+    {
+      "name": "chatPage_chatMessage_padding_bottom",
+      "value": "5vp"
+    },
+    {
+      "name": "chatPage_chatMessage_padding_right",
+      "value": "10vp"
+    },
+    {
+      "name": "chatPage_head_padding",
+      "value": "5vp"
+    },
+    {
+      "name": "chatPage_head_margin_top",
+      "value": "10vp"
+    },
+    {
+      "name": "chatPage_head_margin_right",
+      "value": "15vp"
+    },
+    {
+      "name": "chatPage_ListItem_margin_top",
+      "value": "10vp"
+    },
+    {
+      "name": "chatPage_ListItem_margin_right",
+      "value": "5vp"
+    },
+    {
+      "name": "chatPage_ListItem_padding",
+      "value": "5vp"
+    },
+    {
+      "name": "chatRecord_chatMessage_borderRadius",
+      "value": "15vp"
+    },
+    {
+      "name": "chatRecord_chatMessage_fontSize",
+      "value": "20vp"
+    },
+    {
+      "name": "chatRecord_chatMessage_margin",
+      "value": "15"
+    },
+    {
+      "name": "chatRecord_chatMessage_padding_left",
+      "value": "10vp"
+    },
+    {
+      "name": "chatRecord_chatMessage_padding_top",
+      "value": "5vp"
+    },
+    {
+      "name": "chatRecord_chatMessage_padding_bottom",
+      "value": "5vp"
+    },
+    {
+      "name": "chatRecord_chatMessage_padding_right",
+      "value": "10vp"
+    },
+    {
+      "name": "chatRecord_head_padding",
+      "value": "5vp"
+    },
+    {
+      "name": "chatRecord_head_margin_top",
+      "value": "10vp"
+    },
+    {
+      "name": "chatRecord_head_margin_right",
+      "value": "15vp"
+    },
+    {
+      "name": "chatRecord_ListItem_margin_top",
+      "value": "10vp"
+    },
+    {
+      "name": "chatRecord_ListItem_margin_right",
+      "value": "5vp"
+    },
+    {
+      "name": "chatRecord_ListItem_padding",
+      "value": "5vp"
+    },
+    {
+      "name": "connectPage_icon_width",
+      "value": "60vp"
+    },
+    {
+      "name": "connectPage_icon_borderRadius",
+      "value": "15vp"
+    },
+    {
+      "name": "connectPage_userName_fontSize",
+      "value": "15vp"
+    },
+    {
+      "name": "connectPage_roomIp_fontSize",
+      "value": "20vp"
+    },
+    {
+      "name": "connectPage_TextInput_width",
+      "value": "60vp"
+    },
+    {
+      "name": "connectPage_dot_fontSize",
+      "value": "30vp"
+    },
+    {
+      "name": "connectPage_roomPort_fontSize",
+      "value": "20"
+    },
+    {
+      "name": "connectPage_roomPort_TextInput_width",
+      "value": "100"
+    },
+    {
+      "name": "joinRoom_fontSize",
+      "value": "15"
+    },
+    {
+      "name": "connectPage_joinRoom_width",
+      "value": "100"
+    },
+    {
+      "name": "connectPage_joinRoom_height",
+      "value": "40"
+    },
+    {
+      "name": "chatRecord_Button_fontSize",
+      "value": "15"
+    },
+    {
+      "name": "chatRecord_Button_width",
+      "value": "100"
+    },
+    {
+      "name": "chatRecord_Button_height",
+      "value": "40"
+    },
+    {
+      "name": "friendCircle_picture_height",
+      "value": "276"
+    },
+    {
+      "name": "friendCircle_Navigator_height",
+      "value": "300"
+    },
+    {
+      "name": "friendCircle_nameSize",
+      "value": "20"
+    },
+    {
+      "name": "nameMargin_bottom",
+      "value": "10"
+    },
+    {
+      "name": "picture_wOrh",
+      "value": "80"
+    },
+    {
+      "name": "picture_borderRadius",
+      "value": "8"
+    },
+    {
+      "name": "headPadding",
+      "value": "14"
+    },
+    {
+      "name": "friendList_wOrh",
+      "value": "50"
+    },
+    {
+      "name": "friendList_borderRadius",
+      "value": "6"
+    },
+    {
+      "name": "friendCleMessage_fS",
+      "value": "16"
+    },
+    {
+      "name": "friendCleMessage_LH",
+      "value": "22"
+    },
+    {
+      "name": "pictureList_wOrh",
+      "value": "70"
+    },
+    {
+      "name": "pictureList_borderRadius",
+      "value": "2"
+    },
+    {
+      "name": "LikeImage_wOrh",
+      "value": "20"
+    },
+    {
+      "name": "LikeImage_margin",
+      "value": "200"
+    },
+    {
+      "name": "Time_fs",
+      "value": "11"
+    },
+    {
+      "name": "contentPadding",
+      "value": "10"
+    },
+    {
+      "name": "friendCle_divider",
+      "value": "1"
+    },
+    {
+      "name": "registerPageIconSize",
+      "value": "60vp"
+    },
+    {
+      "name": "registerPageButtonWidth",
+      "value": "80vp"
+    },
+    {
+      "name": "registerPageButtonHeight",
+      "value": "40vp"
+    },
+    {
+      "name": "registerPageButtonFontSize",
+      "value": "15"
+    },
+    {
+      "name": "registerPageTextFontSize",
+      "value": "20"
+    },
+    {
+      "name": "registerPageTextBorderRadius",
+      "value": "15"
+    },
+    {
+      "name": "registerPageTextWidth",
+      "value": "80vp"
+    },
+    {
+      "name": "registerPageTextHeight",
+      "value": "50vp"
+    },
+    {
+      "name": "rowComponentTextHeight",
+      "value": "30vp"
+    },
+    {
+      "name": "rowComponentTextFontSize",
+      "value": "15vp"
+    },
+    {
+      "name": "rowComponentInputWidth",
+      "value": "200vp"
+    },
+    {
+      "name": "rowComponentInputHeight",
+      "value": "35vp"
+    },
+    {
+      "name": "findImageLength",
+      "value": "35"
+    },
+    {
+      "name": "goImageLength",
+      "value": "15"
+    },
+    {
+      "name": "findTitleFontSize",
+      "value": "28vp"
+    },
+    {
+      "name": "findTitleLineHeight",
+      "value": "40vp"
+    },
+    {
+      "name": "findTitlePadding",
+      "value": "1%"
+    },
+    {
+      "name": "friendCircleImagePadding",
+      "value": "2"
+    },
+    {
+      "name": "friendCircleImageMargin",
+      "value": "7"
+    },
+    {
+      "name": "friendCircleImageDai_borderRadius",
+      "value": "4"
+    },
+    {
+      "name": "friendCircleImageDai_margin",
+      "value": "50"
+    },
+    {
+      "name": "friendCircleImageGo_height",
+      "value": "15"
+    },
+    {
+      "name": "friendCircleImageGo_margin",
+      "value": "40"
+    },
+    {
+      "name": "friendCircleTextFonSize",
+      "value": "25"
+    },
+    {
+      "name": "friendCircleTextMargin",
+      "value": "13"
+    },
+    {
+      "name": "friendCircleRedDot_length",
+      "value": "5"
+    },
+    {
+      "name": "friendCircleRedDot_borderRadius",
+      "value": "6"
+    },
+    {
+      "name": "friendCircleRedDot_margin",
+      "value": "90"
+    },
+    {
+      "name": "rowFriendCircle_height",
+      "value": "60"
+    },
+    {
+      "name": "AddressBookItemHead_FontSize",
+      "value": "20"
+    },
+    {
+      "name": "AddressBookItemHead_Padding",
+      "value": "10"
+    },
+    {
+      "name": "addressBook_titleLineHeight",
+      "value": "40"
+    },
+    {
+      "name": "addressBook_titleFontSize",
+      "value": "28"
+    },
+    {
+      "name": "addressBook_imageLength",
+      "value": "35"
+    },
+    {
+      "name": "addressBookTitle_padding",
+      "value": "1%"
+    },
+    {
+      "name": "addressBookRowImage_length",
+      "value": "35"
+    },
+    {
+      "name": "addressBookRowText_fontSize",
+      "value": "16"
+    },
+    {
+      "name": "addressBookRowText_padding",
+      "value": "10"
+    },
+    {
+      "name": "homeIcon_width",
+      "value": "44"
+    },
+    {
+      "name": "homeIcon_height",
+      "value": "44"
+    },
+    {
+      "name": "homeIcon_borderRadius",
+      "value": "4"
+    },
+    {
+      "name": "homeUsername_fontSize",
+      "value": "16"
+    },
+    {
+      "name": "homeInfo_fontSize",
+      "value": "14"
+    },
+    {
+      "name": "homeDDate_fontSize",
+      "value": "14"
+    },
+    {
+      "name": "homeDDate_width",
+      "value": "60"
+    },
+    {
+      "name": "home_actionItemText_fontSize",
+      "value": "14"
+    },
+    {
+      "name": "home_actionItemText_height",
+      "value": "60"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "src": [
+    "pages/Index",
+    "pages/MainInterface",
+    "pages/chatPage",
+    "pages/friendCircle",
+    "pages/SwiperPage",
+    "pages/agreement",
+    "pages/chatInformation",
+    "pages/connectPage",
+    "pages/chatRecord",
+    "pages/registerPage"
+  ]
+}
