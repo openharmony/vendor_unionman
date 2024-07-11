@@ -1,0 +1,172 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "userKnow",
+      "value": "#00AFFF"
+    },
+    {
+      "name": "mainPage_selected",
+      "value": "#1698CE"
+    },
+    {
+      "name": "mainPage_normal",
+      "value": "#6B6B6B"
+    },
+    {
+      "name": "mainPage_backgroundColor",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "chatTextArea",
+      "value": "#CFCFCF"
+    },
+    {
+      "name": "chatMessage",
+      "value": "#A4FF00"
+    },
+    {
+      "name": "joinRoom",
+      "value": "#64F064"
+    },
+    {
+      "name": "chatRecord",
+      "value": "#64F0FF"
+    },
+    {
+      "name": "registerPageBG",
+      "value": "#F4F4F4"
+    },
+    {
+      "name": "register",
+      "value": "#5ABEF0"
+    },
+    {
+      "name": "dividerCustom",
+      "value": "#eeeeee"
+    },
+    {
+      "name": "mineBGC",
+      "value": "#ffffff"
+    },
+    {
+      "name": "QRCode",
+      "value": "#888888"
+    },
+    {
+      "name": "MINE_BUTTON",
+      "value": "#cccccc"
+    },
+    {
+      "name": "MINE_BUTTON_FONT",
+      "value": "#666666"
+    },
+    {
+      "name": "MINE_BUTTON_BG",
+      "value": "#ffffff"
+    },
+    {
+      "name": "MINE_Column_BG",
+      "value": "#eeeeee"
+    },
+    {
+      "name": "chatPage_textInput_fontColor",
+      "value": "#000000"
+    },
+    {
+      "name": "chatPage_sendButton_blackGround",
+      "value": "#008000"
+    },
+    {
+      "name": "chatPage_sendHint_fontColor",
+      "value": "#ffffff"
+    },
+    {
+      "name": "chatPage_chatMessage_fontColor",
+      "value": "#000000"
+    },
+    {
+      "name": "listBackGround",
+      "value": "#ffffff"
+    },
+    {
+      "name": "chatInformation_toggle_selectedColor",
+      "value": "#007dff"
+    },
+    {
+      "name": "chatInformation_toggle_switchPointColor",
+      "value": "#ffffff"
+    },
+    {
+      "name": "chatRecord_chatMessage_fontColor",
+      "value": "#000000"
+    },
+    {
+      "name": "connectPage_dotColor",
+      "value": "#000000"
+    },
+    {
+      "name": "nameColor",
+      "value": "#ffffff"
+    },
+    {
+      "name": "Time",
+      "value": "#79948E8E"
+    },
+    {
+      "name": "swiperPage_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "friendCircleText_color",
+      "value": "#333333"
+    },
+    {
+      "name": "findTitleBackground_color",
+      "value": "#EDEDED"
+    },
+    {
+      "name": "friendCircleRedDotBackground_color",
+      "value": "#F14400"
+    },
+    {
+      "name": "addressBookItemHead_color",
+      "value": "#EEEEEE"
+    },
+    {
+      "name": "addressBookTitle_color",
+      "value": "#EDEDED"
+    },
+    {
+      "name": "home_info_color",
+      "value": "#666666"
+    },
+    {
+      "name": "home_date_color",
+      "value": "#666666"
+    },
+    {
+      "name": "home_actionItemText_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "home_divider_color",
+      "value": "#eeeeee"
+    },
+    {
+      "name": "home_divider_backgroundColor",
+      "value": "#ffffff"
+    },
+    {
+      "name": "home_backgroundColor",
+      "value": "#eeeeee"
+    }
+  ]
+}
