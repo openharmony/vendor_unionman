@@ -1,0 +1,15 @@
+{
+  "src": [
+    "pages/FormManagerView",
+    "pages/FormServiceView",
+    "pages/EmptyPage",
+    "pages/EntryView",
+    "pages/RecentView",
+    "pages/Index1",
+    "pages/Index2",
+    "pages/Index3",
+    "pages/Index4",
+    "pages/Index5",
+    "pages/Index6"
+  ]
+}

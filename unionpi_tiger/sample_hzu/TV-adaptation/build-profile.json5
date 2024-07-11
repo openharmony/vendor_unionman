@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020-2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 {
   "app": {
     "products": [
@@ -8,20 +22,7 @@
         "compatibleSdkVersion": 9
       }
     ],
-    "signingConfigs": [
-      {
-        "name": "default",
-        "material": {
-          "storePassword": "00000016898B7E4E76E6E7089591AB3ECEC5C68F194BBD0C6E6C17446516E8FBDA0E8657F0A8",
-          "certpath": "signature/OpenHarmonyApplication.cer",
-          "keyAlias": "OpenHarmony Application Release",
-          "keyPassword": "0000001607C1E3DE9D968380A780032F24E0099F93A67F346F8C51189010440B5BF58E8E0147",
-          "profile": "signature/launcher.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "signature/OpenHarmony.p12"
-        }
-      }
-    ]
+    "signingConfigs": [],
   },
   "modules": [
     {
