@@ -1,0 +1,100 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "weiliao"
+    },
+    {
+      "name": "OpenHarmony",
+      "value": "OpenHarmony"
+    },
+    {
+      "name": "WEILIAO",
+      "value": "WEILIAO"
+    },
+    {
+      "name": "Get_account_number",
+      "value": "account number"
+    },
+    {
+      "name": "Get_password",
+      "value": "password"
+    },
+    {
+      "name": "login",
+      "value": "login"
+    },
+    {
+      "name": "register",
+      "value": "register"
+    },
+    {
+      "name": "Error_login",
+      "value": "error login"
+    },
+    {
+      "name": "mainPage_tabTitles_home",
+      "value": "WEILIAO"
+    },
+    {
+      "name": "address_book_tabTitles",
+      "value": "address book"
+    },
+    {
+      "name": "MINE_BUTTON_TEXT",
+      "value": "add status"
+    },
+    {
+      "name": "MINE_hCC_TEXT_WEILIAO_ACCOUNT",
+      "value": "WEILIAO：Roger597"
+    },
+    {
+      "name": "MINE_hCC_TEXT_ACCOUNT_NAME",
+      "value": "单行道"
+    },
+    {
+      "name": "textInput_hint",
+      "value": "enter and click------------------>"
+    },
+    {
+      "name": "send",
+      "value": "send"
+    },
+    {
+      "name": "viewChatHistory",
+      "value": "view chat history"
+    },
+    {
+      "name": "roomIp",
+      "value": "roomIp"
+    },
+    {
+      "name": "roomNumber",
+      "value": "roomNumber"
+    },
+    {
+      "name": "joinRoom",
+      "value": "joinRoom"
+    },
+    {
+      "name": "chatMessage",
+      "value": "chatMessage"
+    },
+    {
+      "name": "buildRoom",
+      "value": "buildRoom"
+    },
+    {
+      "name": "FriendCircle",
+      "value": "FriendCircle"
+    }
+  ]
+}
