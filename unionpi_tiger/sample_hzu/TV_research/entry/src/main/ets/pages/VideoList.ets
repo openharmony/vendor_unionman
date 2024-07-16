@@ -67,7 +67,7 @@ export struct VideoList {
         .padding(10)
         .border({width:1})
         .onClick(()=>{
-          router.pushUrl({url:"pages/VideoPage",params:$r("app.media.video008")})
+          router.pushUrl({url:'pages/VideoPage,params':$r('app.media.video008')})
         }).margin(3)
 
     }
