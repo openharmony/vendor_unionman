@@ -1,20 +1,20 @@
+/*
+ * Copyright 2023 Unionman Technology Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 {
   "app": {
-    "signingConfigs": [
-      {
-        "name": "default",
-        "type": "HarmonyOS",
-        "material": {
-          "certpath": "C:\\Users\\hhha\\.ohos\\config\\auto_debug_MyApplication_com.example.myapplication_2850086000373754155.cer",
-          "storePassword": "0000001B06213B32577E56290F0E1B3F7195CBBA83755110C2925BBD427ED28D60193E002E593F81785520",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001BBECBC5A206A2BC33DC654B06E3E6C0D38301795460B018CCE70B000148A7664DDB248F44891B98",
-          "profile": "C:\\Users\\hhha\\.ohos\\config\\auto_debug_MyApplication_com.example.myapplication_2850086000373754155.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\hhha\\.ohos\\config\\auto_debug_MyApplication_com.example.myapplication_2850086000373754155.p12"
-        }
-      }
-    ],
+    "signingConfigs": [],
     "products": [
       {
         "name": "default",

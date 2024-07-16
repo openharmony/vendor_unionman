@@ -51,19 +51,3 @@ struct Index {
     .backgroundColor('#043ba0')
   }
 }
-
-// async avPlayerFdSrcDemo() {
-//   // 创建avPlayer实例对象
-//   let avPlayer: media.AVPlayer = await media.createAVPlayer();
-//   // 创建状态机变化回调函数
-//   this.setAVPlayerCallback(avPlayer);
-//   // 通过UIAbilityContext的resourceManager成员的getRawFd接口获取媒体资源播放地址
-//   // 返回类型为{fd,offset,length},fd为HAP包fd地址，offset为媒体资源偏移量，length为播放长度
-//   let context = getContext(this) as common.UIAbilityContext;
-//   let fileDescriptor = await context.resourceManager.getRawFd('H264_AAC.mp4');
-//   let avFileDescriptor: media.AVFileDescriptor =
-//     { fd: fileDescriptor.fd, offset: fileDescriptor.offset, length: fileDescriptor.length };
-//   this.isSeek = true; // 支持seek操作
-//   // 为fdSrc赋值触发initialized状态机上报
-//   avPlayer.fdSrc = avFileDescriptor;
-// }

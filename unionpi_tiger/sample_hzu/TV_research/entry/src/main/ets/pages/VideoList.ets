@@ -77,7 +77,7 @@ export struct VideoList {
 
 
     .alignItems(HorizontalAlign.Start)
-    .size({ width: "100%", height: "100%" })
+    .size({ width: '100%', height: '100%' })
 
   }
 }
