@@ -84,10 +84,10 @@ function generateRandomColor(): string {
   let b = toHexString(getRandomInt(0, 255));
 
   // 组合成完整的十六进制颜色代码
-  return "#" + r + g + b;
+  return '#' + r + g + b;
 }
 
-function  getRandomInt(min: number, max: number): number {
+function getRandomInt(min: number, max: number): number {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -97,7 +97,7 @@ function  getRandomInt(min: number, max: number): number {
 function toHexString(num: number): string {
   let hex = num.toString(16);
   if (hex.length === 1) {
-    hex = "0" + hex;
+    hex = '0' + hex;
   }
   return hex;
 }

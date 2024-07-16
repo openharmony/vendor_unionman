@@ -51,7 +51,7 @@ struct VideoPage {
           .onUpdate((e) => {
             console.info('onUpdate is ' + e.time)
           })
-        Image($r("app.media.fanhui"))
+        Image($r('app.media.fanhui'))
           .onClick(() => {
             router.back()
           })
