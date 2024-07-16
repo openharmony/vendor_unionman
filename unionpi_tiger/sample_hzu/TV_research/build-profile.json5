@@ -1,0 +1,50 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\hhha\\.ohos\\config\\auto_debug_MyApplication_com.example.myapplication_2850086000373754155.cer",
+          "storePassword": "0000001B06213B32577E56290F0E1B3F7195CBBA83755110C2925BBD427ED28D60193E002E593F81785520",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001BBECBC5A206A2BC33DC654B06E3E6C0D38301795460B018CCE70B000148A7664DDB248F44891B98",
+          "profile": "C:\\Users\\hhha\\.ohos\\config\\auto_debug_MyApplication_com.example.myapplication_2850086000373754155.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\hhha\\.ohos\\config\\auto_debug_MyApplication_com.example.myapplication_2850086000373754155.p12"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compileSdkVersion": 10,
+        "compatibleSdkVersion": 10,
+        "runtimeOS": "OpenHarmony",
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
