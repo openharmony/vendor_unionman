@@ -56,7 +56,7 @@ struct Index {
   }
 
   onShow() {
-    console.log("xxx")
+    console.log('xxx')
     i2cnapidemo.SoftReset();
     i2cnapidemo.ModeSet(3, 3);
     this.updateSensorData();
