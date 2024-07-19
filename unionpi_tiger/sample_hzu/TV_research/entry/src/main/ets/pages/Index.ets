@@ -34,7 +34,7 @@ struct Index {
         Flex() {
           Image('./assets/1.png').height('60%').borderRadius(15).margin(2)
             .onClick(() => {
-              router.pushUrl({url:"pages/VideoPage",params:$r("app.media.video003")})
+              router.pushUrl({url:'pages/VideoPage',params:$r('app.media.video003')})
             })
           Column() { // 上半部分布局
             Image('./assets/2.png').height('30%').borderRadius(15).margin(2)
