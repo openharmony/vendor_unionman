@@ -50,12 +50,10 @@ struct Index {
               })
             Image('./assets/6.png').height('30%').borderRadius(15).margin(2)
           }
-          // .onClick(()=>{
-          //   router.pushUrl({url:"pages/VideoList"})
-          // })
+
           Image('./assets/4.png').height('60%').borderRadius(15).margin(2)
             .onClick(()=>{
-              router.pushUrl({url:"pages/VideoPage",params:$r("app.media.video004")})
+              router.pushUrl({url:'pages/VideoPage',params:$r('app.media.video004')})
             })
         }
         .padding({ right: '8%', left: '8%', top: '4%' })
