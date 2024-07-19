@@ -46,7 +46,7 @@ struct Index {
           Column() { // 下半部分布局
             Image('./assets/5.png').height('30%').borderRadius(15).margin(2)
               .onClick(()=>{
-                router.pushUrl({url:"pages/VideoList"})
+                router.pushUrl({url:'pages/VideoList'})
               })
             Image('./assets/6.png').height('30%').borderRadius(15).margin(2)
           }
