@@ -18,9 +18,8 @@ export struct SettingDetails {
         width: 12, color: this.isSelected ? Color.White : Color.Red,
         radius: 20
       })
-      .onClick(() => {
-        this.isSelected = !this.isSelected;
-      })
+      .onClick(() => {this.isSelected = !this.isSelected; })
     Text(this.title).fontSize(32).width(200).textAlign(TextAlign.Center)
   }
-}}
+}
+}
