@@ -4,7 +4,7 @@
 @Component
 export struct HomeDetails{
 
-  @State  private image: string= "common/images/home_out.png"
+  @State  private image: string= 'common/images/home_out.png'
 
   @State  private selectColor: Color = Color.Red
  @State private isSelected: boolean = true;
