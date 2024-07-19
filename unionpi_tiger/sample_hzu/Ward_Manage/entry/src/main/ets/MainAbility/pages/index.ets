@@ -14,8 +14,8 @@ struct Index {
   @State ReadTemperatureC: number = 0;
   @State ReadHumidity: number = 0;
   @State ReadTemperatureF: number = 0;
-  @State pwm_Angle: number = 0;
-  @State time: string = "";
+  @State Pwm_Angle: number = 0;
+  @State time: string = '';
   data: {
     pin: 382,
     status: Boolean
@@ -275,8 +275,7 @@ struct Index {
           .onChange((isOn: bool) => {
             if (isOn) {
               gpioled.setLedStatus(388, gpioled.LED_ON)
-            }
-            else {
+            }else {
               gpioled.setLedStatus(388, gpioled.LED_OFF)
             }
           })
@@ -358,7 +357,7 @@ struct Index {
       .borderRadius('30')
       .height('625')
       .width('270')
-    }.width("100%")
+    }.width('100%')
     .height('100%').backgroundImage('/common/images/back.jpg', ImageRepeat.NoRepeat)
     .backgroundImageSize({ width: 1100, height: 1200 })
 
