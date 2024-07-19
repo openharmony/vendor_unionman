@@ -1,8 +1,8 @@
 @Entry
 @Component
 export struct SettingDetails {
-  @State  private image: string = "common/images/setting.png"
-  @State  private title: string = "Maintenance\nRequests"
+  @State  private image: string = 'common/images/setting.png'
+  @State  private title: string = 'Maintenance\nRequests'
   @State private isSelected: boolean = true;
 
   build() {
