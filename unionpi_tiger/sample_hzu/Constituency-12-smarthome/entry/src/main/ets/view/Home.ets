@@ -61,9 +61,9 @@ export default struct Home {
   //温湿度初始化
   @State temp: number = 25
   @State hum: number = 0
-  @State OutWeather: string = ' 晴 '
-  @State OutTemp: number = 0
-  @State OutHum: number = 0
+  @State outWeather: string = ' 晴 '
+  @State outTemp: number = 0
+  @State outHum: number = 0
   //默认温度限制28°C
   @State setTemp: number = 28
 
@@ -79,15 +79,15 @@ export default struct Home {
   getValue() {
     i2cnapidemo.ReadData();
     this.temp = i2cnapidemo.ReadTemperatureC();
-    this.OutTemp = i2cnapidemo.ReadTemperatureC();
+    this.outTemp = i2cnapidemo.ReadTemperatureC();
     this.hum = i2cnapidemo.ReadHumidity();
-    this.OutHum = i2cnapidemo.ReadHumidity();
+    this.outHum = i2cnapidemo.ReadHumidity();
   }
 
   getWeather() {
-    if (this.OutHum >= 70) {
-      this.OutWeather = '雨';
-    }  else this.OutWeather = '晴';
+    if (this.outHum >= 70) {
+      this.outWeather = '雨';
+    }  else this.outWeather = '晴';
   }
 
   startTempAndHum() {
