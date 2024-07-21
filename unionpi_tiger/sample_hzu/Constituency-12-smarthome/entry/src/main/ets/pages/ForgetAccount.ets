@@ -3,13 +3,8 @@ import  axios  from '@ohos/axios'
 import router from '@ohos.router'
 import promptAction from '@ohos.promptAction';
 
-@Extend(Line) function lineStyle() {
-  .width('92%')
-  .height(3)
-  .margin({ top : 30 })
-  // .position({x : '0' , y : '0' })
-  .backgroundColor(Color.Black)
-}
+@Extend(Line) function lineStyle()
+{.width('92%').margin({ top : 30 }).backgroundColor(Color.Black)}
 
 @Entry
 @Component
@@ -138,7 +133,7 @@ struct Index {
           }
 
           axios({
-            method: "post",
+            method: 'post',
             url: 'http://ip:端口/upd',
             data:{
               account:this.account,

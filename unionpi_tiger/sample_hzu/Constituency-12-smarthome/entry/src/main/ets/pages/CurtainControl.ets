@@ -1,4 +1,4 @@
-import pwmtest from '@ohos.pwmtest';
+import PwmTest from '@ohos.pwmtest';
 @CustomDialog
 export default struct CurtainControl {
   isonValue: Boolean//存放开关状态
@@ -7,7 +7,7 @@ export default struct CurtainControl {
   confirm: (Boolean) => void//确定按钮对应事件
 
   //默认引脚1
-  @State Pex: number = 1
+  @State pex: number = 1
   pin : number = 386
 
   //舵机转动角度，尾部序号为舵机代号
@@ -36,7 +36,7 @@ export default struct CurtainControl {
             .onChange((value: number) => {
                 this.PwmAngle1 = value
                 console.info('onChange pwmAngle = ' + this.PwmAngle1)
-                pwmtest.setPwmStatus(this.Pex, this.PwmAngle1)
+                PwmTest.setPwmStatus(this.pex, this.PwmAngle1)
             })
         }
       }

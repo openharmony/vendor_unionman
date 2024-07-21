@@ -1,4 +1,4 @@
-import pwmtest from '@ohos.pwmtest';
+import PwmTest from '@ohos.pwmtest';
 import appRecovery from '@ohos.app.ability.appRecovery';
 @CustomDialog
 export default struct DoorControl {
@@ -12,7 +12,7 @@ export default struct DoorControl {
   @State PwmAngle2: number = 0
 
   //默认引脚1
-  @State Pex: number = 1
+  @State pex: number = 1
   //默认开门为90°打开,-90°为关闭
   openvalue: number = 90
   closevalue: number = 0
@@ -30,12 +30,12 @@ export default struct DoorControl {
               this.isonValue = isOn
               if (isOn) {
                 this.PwmAngle1 = this.openvalue
-                pwmtest.setPwmStatus(this.Pex, this.PwmAngle1)
+                PwmTest.setPwmStatus(this.pex, this.PwmAngle1)
                 console.info('门On' )
                 return
               }
                 this.PwmAngle1 = this.closevalue
-                pwmtest.setPwmStatus(this.Pex, this.PwmAngle1)
+                PwmTest.setPwmStatus(this.pex, this.PwmAngle1)
                 console.info('门Off')
             })
         }
@@ -47,12 +47,12 @@ export default struct DoorControl {
               this.isonValue = isOn
               if (isOn) {
                 this.PwmAngle1 = this.openvalue
-                pwmtest.setPwmStatus(this.Pex, this.PwmAngle1)
+                PwmTest.setPwmStatus(this.pex, this.PwmAngle1)
                 console.info('门On' )
                 return
               }
               this.PwmAngle1 = this.closevalue
-              pwmtest.setPwmStatus(this.Pex, this.PwmAngle1)
+              PwmTest.setPwmStatus(this.pex, this.PwmAngle1)
               console.info('门Off')
             })
         }
@@ -64,12 +64,12 @@ export default struct DoorControl {
               this.isonValue = isOn
               if (isOn) {
                 this.PwmAngle1 = this.openvalue
-                pwmtest.setPwmStatus(this.Pex, this.PwmAngle1)
+                PwmTest.setPwmStatus(this.pex, this.PwmAngle1)
                 console.info('门On' )
                 return
               }
               this.PwmAngle1 = this.closevalue
-              pwmtest.setPwmStatus(this.Pex, this.PwmAngle1)
+              PwmTest.setPwmStatus(this.pex, this.PwmAngle1)
               console.info('门Off')
             })
         }

@@ -9,36 +9,20 @@ import  axios  from '@ohos/axios';
       //functionName为样式函数名
  */
 
-@Extend(TextInput) function inputStyle() {
-  .placeholderColor($r('app.color.font_color'))
-  .height(45)
-  .fontSize(20)
-  .backgroundColor('#00000000')
-  .width('50%')
-  .padding({ left: 0 })
-  .margin({ top: 5 })
-}
+@Extend(TextInput) function inputStyle()
+{.height(45).fontSize(20).backgroundColor('#00000000').width('50%')}
 
-@Extend(Line) function lineStyle() {
-  .width('50%')
-  .height(3)
-  .margin({ top : 30 })
-  .backgroundColor(Color.Black)
-}
+@Extend(Line) function lineStyle()
+{ .width('50%') .margin({ top : 30 }).backgroundColor(Color.Black)}
 
-@Extend(Text) function blueTextStyle() {
-  .fontColor($r('app.color.login_blue_text_color'))
-  .fontSize(20)
-  .fontWeight(FontWeight.Medium)
-}
+@Extend(Text) function blueTextStyle()
+{.fontColor(Color.Blue) .fontSize(20).fontWeight(FontWeight.Medium)}
 
 @Entry
 @Component
 struct LoGin {
   @State account: string = '';
   @State password: string = '';
-  @State account_find: string = '';
-  @State password_find: string = '';
 
   //是否显示加载条
   @State isShowProgress: boolean = false;
@@ -61,10 +45,9 @@ struct LoGin {
 
     //使用get到数据库中查询
     axios({
-      method: "get",
+      method: 'get',
       url: 'http://ip:端口/find/'+this.account+ '/' + this.password,
     }).then(res => {
-      // console.info('result:' + JSON.stringify(res.data));
       console.info('result:' + JSON.stringify(res.data));
 
       promptAction.showToast({ message: '登录成功' })
