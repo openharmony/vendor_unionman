@@ -36,7 +36,7 @@ struct Index {
           .lineStyle()
 
         if(this.account){
-          Image($r("app.media.cancel"))
+          Image($r('app.media.cancel'))
             .width(20)
             .height(20)
             .border({width: 2, radius: 20, color: '#fffffff'})

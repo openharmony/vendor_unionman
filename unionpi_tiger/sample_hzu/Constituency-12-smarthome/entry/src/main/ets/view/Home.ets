@@ -65,7 +65,7 @@ export default struct Home {
   @State OutTemp: number = 0
   @State OutHum: number = 0
   //默认温度限制28°C
-  @State SetTemp: number = 28
+  @State setTemp: number = 28
 
   intervalID1: number
   intervalID2: number
@@ -99,7 +99,7 @@ export default struct Home {
 
   startTempEW() {
     this.intervalID2 = setInterval(() => {
-      if (this.temp >= this.SetTemp) {
+      if (this.temp >= this.setTemp) {
         this.Open()
       }else this.Close()
     }, 1000)
