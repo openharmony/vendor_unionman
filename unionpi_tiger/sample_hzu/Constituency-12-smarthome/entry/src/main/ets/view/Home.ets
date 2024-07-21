@@ -70,11 +70,6 @@ export default struct Home {
   intervalID1: number
   intervalID2: number
 
-  //默认引脚1
-  @State Pex: number = 1
-
-  pin: number = 386
-
   //弹框初始选择从10开始
   @State select: number = 10
   //温度索引范围
@@ -92,8 +87,7 @@ export default struct Home {
   getWeather() {
     if (this.OutHum >= 70) {
       this.OutWeather = '雨';
-    }
-    else this.OutWeather = '晴';
+    }  else this.OutWeather = '晴';
   }
 
   startTempAndHum() {
@@ -107,8 +101,7 @@ export default struct Home {
     this.intervalID2 = setInterval(() => {
       if (this.temp >= this.SetTemp) {
         this.Open()
-      }
-      else this.Close()
+      }else this.Close()
     }, 1000)
   }
 
@@ -237,21 +230,16 @@ export default struct Home {
                 onAccept: (value: TextPickerResult) => {
                   // 设置select为按下确定按钮时候的选中项index，这样当弹窗再次弹出时显示选中的是上一次确定的选项
                   this.SetTemp = value.index
-                  //设置开关判定是否开启温度对比
-                  // if (this.start3) {
-                  //   this.startTempEW()
-                  //   return
-                  // }
                   this.select = value.index
-                  console.info("TextPickerDialog:onAccept()" + JSON.stringify(value))
+                  console.info('TextPickerDialog:onAccept()' + JSON.stringify(value))
                 },
                 // 点击弹窗中的“取消”按钮时触发该回调
                 onCancel: () => {
-                  console.info("TextPickerDialog:onCancel()")
+                  console.info('TextPickerDialog:onCancel()')
                 },
                 // 滑动弹窗中的选择器使当前选中项改变时触发该回调
                 onChange: (value: TextPickerResult) => {
-                  console.info("TextPickerDialog:onChange()" + JSON.stringify(value))
+                  console.info('TextPickerDialog:onChange()' + JSON.stringify(value))
                 }
               })
             })
@@ -282,13 +270,12 @@ export default struct Home {
        onclick//等待事件设计
 
     })
-    // .fontSize('30')
     .height(100)
     .width(100)
     .backgroundColor($r('app.color.background'))
   }
 
-  onAccept(Bool) {
+  onAccept() {
     this.dialogController.close();//关闭弹窗
   }
 

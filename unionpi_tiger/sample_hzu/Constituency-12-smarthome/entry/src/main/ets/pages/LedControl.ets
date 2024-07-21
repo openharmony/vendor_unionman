@@ -1,4 +1,4 @@
-import gpioled from '@ohos.gpioled'
+import gpioLed from '@ohos.gpioled'
 @CustomDialog
 export default struct LedControl {
   isonValue: Boolean//存放开关状态
@@ -6,16 +6,14 @@ export default struct LedControl {
   cancel: () => void//取消按钮对应事件
   confirm: (Boolean) => void//确定按钮对应事件
 
-  //默认引脚1
-  @State Pex: number = 1
-  // pin : number = 385
+   pin : number = 385
 
   Open(pin: number ) {
-    gpioled.setLedStatus(pin, gpioled.LED_ON)
+    gpioLed.setLedStatus(pin, gpioled.LED_ON)
   }
 
   Close(pin: number) {
-    gpioled.setLedStatus(pin, gpioled.LED_OFF)
+    gpioLed.setLedStatus(pin, gpioled.LED_OFF)
   }
 
   build() {

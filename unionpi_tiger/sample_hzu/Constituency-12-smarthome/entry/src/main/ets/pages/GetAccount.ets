@@ -3,13 +3,8 @@ import  axios  from '@ohos/axios'
 import router from '@ohos.router'
 import promptAction from '@ohos.promptAction';
 
-@Extend(Line) function lineStyle() {
-  .width('92%')
-  .height(3)
-  .margin({ top : 30 })
-  // .position({x : '0' , y : '0' })
-  .backgroundColor(Color.Black)
-}
+@Extend(Line) function lineStyle() 
+{ .width('92%').height(3).margin({ top : 30 }) .backgroundColor(Color.Black)}
 
 @Entry
 @Component
@@ -17,8 +12,6 @@ struct Index {
   // 上传数据
   @State account: string = ''
   @State pwd: string = ''
-  @State account_find:string =''
-  @State pwd_find:string =''
 
   build() {
     Column() {
@@ -99,7 +92,7 @@ struct Index {
           }
 
           axios({
-            method: "post",
+            method: 'post',
             url: 'http://ip:端口/publish',
             data:{
               account:this.account,
