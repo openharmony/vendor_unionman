@@ -1,0 +1,16 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "app_header_color",
+      "value": "#1e49ed"
+    },
+    {
+      "name": "icon_fuzhu_color",
+      "value": "#8a8a8a"
+    }
+  ]
+}
