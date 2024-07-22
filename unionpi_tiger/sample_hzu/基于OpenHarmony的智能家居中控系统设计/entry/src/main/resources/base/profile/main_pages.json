@@ -1,0 +1,9 @@
+{
+  "src": [
+    "pages/Index",
+    "pages/Buzzer",
+    "pages/Humiture",
+    "pages/Madaish",
+    "pages/Servo"
+  ]
+}
