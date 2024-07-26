@@ -1,0 +1,8 @@
+{
+  "src": [
+    "pages/EntryView",
+    "pages/phb",
+    "pages/shoucang",
+    "pages/videoview"
+  ]
+}
