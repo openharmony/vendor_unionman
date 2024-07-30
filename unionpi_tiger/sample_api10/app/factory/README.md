@@ -1,3 +1,0 @@
-# factory
-
-factory for OpenHarmony
