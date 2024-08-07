@@ -6,7 +6,7 @@
 export class HorizontalVideoItem{
   id: number;
   image: Resource;
-  name: string;
+  name!: string;
 
   constructor(id: number, image: Resource, name: string) {
     this.id = id;
