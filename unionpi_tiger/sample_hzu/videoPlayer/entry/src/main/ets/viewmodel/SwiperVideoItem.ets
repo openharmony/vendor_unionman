@@ -4,7 +4,7 @@
  */
 @Observed
 export class SwiperVideoItem {
-  image!: Resource;
+  public image: Resource;
 
   constructor(image: Resource) {
     this.image = image;
