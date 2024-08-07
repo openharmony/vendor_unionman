@@ -4,9 +4,9 @@
  */
 @Observed
 export class HorizontalVideoItem{
-  id: number;
-  image: Resource;
-  name!: string;
+  public id: number;
+  public image: Resource;
+  public name: string;
 
   constructor(id: number, image: Resource, name: string) {
     this.id = id;
