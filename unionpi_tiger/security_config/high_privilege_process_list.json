@@ -65,6 +65,16 @@
             "name": "key_enable",
             "uid": "root",
             "gid": "root"
+        },
+        {
+            "name": "check_module_update",
+            "uid": "root",
+            "gid": "root"
+        },
+        {
+            "name": "module_update_sa",
+            "uid": "root",
+            "gid": "root"
         }
     ]
 }
