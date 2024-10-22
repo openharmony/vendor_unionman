@@ -1,0 +1,190 @@
+#Copyright (c) 2023 Huawei Device Co., Ltd.
+
+#Licensed under the BSD (Berkeley Standard Distribution) license.
+#This license allows you to use the source code royalty free and 
+#does not place any restrictions on what you do with source code 
+#derived from the SDK.
+
+#Redistribution and use in source and binary forms, with or without 
+#modification, are permitted provided that the following conditions are met: 
+
+#* Redistributions of source code must retain the above copyright notice, 
+#  this list of conditions and the following disclaimer. 
+#* Redistributions in binary form must reproduce the above copyright notice, 
+#  this list of conditions and the following disclaimer in the documentation 
+#  and/or other materials provided with the distribution. 
+#* Neither name of Intel Corporation nor the names of its contributors 
+#  may be used to endorse or promote products derived from this software 
+#  without specific prior written permission.
+
+#THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+#``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+#LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR 
+#A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL INTEL OR 
+#CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
+#EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+#PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+#PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY 
+#OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+#NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
+#SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+config("upnp_config") {
+  include_dirs = [
+    ".",
+    "ixml/inc",
+    "ixml/src/inc",
+    "upnp/inc",
+    "upnp/src/inc",
+    "upnp/src/threadutil",
+  ]
+
+  cflags = [
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Wno-format",
+    "-Wno-shadow",
+    "-Wno-unused-parameter",
+    "-Wno-unused-function",
+    "-Wno-missing-field-initializers",
+    "-Wno-non-pod-varargs",
+    "-Wno-writable-strings",
+    "-Wno-unused-but-set-variable",
+    "-Wno-unused-variable",
+    "-Wno-conversion",
+    "-FS",
+    "-O2",
+    "-D_FORTIFY_SOURCE=2",
+    "-fvisibility=hidden",
+    "-fvisibility-inlines-hidden"
+  ]
+  cflags_cc = cflags
+}
+
+ohos_static_library("libixml") {
+  sources = [
+    "ixml/src/attr.c",
+    "ixml/src/document.c",
+    "ixml/src/element.c",
+    "ixml/src/ixml.c",
+    "ixml/src/ixmldebug.c",
+    "ixml/src/ixmlparser.c",
+    "ixml/src/ixmlmembuf.c",
+    "ixml/src/namedNodeMap.c",
+    "ixml/src/node.c",
+    "ixml/src/nodeList.c",
+  ]
+  public_configs = [ ":upnp_config" ]
+}
+
+ohos_static_library("libupnp") {
+  sources = [
+    #threadutil
+    "upnp/src/threadutil/FreeList.c",
+    "upnp/src/threadutil/LinkedList.c",
+    "upnp/src/threadutil/ThreadPool.c",
+    "upnp/src/threadutil/TimerThread.c",
+    #ssdp
+    "upnp/src/ssdp/SSDPResultData.c",
+    "upnp/src/ssdp/SSDPResultDataCallback.c",
+    "upnp/src/ssdp/ssdp_device.c",
+    "upnp/src/ssdp/ssdp_ctrlpt.c",
+    "upnp/src/ssdp/ssdp_server.c",
+    #soap
+    "upnp/src/soap/soap_device.c",
+    "upnp/src/soap/soap_ctrlpt.c",
+    "upnp/src/soap/soap_common.c",
+    #genlib
+    "upnp/src/genlib/miniserver/miniserver.c",
+    "upnp/src/genlib/client_table/client_table.c",
+    "upnp/src/genlib/client_table/GenlibClientSubscription.c",
+    "upnp/src/genlib/service_table/service_table.c",
+    "upnp/src/genlib/util/membuffer.c",
+    "upnp/src/genlib/util/strintmap.c",
+    "upnp/src/genlib/util/util.c",
+    "upnp/src/genlib/util/list.c",
+    "upnp/src/genlib/net/sock.c",
+    "upnp/src/genlib/net/http/httpparser.c",
+    "upnp/src/genlib/net/http/httpreadwrite.c",
+    "upnp/src/genlib/net/http/statcodes.c",
+    "upnp/src/genlib/net/http/webserver.c",
+    "upnp/src/genlib/net/http/parsetools.c",
+    "upnp/src/genlib/net/uri/uri.c",
+    #gena
+    "upnp/src/gena/gena_device.c",
+    "upnp/src/gena/gena_ctrlpt.c",
+    "upnp/src/gena/gena_callback2.c",
+    #api
+    "upnp/src/api/UpnpActionComplete.c",
+    "upnp/src/api/UpnpActionRequest.c",
+    "upnp/src/api/UpnpDiscovery.c",
+    "upnp/src/api/UpnpEvent.c",
+    "upnp/src/api/UpnpEventSubscribe.c",
+    "upnp/src/api/UpnpExtraHeaders.c",
+    "upnp/src/api/UpnpFileInfo.c",
+    "upnp/src/api/UpnpStateVarComplete.c",
+    "upnp/src/api/UpnpStateVarRequest.c",
+    "upnp/src/api/UpnpSubscriptionRequest.c",
+    "upnp/src/api/UpnpString.c",
+    "upnp/src/api/upnpapi.c",
+    "upnp/src/api/upnpdebug.c",
+    "upnp/src/api/upnptools.c",
+    #uuid
+    "upnp/src/uuid/md5.c",
+    "upnp/src/uuid/sysdep.c",
+    "upnp/src/uuid/uuid.c",
+    #urlconfig
+    "upnp/src/urlconfig/urlconfig.c",
+  ]
+  public_configs = [ ":upnp_config" ]
+}
+
+ohos_executable("tv_ctrlpt") {
+  sources = [
+    "upnp/sample/common/sample_util.c",
+    "upnp/sample/common/tv_ctrlpt.c",
+    "upnp/sample/linux/tv_ctrlpt_main.c",
+  ]
+  include_dirs = [
+    "upnp/sample/common"
+  ]
+  deps = [
+    ":libixml",
+    ":libupnp",
+  ]
+}
+
+ohos_executable("tv_combo") {
+  sources = [
+    "upnp/sample/common/sample_util.c",
+    "upnp/sample/common/tv_ctrlpt.c",
+    "upnp/sample/common/tv_device.c",
+    "upnp/sample/linux/tv_combo_main.c",
+  ]
+  include_dirs = [
+    "upnp/sample/common"
+  ]
+  deps = [
+    ":libixml",
+    ":libupnp",
+  ]
+}
+
+ohos_executable("tv_device") {
+  sources = [
+    "upnp/sample/common/sample_util.c",
+    "upnp/sample/common/tv_device.c",
+    "upnp/sample/linux/tv_device_main.c",
+  ]
+  include_dirs = [
+    "upnp/sample/common"
+  ]
+  deps = [
+    ":libixml",
+    ":libupnp",
+  ]
+}
