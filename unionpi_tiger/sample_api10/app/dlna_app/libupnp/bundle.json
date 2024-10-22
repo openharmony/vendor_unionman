@@ -1,0 +1,38 @@
+{
+    "name": "@ohos/libupnp",
+    "description": "libupnp propot",
+    "version": "1.1",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "third_party/libupnp"
+    },
+    "dirs": {},
+    "scripts": {},
+    "readmePath": {
+        "en": "README.md"
+    },
+    "component": {
+        "name": "libupnp",
+        "subsystem": "thirdparty",
+        "syscap": [],
+        "features": [],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "rom": "",
+        "ram": "",
+        "deps": {
+            "components": [],
+            "third_party": []
+        },
+        "build": {
+            "sub_component": [
+                "//third_party/libupnp:upnp",
+                "//third_party/libupnp:ixml"
+            ],
+            "inner_kits": [],
+            "test": []
+        }
+    }
+}
