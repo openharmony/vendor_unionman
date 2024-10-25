@@ -1990,6 +1990,153 @@ int DmrAVTransport::FillMediaInfo(DmrActionParam *pstActionEvent)
 
     return FillMediaInfoIsPresent(pstActionEvent, noMediaPresent);
 }
+
+
+int DmrAVTransport::GetMediaInfo(DmrActionParam *pstActionEvent)
+{
+    UpnpActionRequest *pstActionRequest = NULL;
+    int iInstVal;
+    int iRetVal;
+
+    OH_LOG_Print(LOG_APP, LOG_INFO, 0xFF00, DLNA_LOG_TAG,  "[CastEngineDlna][%{public}s][:%{public}d]-: Peer has invoked the GetMediaInfo"
+        " action\r\n", __FUNCTION__, __LINE__);
+
+    if (pstActionEvent == NULL) {
+        OH_LOG_Print(LOG_APP, LOG_ERROR, 0xFF00, DLNA_LOG_TAG,  "[CastEngineDlna][%{public}s][:%{public}d]-: pstActionEvent is NULL\r\n", __FUNCTION__, __LINE__);
+        return DLNA_RET_FAILURE;
+    }
+
+    pstActionRequest = pstActionEvent->pstActionRequest;
+    if ((DlnaCommon::getInstance().GetDmrHdl()->dmrState < static_cast<int>(DmrAvState::DLNA_DMR_STATE_STOPPED))
+        || (DlnaCommon::getInstance().GetDmrHdl()->dmrState > static_cast<int>(DmrAvState::DLNA_DMR_STATE_TRANSTIONING))) {
+        pstActionEvent->iErrorCode = DLNA_E_UPNP_500;
+        pstActionEvent->pErrorStr = DLNA_E_UPNP_500_STRING;
+
+        OH_LOG_Print(LOG_APP, LOG_ERROR, 0xFF00, DLNA_LOG_TAG,  "[CastEngineDlna][%{public}s][:%{public}d]-:Invalid DMR state while processing %{public}s action"
+            " request. Current DMR state = %{public}d\r\n",
+            __FUNCTION__, __LINE__, UpnpString_get_String(UpnpActionRequest_get_ActionName(pstActionRequest)),
+            DlnaCommon::getInstance().GetDmrHdl()->dmrState);
+        return DLNA_RET_FAILURE;
+    }
+
+    iRetVal = CheckInstanceIdValid(&iInstVal, pstActionRequest, pstActionEvent);
+    if (iRetVal != DLNA_RET_SUCCESS) {
+        return DLNA_RET_FAILURE;
+    }
+
+    iRetVal = CheckAvtAvaliable(iInstVal, pstActionEvent);
+    if (iRetVal != DLNA_RET_SUCCESS) {
+        return DLNA_RET_FAILURE;
+    }
+
+    iRetVal = FillMediaInfo(pstActionEvent);
+    if (iRetVal != DLNA_RET_SUCCESS) {
+        /* Set error return values for the response */
+        pstActionEvent->iErrorCode = DLNA_E_UPNP_500;
+        pstActionEvent->pErrorStr = DLNA_E_UPNP_500_STRING;
+    }
+
+    OH_LOG_Print(LOG_APP, LOG_INFO, 0xFF00, DLNA_LOG_TAG,  "[CastEngineDlna][%{public}s][:%{public}d]-: GetMediaInfo Action Is Exiting with return "
+        "value-:%{public}d\r\n", __FUNCTION__, __LINE__, iRetVal);
+
+    return iRetVal;
+}
+
+int DmrAVTransport::GetDeviceCapabilities(DmrActionParam *pstActionEvent)
+{
+    UpnpActionRequest *pstActionRequest = NULL;
+    int iInstVal;
+
+    OH_LOG_Print(LOG_APP, LOG_INFO, 0xFF00, DLNA_LOG_TAG,  "[CastEngineDlna][%{public}s][:%{public}d]-: Peer has invoked the GetDeviceCapabilities"
+        " action\r\n", __FUNCTION__, __LINE__);
+
+    if (pstActionEvent == NULL) {
+        OH_LOG_Print(LOG_APP, LOG_ERROR, 0xFF00, DLNA_LOG_TAG,  "[CastEngineDlna][%{public}s][:%{public}d]-: pstActionEvent is NULL\r\n", __FUNCTION__, __LINE__);
+        return DLNA_RET_FAILURE;
+    }
+
+    pstActionRequest = pstActionEvent->pstActionRequest;
+
+    iInstVal = DlnaCommon::getInstance().GetInt(pstActionRequest, INSTANCE_ID);
+    if (iInstVal == DLNA_NULL_INT32) {
+        OH_LOG_Print(LOG_APP, LOG_ERROR, 0xFF00, DLNA_LOG_TAG,  "[CastEngineDlna]:Received Invalid Instance ID with incorrect datatype in the "
+                  "GetDeviceCapabilities action request. \r\n");
+
+        pstActionEvent->iErrorCode = DLNA_E_UPNP_402;
+        pstActionEvent->pErrorStr = DLNA_E_UPNP_402_STRING;
+
+        return DLNA_RET_FAILURE;
+    }
+
+    if (CheckInstVal(iInstVal, pstActionEvent) != DLNA_RET_SUCCESS) {
+        return DLNA_RET_FAILURE;
+    }
+
+    DLNA_ADD_PARAM_RETURN_FAILED(pstActionEvent, PLAY_MEDIA, "NONE,NETWORK", strlen("NONE,NETWORK"));
+    DLNA_ADD_PARAM_RETURN_FAILED(pstActionEvent, RECORD_MEDIA, "NOT_IMPLEMENTED", strlen("NOT_IMPLEMENTED"));
+    DLNA_ADD_PARAM_RETURN_FAILED(pstActionEvent, RECORD_QUALITY_MODES, "NOT_IMPLEMENTED", strlen("NOT_IMPLEMENTED"));
+
+    OH_LOG_Print(LOG_APP, LOG_INFO, 0xFF00, DLNA_LOG_TAG,  "[CastEngineDlna][%{public}s][:%{public}d]-: GetDeviceCapabilities action is successful\r\n", __FUNCTION__, __LINE__);
+
+    return DLNA_RET_SUCCESS;
+}
+
+int DmrAVTransport::GetCurrentTransportActions(DmrActionParam *pstActionEvent)
+{
+    int iInstVal;
+    UpnpActionRequest *pstActionRequest = NULL;
+
+    if (pstActionEvent == NULL) {
+        OH_LOG_Print(LOG_APP, LOG_ERROR, 0xFF00, DLNA_LOG_TAG,  "[VPPDLNA][%{public}s][:%{public}d]-: pstActionEvent is NULL\r\n", __FUNCTION__, __LINE__);
+        return DLNA_RET_FAILURE;
+    }
+
+    pstActionRequest = pstActionEvent->pstActionRequest;
+
+    iInstVal = DlnaCommon::getInstance().GetInt(pstActionRequest, INSTANCE_ID);
+    if (iInstVal == DLNA_NULL_INT32) {
+        OH_LOG_Print(LOG_APP, LOG_ERROR, 0xFF00, DLNA_LOG_TAG,  "[VPPDLNA]:Received Invalid Instance ID with incorrect datatype in the "
+                  "Pause action request. \r\n");
+
+        pstActionEvent->iErrorCode = DLNA_E_UPNP_402;
+        pstActionEvent->pErrorStr = DLNA_E_UPNP_402_STRING;
+
+        return DLNA_RET_FAILURE;
+    }
+
+    if (CheckInstVal(iInstVal, pstActionEvent) != DLNA_RET_SUCCESS) {
+        return DLNA_RET_FAILURE;
+    }
+
+    DLNA_ADD_PARAM_RETURN_FAILED(pstActionEvent, "Actions", DlnaCommon::getInstance().GetDmrHdl()->pszCurrentTransportActions,
+        strlen(DlnaCommon::getInstance().GetDmrHdl()->pszCurrentTransportActions));
+
+    OH_LOG_Print(LOG_APP, LOG_INFO, 0xFF00, DLNA_LOG_TAG,  "[VPPDLNA][%{public}s][:%{public}d]-: GetCurrentTransportActions action is successful\r\n", __FUNCTION__, __LINE__);
+
+    return DLNA_RET_SUCCESS;
+}
+
+
+DmrServiceAction* DmrAVTransport::getActionFuncTable(){
+	 static DmrServiceAction  dmrAvtActionFuncTable[] = {
+	    { DMR_AV_TRANSPORT_ACTION_SET_AVTRANSPORT_URI, DmrAVTransport::SetTransportURI },
+	    { DMR_AV_TRANSPORT_ACTION_PLAY, DmrAVTransport::Play },
+	    { DMR_AV_TRANSPORT_ACTION_STOP, DmrAVTransport::Stop },
+	    { DMR_AV_TRANSPORT_ACTION_PAUSE, DmrAVTransport::Pause },
+	    { DMR_AV_TRANSPORT_ACTION_SEEK, DmrAVTransport::Seek },
+	    { DMR_AV_TRANSPORT_ACTION_GET_POSITION_INFO, DmrAVTransport::GetPositionInfo },
+	    { DMR_AV_TRANSPORT_ACTION_GET_TRANSPORT_INFO, DmrAVTransport::GetTransportInfo },
+	    { DMR_AV_TRANSPORT_ACTION_GET_TRANSPORT_SETTINGS, DmrAVTransport::GetTransportSettings },
+	    { DMR_AV_TRANSPORT_ACTION_GET_MEDIA_INFO, DmrAVTransport::GetMediaInfo },
+	    { DMR_AV_TRANSPORT_ACTION_GET_DEVICE_CAPABILITIES, DmrAVTransport::GetDeviceCapabilities },
+	    { DMR_AV_TRANSPORT_ACTION_NEXT, DmrAVTransport::Next },
+	    { DMR_AV_TRANSPORT_ACTION_PREVIOUS, DmrAVTransport::Previous },
+	    { DMR_AV_TRANSPORT_ACTION_GET_TRANSPORT_ACTION, DmrAVTransport::GetCurrentTransportActions },
+	    { NULL, NULL }
+	};
+	return (DmrServiceAction *)dmrAvtActionFuncTable;
+}
+
 }
 }
 }
