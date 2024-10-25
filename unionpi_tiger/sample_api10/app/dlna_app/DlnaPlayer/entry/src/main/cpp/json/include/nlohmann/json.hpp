@@ -1399,4 +1399,1573 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
         JSON_THROW(type_error::create(302, detail::concat("type must be boolean, but is ", type_name()), this));
     }
 
-#endif  // INCLUDE_NLOHMANN_JSON_HPP_
+    /// get a pointer to the value (object)
+    object_t* get_impl_ptr(object_t* /*unused*/) noexcept
+    {
+        return is_object() ? m_value.object : nullptr;
+    }
+
+    /// get a pointer to the value (object)
+    constexpr const object_t* get_impl_ptr(const object_t* /*unused*/) const noexcept
+    {
+        return is_object() ? m_value.object : nullptr;
+    }
+
+    /// get a pointer to the value (array)
+    array_t* get_impl_ptr(array_t* /*unused*/) noexcept
+    {
+        return is_array() ? m_value.array : nullptr;
+    }
+
+    /// get a pointer to the value (array)
+    constexpr const array_t* get_impl_ptr(const array_t* /*unused*/) const noexcept
+    {
+        return is_array() ? m_value.array : nullptr;
+    }
+
+    /// get a pointer to the value (string)
+    string_t* get_impl_ptr(string_t* /*unused*/) noexcept
+    {
+        return is_string() ? m_value.string : nullptr;
+    }
+
+    /// get a pointer to the value (string)
+    constexpr const string_t* get_impl_ptr(const string_t* /*unused*/) const noexcept
+    {
+        return is_string() ? m_value.string : nullptr;
+    }
+
+    /// get a pointer to the value (boolean)
+    boolean_t* get_impl_ptr(boolean_t* /*unused*/) noexcept
+    {
+        return is_boolean() ? &m_value.boolean : nullptr;
+    }
+
+    /// get a pointer to the value (boolean)
+    constexpr const boolean_t* get_impl_ptr(const boolean_t* /*unused*/) const noexcept
+    {
+        return is_boolean() ? &m_value.boolean : nullptr;
+    }
+
+    /// get a pointer to the value (integer number)
+    number_integer_t* get_impl_ptr(number_integer_t* /*unused*/) noexcept
+    {
+        return is_number_integer() ? &m_value.number_integer : nullptr;
+    }
+
+    /// get a pointer to the value (integer number)
+    constexpr const number_integer_t* get_impl_ptr(const number_integer_t* /*unused*/) const noexcept
+    {
+        return is_number_integer() ? &m_value.number_integer : nullptr;
+    }
+
+    /// get a pointer to the value (unsigned number)
+    number_unsigned_t* get_impl_ptr(number_unsigned_t* /*unused*/) noexcept
+    {
+        return is_number_unsigned() ? &m_value.number_unsigned : nullptr;
+    }
+
+    /// get a pointer to the value (unsigned number)
+    constexpr const number_unsigned_t* get_impl_ptr(const number_unsigned_t* /*unused*/) const noexcept
+    {
+        return is_number_unsigned() ? &m_value.number_unsigned : nullptr;
+    }
+
+    /// get a pointer to the value (floating-point number)
+    number_float_t* get_impl_ptr(number_float_t* /*unused*/) noexcept
+    {
+        return is_number_float() ? &m_value.number_float : nullptr;
+    }
+
+    /// get a pointer to the value (floating-point number)
+    constexpr const number_float_t* get_impl_ptr(const number_float_t* /*unused*/) const noexcept
+    {
+        return is_number_float() ? &m_value.number_float : nullptr;
+    }
+
+    /// get a pointer to the value (binary)
+    binary_t* get_impl_ptr(binary_t* /*unused*/) noexcept
+    {
+        return is_binary() ? m_value.binary : nullptr;
+    }
+
+    /// get a pointer to the value (binary)
+    constexpr const binary_t* get_impl_ptr(const binary_t* /*unused*/) const noexcept
+    {
+        return is_binary() ? m_value.binary : nullptr;
+    }
+
+    /*!
+    @brief helper function to implement get_ref()
+
+    This function helps to implement get_ref() without code duplication for
+    const and non-const overloads
+
+    @tparam ThisType will be deduced as `basic_json` or `const basic_json`
+
+    @throw type_error.303 if ReferenceType does not match underlying value
+    type of the current JSON
+    */
+    template<typename ReferenceType, typename ThisType>
+    static ReferenceType get_ref_impl(ThisType& obj)
+    {
+        // delegate the call to get_ptr<>()
+        auto* ptr = obj.template get_ptr<typename std::add_pointer<ReferenceType>::type>();
+
+        if (JSON_HEDLEY_LIKELY(ptr != nullptr))
+        {
+            return *ptr;
+        }
+
+        JSON_THROW(type_error::create(303, detail::concat("incompatible ReferenceType for get_ref, actual type is ", obj.type_name()), &obj));
+    }
+
+  public:
+    /// @name value access
+    /// Direct access to the stored value of a JSON value.
+    /// @{
+
+    /// @brief get a pointer value (implicit)
+    /// @sa https://json.nlohmann.me/api/basic_json/get_ptr/
+    template<typename PointerType, typename std::enable_if<
+                 std::is_pointer<PointerType>::value, int>::type = 0>
+    auto get_ptr() noexcept -> decltype(std::declval<basic_json_t&>().get_impl_ptr(std::declval<PointerType>()))
+    {
+        // delegate the call to get_impl_ptr<>()
+        return get_impl_ptr(static_cast<PointerType>(nullptr));
+    }
+
+    /// @brief get a pointer value (implicit)
+    /// @sa https://json.nlohmann.me/api/basic_json/get_ptr/
+    template < typename PointerType, typename std::enable_if <
+                   std::is_pointer<PointerType>::value&&
+                   std::is_const<typename std::remove_pointer<PointerType>::type>::value, int >::type = 0 >
+    constexpr auto get_ptr() const noexcept -> decltype(std::declval<const basic_json_t&>().get_impl_ptr(std::declval<PointerType>()))
+    {
+        // delegate the call to get_impl_ptr<>() const
+        return get_impl_ptr(static_cast<PointerType>(nullptr));
+    }
+
+  private:
+    /*!
+    @brief get a value (explicit)
+
+    Explicit type conversion between the JSON value and a compatible value
+    which is [CopyConstructible](https://en.cppreference.com/w/cpp/named_req/CopyConstructible)
+    and [DefaultConstructible](https://en.cppreference.com/w/cpp/named_req/DefaultConstructible).
+    The value is converted by calling the @ref json_serializer<ValueType>
+    `from_json()` method.
+
+    The function is equivalent to executing
+    @code {.cpp}
+    ValueType ret;
+    JSONSerializer<ValueType>::from_json(*this, ret);
+    return ret;
+    @endcode
+
+    This overloads is chosen if:
+    - @a ValueType is not @ref basic_json,
+    - @ref json_serializer<ValueType> has a `from_json()` method of the form
+      `void from_json(const basic_json&, ValueType&)`, and
+    - @ref json_serializer<ValueType> does not have a `from_json()` method of
+      the form `ValueType from_json(const basic_json&)`
+
+    @tparam ValueType the returned value type
+
+    @return copy of the JSON value, converted to @a ValueType
+
+    @throw what @ref json_serializer<ValueType> `from_json()` method throws
+
+    @liveexample{The example below shows several conversions from JSON values
+    to other types. There a few things to note: (1) Floating-point numbers can
+    be converted to integers\, (2) A JSON array can be converted to a standard
+    `std::vector<short>`\, (3) A JSON object can be converted to C++
+    associative containers such as `std::unordered_map<std::string\,
+    json>`.,get__ValueType_const}
+
+    @since version 2.1.0
+    */
+    template < typename ValueType,
+               detail::enable_if_t <
+                   detail::is_default_constructible<ValueType>::value&&
+                   detail::has_from_json<basic_json_t, ValueType>::value,
+                   int > = 0 >
+    ValueType get_impl(detail::priority_tag<0> /*unused*/) const noexcept(noexcept(
+                JSONSerializer<ValueType>::from_json(std::declval<const basic_json_t&>(), std::declval<ValueType&>())))
+    {
+        auto ret = ValueType();
+        JSONSerializer<ValueType>::from_json(*this, ret);
+        return ret;
+    }
+
+    /*!
+    @brief get a value (explicit); special case
+
+    Explicit type conversion between the JSON value and a compatible value
+    which is **not** [CopyConstructible](https://en.cppreference.com/w/cpp/named_req/CopyConstructible)
+    and **not** [DefaultConstructible](https://en.cppreference.com/w/cpp/named_req/DefaultConstructible).
+    The value is converted by calling the @ref json_serializer<ValueType>
+    `from_json()` method.
+
+    The function is equivalent to executing
+    @code {.cpp}
+    return JSONSerializer<ValueType>::from_json(*this);
+    @endcode
+
+    This overloads is chosen if:
+    - @a ValueType is not @ref basic_json and
+    - @ref json_serializer<ValueType> has a `from_json()` method of the form
+      `ValueType from_json(const basic_json&)`
+
+    @note If @ref json_serializer<ValueType> has both overloads of
+    `from_json()`, this one is chosen.
+
+    @tparam ValueType the returned value type
+
+    @return copy of the JSON value, converted to @a ValueType
+
+    @throw what @ref json_serializer<ValueType> `from_json()` method throws
+
+    @since version 2.1.0
+    */
+    template < typename ValueType,
+               detail::enable_if_t <
+                   detail::has_non_default_from_json<basic_json_t, ValueType>::value,
+                   int > = 0 >
+    ValueType get_impl(detail::priority_tag<1> /*unused*/) const noexcept(noexcept(
+                JSONSerializer<ValueType>::from_json(std::declval<const basic_json_t&>())))
+    {
+        return JSONSerializer<ValueType>::from_json(*this);
+    }
+
+    /*!
+    @brief get special-case overload
+
+    This overloads converts the current @ref basic_json in a different
+    @ref basic_json type
+
+    @tparam BasicJsonType == @ref basic_json
+
+    @return a copy of *this, converted into @a BasicJsonType
+
+    @complexity Depending on the implementation of the called `from_json()`
+                method.
+
+    @since version 3.2.0
+    */
+    template < typename BasicJsonType,
+               detail::enable_if_t <
+                   detail::is_basic_json<BasicJsonType>::value,
+                   int > = 0 >
+    BasicJsonType get_impl(detail::priority_tag<2> /*unused*/) const
+    {
+        return *this;
+    }
+
+    /*!
+    @brief get special-case overload
+
+    This overloads avoids a lot of template boilerplate, it can be seen as the
+    identity method
+
+    @tparam BasicJsonType == @ref basic_json
+
+    @return a copy of *this
+
+    @complexity Constant.
+
+    @since version 2.1.0
+    */
+    template<typename BasicJsonType,
+             detail::enable_if_t<
+                 std::is_same<BasicJsonType, basic_json_t>::value,
+                 int> = 0>
+    basic_json get_impl(detail::priority_tag<3> /*unused*/) const
+    {
+        return *this;
+    }
+
+    /*!
+    @brief get a pointer value (explicit)
+    @copydoc get()
+    */
+    template<typename PointerType,
+             detail::enable_if_t<
+                 std::is_pointer<PointerType>::value,
+                 int> = 0>
+    constexpr auto get_impl(detail::priority_tag<4> /*unused*/) const noexcept
+    -> decltype(std::declval<const basic_json_t&>().template get_ptr<PointerType>())
+    {
+        // delegate the call to get_ptr
+        return get_ptr<PointerType>();
+    }
+
+  public:
+    /*!
+    @brief get a (pointer) value (explicit)
+
+    Performs explicit type conversion between the JSON value and a compatible value if required.
+
+    - If the requested type is a pointer to the internally stored JSON value that pointer is returned.
+    No copies are made.
+
+    - If the requested type is the current @ref basic_json, or a different @ref basic_json convertible
+    from the current @ref basic_json.
+
+    - Otherwise the value is converted by calling the @ref json_serializer<ValueType> `from_json()`
+    method.
+
+    @tparam ValueTypeCV the provided value type
+    @tparam ValueType the returned value type
+
+    @return copy of the JSON value, converted to @tparam ValueType if necessary
+
+    @throw what @ref json_serializer<ValueType> `from_json()` method throws if conversion is required
+
+    @since version 2.1.0
+    */
+    template < typename ValueTypeCV, typename ValueType = detail::uncvref_t<ValueTypeCV>>
+#if defined(JSON_HAS_CPP_14)
+    constexpr
+#endif
+    auto get() const noexcept(
+    noexcept(std::declval<const basic_json_t&>().template get_impl<ValueType>(detail::priority_tag<4> {})))
+    -> decltype(std::declval<const basic_json_t&>().template get_impl<ValueType>(detail::priority_tag<4> {}))
+    {
+        // we cannot static_assert on ValueTypeCV being non-const, because
+        // there is support for get<const basic_json_t>(), which is why we
+        // still need the uncvref
+        static_assert(!std::is_reference<ValueTypeCV>::value,
+                      "get() cannot be used with reference types, you might want to use get_ref()");
+        return get_impl<ValueType>(detail::priority_tag<4> {});
+    }
+
+    /*!
+    @brief get a pointer value (explicit)
+
+    Explicit pointer access to the internally stored JSON value. No copies are
+    made.
+
+    @warning The pointer becomes invalid if the underlying JSON object
+    changes.
+
+    @tparam PointerType pointer type; must be a pointer to @ref array_t, @ref
+    object_t, @ref string_t, @ref boolean_t, @ref number_integer_t,
+    @ref number_unsigned_t, or @ref number_float_t.
+
+    @return pointer to the internally stored JSON value if the requested
+    pointer type @a PointerType fits to the JSON value; `nullptr` otherwise
+
+    @complexity Constant.
+
+    @liveexample{The example below shows how pointers to internal values of a
+    JSON value can be requested. Note that no type conversions are made and a
+    `nullptr` is returned if the value and the requested pointer type does not
+    match.,get__PointerType}
+
+    @sa see @ref get_ptr() for explicit pointer-member access
+
+    @since version 1.0.0
+    */
+    template<typename PointerType, typename std::enable_if<
+                 std::is_pointer<PointerType>::value, int>::type = 0>
+    auto get() noexcept -> decltype(std::declval<basic_json_t&>().template get_ptr<PointerType>())
+    {
+        // delegate the call to get_ptr
+        return get_ptr<PointerType>();
+    }
+
+    /// @brief get a value (explicit)
+    /// @sa https://json.nlohmann.me/api/basic_json/get_to/
+    template < typename ValueType,
+               detail::enable_if_t <
+                   !detail::is_basic_json<ValueType>::value&&
+                   detail::has_from_json<basic_json_t, ValueType>::value,
+                   int > = 0 >
+    ValueType & get_to(ValueType& v) const noexcept(noexcept(
+                JSONSerializer<ValueType>::from_json(std::declval<const basic_json_t&>(), v)))
+    {
+        JSONSerializer<ValueType>::from_json(*this, v);
+        return v;
+    }
+
+    // specialization to allow calling get_to with a basic_json value
+    // see https://github.com/nlohmann/json/issues/2175
+    template<typename ValueType,
+             detail::enable_if_t <
+                 detail::is_basic_json<ValueType>::value,
+                 int> = 0>
+    ValueType & get_to(ValueType& v) const
+    {
+        v = *this;
+        return v;
+    }
+
+    template <
+        typename T, std::size_t N,
+        typename Array = T (&)[N], // NOLINT(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
+        detail::enable_if_t <
+            detail::has_from_json<basic_json_t, Array>::value, int > = 0 >
+    Array get_to(T (&v)[N]) const // NOLINT(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
+    noexcept(noexcept(JSONSerializer<Array>::from_json(
+                          std::declval<const basic_json_t&>(), v)))
+    {
+        JSONSerializer<Array>::from_json(*this, v);
+        return v;
+    }
+
+    /// @brief get a reference value (implicit)
+    /// @sa https://json.nlohmann.me/api/basic_json/get_ref/
+    template<typename ReferenceType, typename std::enable_if<
+                 std::is_reference<ReferenceType>::value, int>::type = 0>
+    ReferenceType get_ref()
+    {
+        // delegate call to get_ref_impl
+        return get_ref_impl<ReferenceType>(*this);
+    }
+
+    /// @brief get a reference value (implicit)
+    /// @sa https://json.nlohmann.me/api/basic_json/get_ref/
+    template < typename ReferenceType, typename std::enable_if <
+                   std::is_reference<ReferenceType>::value&&
+                   std::is_const<typename std::remove_reference<ReferenceType>::type>::value, int >::type = 0 >
+    ReferenceType get_ref() const
+    {
+        // delegate call to get_ref_impl
+        return get_ref_impl<ReferenceType>(*this);
+    }
+
+    /*!
+    @brief get a value (implicit)
+
+    Implicit type conversion between the JSON value and a compatible value.
+    The call is realized by calling @ref get() const.
+
+    @tparam ValueType non-pointer type compatible to the JSON value, for
+    instance `int` for JSON integer numbers, `bool` for JSON booleans, or
+    `std::vector` types for JSON arrays. The character type of @ref string_t
+    as well as an initializer list of this type is excluded to avoid
+    ambiguities as these types implicitly convert to `std::string`.
+
+    @return copy of the JSON value, converted to type @a ValueType
+
+    @throw type_error.302 in case passed type @a ValueType is incompatible
+    to the JSON value type (e.g., the JSON value is of type boolean, but a
+    string is requested); see example below
+
+    @complexity Linear in the size of the JSON value.
+
+    @liveexample{The example below shows several conversions from JSON values
+    to other types. There a few things to note: (1) Floating-point numbers can
+    be converted to integers\, (2) A JSON array can be converted to a standard
+    `std::vector<short>`\, (3) A JSON object can be converted to C++
+    associative containers such as `std::unordered_map<std::string\,
+    json>`.,operator__ValueType}
+
+    @since version 1.0.0
+    */
+    template < typename ValueType, typename std::enable_if <
+                   detail::conjunction <
+                       detail::negation<std::is_pointer<ValueType>>,
+                       detail::negation<std::is_same<ValueType, std::nullptr_t>>,
+                       detail::negation<std::is_same<ValueType, detail::json_ref<basic_json>>>,
+                                        detail::negation<std::is_same<ValueType, typename string_t::value_type>>,
+                                        detail::negation<detail::is_basic_json<ValueType>>,
+                                        detail::negation<std::is_same<ValueType, std::initializer_list<typename string_t::value_type>>>,
+#if defined(JSON_HAS_CPP_17) && (defined(__GNUC__) || (defined(_MSC_VER) && _MSC_VER >= 1910 && _MSC_VER <= 1914))
+                                                detail::negation<std::is_same<ValueType, std::string_view>>,
+#endif
+#if defined(JSON_HAS_CPP_17)
+                                                detail::negation<std::is_same<ValueType, std::any>>,
+#endif
+                                                detail::is_detected_lazy<detail::get_template_function, const basic_json_t&, ValueType>
+                                                >::value, int >::type = 0 >
+                                        JSON_EXPLICIT operator ValueType() const
+    {
+        // delegate the call to get<>() const
+        return get<ValueType>();
+    }
+
+    /// @brief get a binary value
+    /// @sa https://json.nlohmann.me/api/basic_json/get_binary/
+    binary_t& get_binary()
+    {
+        if (!is_binary())
+        {
+            JSON_THROW(type_error::create(302, detail::concat("type must be binary, but is ", type_name()), this));
+        }
+
+        return *get_ptr<binary_t*>();
+    }
+
+    /// @brief get a binary value
+    /// @sa https://json.nlohmann.me/api/basic_json/get_binary/
+    const binary_t& get_binary() const
+    {
+        if (!is_binary())
+        {
+            JSON_THROW(type_error::create(302, detail::concat("type must be binary, but is ", type_name()), this));
+        }
+
+        return *get_ptr<const binary_t*>();
+    }
+
+    /// @}
+
+
+    ////////////////////
+    // element access //
+    ////////////////////
+
+    /// @name element access
+    /// Access to the JSON value.
+    /// @{
+
+    /// @brief access specified array element with bounds checking
+    /// @sa https://json.nlohmann.me/api/basic_json/at/
+    reference at(size_type idx)
+    {
+        // at only works for arrays
+        if (JSON_HEDLEY_LIKELY(is_array()))
+        {
+            JSON_TRY
+            {
+                return set_parent(m_value.array->at(idx));
+            }
+            JSON_CATCH (std::out_of_range&)
+            {
+                // create better exception explanation
+                JSON_THROW(out_of_range::create(401, detail::concat("array index ", std::to_string(idx), " is out of range"), this));
+            }
+        }
+        else
+        {
+            JSON_THROW(type_error::create(304, detail::concat("cannot use at() with ", type_name()), this));
+        }
+    }
+
+    /// @brief access specified array element with bounds checking
+    /// @sa https://json.nlohmann.me/api/basic_json/at/
+    const_reference at(size_type idx) const
+    {
+        // at only works for arrays
+        if (JSON_HEDLEY_LIKELY(is_array()))
+        {
+            JSON_TRY
+            {
+                return m_value.array->at(idx);
+            }
+            JSON_CATCH (std::out_of_range&)
+            {
+                // create better exception explanation
+                JSON_THROW(out_of_range::create(401, detail::concat("array index ", std::to_string(idx), " is out of range"), this));
+            }
+        }
+        else
+        {
+            JSON_THROW(type_error::create(304, detail::concat("cannot use at() with ", type_name()), this));
+        }
+    }
+
+    /// @brief access specified object element with bounds checking
+    /// @sa https://json.nlohmann.me/api/basic_json/at/
+    reference at(const typename object_t::key_type& key)
+    {
+        // at only works for objects
+        if (JSON_HEDLEY_UNLIKELY(!is_object()))
+        {
+            JSON_THROW(type_error::create(304, detail::concat("cannot use at() with ", type_name()), this));
+        }
+
+        auto it = m_value.object->find(key);
+        if (it == m_value.object->end())
+        {
+            JSON_THROW(out_of_range::create(403, detail::concat("key '", key, "' not found"), this));
+        }
+        return set_parent(it->second);
+    }
+
+    /// @brief access specified object element with bounds checking
+    /// @sa https://json.nlohmann.me/api/basic_json/at/
+    template<class KeyType, detail::enable_if_t<
+                 detail::is_usable_as_basic_json_key_type<basic_json_t, KeyType>::value, int> = 0>
+    reference at(KeyType && key)
+    {
+        // at only works for objects
+        if (JSON_HEDLEY_UNLIKELY(!is_object()))
+        {
+            JSON_THROW(type_error::create(304, detail::concat("cannot use at() with ", type_name()), this));
+        }
+
+        auto it = m_value.object->find(std::forward<KeyType>(key));
+        if (it == m_value.object->end())
+        {
+            JSON_THROW(out_of_range::create(403, detail::concat("key '", string_t(std::forward<KeyType>(key)), "' not found"), this));
+        }
+        return set_parent(it->second);
+    }
+
+    /// @brief access specified object element with bounds checking
+    /// @sa https://json.nlohmann.me/api/basic_json/at/
+    const_reference at(const typename object_t::key_type& key) const
+    {
+        // at only works for objects
+        if (JSON_HEDLEY_UNLIKELY(!is_object()))
+        {
+            JSON_THROW(type_error::create(304, detail::concat("cannot use at() with ", type_name()), this));
+        }
+
+        auto it = m_value.object->find(key);
+        if (it == m_value.object->end())
+        {
+            JSON_THROW(out_of_range::create(403, detail::concat("key '", key, "' not found"), this));
+        }
+        return it->second;
+    }
+
+    /// @brief access specified object element with bounds checking
+    /// @sa https://json.nlohmann.me/api/basic_json/at/
+    template<class KeyType, detail::enable_if_t<
+                 detail::is_usable_as_basic_json_key_type<basic_json_t, KeyType>::value, int> = 0>
+    const_reference at(KeyType && key) const
+    {
+        // at only works for objects
+        if (JSON_HEDLEY_UNLIKELY(!is_object()))
+        {
+            JSON_THROW(type_error::create(304, detail::concat("cannot use at() with ", type_name()), this));
+        }
+
+        auto it = m_value.object->find(std::forward<KeyType>(key));
+        if (it == m_value.object->end())
+        {
+            JSON_THROW(out_of_range::create(403, detail::concat("key '", string_t(std::forward<KeyType>(key)), "' not found"), this));
+        }
+        return it->second;
+    }
+
+    /// @brief access specified array element
+    /// @sa https://json.nlohmann.me/api/basic_json/operator%5B%5D/
+    reference operator[](size_type idx)
+    {
+        // implicitly convert null value to an empty array
+        if (is_null())
+        {
+            m_type = value_t::array;
+            m_value.array = create<array_t>();
+            assert_invariant();
+        }
+
+        // operator[] only works for arrays
+        if (JSON_HEDLEY_LIKELY(is_array()))
+        {
+            // fill up array with null values if given idx is outside range
+            if (idx >= m_value.array->size())
+            {
+#if JSON_DIAGNOSTICS
+                // remember array size & capacity before resizing
+                const auto old_size = m_value.array->size();
+                const auto old_capacity = m_value.array->capacity();
+#endif
+                m_value.array->resize(idx + 1);
+
+#if JSON_DIAGNOSTICS
+                if (JSON_HEDLEY_UNLIKELY(m_value.array->capacity() != old_capacity))
+                {
+                    // capacity has changed: update all parents
+                    set_parents();
+                }
+                else
+                {
+                    // set parent for values added above
+                    set_parents(begin() + static_cast<typename iterator::difference_type>(old_size), static_cast<typename iterator::difference_type>(idx + 1 - old_size));
+                }
+#endif
+                assert_invariant();
+            }
+
+            return m_value.array->operator[](idx);
+        }
+
+        JSON_THROW(type_error::create(305, detail::concat("cannot use operator[] with a numeric argument with ", type_name()), this));
+    }
+
+    /// @brief access specified array element
+    /// @sa https://json.nlohmann.me/api/basic_json/operator%5B%5D/
+    const_reference operator[](size_type idx) const
+    {
+        // const operator[] only works for arrays
+        if (JSON_HEDLEY_LIKELY(is_array()))
+        {
+            return m_value.array->operator[](idx);
+        }
+
+        JSON_THROW(type_error::create(305, detail::concat("cannot use operator[] with a numeric argument with ", type_name()), this));
+    }
+
+    /// @brief access specified object element
+    /// @sa https://json.nlohmann.me/api/basic_json/operator%5B%5D/
+    reference operator[](typename object_t::key_type key)
+    {
+        // implicitly convert null value to an empty object
+        if (is_null())
+        {
+            m_type = value_t::object;
+            m_value.object = create<object_t>();
+            assert_invariant();
+        }
+
+        // operator[] only works for objects
+        if (JSON_HEDLEY_LIKELY(is_object()))
+        {
+            auto result = m_value.object->emplace(std::move(key), nullptr);
+            return set_parent(result.first->second);
+        }
+
+        JSON_THROW(type_error::create(305, detail::concat("cannot use operator[] with a string argument with ", type_name()), this));
+    }
+
+    /// @brief access specified object element
+    /// @sa https://json.nlohmann.me/api/basic_json/operator%5B%5D/
+    const_reference operator[](const typename object_t::key_type& key) const
+    {
+        // const operator[] only works for objects
+        if (JSON_HEDLEY_LIKELY(is_object()))
+        {
+            auto it = m_value.object->find(key);
+            JSON_ASSERT(it != m_value.object->end());
+            return it->second;
+        }
+
+        JSON_THROW(type_error::create(305, detail::concat("cannot use operator[] with a string argument with ", type_name()), this));
+    }
+
+    // these two functions resolve a (const) char * ambiguity affecting Clang and MSVC
+    // (they seemingly cannot be constrained to resolve the ambiguity)
+    template<typename T>
+    reference operator[](T* key)
+    {
+        return operator[](typename object_t::key_type(key));
+    }
+
+    template<typename T>
+    const_reference operator[](T* key) const
+    {
+        return operator[](typename object_t::key_type(key));
+    }
+
+    /// @brief access specified object element
+    /// @sa https://json.nlohmann.me/api/basic_json/operator%5B%5D/
+    template<class KeyType, detail::enable_if_t<
+                 detail::is_usable_as_basic_json_key_type<basic_json_t, KeyType>::value, int > = 0 >
+    reference operator[](KeyType && key)
+    {
+        // implicitly convert null value to an empty object
+        if (is_null())
+        {
+            m_type = value_t::object;
+            m_value.object = create<object_t>();
+            assert_invariant();
+        }
+
+        // operator[] only works for objects
+        if (JSON_HEDLEY_LIKELY(is_object()))
+        {
+            auto result = m_value.object->emplace(std::forward<KeyType>(key), nullptr);
+            return set_parent(result.first->second);
+        }
+
+        JSON_THROW(type_error::create(305, detail::concat("cannot use operator[] with a string argument with ", type_name()), this));
+    }
+
+    /// @brief access specified object element
+    /// @sa https://json.nlohmann.me/api/basic_json/operator%5B%5D/
+    template<class KeyType, detail::enable_if_t<
+                 detail::is_usable_as_basic_json_key_type<basic_json_t, KeyType>::value, int > = 0 >
+    const_reference operator[](KeyType && key) const
+    {
+        // const operator[] only works for objects
+        if (JSON_HEDLEY_LIKELY(is_object()))
+        {
+            auto it = m_value.object->find(std::forward<KeyType>(key));
+            JSON_ASSERT(it != m_value.object->end());
+            return it->second;
+        }
+
+        JSON_THROW(type_error::create(305, detail::concat("cannot use operator[] with a string argument with ", type_name()), this));
+    }
+
+  private:
+    template<typename KeyType>
+    using is_comparable_with_object_key = detail::is_comparable <
+        object_comparator_t, const typename object_t::key_type&, KeyType >;
+
+    template<typename ValueType>
+    using value_return_type = std::conditional <
+        detail::is_c_string_uncvref<ValueType>::value,
+        string_t, typename std::decay<ValueType>::type >;
+
+  public:
+    /// @brief access specified object element with default value
+    /// @sa https://json.nlohmann.me/api/basic_json/value/
+    template < class ValueType, detail::enable_if_t <
+                   !detail::is_transparent<object_comparator_t>::value
+                   && detail::is_getable<basic_json_t, ValueType>::value
+                   && !std::is_same<value_t, detail::uncvref_t<ValueType>>::value, int > = 0 >
+    ValueType value(const typename object_t::key_type& key, const ValueType& default_value) const
+    {
+        // value only works for objects
+        if (JSON_HEDLEY_LIKELY(is_object()))
+        {
+            // if key is found, return value and given default value otherwise
+            const auto it = find(key);
+            if (it != end())
+            {
+                return it->template get<ValueType>();
+            }
+
+            return default_value;
+        }
+
+        JSON_THROW(type_error::create(306, detail::concat("cannot use value() with ", type_name()), this));
+    }
+
+    /// @brief access specified object element with default value
+    /// @sa https://json.nlohmann.me/api/basic_json/value/
+    template < class ValueType, class ReturnType = typename value_return_type<ValueType>::type,
+               detail::enable_if_t <
+                   !detail::is_transparent<object_comparator_t>::value
+                   && detail::is_getable<basic_json_t, ReturnType>::value
+                   && !std::is_same<value_t, detail::uncvref_t<ValueType>>::value, int > = 0 >
+    ReturnType value(const typename object_t::key_type& key, ValueType && default_value) const
+    {
+        // value only works for objects
+        if (JSON_HEDLEY_LIKELY(is_object()))
+        {
+            // if key is found, return value and given default value otherwise
+            const auto it = find(key);
+            if (it != end())
+            {
+                return it->template get<ReturnType>();
+            }
+
+            return std::forward<ValueType>(default_value);
+        }
+
+        JSON_THROW(type_error::create(306, detail::concat("cannot use value() with ", type_name()), this));
+    }
+
+    /// @brief access specified object element with default value
+    /// @sa https://json.nlohmann.me/api/basic_json/value/
+    template < class ValueType, class KeyType, detail::enable_if_t <
+                   detail::is_transparent<object_comparator_t>::value
+                   && !detail::is_json_pointer<KeyType>::value
+                   && is_comparable_with_object_key<KeyType>::value
+                   && detail::is_getable<basic_json_t, ValueType>::value
+                   && !std::is_same<value_t, detail::uncvref_t<ValueType>>::value, int > = 0 >
+    ValueType value(KeyType && key, const ValueType& default_value) const
+    {
+        // value only works for objects
+        if (JSON_HEDLEY_LIKELY(is_object()))
+        {
+            // if key is found, return value and given default value otherwise
+            const auto it = find(std::forward<KeyType>(key));
+            if (it != end())
+            {
+                return it->template get<ValueType>();
+            }
+
+            return default_value;
+        }
+
+        JSON_THROW(type_error::create(306, detail::concat("cannot use value() with ", type_name()), this));
+    }
+
+    /// @brief access specified object element via JSON Pointer with default value
+    /// @sa https://json.nlohmann.me/api/basic_json/value/
+    template < class ValueType, class KeyType, class ReturnType = typename value_return_type<ValueType>::type,
+               detail::enable_if_t <
+                   detail::is_transparent<object_comparator_t>::value
+                   && !detail::is_json_pointer<KeyType>::value
+                   && is_comparable_with_object_key<KeyType>::value
+                   && detail::is_getable<basic_json_t, ReturnType>::value
+                   && !std::is_same<value_t, detail::uncvref_t<ValueType>>::value, int > = 0 >
+    ReturnType value(KeyType && key, ValueType && default_value) const
+    {
+        // value only works for objects
+        if (JSON_HEDLEY_LIKELY(is_object()))
+        {
+            // if key is found, return value and given default value otherwise
+            const auto it = find(std::forward<KeyType>(key));
+            if (it != end())
+            {
+                return it->template get<ReturnType>();
+            }
+
+            return std::forward<ValueType>(default_value);
+        }
+
+        JSON_THROW(type_error::create(306, detail::concat("cannot use value() with ", type_name()), this));
+    }
+
+    /// @brief access specified object element via JSON Pointer with default value
+    /// @sa https://json.nlohmann.me/api/basic_json/value/
+    template < class ValueType, detail::enable_if_t <
+                   detail::is_getable<basic_json_t, ValueType>::value
+                   && !std::is_same<value_t, detail::uncvref_t<ValueType>>::value, int > = 0 >
+    ValueType value(const json_pointer& ptr, const ValueType& default_value) const
+    {
+        // value only works for objects
+        if (JSON_HEDLEY_LIKELY(is_object()))
+        {
+            // if pointer resolves a value, return it or use default value
+            JSON_TRY
+            {
+                return ptr.get_checked(this).template get<ValueType>();
+            }
+            JSON_INTERNAL_CATCH (out_of_range&)
+            {
+                return default_value;
+            }
+        }
+
+        JSON_THROW(type_error::create(306, detail::concat("cannot use value() with ", type_name()), this));
+    }
+
+    /// @brief access specified object element via JSON Pointer with default value
+    /// @sa https://json.nlohmann.me/api/basic_json/value/
+    template < class ValueType, class ReturnType = typename value_return_type<ValueType>::type,
+               detail::enable_if_t <
+                   detail::is_getable<basic_json_t, ReturnType>::value
+                   && !std::is_same<value_t, detail::uncvref_t<ValueType>>::value, int > = 0 >
+    ReturnType value(const json_pointer& ptr, ValueType && default_value) const
+    {
+        // value only works for objects
+        if (JSON_HEDLEY_LIKELY(is_object()))
+        {
+            // if pointer resolves a value, return it or use default value
+            JSON_TRY
+            {
+                return ptr.get_checked(this).template get<ReturnType>();
+            }
+            JSON_INTERNAL_CATCH (out_of_range&)
+            {
+                return std::forward<ValueType>(default_value);
+            }
+        }
+
+        JSON_THROW(type_error::create(306, detail::concat("cannot use value() with ", type_name()), this));
+    }
+
+    template < class ValueType, class BasicJsonType, detail::enable_if_t <
+                   detail::is_basic_json<BasicJsonType>::value
+                   && detail::is_getable<basic_json_t, ValueType>::value
+                   && !std::is_same<value_t, detail::uncvref_t<ValueType>>::value, int > = 0 >
+    JSON_HEDLEY_DEPRECATED_FOR(3.11.0, basic_json::json_pointer or nlohmann::json_pointer<basic_json::string_t>) // NOLINT(readability/alt_tokens)
+    ValueType value(const ::nlohmann::json_pointer<BasicJsonType>& ptr, const ValueType& default_value) const
+    {
+        return value(ptr.convert(), default_value);
+    }
+
+    template < class ValueType, class BasicJsonType, class ReturnType = typename value_return_type<ValueType>::type,
+               detail::enable_if_t <
+                   detail::is_basic_json<BasicJsonType>::value
+                   && detail::is_getable<basic_json_t, ReturnType>::value
+                   && !std::is_same<value_t, detail::uncvref_t<ValueType>>::value, int > = 0 >
+    JSON_HEDLEY_DEPRECATED_FOR(3.11.0, basic_json::json_pointer or nlohmann::json_pointer<basic_json::string_t>) // NOLINT(readability/alt_tokens)
+    ReturnType value(const ::nlohmann::json_pointer<BasicJsonType>& ptr, ValueType && default_value) const
+    {
+        return value(ptr.convert(), std::forward<ValueType>(default_value));
+    }
+
+    /// @brief access the first element
+    /// @sa https://json.nlohmann.me/api/basic_json/front/
+    reference front()
+    {
+        return *begin();
+    }
+
+    /// @brief access the first element
+    /// @sa https://json.nlohmann.me/api/basic_json/front/
+    const_reference front() const
+    {
+        return *cbegin();
+    }
+
+    /// @brief access the last element
+    /// @sa https://json.nlohmann.me/api/basic_json/back/
+    reference back()
+    {
+        auto tmp = end();
+        --tmp;
+        return *tmp;
+    }
+
+    /// @brief access the last element
+    /// @sa https://json.nlohmann.me/api/basic_json/back/
+    const_reference back() const
+    {
+        auto tmp = cend();
+        --tmp;
+        return *tmp;
+    }
+
+    /// @brief remove element given an iterator
+    /// @sa https://json.nlohmann.me/api/basic_json/erase/
+    template < class IteratorType, detail::enable_if_t <
+                   std::is_same<IteratorType, typename basic_json_t::iterator>::value ||
+                   std::is_same<IteratorType, typename basic_json_t::const_iterator>::value, int > = 0 >
+    IteratorType erase(IteratorType pos)
+    {
+        // make sure iterator fits the current value
+        if (JSON_HEDLEY_UNLIKELY(this != pos.m_object))
+        {
+            JSON_THROW(invalid_iterator::create(202, "iterator does not fit current value", this));
+        }
+
+        IteratorType result = end();
+
+        switch (m_type)
+        {
+            case value_t::boolean:
+            case value_t::number_float:
+            case value_t::number_integer:
+            case value_t::number_unsigned:
+            case value_t::string:
+            case value_t::binary:
+            {
+                if (JSON_HEDLEY_UNLIKELY(!pos.m_it.primitive_iterator.is_begin()))
+                {
+                    JSON_THROW(invalid_iterator::create(205, "iterator out of range", this));
+                }
+
+                if (is_string())
+                {
+                    AllocatorType<string_t> alloc;
+                    std::allocator_traits<decltype(alloc)>::destroy(alloc, m_value.string);
+                    std::allocator_traits<decltype(alloc)>::deallocate(alloc, m_value.string, 1);
+                    m_value.string = nullptr;
+                }
+                else if (is_binary())
+                {
+                    AllocatorType<binary_t> alloc;
+                    std::allocator_traits<decltype(alloc)>::destroy(alloc, m_value.binary);
+                    std::allocator_traits<decltype(alloc)>::deallocate(alloc, m_value.binary, 1);
+                    m_value.binary = nullptr;
+                }
+
+                m_type = value_t::null;
+                assert_invariant();
+                break;
+            }
+
+            case value_t::object:
+            {
+                result.m_it.object_iterator = m_value.object->erase(pos.m_it.object_iterator);
+                break;
+            }
+
+            case value_t::array:
+            {
+                result.m_it.array_iterator = m_value.array->erase(pos.m_it.array_iterator);
+                break;
+            }
+
+            case value_t::null:
+            case value_t::discarded:
+            default:
+                JSON_THROW(type_error::create(307, detail::concat("cannot use erase() with ", type_name()), this));
+        }
+
+        return result;
+    }
+
+    /// @brief remove elements given an iterator range
+    /// @sa https://json.nlohmann.me/api/basic_json/erase/
+    template < class IteratorType, detail::enable_if_t <
+                   std::is_same<IteratorType, typename basic_json_t::iterator>::value ||
+                   std::is_same<IteratorType, typename basic_json_t::const_iterator>::value, int > = 0 >
+    IteratorType erase(IteratorType first, IteratorType last)
+    {
+        // make sure iterator fits the current value
+        if (JSON_HEDLEY_UNLIKELY(this != first.m_object || this != last.m_object))
+        {
+            JSON_THROW(invalid_iterator::create(203, "iterators do not fit current value", this));
+        }
+
+        IteratorType result = end();
+
+        switch (m_type)
+        {
+            case value_t::boolean:
+            case value_t::number_float:
+            case value_t::number_integer:
+            case value_t::number_unsigned:
+            case value_t::string:
+            case value_t::binary:
+            {
+                if (JSON_HEDLEY_LIKELY(!first.m_it.primitive_iterator.is_begin()
+                                       || !last.m_it.primitive_iterator.is_end()))
+                {
+                    JSON_THROW(invalid_iterator::create(204, "iterators out of range", this));
+                }
+
+                if (is_string())
+                {
+                    AllocatorType<string_t> alloc;
+                    std::allocator_traits<decltype(alloc)>::destroy(alloc, m_value.string);
+                    std::allocator_traits<decltype(alloc)>::deallocate(alloc, m_value.string, 1);
+                    m_value.string = nullptr;
+                }
+                else if (is_binary())
+                {
+                    AllocatorType<binary_t> alloc;
+                    std::allocator_traits<decltype(alloc)>::destroy(alloc, m_value.binary);
+                    std::allocator_traits<decltype(alloc)>::deallocate(alloc, m_value.binary, 1);
+                    m_value.binary = nullptr;
+                }
+
+                m_type = value_t::null;
+                assert_invariant();
+                break;
+            }
+
+            case value_t::object:
+            {
+                result.m_it.object_iterator = m_value.object->erase(first.m_it.object_iterator,
+                                              last.m_it.object_iterator);
+                break;
+            }
+
+            case value_t::array:
+            {
+                result.m_it.array_iterator = m_value.array->erase(first.m_it.array_iterator,
+                                             last.m_it.array_iterator);
+                break;
+            }
+
+            case value_t::null:
+            case value_t::discarded:
+            default:
+                JSON_THROW(type_error::create(307, detail::concat("cannot use erase() with ", type_name()), this));
+        }
+
+        return result;
+    }
+
+  private:
+    template < typename KeyType, detail::enable_if_t <
+                   detail::has_erase_with_key_type<basic_json_t, KeyType>::value, int > = 0 >
+    size_type erase_internal(KeyType && key)
+    {
+        // this erase only works for objects
+        if (JSON_HEDLEY_UNLIKELY(!is_object()))
+        {
+            JSON_THROW(type_error::create(307, detail::concat("cannot use erase() with ", type_name()), this));
+        }
+
+        return m_value.object->erase(std::forward<KeyType>(key));
+    }
+
+    template < typename KeyType, detail::enable_if_t <
+                   !detail::has_erase_with_key_type<basic_json_t, KeyType>::value, int > = 0 >
+    size_type erase_internal(KeyType && key)
+    {
+        // this erase only works for objects
+        if (JSON_HEDLEY_UNLIKELY(!is_object()))
+        {
+            JSON_THROW(type_error::create(307, detail::concat("cannot use erase() with ", type_name()), this));
+        }
+
+        const auto it = m_value.object->find(std::forward<KeyType>(key));
+        if (it != m_value.object->end())
+        {
+            m_value.object->erase(it);
+            return 1;
+        }
+        return 0;
+    }
+
+  public:
+
+    /// @brief remove element from a JSON object given a key
+    /// @sa https://json.nlohmann.me/api/basic_json/erase/
+    size_type erase(const typename object_t::key_type& key)
+    {
+        // the indirection via erase_internal() is added to avoid making this
+        // function a template and thus de-rank it during overload resolution
+        return erase_internal(key);
+    }
+
+    /// @brief remove element from a JSON object given a key
+    /// @sa https://json.nlohmann.me/api/basic_json/erase/
+    template<class KeyType, detail::enable_if_t<
+                 detail::is_usable_as_basic_json_key_type<basic_json_t, KeyType>::value, int> = 0>
+    size_type erase(KeyType && key)
+    {
+        return erase_internal(std::forward<KeyType>(key));
+    }
+
+    /// @brief remove element from a JSON array given an index
+    /// @sa https://json.nlohmann.me/api/basic_json/erase/
+    void erase(const size_type idx)
+    {
+        // this erase only works for arrays
+        if (JSON_HEDLEY_LIKELY(is_array()))
+        {
+            if (JSON_HEDLEY_UNLIKELY(idx >= size()))
+            {
+                JSON_THROW(out_of_range::create(401, detail::concat("array index ", std::to_string(idx), " is out of range"), this));
+            }
+
+            m_value.array->erase(m_value.array->begin() + static_cast<difference_type>(idx));
+        }
+        else
+        {
+            JSON_THROW(type_error::create(307, detail::concat("cannot use erase() with ", type_name()), this));
+        }
+    }
+
+    /// @}
+
+
+    ////////////
+    // lookup //
+    ////////////
+
+    /// @name lookup
+    /// @{
+
+    /// @brief find an element in a JSON object
+    /// @sa https://json.nlohmann.me/api/basic_json/find/
+    iterator find(const typename object_t::key_type& key)
+    {
+        auto result = end();
+
+        if (is_object())
+        {
+            result.m_it.object_iterator = m_value.object->find(key);
+        }
+
+        return result;
+    }
+
+    /// @brief find an element in a JSON object
+    /// @sa https://json.nlohmann.me/api/basic_json/find/
+    const_iterator find(const typename object_t::key_type& key) const
+    {
+        auto result = cend();
+
+        if (is_object())
+        {
+            result.m_it.object_iterator = m_value.object->find(key);
+        }
+
+        return result;
+    }
+
+    /// @brief find an element in a JSON object
+    /// @sa https://json.nlohmann.me/api/basic_json/find/
+    template<class KeyType, detail::enable_if_t<
+                 detail::is_usable_as_basic_json_key_type<basic_json_t, KeyType>::value, int> = 0>
+    iterator find(KeyType && key)
+    {
+        auto result = end();
+
+        if (is_object())
+        {
+            result.m_it.object_iterator = m_value.object->find(std::forward<KeyType>(key));
+        }
+
+        return result;
+    }
+
+    /// @brief find an element in a JSON object
+    /// @sa https://json.nlohmann.me/api/basic_json/find/
+    template<class KeyType, detail::enable_if_t<
+                 detail::is_usable_as_basic_json_key_type<basic_json_t, KeyType>::value, int> = 0>
+    const_iterator find(KeyType && key) const
+    {
+        auto result = cend();
+
+        if (is_object())
+        {
+            result.m_it.object_iterator = m_value.object->find(std::forward<KeyType>(key));
+        }
+
+        return result;
+    }
+
+    /// @brief returns the number of occurrences of a key in a JSON object
+    /// @sa https://json.nlohmann.me/api/basic_json/count/
+    size_type count(const typename object_t::key_type& key) const
+    {
+        // return 0 for all nonobject types
+        return is_object() ? m_value.object->count(key) : 0;
+    }
+
+    /// @brief returns the number of occurrences of a key in a JSON object
+    /// @sa https://json.nlohmann.me/api/basic_json/count/
+    template<class KeyType, detail::enable_if_t<
+                 detail::is_usable_as_basic_json_key_type<basic_json_t, KeyType>::value, int> = 0>
+    size_type count(KeyType && key) const
+    {
+        // return 0 for all nonobject types
+        return is_object() ? m_value.object->count(std::forward<KeyType>(key)) : 0;
+    }
+
+    /// @brief check the existence of an element in a JSON object
+    /// @sa https://json.nlohmann.me/api/basic_json/contains/
+    bool contains(const typename object_t::key_type& key) const
+    {
+        return is_object() && m_value.object->find(key) != m_value.object->end();
+    }
+
+    /// @brief check the existence of an element in a JSON object
+    /// @sa https://json.nlohmann.me/api/basic_json/contains/
+    template<class KeyType, detail::enable_if_t<
+                 detail::is_usable_as_basic_json_key_type<basic_json_t, KeyType>::value, int> = 0>
+    bool contains(KeyType && key) const
+    {
+        return is_object() && m_value.object->find(std::forward<KeyType>(key)) != m_value.object->end();
+    }
+
+    /// @brief check the existence of an element in a JSON object given a JSON pointer
+    /// @sa https://json.nlohmann.me/api/basic_json/contains/
+    bool contains(const json_pointer& ptr) const
+    {
+        return ptr.contains(this);
+    }
+
+    template<typename BasicJsonType, detail::enable_if_t<detail::is_basic_json<BasicJsonType>::value, int> = 0>
+    JSON_HEDLEY_DEPRECATED_FOR(3.11.0, basic_json::json_pointer or nlohmann::json_pointer<basic_json::string_t>) // NOLINT(readability/alt_tokens)
+    bool contains(const typename ::nlohmann::json_pointer<BasicJsonType>& ptr) const
+    {
+        return ptr.contains(this);
+    }
+
+    /// @}
+
+
+    ///////////////
+    // iterators //
+    ///////////////
+
+    /// @name iterators
+    /// @{
+
+    /// @brief returns an iterator to the first element
+    /// @sa https://json.nlohmann.me/api/basic_json/begin/
+    iterator begin() noexcept
+    {
+        iterator result(this);
+        result.set_begin();
+        return result;
+    }
+
+    /// @brief returns an iterator to the first element
+    /// @sa https://json.nlohmann.me/api/basic_json/begin/
+    const_iterator begin() const noexcept
+    {
+        return cbegin();
+    }
+
+    /// @brief returns a const iterator to the first element
+    /// @sa https://json.nlohmann.me/api/basic_json/cbegin/
+    const_iterator cbegin() const noexcept
+    {
+        const_iterator result(this);
+        result.set_begin();
+        return result;
+    }
+
+    /// @brief returns an iterator to one past the last element
+    /// @sa https://json.nlohmann.me/api/basic_json/end/
+    iterator end() noexcept
+    {
+        iterator result(this);
+        result.set_end();
+        return result;
+    }
+
+    /// @brief returns an iterator to one past the last element
+    /// @sa https://json.nlohmann.me/api/basic_json/end/
+    const_iterator end() const noexcept
+    {
+        return cend();
+    }
+
+    /// @brief returns an iterator to one past the last element
+    /// @sa https://json.nlohmann.me/api/basic_json/cend/
+    const_iterator cend() const noexcept
+    {
+        const_iterator result(this);
+        result.set_end();
+        return result;
+    }
+
+    /// @brief returns an iterator to the reverse-beginning
+    /// @sa https://json.nlohmann.me/api/basic_json/rbegin/
+    reverse_iterator rbegin() noexcept
+    {
+        return reverse_iterator(end());
+    }
+
+    /// @brief returns an iterator to the reverse-beginning
+    /// @sa https://json.nlohmann.me/api/basic_json/rbegin/
+    const_reverse_iterator rbegin() const noexcept
+    {
+        return crbegin();
+    }
+
+    /// @brief returns an iterator to the reverse-end
+    /// @sa https://json.nlohmann.me/api/basic_json/rend/
+    reverse_iterator rend() noexcept
+    {
+        return reverse_iterator(begin());
+    }
+
+    /// @brief returns an iterator to the reverse-end
+    /// @sa https://json.nlohmann.me/api/basic_json/rend/
+    const_reverse_iterator rend() const noexcept
+    {
+        return crend();
+    }
+
+    /// @brief returns a const reverse iterator to the last element
+    /// @sa https://json.nlohmann.me/api/basic_json/crbegin/
+    const_reverse_iterator crbegin() const noexcept
+    {
+        return const_reverse_iterator(cend());
+    }
+
+    /// @brief returns a const reverse iterator to one before the first
+    /// @sa https://json.nlohmann.me/api/basic_json/crend/
+    const_reverse_iterator crend() const noexcept
+    {
+        return const_reverse_iterator(cbegin());
+    }
+
+  public:
+    /// @brief wrapper to access iterator member functions in range-based for
+    /// @sa https://json.nlohmann.me/api/basic_json/items/
+    /// @deprecated This function is deprecated since 3.1.0 and will be removed in
+    ///             version 4.0.0 of the library. Please use @ref items() instead;
+    ///             that is, replace `json::iterator_wrapper(j)` with `j.items()`.
+    JSON_HEDLEY_DEPRECATED_FOR(3.1.0, items())
+    static iteration_proxy<iterator> iterator_wrapper(reference ref) noexcept
+    {
+        return ref.items();
+    }
+
+    /// @brief wrapper to access iterator member functions in range-based for
+    /// @sa https://json.nlohmann.me/api/basic_json/items/
+    /// @deprecated This function is deprecated since 3.1.0 and will be removed in
+    ///         version 4.0.0 of the library. Please use @ref items() instead;
+    ///         that is, replace `json::iterator_wrapper(j)` with `j.items()`.
+    JSON_HEDLEY_DEPRECATED_FOR(3.1.0, items())
+    static iteration_proxy<const_iterator> iterator_wrapper(const_reference ref) noexcept
+    {
+        return ref.items();
+    }
+
+    /// @brief helper to access iterator member functions in range-based for
+    /// @sa https://json.nlohmann.me/api/basic_json/items/
+    iteration_proxy<iterator> items() noexcept
+    {
+        return iteration_proxy<iterator>(*this);
+    }
+
+    /// @brief helper to access iterator member functions in range-based for
+    /// @sa https://json.nlohmann.me/api/basic_json/items/
+    iteration_proxy<const_iterator> items() const noexcept
+    {
+        return iteration_proxy<const_iterator>(*this);
+    }
+
+    /// @}
+
+
+    //////////////
+    // capacity //
+    //////////////
+
+    /// @name capacity
+    /// @{
+
+    /// @brief checks whether the container is empty.
+    /// @sa https://json.nlohmann.me/api/basic_json/empty/
+    bool empty() const noexcept
+    {
+        switch (m_type)
+        {
+            case value_t::null:
+            {
+                // null values are empty
+                return true;
+            }
+
+            case value_t::array:
+            {
+                // delegate call to array_t::empty()
+                return m_value.array->empty();
+            }
+
+            case value_t::object:
+            {
+                // delegate call to object_t::empty()
+                return m_value.object->empty();
+            }
+
+            case value_t::string:
+            case value_t::boolean:
+            case value_t::number_integer:
+            case value_t::number_unsigned:
+            case value_t::number_float:
+            case value_t::binary:
+            case value_t::discarded:
+            default:
+            {
+                // all other types are nonempty
+                return false;
+            }
+        }
+    }
+
+    /// @brief returns the number of elements
+    /// @sa https://json.nlohmann.me/api/basic_json/size/
+    size_type size() const noexcept
+    {
+        switch (m_type)
+        {
+            case value_t::null:
+            {
+                // null values are empty
+                return 0;
+            }
+
+            case value_t::array:
+            {
+                // delegate call to array_t::size()
+                return m_value.array->size();
+            }
+
+            case value_t::object:
+            {
+                // delegate call to object_t::size()
+                return m_value.object->size();
+            }
+
+            case value_t::string:
+            case value_t::boolean:
+            case value_t::number_integer:
+            case value_t::number_unsigned:
+            case value_t::number_float:
+            case value_t::binary:
+            case value_t::discarded:
+            default:
+            {
+                // all other types have size 1
+                return 1;
+            }
+        }
+    }
