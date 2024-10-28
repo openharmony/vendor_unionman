@@ -1,0 +1,697 @@
+*******************************************************************************
+Version 1.18.0
+*******************************************************************************
+
+*******************************************************************************
+Version 1.16.0
+*******************************************************************************
+
+        Aborted.
+
+*******************************************************************************
+Version 1.14.19
+*******************************************************************************
+
+2023-09-16 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+        - Fixed memory allocation in `tv_device.c::TvDeviceSetContrast()`.
+
+2023-08-31 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+        - Updated some old AX macro files to fix bootstrap messages.
+
+*******************************************************************************
+Version 1.14.18
+*******************************************************************************
+
+2023-06-29 Thomas Guillem <thomas(at)gllm.fr>
+
+        miniserver: fix busy loop on socket error
+
+        In case of a socket error, the socket was not removed from the select
+        pool, causing future select() calls to return immediately, and
+        readFromSSDPSocket() to be called just after on the failing socket. This
+        was causing a high CPU load.
+
+*******************************************************************************
+Version 1.14.17
+*******************************************************************************
+
+2023-04-30 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+        Include fuzzer and gtest in the tarball.
+
+*******************************************************************************
+Version 1.14.16
+*******************************************************************************
+
+2023-03-19 philippe44 <philippe44@users.noreply.github.com>
+
+        Fix memory leak and ActionExAsync (#426)
+
+        This intends to fix #424. I've found at least 2 memory leaks
+
+        1- When sending Action(Ex)Async
+        The ActionRequest document was not released nor was the ActionResult.
+        I initially tought that this should be done in
+        UpnpActionComplete::UpnpActionComplete_delete() but I was wrong because
+        ActionRequest and ActionResult do not "belong" to the Evt object.
+        The sets methods only set a pointer and modifying generator.c is not the
+        right solution. The reason is that ActionRequest "belongs" to the ACTION
+        job and should be handled as such if we want as well that, when the job
+        is cancelled, the memory is released as well. So I've change the
+        free_func for ACTION to reflect that.
+
+        2- When using event subscription
+        The Event was not released upon Timer termination. So I've done as
+        above, created a special free_func that handles that properly.
+
+        In general, when something prevents the execution/submission of a job,
+        I've also used the actual free function instead of duplicating the
+        individual free(). Note that when terminating a timer, I'm using the
+        job's internal structure free_func() as it was already used to access
+        arg. One can argue that it should be an opaque structure and get/set or
+        the option to call the free function could be use instead.
+
+        Also, I realized that ActionExAsync has never been working properly
+        because when the job is executed, only an Action is made, never an
+        ActionEx although the Header document is in the job's argument. I've
+        fixed that as well and stopped there to not go too deep in that rabbit
+        hole.
+
+        I've also removed the upnp_timeout.c/h files as they were not used
+        anymore (and had a strange names anyway)
+
+2023-01-04 Thoren Paulson <thoren.paulson@gmail.com>
+
+        Handle redundant initialization
+
+2022-12-22 Thoren Paulson <thoren.paulson@gmail.com>
+
+        Clean up after failed initialization.
+
+        Some initialization failures (such as failure in UpnpGetIfInfo) would
+        leave resources like thread pools initialized. This change ensures if
+        UpnpInit2 fails, we call UpnpFinish before returning to clean up those
+        resources.
+
+        To ensure UpnpFinish is effective in this way, we set UpnpSdkInit to 1
+        earlier in UpnpInit2.
+
+*******************************************************************************
+Version 1.14.15
+*******************************************************************************
+
+2022-11-18 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+        Fix for missing CMake files in the autotools distro.
+
+*******************************************************************************
+Version 1.14.14
+*******************************************************************************
+
+2022-09-27 philippe44 <philippe44@users.noreply.github.com>
+
+        don't use strxxx_s on Windows
+
+        The use of these fails as 2nd argument is the same as 4th argument.
+        Reading the cpp_reference defintions of these, it can't be right.
+
+2022-09-20 Rex Cheung <93339127+rexcheung21(at)users.noreply.github.com>
+
+        Fix #412
+
+        Skip leading UTF-8 BOM in XML document
+
+2022-08-04 Hugo Beauzée-Luyssen <hugo(at)beauzee.fr>
+
+        ThreadPool: Fix non UCRT builds
+
+*******************************************************************************
+Version 1.14.13
+*******************************************************************************
+
+2021-04-28 Hugo Beauzée-Luyssen <hugo(at)beauzee.fr>
+
+        http: RecvMessage: Fix potential allocation failure
+
+        If for whatever reason the server replies without maxing out the buffer,
+        the code would end up doubling the buffer size nonetheless, which can
+        quickly cause malloc to fail, once we try to allocate 2^30 or more bytes
+        This was especially noticeable for large results.
+        Reported as https://code.videolan.org/videolan/vlc/-/issues/27173
+
+*******************************************************************************
+Version 1.14.12
+*******************************************************************************
+
+2021-04-28 Stephen Anthony Jones <frobones(at)gmail.com>
+
+        Fixes double free caused by closing a file pointer twice.
+
+2021-09-25 Vollstrecker <github@vollstreckernet.de>
+
+        More soname fixes.
+
+*******************************************************************************
+Version 1.14.11
+*******************************************************************************
+
+2021-08-20 Vollstrecker <github@vollstreckernet.de>
+
+        More soname fixes.
+
+*******************************************************************************
+Version 1.14.10
+*******************************************************************************
+
+2021-08-17 Vollstrecker <github@vollstreckernet.de>
+
+        Fixes cmake build soname.
+
+*******************************************************************************
+Version 1.14.9
+*******************************************************************************
+
+2021-08-08 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+        Fixes library soname.
+
+*******************************************************************************
+Version 1.14.8
+*******************************************************************************
+
+2021-08-02 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+        Removes references to deprecated pthread_mutexattr_{g,s}etkind_np
+
+*******************************************************************************
+Version 1.14.7
+*******************************************************************************
+
+2021-05-08 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+        Fixes broken windows build.
+
+*******************************************************************************
+Version 1.14.6
+*******************************************************************************
+
+2021-04-19 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+        Fix for a DNS Rebind exploit. A special thanks for the collaboration
+        of the following people:
+        - Alaric Senat
+        - Fabrice Fontaine
+        - Gabriel Corona
+        - Ian Whyman
+        - Jean-Francois Dockes
+        - Marvin Scholz
+        - Werner Mahr
+
+2021-04-06 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+        Fix for Github #250:
+        When upnp uses ixml to parse SOAP messages which contains too many node,
+        services are unavailable.
+
+*******************************************************************************
+Version 1.14.5
+*******************************************************************************
+
+2021-04-06 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+        Avoid potential memory leak in http_SendMessage()
+
+2021-04-06 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+        Get rid of alloca()'s.
+
+2021-04-05 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+        Non-recursive version of ixmlNode_free() avoids stack overflow attack.
+        Fixes CVE-2021-28302.
+
+*******************************************************************************
+Version 1.14.4
+*******************************************************************************
+
+2021-03-29 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+        Add more missing CMake infrastructure to the tarball.
+
+*******************************************************************************
+Version 1.14.3
+*******************************************************************************
+
+2021-03-29 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+        Add CMake infrastructure to the tarball.
+
+2021-03-13 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+        Fix for gena leak.
+
+*******************************************************************************
+Version 1.14.2
+*******************************************************************************
+
+2021-02-17 Jim Broadus <jbroadus(at)gmail.com>
+
+        upnpapi.c: Fix crash in UpnpGetIfInfo
+
+        Per getifaddrs documentation, the ifa_addr field of an ifaddrs structure
+        can be null. In a real world example, an entry may be provided for the
+        non-existent hardware address of a tunnel device. This behavior was
+        observed with the netlink based getifaddrs implementation in glibc.
+
+2021-02-17 Karlchen <k_straussberger(at)netzland.net>
+
+        Handle interfaces without address
+
+        I got a crash on gerbera startup because at least one interface did not have `ifa_addr` set.
+
+        The reason is quite simple: they are the physical interfaces which are part of my channel
+        ```
+        2: eth1: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 1500 qdisc fq_codel master bond0 state UP group default qlen 1000
+            link/ether xx:xx:xx:xx:xx:xx brd ff:ff:ff:ff:ff:ff
+        3: eth0: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 1500 qdisc fq_codel master bond0 state UP group default qlen 1000
+            link/ether xx:xx:xx:xx:xx:xx brd ff:ff:ff:ff:ff:ff
+        4: bond0: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+            link/ether xx:xx:xx:xx:xx:xx brd ff:ff:ff:ff:ff:ff
+        ```
+
+
+2021-02-14 Vollstrecker <github(at)vollstreckernet.de>
+
+        CMake:
+        - Fix tests for all occasions. (Hopefully)
+        - Set right so-version and don't yell commands. Fixes #231
+        - Reverted libname-change till decided
+
+2021-02-09 Fabrice Fontaine <fontaine.fabrice(at)gmail.com>
+
+        Fix IPv6 GENA subscription
+
+        Use LOCAL_PORT_V6_ULA_GUA or LOCAL_PORT_V6 depending on the IPv6 address
+
+2021-02-08 Fabrice Fontaine <fontaine.fabrice(at)gmail.com>
+
+        samples: allow the user to specify the control point interface
+
+        This is useful to test UPnP on specific interface (e.g. IPv6-only).
+        This was already possible on the device sample.
+
+2021-02-08 Fabrice Fontaine <fontaine.fabrice(at)gmail.com>
+
+        upnp/src/api/upnpapi.c: don't set gIF_IPV4 if there is no IPv4
+
+        Don't set gIF_IPV4 if no IPv4 is found to keep the default value of '\0'
+        otherwise SSDP will try to register IPv4 multicast with address 0.0.0.0
+        which will result in a runtime failure
+
+*******************************************************************************
+Version 1.14.1
+*******************************************************************************
+
+2021-02-05 Ian Whyman <ian(at)gerbera.io>
+
+        CMake Github Actions, including windows build.
+
+2021-02-05 Fabrice Fontaine <fontaine.fabrice(at)gmail.com>
+
+        upnpapi.c: assume that getifaddrs is available
+
+        Assume that getifaddrs is available even if it is not POSIX-compliant,
+        this will simplify the code and, as a side effect, this allow pupnp to
+        work on an interface that does not have an IPv4 address.
+
+2020-12-09 Vollstrecker <github(at)vollstreckernet.de>
+
+        CMake support.
+
+2020-11-30 Marcelo Jimenez <marcelo.jimenez(at)gmail.com>
+
+        GitHub #203 by Vollstrecker, part 2.
+
+        Fixes the inclusion of alloca.h in WIN32.
+
+2020-11-30 Marcelo Jimenez <marcelo.jimenez(at)gmail.com>
+
+        GitHub #203 by Vollstrecker, part 1.
+
+        Remove the now unused file ClientSubscription.c.
+
+2020-11-09 Thomas Mitterfellner <thomas.mitterfellner(at)gmail.com>
+
+        Remove port >= 49152 restriction.
+
+*******************************************************************************
+Version 1.14.0
+*******************************************************************************
+
+2020-07-19 Marcelo Jimenez <marcelo.jimenez(at)gmail.com>
+
+        Reworked the miniserver code to deal with SO_REUSEADDR
+
+        Factored the common socket code and test for EADDRINUSE returning from
+	listen() when SO_REUSEADDR is turned on.
+
+2020-06-17 Marcelo Jimenez <marcelo.jimenez(at)gmail.com>
+
+        Removed template classes.
+
+        The files generated through template classes had some drawbacks:
+
+        1 - You could not read the code.
+	2 - You could not step through the code with a debugger.
+	3 - Doxygen was unable to document it.
+
+        This patch removes the templates and creates an auto generator for these
+	boilerplate generated code in the same spirit of the templates, but
+        solves the above problems.
+
+        Still, dealing with documentation still needs some work, but should be
+	much easier now.
+
+2020-06-11 Fabrice Fontaine <fontaine.fabrice(at)gmail.com>
+
+        upnpapi.c: retrieve gIF_IPV4_NETMASK with BSD
+	GitHub #183
+
+        BSD is using getifaddrs, update the code to retrieve the IPv4 netmask
+	(used in the CallStranger fix)
+
+        Signed-off-by: Fabrice Fontaine fontaine.fabrice@gmail.com
+
+2020-06-09 Fabrice Fontaine <fontaine.fabrice(at)gmail.com>
+
+        Drop UpnpInit
+	GitHub #182
+
+        This function is deprecated since a long time moreover it is vulnerable
+	to CallStranger a.k.a. CVE-2020-12695 and can't be fixed without
+	breaking the API as HostIP only allows the user to pass an IP address
+	and not a netmask.
+
+        If we want to discover the netmask from the HostIP provided in UPnPInit,
+	we'll have to loop through all the available interfaces to find the
+	interface with the given IP address to finally retrieve the netmask.
+	This is a lot of work/modification for a deprecated function. Moreover,
+	in the end UPnPInit will be like a "deprecated" (i.e. IPv4-only) version
+	of UPnPInit2.
+
+        So it is time to remove this deprecated function.
+
+        As a result, also remove getlocalhostname and DEFAULT_INTERFACE which
+	are not needed anymore and replace UpnpInit by UpnpInit2 in comments.
+
+        Signed-off-by: Fabrice Fontaine fontaine.fabrice@gmail.com
+
+2020-06-09 Fabrice Fontaine <fontaine.fabrice(at)gmail.com>
+
+        Partial fix for CallStranger on IPv4
+	GitHub #181
+
+        This is a partial fix for CallStranger a.k.a. CVE-2020-12695
+
+        Check that DeliveryURLs are in the expected network segment as requested
+	by the new UPnP UDA:
+	https://openconnectivity.org/upnp-specs/UPnP-arch-DeviceArchitecture-v2.0-20200417.pdf.
+
+        Here is an extract of the new requirement:
+
+        The subscription request containing a delivery URL not on the same
+	network segment as the fully qualified event subscription URL shall not
+	be accepted. For private networks this means that the delivery URL
+	provided will adhere to the following IP ranges:
+
+        . 10.0.0.0 - 10.255.255.255 (10/8 prefix)
+	. 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
+	. 192.168.0.0 - 192.168.255.255 (192.168/16 prefix)
+
+        In the context of pupnp, this means that the IPv4 netmask is now
+	retrieved when using UPnPInit2. Then, each DeliveryURL is checked
+	against the device's IPv4 address and netmask. If one of them are not
+	compliant, the whole subscription is rejected.
+
+        This first commit should be enhanced / updated to:
+
+        . remove UPnPInit (it is deprecated for a long time) or update it so
+	. the user can also pass the netmask
+	. fix IPv6
+	. fix Windows code
+	. retrieve the netmask in the BSD code of UPnPInit2
+
+        Signed-off-by: Fabrice Fontaine fontaine.fabrice@gmail.com
+
+2020-06-04 Patrik Lantz pjlantz(at)github
+
+        Fixes #177
+
+        NULL pointer dereference in FindServiceControlURLPath
+
+*******************************************************************************
+Version 1.12.1
+*******************************************************************************
+
+2020-04-03 Rene Nielsen <rene.nielsen(at)microchip.com>
+
+	setsockopt(IP_MULTICAST_IF) fails on 64-bit CPUs
+
+2020-04-03 Rosen Penev <rosenp(at)gmail.com>
+
+	GitHub PR #164
+
+	Do not use usleep when using newer POSIX C source.
+
+    	usleep is deprecated and is optionally unavailable with uClibc-ng.
+
+2020-03-29 pamapa <pamapa(at)github>
+
+	GitHub PR #162
+
+	Add Os/UserAgent information to UpnpActionRequest and UpnpFileInfo
+
+2020-03-28 pamapa <pamapa(at)github>
+
+	GitHub PR #161
+
+	Add CtrlPtIPAddr to UpnpFileInfo class
+
+2020-01-27 Ian Whyman <v00d00(at)github>
+
+	GitHub PR #160
+
+	List: Add extern C for C++ users
+
+*******************************************************************************
+Version 1.12.0
+*******************************************************************************
+
+2020-01-22 Stephen Bash <scbash(at)github>
+
+    Reduce spurious HTTP 416 errors due to ill-defined bytes header
+
+    I (re)discovered this behavior trying to use the Gerbera media server
+    with Chromecast (built in to my Vizio P55-F1 TV).  Chromecast specifies
+    "bytes:0-" with no end range, which caused pupnp to return
+    RANGE_NOT_SATISFIABLE.  Jin, the author of MediaTomb, of which Gerbera
+    is a continuation, fixed this in 2007 in MediaTomb's fork of pupnp, see
+    gerbera@ccd7994d45 "made sure that range requests specified as
+    "bytes=0-" do not trigger...", but never passed the fix upstream.  When
+    restarted as Gerbera, pupnp was removed from the local tree in favor of
+    using the upstream version, and the patch was lost which lead to me
+    rediscovering it recently.
+
+    This is Jin's original patch applied to pupnp 1.8.  This teaches pupnp to
+    ignore the bytes header if it matches "0-" and return HTTP_OK.
+
+2020-01-22 Marcelo Jimenez <mroberto(at)users.sourceforge.net>
+
+	GitHub issue #157
+
+	When building v1.8.6 (on GNU/Linux) with --disable-device, pupnp doesn't build:
+	/bin/bash ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I.. -I../upnp/inc  -I./inc -I../ixml/inc  -DNDEBUG -I./src/inc -I./src/threadutil -I/foo/contrib/x86_64-linux-gnu/include -fPIC  -pthread  -I/foo/contrib/x86_64-linux-gnu/include -DNDEBUG=1 -O3  -DUPNP_STATIC_LIB -Os -Wall -c -o src/genlib/util/libupnp_la-util.lo `test -f 'src/genlib/util/util.c' || echo './'`src/genlib/util/util.c
+	In file included from src/genlib/miniserver/miniserver.c:58:0:
+	./src/inc/upnpapi.h:208:2: error: unknown type name 'service_info'
+  	service_info **serv_info
+  	^~~~~~~~~~~~
+
+	This patch fixes compilation for the --disable-device case.
+
+
+2019-11-20 ePirat Marvin Scholz <epirat07(at)gmail.com>
+
+        GitHub PRs:
+        #150: Remove unused files
+        #149: UpnpEnableWebserver: Error correctly when web server compiled-out
+        #148: CI: Remove .travis.yml
+        #147: Remove TRUE/FALSE defines and BOOL typedef
+        #146: CI: Add address sanitizer and leak sanitizer enabled test run
+        #145: Add list test
+        #144: Add -Wextra and -Wpedantic to get more warnings
+        #143: More warning fixes
+        #142: Doxygen changes
+        #141: Remove unused headers
+        #140: Remove IN, OUT and INOUT defines
+        #139: Remove unused defines in uri.h
+        #138: Use stdbool.h instead of BOOL typedef and defines
+        #137: Various compiler warning fixes
+        #136: configure.ac: Fix Windows detection
+        #135: configure.ac: Enable silent rules
+        #134: LinkedList: Simplify _WIN32 check
+        #133: Remove checks of __OSX__ define
+        #132: Add Github Actions based CI
+
+2019-12-03 Jean-Francois Dockes <jf(at)dockes.org>
+
+        Github PR #130: Add forgotten Windows dll export qualifiers
+
+2019-12-01 Jean-Francois Dockes <jf(at)dockes.org>
+
+        Github PR #129: Remove and replace the list.h file
+
+2019-11-20 ePirat Marvin Scholz <epirat07(at)gmail.com>
+
+	Github PRs:
+
+	#128: Overhaul list.h to fix various issues
+	#127: Use rand_s in get_random_info on Windows
+	#126: Do not redeclare timezone struct if already defined in Mingw
+	#125: Fix interface filtering for Windows
+	- The mentioned fix is not only needed for MSVC, but when
+	cross-compiling for Windows with mingw-w64 too.
+	#124: config.h: Remove DEBUG_TARGET
+	- The DEBUG_TARGET is no longer used, it was previously used in
+	upnpdebug.c to disable logging to a file, which now is done
+	by just not calling UpnpSetLogFileNames.
+	#123: Check for -lpthread too
+	- Updates pthread m4 check from upstream
+
+*******************************************************************************
+Version 1.10.1
+*******************************************************************************
+
+2019-11-20 Marcelo Jimenez <mroberto(at)users.sourceforge.net>
+
+	Forward port of Karlchen's github #122
+	Fix format string for ExtraHeaders
+
+*******************************************************************************
+Version 1.10.0
+*******************************************************************************
+
+2019-07-19 Marcelo Jimenez <mroberto(at)users.sourceforge.net>
+
+	Fix sed command for upnp patch in configure.ac
+
+2019-04-03 Marcelo Jimenez <mroberto(at)users.sourceforge.net>
+
+	Proper allocation for an array of structs and a check for an unlikely
+	overflow when calling the SIOCGIFCONF ioctl().
+
+	It still bugs me the stack requirements of getlocalhostname() and
+	UpnpGetIfInfo().
+
+*******************************************************************************
+Version 1.8.6
+*******************************************************************************
+
+2019-11-20 Karl Straussberger (Karlchen@github)
+
+	Fix format string for ExtraHeaders #122
+
+*******************************************************************************
+Version 1.8.5
+*******************************************************************************
+
+2019-07-18 Marcelo Jimenez <mroberto(at)users.sourceforge.net>
+
+	Fixed a wrong ifdef in ssdp_device.c that was causing problems with
+	ipv6. Thanks to BraneDev @ Github
+
+*******************************************************************************
+Version 1.8.4
+*******************************************************************************
+
+2017-11-17 Marcelo Jimenez <mroberto(at)users.sourceforge.net>
+
+	GitHub #57 - 1.8.3 broke ABI without changing SONAME
+	Opened by jcowgill
+
+	This change in 1.8.3 broke the ABI and therefore the SONAME should have
+	been changed (ie: age reset to 0):
+
+	EXPORT_SPEC int UpnpAddVirtualDir(
+	        /*! [in] The name of the new directory mapping to add. */
+	-       const char *dirName);
+	+       const char *dirName,
+	+       /*! [in] The cookie to associated with this virtual directory */
+	+       const void *cookie,
+	+       /*! [out] The cookie previously associated, if mapping is already present */
+	+       const void **oldcookie);
+
+	If only the cookie argument was added, you could probably get away with
+	this because all that would happen is that a garbage value is passed
+	around without being used. With the addition of oldcookie, any old
+	programs will not initialize this value and will probably segfault when
+	libupnp tries to write to it.
+
+*******************************************************************************
+Version 1.8.3
+*******************************************************************************
+
+2017-09-07 Dave Overton <david(at)insomniavisions.com>
+
+	Add user data/cookie to virtualDir callbacks
+
+	As with the main Device APIs (UpnpRegisterRootDevice etc), it is useful
+	to have a user data/cookie pointer returned with each callback.
+
+	This patch allows one cookie per registered path which enables a variety
+	of functionality in client apps.
+
+2017-09-03 Uwe Kleine-König <uwe@kleine-koenig.org>
+
+	Fix large file system support
+
+	libupnp uses large file support (if available). If a program linking to
+	libupnp does not however it creates mismatches in call frames. See
+	Issue #51 for the results.
+
+	This simplifies LFS support by using AC_SYS_LARGEFILE_SENSITIVE instead of
+	manually defining _LARGE_FILE_SOURCE and _FILE_OFFSET_BITS (which is
+	useless on architectures where the size of off_t is fixed).
+
+	Furthermore additional logic is introduced to catch a library user without
+	64 bit wide off_t on such a platform.
+
+	upnp.h also makes use of off_t, but as this file includes FileInfo.h, the
+	latter is the single right place for this check.
+
+	This fixes #52 which is a generalized variant of #51.
+
+2017-08-19 Uwe Kleine-König <uwe@kleine-koenig.org>
+
+	configure.ac: Drop copying of include files
+
+	The comment suggests this is for windows compilation. It should be easily
+	possible to add the source directory as an include path to the windows
+	compiler, too, so drop this. (Otherwise this should better be done using
+	AC_CONFIG_COMMANDS.)
+
+2017-09-03 Uwe Kleine-König <uwe@kleine-koenig.org>
+
+	Let source code use autoconfig.h not the public upnpconfig.h
+
+	The former is the one supposed to be used for internal code. upnpconfig.h is only
+	for public stuff.
+
+2017-08-19 Uwe Kleine-König <uwe@kleine-koenig.org>
+
+	configure.ac: Fix typo s/optionnal/optional/
+
+2017-08-08 Marcelo Jimenez <mroberto(at)users.sourceforge.net>
+
+	Fix broken samples when configured with --disable-ipv6.
