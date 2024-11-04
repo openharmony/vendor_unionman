@@ -4961,3 +4961,126 @@ dnl #AC_SUBST([LT_VERSION_THREADUTIL], [::])
 dnl #AC_SUBST([LT_VERSION_UPNP],       [::])
 dnl #
 dnl ############################################################################
+dnl # Release 1.8.0:
+dnl # "current:revision:age"
+dnl #
+dnl # - Start from a new ground.
+dnl #
+dnl #AC_SUBST([LT_VERSION_IXML],       [10:0:0])
+dnl #AC_SUBST([LT_VERSION_THREADUTIL], [10:0:0])
+dnl #AC_SUBST([LT_VERSION_UPNP],       [10:0:0])
+dnl #
+dnl ############################################################################
+dnl # Release 1.8.1:
+dnl # "current:revision:age"
+dnl #
+dnl # - Code has changed in ixml
+dnl #   revision: 0 -> 1
+dnl # - Code has changed in upnp
+dnl #   revision: 0 -> 1
+dnl # - interface changed/added/removed in upnp
+dnl #   current++(11); revision = 0
+dnl # - interface added in upnp
+dnl #   age++(1)
+dnl #
+dnl #AC_SUBST([LT_VERSION_IXML],       [10:1:0])
+dnl #AC_SUBST([LT_VERSION_UPNP],       [11:0:1])
+dnl #
+dnl ############################################################################
+dnl # Release 1.8.2:
+dnl # "current:revision:age"
+dnl #
+dnl # - Code has changed in upnp
+dnl #   revision: 0 -> 1
+dnl #
+dnl #AC_SUBST([LT_VERSION_IXML],       [10:1:0])
+dnl #AC_SUBST([LT_VERSION_UPNP],       [11:1:1])
+dnl #
+dnl ############################################################################
+dnl # Release 1.8.3:
+dnl # "current:revision:age"
+dnl #
+dnl # - Code has changed in upnp
+dnl #   revision: 1 -> 2
+dnl # - interfaces changed/added/removed:
+dnl #   current: 11 -> 12, revision 2 -> 0
+dnl # - interfaces added:
+dnl #   age: 1 -> 2
+dnl #
+dnl #AC_SUBST([LT_VERSION_IXML],       [10:1:0])
+dnl #AC_SUBST([LT_VERSION_UPNP],       [12:0:2])
+dnl #
+dnl ############################################################################
+dnl # Release 1.8.4:
+dnl # "current:revision:age"
+dnl #
+dnl # - Code has changed in upnp
+dnl #   revision: 0 -> 1
+dnl # - interfaces changed/added/removed:
+dnl #   current: 12 -> 13, revision 1 -> 0
+dnl # - interfaces removed:
+dnl #   age: 2 -> 0
+dnl #
+dnl #AC_SUBST([LT_VERSION_IXML],       [10:1:0])
+dnl #AC_SUBST([LT_VERSION_UPNP],       [13:0:0])
+dnl #
+dnl ############################################################################
+dnl # Release 1.8.5:
+dnl # "current:revision:age"
+dnl #
+dnl # - Code has changed in ixml
+dnl #   revision: 1 -> 2
+dnl # - Code has changed in upnp
+dnl #   revision: 0 -> 1
+dnl # - interfaces changed/added/removed:
+dnl #   current: 13 -> 14, revision 1 -> 0
+dnl # - interfaces added:
+dnl #   age: 0 -> 1
+dnl #
+dnl #AC_SUBST([LT_VERSION_IXML],       [10:2:0])
+dnl #AC_SUBST([LT_VERSION_UPNP],       [14:0:1])
+dnl #
+dnl ############################################################################
+dnl # Release 1.8.6:
+dnl # "current:revision:age"
+dnl #
+dnl # -
+dnl #
+dnl #AC_SUBST([LT_VERSION_IXML],       [::])
+dnl #AC_SUBST([LT_VERSION_UPNP],       [::])
+dnl #
+dnl ############################################################################
+dnl # Release 1.10.0:
+dnl # "current:revision:age"
+dnl #
+dnl # - First release of 1.10
+dnl #
+dnl #AC_SUBST([LT_VERSION_IXML],       [11:0:0])
+dnl #AC_SUBST([LT_VERSION_UPNP],       [15:0:0])
+dnl #
+dnl ############################################################################
+dnl # Release 1.10.1
+dnl # "current:revision:age"
+dnl #
+dnl # - Code has changed in upnp
+dnl #   revision: 0 -> 1
+dnl #
+dnl #AC_SUBST([LT_VERSION_IXML],       [11:0:0])
+dnl #AC_SUBST([LT_VERSION_UPNP],       [15:1:0])
+dnl #
+dnl ############################################################################
+dnl # Release 1.12.0
+dnl # "current:revision:age"
+dnl #
+dnl # - Code has changed in upnp
+dnl #   revision: 1 -> 2
+dnl # - interfaces changed/added/removed:
+dnl #   current: 15 -> 16
+dnl #   revision: 2 -> 0
+dnl # 	- interfaces removed or changed:
+dnl #   age: 0 -> 0
+dnl #
+dnl #AC_SUBST([LT_VERSION_IXML],       [11:0:0])
+dnl #AC_SUBST([LT_VERSION_UPNP],       [16:0:0])
+dnl #
+dnl ############################################################################
