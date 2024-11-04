@@ -2463,3 +2463,610 @@ Version 1.6.16
 
 	src/genlib/net/http/httpparser.c: In function ‘parser_parse_requestline’:
 	src/genlib/net/http/httpparser.c:1319:28: warning: ‘index’ may be used uninitialized in this function
+
+2012-02-24 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	SF Bug Tracker id 3489999 - UpnpString leaks in genaSubscribe()
+
+	Submitted: Yoichi NAKAYAMA ( yoichi ) - 2012-02-21 07:06:35 PST
+
+	In genaSubscribe() (defined in upnp/src/gena/gena_ctrlpt.c),
+	ActualSID and EventURL will not be freed if ScheduleGenaAutoRenew
+	returns UPNP_E_SUCCESS.
+
+	This fixes the an issue introduced by the previous fix.
+
+2012-02-23 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	SF Bug Tracker id 3489990 - some files are missing in tarball
+
+	Submitted: Yoichi NAKAYAMA ( yoichi ) - 2012-02-21 06:52:57 PST
+
+	Released tarball (e.g. libupnp-1.6.15.tar.bz2) does not contain
+	some files under upnp/{inc,src} used by the project files for
+	windows (build/vc8/libupnp. vcproj and build/vc9/libupnp.vcproj).
+
+	This breaks build on Windows from tarball released after following changes
+	http://pupnp.git.sourceforge.net/git/gitweb.cgi?p=pupnp/pupnp;a=commitdiff;h=0eba550da039be01211b56fea0d02d03f0a12343
+	http://pupnp.git.sourceforge.net/git/gitweb.cgi?p=pupnp/pupnp;a=commitdiff;h=7a796b264ec7d5de5876fd6a2001c2d329709e02
+
+2012-02-23 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	SF Bug Tracker id 3489999 - UpnpString leaks in genaSubscribe()
+
+	Submitted: Yoichi NAKAYAMA ( yoichi ) - 2012-02-21 07:06:35 PST
+
+	In genaSubscribe() (defined in upnp/src/gena/gena_ctrlpt.c),
+	ActualSID and EventURL will not be freed if ScheduleGenaAutoRenew
+	returns UPNP_E_SUCCESS.
+
+	This fixes the original issue.
+
+2012-02-23 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	SF Bug Tracker: UpnpString leaks in genaSubscribe()
+
+	In genaSubscribe() (defined in upnp/src/gena/gena_ctrlpt.c),
+	ActualSID and EventURL will not be freed if ScheduleGenaAutoRenew
+	returns UPNP_E_SUCCESS.
+
+2012-02-23 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	Revert cb89781a55466703763c1b0ee67094eb401ddfe9 as suggested by
+	Fabrice Fontaine.
+
+2012-02-07 Edwin Stearns <edwin(at)vtilt.com>
+
+	Attached is a patch that resolved an issue I found with a server that
+	gave its device description URI without a trailing slash (e.g.
+	`http://127.0.0.1:5555`).
+
+2012-01-04 Fabrice Fontaine <fabrice.fontaine(at)orange.com>
+
+	Bug fix for IPv4-mapped IPv6 addresses.
+
+	Setting IPv6 sockets with IPV6_V6ONLY flag to avoid getting IP packets
+	with IPv4-mapped IPv6 addresses on IPv6 sockets.
+
+
+*******************************************************************************
+Version 1.6.15
+*******************************************************************************
+
+2012-01-11 Fabrice Fontaine <fabrice.fontaine(at)orange.com>
+
+	Bug fix on M-SEARCH for IPv6 CPs.
+
+	Small bug fix on IPv6 Control Point: now CP will also send M-SEARCH on
+	site-scope address (FF05::C) instead of only sending M-SEARCH on
+	link-scope (FF02::C).
+
+2012-01-11 Fabrice Fontaine <fabrice.fontaine(at)orange.com>
+
+	Retrieve IPv6 addresses in Upnp_Discovery.
+
+	Changing sockaddr_in into sockaddr_storage in Upnp_Discovery to be able
+	to retrieve IPv6 addresses of devices in Control Points using pupnp.
+
+2012-01-09 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	SF Bug tracker, ID: 3469344
+	Submitted: dimmman ( dimmman ) - 2012-01-04 01:44:29 PST
+	Details: Looking at the code (v1.6.14, upnptools.c) for UpnpResolveURL
+	and UpnpResolveURL2 it shows that the ExitFunction: always returns
+	UPNP_E_SUCCESS.
+
+	I'm fairly sure it's a simple mistake that should have been "return ret;"
+	in both cases.
+
+	Br,
+	Jonny
+
+*******************************************************************************
+Version 1.6.14
+*******************************************************************************
+
+2011-10-31 Fabrice Fontaine <fabrice.fontaine(at)orange.com>
+
+	UPnP Low Power Support.
+
+	Adding two new functions (UpnpSendAdvertisementLowPower and
+	UpnpUnRegisterRootDeviceLowPower) which can be used to specify values
+	for the three SSDP headers defined by UPnP Low Power. Those headers are
+	PowerState, SleepPeriod and RegistrationState.
+
+2011-10-24 Fabrice Fontaine <fabrice.fontaine(at)orange.com>
+
+	Bug fix in IN6_IS_ADDR_GLOBAL.
+
+	Changing IN6_IS_ADDR_GLOBAL to accept all IPv6 addresses which have a
+	2000::/3 prefix.
+
+2011-07-20 Marc Essayan <marc.essayan(at)orange-ftgroup.com>
+
+	Bug Fix on M-SEARCH.
+
+	Do not answer to M-SEARCH using HTTP version 1.0 as specified by the
+	UPnP Device Architecture.
+
+2011-03-18 Iain Denniston <iain.denniston(at)gmail.com>
+
+	Fixes for compilation under Windows (specifically MSVC). Also added
+	MSVC supported "_inline", and fixed some WIN32 specific warnings.
+
+2011-03-08 Iain Denniston <iain.denniston(at)gmail.com>
+
+	Several fixes to correctly use SOCKET (and related) types instead of
+	non-portable variations.
+
+*******************************************************************************
+Version 1.6.13
+*******************************************************************************
+
+2011-03-15 Fabrice Fontaine <fabrice.fontaine(at)orange-ftgroup.com>
+
+	Putting ssdpReqSocks under compilation flag.
+
+	Putting all access to ssdpReqSock4 and ssdpReqSock6 under
+	INCLUDE_CLIENT_APIS compilation flag to be able to compile when
+	client part of library is disable.
+
+2011-03-15 Fabrice Fontaine <fabrice.fontaine(at)orange-ftgroup.com>
+
+	New UpnpRegisterRootDevice4 for legacy CPs.
+
+	Add a new UpnpRegisterRootDevice4 which allow user to specify a
+	description URL to be returned for legacy CPs (for example, CPs
+	searching for a v1 when the device is v2). Most of those CPs does not
+	work if they found a v2 in the XML description, so this new function is
+	only used to solve interoperability issues.
+
+2011-03-08 Iain Denniston <iain.denniston(at)gmail.com>
+	Fix for memory leak.
+
+2011-03-08 Iain Denniston <iain.denniston(at)gmail.com>
+	Fix and Update of MSVC9 solution and project files - now compile in all
+	modes. Added x64 and static library targets.
+
+2011-03-08 Iain Denniston <iain.denniston(at)gmail.com>
+	Partial fix for UpnpGetIfInfo with MSVC - convert wchar string to
+	char string (full fix requires a lot of work - potentially impacting
+	all supported platforms)
+
+2011-03-11 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	Created the macros PRIzd and PRIzx to deal with MSVC lack of C99.
+	Thanks to Iain Denniston for pointing it out.
+
+2011-03-08 Iain Denniston <iain.denniston(at)gmail.com>
+
+	Fixes for headers when compiled under C++
+
+2011-03-08 Iain Denniston <iain.denniston(at)gmail.com>
+
+	Fix for uuid_unpack incorrect shift precedence.
+
+*******************************************************************************
+Version 1.6.12
+*******************************************************************************
+
+2011-02-08 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	Undo the "incorrectly exported include files".
+
+	Legacy applications like linux-igd and igd2-for-linux are using those
+	API to create a thread pool for managing their GENA events.
+
+	Leave it to be reworked in 1.8.x.
+
+*******************************************************************************
+Version 1.6.11
+*******************************************************************************
+
+2011-02-07 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	Remove PrintThreadPoolStats() from the public API. This function uses
+	a ThreadPool object as an argument, which is not supposed to be
+	exported.
+
+2011-02-07 Fabrice Fontaine <fabrice.fontaine(at)orange-ftgroup.com>
+
+	Major bug fix in IPv6 code.
+
+	Major bug fix in miniserver.c for IPv6, bug was introduced when
+	changing implementation of get_port in November 20th 2010 ("gena:fix
+	several compiler warnings" commit).
+
+2011-02-06 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	Fix for incorrectly exported include files.
+
+	The files FreeList.h, LinkedList.h, ThreadPool.h and TimerThread.h
+	from the threautil library were being installed in the include
+	directory of the library, incorrectly exposing internal data structure
+	of the library.
+
+2011-01-30 Chandra Penke <chandrapenke(at)mcntech.com>
+
+	Fix for compilation warnings of unused variables in upnpdebug.c in
+	release builds.
+
+2011-01-20 Chandra Penke <chandrapenke(at)mcntech.com>
+
+	Fix for Race condition can hang miniserver thread.
+
+	Add 'requiredThreads' field to the ThreadPool structure, to avoid
+	a race condition when waiting for a new thread to be created. The
+	race condition occurs when a thread is destroyed while the master
+	thread is waiting for a new thread to be created.
+
+	Thanks to Chuck Thomason for pointing the problem.
+
+	Summary: Race condition can hang miniserver thread - ID: 3158591
+
+	Details:
+	Hello,
+
+	I have found a race condition in the thread pool handling of
+	libupnp-1.6.6 that periodically results in the miniserver thread
+	getting blocked infinitely.
+
+	In my setup, I have the miniserver thread pool configured with 1
+	job per thread, 2 threads minimum, and 50 threads maximum.
+
+	Just before the lockup occurs, the miniserver thread pool contains
+	2 threads: one worker thread hanging around from a previous HTTP
+	request job (let's call that thread "old_worker") and the
+	miniserver thread itself.
+
+	A new HTTP request comes in. Accordingly, the miniserver enters
+	schedule_request_job() and then ThreadPoolAdd(). In
+	ThreadPoolAdd(), the job gets added to the medium-priority queue,
+	and AddWorker() is called. In AddWorker(), jobs = 1 and threads =
+	1, so CreateWorker gets called.
+
+	When we enter CreateWorker(), tp->totalThreads is 2, so
+	currentThreads is 3. The function creates a new thread and then
+	blocks on tp->start_and_shutdown. The miniserver thread expects
+	the newly created thread to increment tp->totalThreads and then
+	signal the condition variable to wake up the miniserver thread and
+	let it proceed.
+
+	The newly created thread starts in the WorkerThread() function. It
+	increments tp->totalThreads to 3, does a broadcast on the
+	start_and_shutdown condition, and starts running its job. However,
+	before the miniserver thread wakes up, "old_worker" times out. It
+	sees that there are no jobs in any queue and that the total number
+	of threads (3) is more than the minimum (2). As a result, it
+	reduces tp->totalThreads to 2 and dies.
+
+	Now the miniserver thread finally wakes up. It checks
+	tp->totalThreads and sees that its value is 2, so it blocks on
+	tp->start_and_shutdown again. It has now "missed" seeing
+	tp->totalThreads get incremented to 3 and will never be unblocked
+	again.
+
+	When this issue does occur for a server device, the miniserver
+	port remains open, but becomes unresponsive since the miniserver
+	thread is stuck. SSDP alive messages keep getting sent out, as
+	they are handled by a separate thread. Reproducing the issue is
+	difficult due to the timing coincidence involved, but in my
+	environment I am presently seeing it at least once a day. I
+	figured out the sequence described above through addition of my
+	own debug logs.
+
+	The relevant code involved in this bug has not changed
+	substantially in libupnp-1.6.10, though I am planning to test
+	against 1.6.10 as well in the near future.
+
+	Do you have any input for an elegant fix for this issue?
+
+	Thanks,
+
+	Chuck Thomason
+
+2011-01-16 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	Define _FILE_OFFSET_BITS, _LARGEFILE_SOURCE and _LARGE_FILE_SOURCE in
+	upnpconfig.h.
+
+	Make these definitions available to programs using the library.
+	Thanks to Chandra Penke for pointing the problem.
+
+	Summary: Problem with large file support in pupnp build - ID: 3158969
+	Submitted: Chandra ( inactiveneurons ) - 2011-01-15 16:17:02 BRST
+	Details:
+	First off, I apologize in advance for the length of this comment, it's
+	the only way I could describe the problem accurately.
+
+	Secondly, a brief thanks (again). The company I'm working for has been
+	using pupnp for a massively cross-platform project which involves iphone,
+	osx, windows, linux x86, arm, and mips hosts. It's amazing how well it
+	works, so kudos to the maintainers!
+
+	We came across a problem when compiling with the following tool-chain:
+	http://www.codesourcery.com/sgpp/lite/mips/portal/release824. The
+	problem is the following:
+
+	In configure.ac the following lines exist to enable large file support:
+
+	AC_DEFINE([_LARGE_FILE_SOURCE], [], [Large files support])
+	AC_DEFINE([_FILE_OFFSET_BITS], [64], [File Offset size])
+
+	Which in turn result in the following #defines in autoconfig.h:
+
+	#define _LARGE_FILE_SOURCE /**/
+	#define _FILE_OFFSET_BITS 64
+
+	However, this file is not exported as part of the upnp build. Therefore,
+	while the entire library gets built with large file support, it's
+	possible that dependent libraries which only rely on the include files
+	may not use large file support.
+
+	In the particular case of the above tool-chain, the 'off_t' type is 8
+	bytes when large file support is enabled, but only 4 bytes when it's
+	not. As a result part our stack built on top of pupnp, which did not
+	have large file support (because it did not use the above autoconf
+	directives), was relying on 'a off_t' that was 4 bytes.
+
+	This caused, among many things, for the UpnpFileInfo struct to break.
+	Since the struct is completely invisible outside of pupnp (because of
+	some template macro magic), pupnp thought that 'FileLength' field was
+	8 bytes, but the header setter/getter methods being used by dependent
+	libraries thought that it was 4, which caused some erratic behavior
+	when going through pupnp's webserver and HTTP client API.
+
+	We put in a temporary work around by adding the following preprocessor
+	flags: -D_LARGE_FILE_SOURCE, -D_FILE_OFFSET_BITS=64 as part of our
+	build process. However, it's a hack, and I was wondering if I'm missing
+	something and there's a better way to approach this.
+
+	Thanks,
+	Chandra
+
+2011-01-16 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	Use config.h to test for the availability of strndup() and strnlen().
+
+2011-01-14 Chandra Penke <chandrapenke(at)mcntech.com>
+
+	- Null termination of strndup() implementation on systems missing it.
+	- Implementation of strnlen() on systems missing it.
+
+2011-01-14 Chandra Penke <chandrapenke(at)mcntech.com>
+
+	Fixes transfer encoding in the HTTP client API, which is currently
+	broken. The break was due to a regression caused by another
+	fix (tracker 3056713), which fixed an out of memory crash when
+	downloading large files. The previous fix changed the
+	http_ReadHttpGet() implementation so that data already read by the
+	user was discarded. However, it only worked for transfers where
+	the content length was specified. This fix extends the previous
+	implementation to cover chunked transfer encoding.
+
+2011-01-14 Chandra Penke <chandrapenke(at)mcntech.com>
+
+	Minor change in membuffer.c to include "membuffer.h" without looking
+	in the standard header path. This allows pupnp to build in xcode.
+
+2010-12-18 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	SF Tracker: Patches
+	Fedora mingw32 compilation - ID: 3138849
+	Details:
+	Hello. I trying compile libupnp-1.6.10 on the Fedora 14 MinGW
+	Environment and get many errors. I create patch to fix it. With this
+	patch i can get static library. This patch is very raw.
+
+	Submitted: Ivan Romanov (ivanromanov) - 2010-12-16 23:29:19 UTC
+
+*******************************************************************************
+Version 1.6.10
+*******************************************************************************
+
+2010-11-23 Fabrice Fontaine <fabrice.fontaine(at)orange-ftgroup.com>
+
+	Major bug fix in http_SendMessage.
+
+	Currently, http_SendMessage was not able to write to write a buffer
+	due to a bad use of file_buf instead of buf. This bug was introduced by
+	the 0197-Doxygen-reformating-compiler-warnings patch.
+
+2010-11-23 Fabrice Fontaine <fabrice.fontaine(at)orange-ftgroup.com>
+
+	Returning the Sid in Upnp_Event_Subscribe.
+
+	Currently, Upnp_Event_Subscribe always contains an empty chain in the
+	Sid parameter. This patch now saves the client Subscription ID in this
+	parameter so Control Points can see and use the same SID in the
+	Upnp_Event_Subscribe and in the Upnp_Event structures.
+
+2010-11-22 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	Two fixes from Juergen Lock <nox(at)jelal.kn-bremen.de>:
+
+1. varargs:  pass size of CRLF as size_t not as int:
+
+--- upnp/src/gena/gena_device.c.orig
++++ upnp/src/gena/gena_device.c
+@@ -225,7 +225,7 @@ static UPNP_INLINE int notify_send_and_r
+		"bbb",
+		start_msg.buf, start_msg.length,
+		propertySet, strlen(propertySet),
+-		"\r\n", 2);
++		"\r\n", sizeof "\r\n" - 1);
+	if (ret_code) {
+		membuffer_destroy(&start_msg);
+		sock_destroy(&info, SD_BOTH);
+
+2. Remove "b" arg here, there is no buffer passed:  (this caused a pointer
+to be interpreted as a buffer size to be alloc'd/copied, hence the 32 GB.)
+
+--- upnp/src/genlib/net/http/webserver.c.orig
++++ upnp/src/genlib/net/http/webserver.c
+@@ -1262,7 +1262,7 @@ static int process_request(
+			// Content-Range: bytes 222-3333/4000  HTTP_PARTIAL_CONTENT
+			// Transfer-Encoding: chunked
+			if (http_MakeMessage(headers, resp_major, resp_minor,
+-				"R" "TLD" "s" "tcS" "b" "Xc" "sCc",
++				"R" "TLD" "s" "tcS" "Xc" "sCc",
+				HTTP_OK,    // status code
+				finfo.content_type, // content type
+				RespInstr,  // language info
+
+2010-11-15 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	Added the convenience function UpnpResolveURL2() to upnptools.c.
+
+	This function avoids some unnecessary memory allocation.
+	The memory alloc'd by this function must be freed later by the caller.
+
+2010-11-10 Fabrice Fontaine <fabrice.fontaine(at)orange-ftgroup.com>
+
+	Add GENA_NOTIFICATION_xxx_TIMEOUT variable.
+
+	Currently, in notify_send_and_recv function, pupnp waits for
+	HTTP_DEFAULT_TIMEOUT seconds when trying to send a GENA notification.
+	When there is a lot of notifications with CPs which was disconnected
+	without unsubscribing, all the pupnp threads are blocked on this
+	timeout. To correct, this issue, this patch adds a new variable,
+	GENA_NOTIFICATION_SENDING_TIMEOUT, which can be used to lower the
+	timeout so GENA threads return quickly when writing is impossible. By
+	the same mean, pupnp waits the CP's answer to the NOTIFY for
+	HTTP_DEFAULT_TIMEOUT seconds, so this patch adds a new variable,
+	GENA_NOTIFICATION_ANSWERING_TIMEOUT, to customize this value.
+
+2010-11-10 Fabrice Fontaine <fabrice.fontaine(at)orange-ftgroup.com>
+
+	Add --disable-blocking-tcp-connections flag.
+
+	Currently, pupnp is using a blocking connect to sends GENA
+	notifications. As a result, when there is a lot of notifications with
+	CPs which were disconnected without unsubscribing, all the pupnp
+	threads are blocked for 20s (timeout). To correct this issue, this
+	patch replace the call to connect with a call to private_connect and add
+	a compilation flag to disable blocking TCP connections, so if we are not
+	able to connect to the CP, the notification is lost.
+
+2010-11-07 Stefan Sommerfeld <zerocom(at)cs.tu-berlin.de>
+
+	Several patches for windows compatibility and fixing warnings.
+
+2010-11-07 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	PTHREAD_MUTEX_RECURSIVE on DragonFly is an enum.
+
+	SF Bug Tracker - ID: 3104527
+	Submitted: OBATA Akio ( obache ) - 2010-11-07 07:10:28 BRST
+
+	In threadutil/inc/ithread.h, it is expected that
+	PTHREAD_MUTEX_RECURSIVE is defined as macro. But on DragonFly BSD,
+	it is defined as enum, so not works as expected.
+
+	Attachment patch treat that DragonFly BSD always
+	have PTHREAD_MUTEX_RECURSIVE.
+
+2010-11-07 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	ftime(3) in -lcompat should not be checked.
+
+	SF Bug Tracker - ID: 3104521
+	Submitted: OBATA Akio ( obache ) - 2010-11-07 07:03:44 BRST
+
+	In configure.ac
+	AC_CHECK_FUNCS(ftime,, [AC_CHECK_LIB(compat, ftime)])
+
+	But since version 1.6.3, ftime(3) is not used, so it should be
+	removed, or introduce unwanted linkage with -lcompat.
+
+*******************************************************************************
+Version 1.6.9
+*******************************************************************************
+
+2010-11-06 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	Fix for bug introduced in samples code in svn revision 502, commit
+	git:25c908c558c8e60eb386c155a6b93add447ffec0
+
+	Sample device and combo were aborting with the message:
+	"***** SampleUtil_Initialize was called multiple times!"
+
+2010-11-06 Fabrice Fontaine <fabrice.fontaine(at)orange-ftgroup.com>
+
+	Make multiple SSDP advertisements faster.
+
+	Put the loop to send multiple copies of each SSDP advertisements in
+	ssdp_server.c instead of ssdp_device.c so we have only one call to
+	imillisleep ( SSDP_PAUSE ) to speed up advertisements.
+
+2010-11-05 Fabrice Fontaine <fabrice.fontaine(at)orange-ftgroup.com>
+
+	Removing unused NUM_COPY variable.
+
+	Previously, NUM_COPY was used in ssdp_device.c to send multiple copies
+	of each advertisements but also multiple replies to each M-SEARCH
+	request. As sending multiple replies is not compliant with HTTPU/MU
+	spec, NUM_COPY has been set to 1 in an older patch. However, as this
+	variable is not needed and has been replaced with SSDP_COPY, it has
+	been removed.
+
+2010-11-05 Fabrice Fontaine <fabrice.fontaine(at)orange-ftgroup.com>
+
+	Use SSDP_COPY to send multiple SSDP advertisements.
+
+	Currently, SSDP_COPY is used only to send multiple M-SEARCH requests (in
+	ssdp_ctrlpt.c). With this patch, SSDP_COPY is also used to send multiple
+	copies of each advertisements packets (in ssdp_device.c).
+
+2010-11-01 Carl Benson <carl.benson(at)windriver.com>
+
+	Fix for Android build.
+
+	I had to do some modifications myself though, because the Android
+	build system insists on having a file named "util.h" taking precedence
+	in its include path, libupnp gets confused because of the same filename
+	in upnp/src/inc/util.h
+
+*******************************************************************************
+Version 1.6.8
+*******************************************************************************
+
+2010-10-20 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	Fix a long date memory leak in webserver.c:StrStr().
+
+2010-10-19 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	Bug fix in select of miniserver.c
+
+	Fix a bug in miniserver.c, in which maxMiniSock was wrongly declared as
+	unsigned int and as a result it was being set to ((unsigned int)(-1)).
+	As a result, after being incremented, it became zero, and this value
+	was being used in the select() call.
+
+	Thanks to Fabrice Fontaine for helping and testing with this issue.
+
+2010-10-15 Marcelo Roberto Jimenez <mroberto(at)users.sourceforge.net>
+
+	Fix for 100% CPU issue in select() in miniserv.c. I have also removed
+	the sleep() call, it was just a workaround.
+
+	SF Bug Tracker [ 3086852 ] 99% CPU loop in miniserver.c on a non ipv6
+	system.
+
+	Submitted by: Jin ( jin_eld ) - 2010-10-13 19:29:13 UTC
+
+	I cross compiled libupnp 1.6.7 for ARM9 using the --disable-ipv6
+	option, my system is an ipv4 only setup.
+
+	I do not know why this problem only appears when running the app in the
+	background (for instance using nohup &), but then it starts using 99%
+	CPU.
+
+	I traced the problem down to the select() call in miniserver.c in the
+	RunMiniServer() function. Select returns code 1, but errno is set to
+	"Socket operation on non-socket", I also see this when running my app
+	under strace.
+
+	I set all ...Sock6 variables to INVALID_SOCKET to make sure that they
+	do not get added to the FD_SET and the problem is gone.
