@@ -3787,3 +3787,1428 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
 #endif
     }
 
+    /// @brief comparison: equal
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_eq/
+    template<typename ScalarType, typename std::enable_if<
+                 std::is_scalar<ScalarType>::value, int>::type = 0>
+    friend bool operator==(const_reference lhs, ScalarType rhs) noexcept
+    {
+        return lhs == basic_json(rhs);
+    }
+
+    /// @brief comparison: equal
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_eq/
+    template<typename ScalarType, typename std::enable_if<
+                 std::is_scalar<ScalarType>::value, int>::type = 0>
+    friend bool operator==(ScalarType lhs, const_reference rhs) noexcept
+    {
+        return basic_json(lhs) == rhs;
+    }
+
+    /// @brief comparison: not equal
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_ne/
+    friend bool operator!=(const_reference lhs, const_reference rhs) noexcept
+    {
+        if (compares_unordered(lhs, rhs, true))
+        {
+            return false;
+        }
+        return !(lhs == rhs);
+    }
+
+    /// @brief comparison: not equal
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_ne/
+    template<typename ScalarType, typename std::enable_if<
+                 std::is_scalar<ScalarType>::value, int>::type = 0>
+    friend bool operator!=(const_reference lhs, ScalarType rhs) noexcept
+    {
+        return lhs != basic_json(rhs);
+    }
+
+    /// @brief comparison: not equal
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_ne/
+    template<typename ScalarType, typename std::enable_if<
+                 std::is_scalar<ScalarType>::value, int>::type = 0>
+    friend bool operator!=(ScalarType lhs, const_reference rhs) noexcept
+    {
+        return basic_json(lhs) != rhs;
+    }
+
+    /// @brief comparison: less than
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_lt/
+    friend bool operator<(const_reference lhs, const_reference rhs) noexcept
+    {
+        // default_result is used if we cannot compare values. In that case,
+        // we compare types. Note we have to call the operator explicitly,
+        // because MSVC has problems otherwise.
+        JSON_IMPLEMENT_OPERATOR( <, false, false, operator<(lhs_type, rhs_type))
+    }
+
+    /// @brief comparison: less than
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_lt/
+    template<typename ScalarType, typename std::enable_if<
+                 std::is_scalar<ScalarType>::value, int>::type = 0>
+    friend bool operator<(const_reference lhs, ScalarType rhs) noexcept
+    {
+        return lhs < basic_json(rhs);
+    }
+
+    /// @brief comparison: less than
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_lt/
+    template<typename ScalarType, typename std::enable_if<
+                 std::is_scalar<ScalarType>::value, int>::type = 0>
+    friend bool operator<(ScalarType lhs, const_reference rhs) noexcept
+    {
+        return basic_json(lhs) < rhs;
+    }
+
+    /// @brief comparison: less than or equal
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_le/
+    friend bool operator<=(const_reference lhs, const_reference rhs) noexcept
+    {
+        if (compares_unordered(lhs, rhs, true))
+        {
+            return false;
+        }
+        return !(rhs < lhs);
+    }
+
+    /// @brief comparison: less than or equal
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_le/
+    template<typename ScalarType, typename std::enable_if<
+                 std::is_scalar<ScalarType>::value, int>::type = 0>
+    friend bool operator<=(const_reference lhs, ScalarType rhs) noexcept
+    {
+        return lhs <= basic_json(rhs);
+    }
+
+    /// @brief comparison: less than or equal
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_le/
+    template<typename ScalarType, typename std::enable_if<
+                 std::is_scalar<ScalarType>::value, int>::type = 0>
+    friend bool operator<=(ScalarType lhs, const_reference rhs) noexcept
+    {
+        return basic_json(lhs) <= rhs;
+    }
+
+    /// @brief comparison: greater than
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_gt/
+    friend bool operator>(const_reference lhs, const_reference rhs) noexcept
+    {
+        // double inverse
+        if (compares_unordered(lhs, rhs))
+        {
+            return false;
+        }
+        return !(lhs <= rhs);
+    }
+
+    /// @brief comparison: greater than
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_gt/
+    template<typename ScalarType, typename std::enable_if<
+                 std::is_scalar<ScalarType>::value, int>::type = 0>
+    friend bool operator>(const_reference lhs, ScalarType rhs) noexcept
+    {
+        return lhs > basic_json(rhs);
+    }
+
+    /// @brief comparison: greater than
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_gt/
+    template<typename ScalarType, typename std::enable_if<
+                 std::is_scalar<ScalarType>::value, int>::type = 0>
+    friend bool operator>(ScalarType lhs, const_reference rhs) noexcept
+    {
+        return basic_json(lhs) > rhs;
+    }
+
+    /// @brief comparison: greater than or equal
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_ge/
+    friend bool operator>=(const_reference lhs, const_reference rhs) noexcept
+    {
+        if (compares_unordered(lhs, rhs, true))
+        {
+            return false;
+        }
+        return !(lhs < rhs);
+    }
+
+    /// @brief comparison: greater than or equal
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_ge/
+    template<typename ScalarType, typename std::enable_if<
+                 std::is_scalar<ScalarType>::value, int>::type = 0>
+    friend bool operator>=(const_reference lhs, ScalarType rhs) noexcept
+    {
+        return lhs >= basic_json(rhs);
+    }
+
+    /// @brief comparison: greater than or equal
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_ge/
+    template<typename ScalarType, typename std::enable_if<
+                 std::is_scalar<ScalarType>::value, int>::type = 0>
+    friend bool operator>=(ScalarType lhs, const_reference rhs) noexcept
+    {
+        return basic_json(lhs) >= rhs;
+    }
+#endif
+
+#undef JSON_IMPLEMENT_OPERATOR
+
+    /// @}
+
+    ///////////////////
+    // serialization //
+    ///////////////////
+
+    /// @name serialization
+    /// @{
+#ifndef JSON_NO_IO
+    /// @brief serialize to stream
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_ltlt/
+    friend std::ostream& operator<<(std::ostream& o, const basic_json& j)
+    {
+        // read width member and use it as indentation parameter if nonzero
+        const bool pretty_print = o.width() > 0;
+        const auto indentation = pretty_print ? o.width() : 0;
+
+        // reset width to 0 for subsequent calls to this stream
+        o.width(0);
+
+        // do the actual serialization
+        serializer s(detail::output_adapter<char>(o), o.fill());
+        s.dump(j, pretty_print, false, static_cast<unsigned int>(indentation));
+        return o;
+    }
+
+    /// @brief serialize to stream
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_ltlt/
+    /// @deprecated This function is deprecated since 3.0.0 and will be removed in
+    ///             version 4.0.0 of the library. Please use
+    ///             operator<<(std::ostream&, const basic_json&) instead; that is,
+    ///             replace calls like `j >> o;` with `o << j;`.
+    JSON_HEDLEY_DEPRECATED_FOR(3.0.0, operator<<(std::ostream&, const basic_json&))
+    friend std::ostream& operator>>(const basic_json& j, std::ostream& o)
+    {
+        return o << j;
+    }
+#endif  // JSON_NO_IO
+    /// @}
+
+
+    /////////////////////
+    // deserialization //
+    /////////////////////
+
+    /// @name deserialization
+    /// @{
+
+    /// @brief deserialize from a compatible input
+    /// @sa https://json.nlohmann.me/api/basic_json/parse/
+    template<typename InputType>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    static basic_json parse(InputType&& i,
+                            const parser_callback_t cb = nullptr,
+                            const bool allow_exceptions = true,
+                            const bool ignore_comments = false)
+    {
+        basic_json result;
+        parser(detail::input_adapter(std::forward<InputType>(i)), cb, allow_exceptions, ignore_comments).parse(true, result);
+        return result;
+    }
+
+    /// @brief deserialize from a pair of character iterators
+    /// @sa https://json.nlohmann.me/api/basic_json/parse/
+    template<typename IteratorType>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    static basic_json parse(IteratorType first,
+                            IteratorType last,
+                            const parser_callback_t cb = nullptr,
+                            const bool allow_exceptions = true,
+                            const bool ignore_comments = false)
+    {
+        basic_json result;
+        parser(detail::input_adapter(std::move(first), std::move(last)), cb, allow_exceptions, ignore_comments).parse(true, result);
+        return result;
+    }
+
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    JSON_HEDLEY_DEPRECATED_FOR(3.8.0, parse(ptr, ptr + len))
+    static basic_json parse(detail::span_input_adapter&& i,
+                            const parser_callback_t cb = nullptr,
+                            const bool allow_exceptions = true,
+                            const bool ignore_comments = false)
+    {
+        basic_json result;
+        parser(i.get(), cb, allow_exceptions, ignore_comments).parse(true, result);
+        return result;
+    }
+
+    /// @brief check if the input is valid JSON
+    /// @sa https://json.nlohmann.me/api/basic_json/accept/
+    template<typename InputType>
+    static bool accept(InputType&& i,
+                       const bool ignore_comments = false)
+    {
+        return parser(detail::input_adapter(std::forward<InputType>(i)), nullptr, false, ignore_comments).accept(true);
+    }
+
+    /// @brief check if the input is valid JSON
+    /// @sa https://json.nlohmann.me/api/basic_json/accept/
+    template<typename IteratorType>
+    static bool accept(IteratorType first, IteratorType last,
+                       const bool ignore_comments = false)
+    {
+        return parser(detail::input_adapter(std::move(first), std::move(last)), nullptr, false, ignore_comments).accept(true);
+    }
+
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    JSON_HEDLEY_DEPRECATED_FOR(3.8.0, accept(ptr, ptr + len))
+    static bool accept(detail::span_input_adapter&& i,
+                       const bool ignore_comments = false)
+    {
+        return parser(i.get(), nullptr, false, ignore_comments).accept(true);
+    }
+
+    /// @brief generate SAX events
+    /// @sa https://json.nlohmann.me/api/basic_json/sax_parse/
+    template <typename InputType, typename SAX>
+    JSON_HEDLEY_NON_NULL(2)
+    static bool sax_parse(InputType&& i, SAX* sax,
+                          input_format_t format = input_format_t::json,
+                          const bool strict = true,
+                          const bool ignore_comments = false)
+    {
+        auto ia = detail::input_adapter(std::forward<InputType>(i));
+        return format == input_format_t::json
+               ? parser(std::move(ia), nullptr, true, ignore_comments).sax_parse(sax, strict)
+               : detail::binary_reader<basic_json, decltype(ia), SAX>(std::move(ia), format).sax_parse(format, sax, strict);
+    }
+
+    /// @brief generate SAX events
+    /// @sa https://json.nlohmann.me/api/basic_json/sax_parse/
+    template<class IteratorType, class SAX>
+    JSON_HEDLEY_NON_NULL(3)
+    static bool sax_parse(IteratorType first, IteratorType last, SAX* sax,
+                          input_format_t format = input_format_t::json,
+                          const bool strict = true,
+                          const bool ignore_comments = false)
+    {
+        auto ia = detail::input_adapter(std::move(first), std::move(last));
+        return format == input_format_t::json
+               ? parser(std::move(ia), nullptr, true, ignore_comments).sax_parse(sax, strict)
+               : detail::binary_reader<basic_json, decltype(ia), SAX>(std::move(ia), format).sax_parse(format, sax, strict);
+    }
+
+    /// @brief generate SAX events
+    /// @sa https://json.nlohmann.me/api/basic_json/sax_parse/
+    /// @deprecated This function is deprecated since 3.8.0 and will be removed in
+    ///             version 4.0.0 of the library. Please use
+    ///             sax_parse(ptr, ptr + len) instead.
+    template <typename SAX>
+    JSON_HEDLEY_DEPRECATED_FOR(3.8.0, sax_parse(ptr, ptr + len, ...))
+    JSON_HEDLEY_NON_NULL(2)
+    static bool sax_parse(detail::span_input_adapter&& i, SAX* sax,
+                          input_format_t format = input_format_t::json,
+                          const bool strict = true,
+                          const bool ignore_comments = false)
+    {
+        auto ia = i.get();
+        return format == input_format_t::json
+               // NOLINTNEXTLINE(hicpp-move-const-arg,performance-move-const-arg)
+               ? parser(std::move(ia), nullptr, true, ignore_comments).sax_parse(sax, strict)
+               // NOLINTNEXTLINE(hicpp-move-const-arg,performance-move-const-arg)
+               : detail::binary_reader<basic_json, decltype(ia), SAX>(std::move(ia), format).sax_parse(format, sax, strict);
+    }
+#ifndef JSON_NO_IO
+    /// @brief deserialize from stream
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_gtgt/
+    /// @deprecated This stream operator is deprecated since 3.0.0 and will be removed in
+    ///             version 4.0.0 of the library. Please use
+    ///             operator>>(std::istream&, basic_json&) instead; that is,
+    ///             replace calls like `j << i;` with `i >> j;`.
+    JSON_HEDLEY_DEPRECATED_FOR(3.0.0, operator>>(std::istream&, basic_json&))
+    friend std::istream& operator<<(basic_json& j, std::istream& i)
+    {
+        return operator>>(i, j);
+    }
+
+    /// @brief deserialize from stream
+    /// @sa https://json.nlohmann.me/api/basic_json/operator_gtgt/
+    friend std::istream& operator>>(std::istream& i, basic_json& j)
+    {
+        parser(detail::input_adapter(i)).parse(false, j);
+        return i;
+    }
+#endif  // JSON_NO_IO
+    /// @}
+
+    ///////////////////////////
+    // convenience functions //
+    ///////////////////////////
+
+    /// @brief return the type as string
+    /// @sa https://json.nlohmann.me/api/basic_json/type_name/
+    JSON_HEDLEY_RETURNS_NON_NULL
+    const char* type_name() const noexcept
+    {
+        switch (m_type)
+        {
+            case value_t::null:
+                return "null";
+            case value_t::object:
+                return "object";
+            case value_t::array:
+                return "array";
+            case value_t::string:
+                return "string";
+            case value_t::boolean:
+                return "boolean";
+            case value_t::binary:
+                return "binary";
+            case value_t::discarded:
+                return "discarded";
+            case value_t::number_integer:
+            case value_t::number_unsigned:
+            case value_t::number_float:
+            default:
+                return "number";
+        }
+    }
+
+
+  JSON_PRIVATE_UNLESS_TESTED:
+    //////////////////////
+    // member variables //
+    //////////////////////
+
+    /// the type of the current element
+    value_t m_type = value_t::null;
+
+    /// the value of the current element
+    json_value m_value = {};
+
+#if JSON_DIAGNOSTICS
+    /// a pointer to a parent value (for debugging purposes)
+    basic_json* m_parent = nullptr;
+#endif
+
+    //////////////////////////////////////////
+    // binary serialization/deserialization //
+    //////////////////////////////////////////
+
+    /// @name binary serialization/deserialization support
+    /// @{
+
+  public:
+    /// @brief create a CBOR serialization of a given JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/to_cbor/
+    static std::vector<std::uint8_t> to_cbor(const basic_json& j)
+    {
+        std::vector<std::uint8_t> result;
+        to_cbor(j, result);
+        return result;
+    }
+
+    /// @brief create a CBOR serialization of a given JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/to_cbor/
+    static void to_cbor(const basic_json& j, detail::output_adapter<std::uint8_t> o)
+    {
+        binary_writer<std::uint8_t>(o).write_cbor(j);
+    }
+
+    /// @brief create a CBOR serialization of a given JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/to_cbor/
+    static void to_cbor(const basic_json& j, detail::output_adapter<char> o)
+    {
+        binary_writer<char>(o).write_cbor(j);
+    }
+
+    /// @brief create a MessagePack serialization of a given JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/to_msgpack/
+    static std::vector<std::uint8_t> to_msgpack(const basic_json& j)
+    {
+        std::vector<std::uint8_t> result;
+        to_msgpack(j, result);
+        return result;
+    }
+
+    /// @brief create a MessagePack serialization of a given JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/to_msgpack/
+    static void to_msgpack(const basic_json& j, detail::output_adapter<std::uint8_t> o)
+    {
+        binary_writer<std::uint8_t>(o).write_msgpack(j);
+    }
+
+    /// @brief create a MessagePack serialization of a given JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/to_msgpack/
+    static void to_msgpack(const basic_json& j, detail::output_adapter<char> o)
+    {
+        binary_writer<char>(o).write_msgpack(j);
+    }
+
+    /// @brief create a UBJSON serialization of a given JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/to_ubjson/
+    static std::vector<std::uint8_t> to_ubjson(const basic_json& j,
+            const bool use_size = false,
+            const bool use_type = false)
+    {
+        std::vector<std::uint8_t> result;
+        to_ubjson(j, result, use_size, use_type);
+        return result;
+    }
+
+    /// @brief create a UBJSON serialization of a given JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/to_ubjson/
+    static void to_ubjson(const basic_json& j, detail::output_adapter<std::uint8_t> o,
+                          const bool use_size = false, const bool use_type = false)
+    {
+        binary_writer<std::uint8_t>(o).write_ubjson(j, use_size, use_type);
+    }
+
+    /// @brief create a UBJSON serialization of a given JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/to_ubjson/
+    static void to_ubjson(const basic_json& j, detail::output_adapter<char> o,
+                          const bool use_size = false, const bool use_type = false)
+    {
+        binary_writer<char>(o).write_ubjson(j, use_size, use_type);
+    }
+
+    /// @brief create a BJData serialization of a given JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/to_bjdata/
+    static std::vector<std::uint8_t> to_bjdata(const basic_json& j,
+            const bool use_size = false,
+            const bool use_type = false)
+    {
+        std::vector<std::uint8_t> result;
+        to_bjdata(j, result, use_size, use_type);
+        return result;
+    }
+
+    /// @brief create a BJData serialization of a given JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/to_bjdata/
+    static void to_bjdata(const basic_json& j, detail::output_adapter<std::uint8_t> o,
+                          const bool use_size = false, const bool use_type = false)
+    {
+        binary_writer<std::uint8_t>(o).write_ubjson(j, use_size, use_type, true, true);
+    }
+
+    /// @brief create a BJData serialization of a given JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/to_bjdata/
+    static void to_bjdata(const basic_json& j, detail::output_adapter<char> o,
+                          const bool use_size = false, const bool use_type = false)
+    {
+        binary_writer<char>(o).write_ubjson(j, use_size, use_type, true, true);
+    }
+
+    /// @brief create a BSON serialization of a given JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/to_bson/
+    static std::vector<std::uint8_t> to_bson(const basic_json& j)
+    {
+        std::vector<std::uint8_t> result;
+        to_bson(j, result);
+        return result;
+    }
+
+    /// @brief create a BSON serialization of a given JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/to_bson/
+    static void to_bson(const basic_json& j, detail::output_adapter<std::uint8_t> o)
+    {
+        binary_writer<std::uint8_t>(o).write_bson(j);
+    }
+
+    /// @brief create a BSON serialization of a given JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/to_bson/
+    static void to_bson(const basic_json& j, detail::output_adapter<char> o)
+    {
+        binary_writer<char>(o).write_bson(j);
+    }
+
+    /// @brief create a JSON value from an input in CBOR format
+    /// @sa https://json.nlohmann.me/api/basic_json/from_cbor/
+    template<typename InputType>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    static basic_json from_cbor(InputType&& i,
+                                const bool strict = true,
+                                const bool allow_exceptions = true,
+                                const cbor_tag_handler_t tag_handler = cbor_tag_handler_t::error)
+    {
+        basic_json result;
+        detail::json_sax_dom_parser<basic_json> sdp(result, allow_exceptions);
+        auto ia = detail::input_adapter(std::forward<InputType>(i));
+        const bool res = binary_reader<decltype(ia)>(std::move(ia), input_format_t::cbor).sax_parse(input_format_t::cbor, &sdp, strict, tag_handler);
+        return res ? result : basic_json(value_t::discarded);
+    }
+
+    /// @brief create a JSON value from an input in CBOR format
+    /// @sa https://json.nlohmann.me/api/basic_json/from_cbor/
+    template<typename IteratorType>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    static basic_json from_cbor(IteratorType first, IteratorType last,
+                                const bool strict = true,
+                                const bool allow_exceptions = true,
+                                const cbor_tag_handler_t tag_handler = cbor_tag_handler_t::error)
+    {
+        basic_json result;
+        detail::json_sax_dom_parser<basic_json> sdp(result, allow_exceptions);
+        auto ia = detail::input_adapter(std::move(first), std::move(last));
+        const bool res = binary_reader<decltype(ia)>(std::move(ia), input_format_t::cbor).sax_parse(input_format_t::cbor, &sdp, strict, tag_handler);
+        return res ? result : basic_json(value_t::discarded);
+    }
+
+    template<typename T>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    JSON_HEDLEY_DEPRECATED_FOR(3.8.0, from_cbor(ptr, ptr + len))
+    static basic_json from_cbor(const T* ptr, std::size_t len,
+                                const bool strict = true,
+                                const bool allow_exceptions = true,
+                                const cbor_tag_handler_t tag_handler = cbor_tag_handler_t::error)
+    {
+        return from_cbor(ptr, ptr + len, strict, allow_exceptions, tag_handler);
+    }
+
+
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    JSON_HEDLEY_DEPRECATED_FOR(3.8.0, from_cbor(ptr, ptr + len))
+    static basic_json from_cbor(detail::span_input_adapter&& i,
+                                const bool strict = true,
+                                const bool allow_exceptions = true,
+                                const cbor_tag_handler_t tag_handler = cbor_tag_handler_t::error)
+    {
+        basic_json result;
+        detail::json_sax_dom_parser<basic_json> sdp(result, allow_exceptions);
+        auto ia = i.get();
+        // NOLINTNEXTLINE(hicpp-move-const-arg,performance-move-const-arg)
+        const bool res = binary_reader<decltype(ia)>(std::move(ia), input_format_t::cbor).sax_parse(input_format_t::cbor, &sdp, strict, tag_handler);
+        return res ? result : basic_json(value_t::discarded);
+    }
+
+    /// @brief create a JSON value from an input in MessagePack format
+    /// @sa https://json.nlohmann.me/api/basic_json/from_msgpack/
+    template<typename InputType>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    static basic_json from_msgpack(InputType&& i,
+                                   const bool strict = true,
+                                   const bool allow_exceptions = true)
+    {
+        basic_json result;
+        detail::json_sax_dom_parser<basic_json> sdp(result, allow_exceptions);
+        auto ia = detail::input_adapter(std::forward<InputType>(i));
+        const bool res = binary_reader<decltype(ia)>(std::move(ia), input_format_t::msgpack).sax_parse(input_format_t::msgpack, &sdp, strict);
+        return res ? result : basic_json(value_t::discarded);
+    }
+
+    /// @brief create a JSON value from an input in MessagePack format
+    /// @sa https://json.nlohmann.me/api/basic_json/from_msgpack/
+    template<typename IteratorType>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    static basic_json from_msgpack(IteratorType first, IteratorType last,
+                                   const bool strict = true,
+                                   const bool allow_exceptions = true)
+    {
+        basic_json result;
+        detail::json_sax_dom_parser<basic_json> sdp(result, allow_exceptions);
+        auto ia = detail::input_adapter(std::move(first), std::move(last));
+        const bool res = binary_reader<decltype(ia)>(std::move(ia), input_format_t::msgpack).sax_parse(input_format_t::msgpack, &sdp, strict);
+        return res ? result : basic_json(value_t::discarded);
+    }
+
+    template<typename T>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    JSON_HEDLEY_DEPRECATED_FOR(3.8.0, from_msgpack(ptr, ptr + len))
+    static basic_json from_msgpack(const T* ptr, std::size_t len,
+                                   const bool strict = true,
+                                   const bool allow_exceptions = true)
+    {
+        return from_msgpack(ptr, ptr + len, strict, allow_exceptions);
+    }
+
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    JSON_HEDLEY_DEPRECATED_FOR(3.8.0, from_msgpack(ptr, ptr + len))
+    static basic_json from_msgpack(detail::span_input_adapter&& i,
+                                   const bool strict = true,
+                                   const bool allow_exceptions = true)
+    {
+        basic_json result;
+        detail::json_sax_dom_parser<basic_json> sdp(result, allow_exceptions);
+        auto ia = i.get();
+        // NOLINTNEXTLINE(hicpp-move-const-arg,performance-move-const-arg)
+        const bool res = binary_reader<decltype(ia)>(std::move(ia), input_format_t::msgpack).sax_parse(input_format_t::msgpack, &sdp, strict);
+        return res ? result : basic_json(value_t::discarded);
+    }
+
+    /// @brief create a JSON value from an input in UBJSON format
+    /// @sa https://json.nlohmann.me/api/basic_json/from_ubjson/
+    template<typename InputType>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    static basic_json from_ubjson(InputType&& i,
+                                  const bool strict = true,
+                                  const bool allow_exceptions = true)
+    {
+        basic_json result;
+        detail::json_sax_dom_parser<basic_json> sdp(result, allow_exceptions);
+        auto ia = detail::input_adapter(std::forward<InputType>(i));
+        const bool res = binary_reader<decltype(ia)>(std::move(ia), input_format_t::ubjson).sax_parse(input_format_t::ubjson, &sdp, strict);
+        return res ? result : basic_json(value_t::discarded);
+    }
+
+    /// @brief create a JSON value from an input in UBJSON format
+    /// @sa https://json.nlohmann.me/api/basic_json/from_ubjson/
+    template<typename IteratorType>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    static basic_json from_ubjson(IteratorType first, IteratorType last,
+                                  const bool strict = true,
+                                  const bool allow_exceptions = true)
+    {
+        basic_json result;
+        detail::json_sax_dom_parser<basic_json> sdp(result, allow_exceptions);
+        auto ia = detail::input_adapter(std::move(first), std::move(last));
+        const bool res = binary_reader<decltype(ia)>(std::move(ia), input_format_t::ubjson).sax_parse(input_format_t::ubjson, &sdp, strict);
+        return res ? result : basic_json(value_t::discarded);
+    }
+
+    template<typename T>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    JSON_HEDLEY_DEPRECATED_FOR(3.8.0, from_ubjson(ptr, ptr + len))
+    static basic_json from_ubjson(const T* ptr, std::size_t len,
+                                  const bool strict = true,
+                                  const bool allow_exceptions = true)
+    {
+        return from_ubjson(ptr, ptr + len, strict, allow_exceptions);
+    }
+
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    JSON_HEDLEY_DEPRECATED_FOR(3.8.0, from_ubjson(ptr, ptr + len))
+    static basic_json from_ubjson(detail::span_input_adapter&& i,
+                                  const bool strict = true,
+                                  const bool allow_exceptions = true)
+    {
+        basic_json result;
+        detail::json_sax_dom_parser<basic_json> sdp(result, allow_exceptions);
+        auto ia = i.get();
+        // NOLINTNEXTLINE(hicpp-move-const-arg,performance-move-const-arg)
+        const bool res = binary_reader<decltype(ia)>(std::move(ia), input_format_t::ubjson).sax_parse(input_format_t::ubjson, &sdp, strict);
+        return res ? result : basic_json(value_t::discarded);
+    }
+
+
+    /// @brief create a JSON value from an input in BJData format
+    /// @sa https://json.nlohmann.me/api/basic_json/from_bjdata/
+    template<typename InputType>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    static basic_json from_bjdata(InputType&& i,
+                                  const bool strict = true,
+                                  const bool allow_exceptions = true)
+    {
+        basic_json result;
+        detail::json_sax_dom_parser<basic_json> sdp(result, allow_exceptions);
+        auto ia = detail::input_adapter(std::forward<InputType>(i));
+        const bool res = binary_reader<decltype(ia)>(std::move(ia), input_format_t::bjdata).sax_parse(input_format_t::bjdata, &sdp, strict);
+        return res ? result : basic_json(value_t::discarded);
+    }
+
+    /// @brief create a JSON value from an input in BJData format
+    /// @sa https://json.nlohmann.me/api/basic_json/from_bjdata/
+    template<typename IteratorType>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    static basic_json from_bjdata(IteratorType first, IteratorType last,
+                                  const bool strict = true,
+                                  const bool allow_exceptions = true)
+    {
+        basic_json result;
+        detail::json_sax_dom_parser<basic_json> sdp(result, allow_exceptions);
+        auto ia = detail::input_adapter(std::move(first), std::move(last));
+        const bool res = binary_reader<decltype(ia)>(std::move(ia), input_format_t::bjdata).sax_parse(input_format_t::bjdata, &sdp, strict);
+        return res ? result : basic_json(value_t::discarded);
+    }
+
+    /// @brief create a JSON value from an input in BSON format
+    /// @sa https://json.nlohmann.me/api/basic_json/from_bson/
+    template<typename InputType>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    static basic_json from_bson(InputType&& i,
+                                const bool strict = true,
+                                const bool allow_exceptions = true)
+    {
+        basic_json result;
+        detail::json_sax_dom_parser<basic_json> sdp(result, allow_exceptions);
+        auto ia = detail::input_adapter(std::forward<InputType>(i));
+        const bool res = binary_reader<decltype(ia)>(std::move(ia), input_format_t::bson).sax_parse(input_format_t::bson, &sdp, strict);
+        return res ? result : basic_json(value_t::discarded);
+    }
+
+    /// @brief create a JSON value from an input in BSON format
+    /// @sa https://json.nlohmann.me/api/basic_json/from_bson/
+    template<typename IteratorType>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    static basic_json from_bson(IteratorType first, IteratorType last,
+                                const bool strict = true,
+                                const bool allow_exceptions = true)
+    {
+        basic_json result;
+        detail::json_sax_dom_parser<basic_json> sdp(result, allow_exceptions);
+        auto ia = detail::input_adapter(std::move(first), std::move(last));
+        const bool res = binary_reader<decltype(ia)>(std::move(ia), input_format_t::bson).sax_parse(input_format_t::bson, &sdp, strict);
+        return res ? result : basic_json(value_t::discarded);
+    }
+
+    template<typename T>
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    JSON_HEDLEY_DEPRECATED_FOR(3.8.0, from_bson(ptr, ptr + len))
+    static basic_json from_bson(const T* ptr, std::size_t len,
+                                const bool strict = true,
+                                const bool allow_exceptions = true)
+    {
+        return from_bson(ptr, ptr + len, strict, allow_exceptions);
+    }
+
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    JSON_HEDLEY_DEPRECATED_FOR(3.8.0, from_bson(ptr, ptr + len))
+    static basic_json from_bson(detail::span_input_adapter&& i,
+                                const bool strict = true,
+                                const bool allow_exceptions = true)
+    {
+        basic_json result;
+        detail::json_sax_dom_parser<basic_json> sdp(result, allow_exceptions);
+        auto ia = i.get();
+        // NOLINTNEXTLINE(hicpp-move-const-arg,performance-move-const-arg)
+        const bool res = binary_reader<decltype(ia)>(std::move(ia), input_format_t::bson).sax_parse(input_format_t::bson, &sdp, strict);
+        return res ? result : basic_json(value_t::discarded);
+    }
+    /// @}
+
+    //////////////////////////
+    // JSON Pointer support //
+    //////////////////////////
+
+    /// @name JSON Pointer functions
+    /// @{
+
+    /// @brief access specified element via JSON Pointer
+    /// @sa https://json.nlohmann.me/api/basic_json/operator%5B%5D/
+    reference operator[](const json_pointer& ptr)
+    {
+        return ptr.get_unchecked(this);
+    }
+
+    template<typename BasicJsonType, detail::enable_if_t<detail::is_basic_json<BasicJsonType>::value, int> = 0>
+    JSON_HEDLEY_DEPRECATED_FOR(3.11.0, basic_json::json_pointer or nlohmann::json_pointer<basic_json::string_t>) // NOLINT(readability/alt_tokens)
+    reference operator[](const ::nlohmann::json_pointer<BasicJsonType>& ptr)
+    {
+        return ptr.get_unchecked(this);
+    }
+
+    /// @brief access specified element via JSON Pointer
+    /// @sa https://json.nlohmann.me/api/basic_json/operator%5B%5D/
+    const_reference operator[](const json_pointer& ptr) const
+    {
+        return ptr.get_unchecked(this);
+    }
+
+    template<typename BasicJsonType, detail::enable_if_t<detail::is_basic_json<BasicJsonType>::value, int> = 0>
+    JSON_HEDLEY_DEPRECATED_FOR(3.11.0, basic_json::json_pointer or nlohmann::json_pointer<basic_json::string_t>) // NOLINT(readability/alt_tokens)
+    const_reference operator[](const ::nlohmann::json_pointer<BasicJsonType>& ptr) const
+    {
+        return ptr.get_unchecked(this);
+    }
+
+    /// @brief access specified element via JSON Pointer
+    /// @sa https://json.nlohmann.me/api/basic_json/at/
+    reference at(const json_pointer& ptr)
+    {
+        return ptr.get_checked(this);
+    }
+
+    template<typename BasicJsonType, detail::enable_if_t<detail::is_basic_json<BasicJsonType>::value, int> = 0>
+    JSON_HEDLEY_DEPRECATED_FOR(3.11.0, basic_json::json_pointer or nlohmann::json_pointer<basic_json::string_t>) // NOLINT(readability/alt_tokens)
+    reference at(const ::nlohmann::json_pointer<BasicJsonType>& ptr)
+    {
+        return ptr.get_checked(this);
+    }
+
+    /// @brief access specified element via JSON Pointer
+    /// @sa https://json.nlohmann.me/api/basic_json/at/
+    const_reference at(const json_pointer& ptr) const
+    {
+        return ptr.get_checked(this);
+    }
+
+    template<typename BasicJsonType, detail::enable_if_t<detail::is_basic_json<BasicJsonType>::value, int> = 0>
+    JSON_HEDLEY_DEPRECATED_FOR(3.11.0, basic_json::json_pointer or nlohmann::json_pointer<basic_json::string_t>) // NOLINT(readability/alt_tokens)
+    const_reference at(const ::nlohmann::json_pointer<BasicJsonType>& ptr) const
+    {
+        return ptr.get_checked(this);
+    }
+
+    /// @brief return flattened JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/flatten/
+    basic_json flatten() const
+    {
+        basic_json result(value_t::object);
+        json_pointer::flatten("", *this, result);
+        return result;
+    }
+
+    /// @brief unflatten a previously flattened JSON value
+    /// @sa https://json.nlohmann.me/api/basic_json/unflatten/
+    basic_json unflatten() const
+    {
+        return json_pointer::unflatten(*this);
+    }
+
+    /// @}
+
+    //////////////////////////
+    // JSON Patch functions //
+    //////////////////////////
+
+    /// @name JSON Patch functions
+    /// @{
+
+    /// @brief applies a JSON patch in-place without copying the object
+    /// @sa https://json.nlohmann.me/api/basic_json/patch/
+    void patch_inplace(const basic_json& json_patch)
+    {
+        basic_json& result = *this;
+        // the valid JSON Patch operations
+        enum class patch_operations {add, remove, replace, move, copy, test, invalid};
+
+        const auto get_op = [](const std::string & op)
+        {
+            if (op == "add")
+            {
+                return patch_operations::add;
+            }
+            if (op == "remove")
+            {
+                return patch_operations::remove;
+            }
+            if (op == "replace")
+            {
+                return patch_operations::replace;
+            }
+            if (op == "move")
+            {
+                return patch_operations::move;
+            }
+            if (op == "copy")
+            {
+                return patch_operations::copy;
+            }
+            if (op == "test")
+            {
+                return patch_operations::test;
+            }
+
+            return patch_operations::invalid;
+        };
+
+        // wrapper for "add" operation; add value at ptr
+        const auto operation_add = [&result](json_pointer & ptr, basic_json val)
+        {
+            // adding to the root of the target document means replacing it
+            if (ptr.empty())
+            {
+                result = val;
+                return;
+            }
+
+            // make sure the top element of the pointer exists
+            json_pointer top_pointer = ptr.top();
+            if (top_pointer != ptr)
+            {
+                result.at(top_pointer);
+            }
+
+            // get reference to parent of JSON pointer ptr
+            const auto last_path = ptr.back();
+            ptr.pop_back();
+            // parent must exist when performing patch add per RFC6902 specs
+            basic_json& parent = result.at(ptr);
+
+            switch (parent.m_type)
+            {
+                case value_t::null:
+                case value_t::object:
+                {
+                    // use operator[] to add value
+                    parent[last_path] = val;
+                    break;
+                }
+
+                case value_t::array:
+                {
+                    if (last_path == "-")
+                    {
+                        // special case: append to back
+                        parent.push_back(val);
+                    }
+                    else
+                    {
+                        const auto idx = json_pointer::template array_index<basic_json_t>(last_path);
+                        if (JSON_HEDLEY_UNLIKELY(idx > parent.size()))
+                        {
+                            // avoid undefined behavior
+                            JSON_THROW(out_of_range::create(401, detail::concat("array index ", std::to_string(idx), " is out of range"), &parent));
+                        }
+
+                        // default case: insert add offset
+                        parent.insert(parent.begin() + static_cast<difference_type>(idx), val);
+                    }
+                    break;
+                }
+
+                // if there exists a parent it cannot be primitive
+                case value_t::string: // LCOV_EXCL_LINE
+                case value_t::boolean: // LCOV_EXCL_LINE
+                case value_t::number_integer: // LCOV_EXCL_LINE
+                case value_t::number_unsigned: // LCOV_EXCL_LINE
+                case value_t::number_float: // LCOV_EXCL_LINE
+                case value_t::binary: // LCOV_EXCL_LINE
+                case value_t::discarded: // LCOV_EXCL_LINE
+                default:            // LCOV_EXCL_LINE
+                    JSON_ASSERT(false); // NOLINT(cert-dcl03-c,hicpp-static-assert,misc-static-assert) LCOV_EXCL_LINE
+            }
+        };
+
+        // wrapper for "remove" operation; remove value at ptr
+        const auto operation_remove = [this, &result](json_pointer & ptr)
+        {
+            // get reference to parent of JSON pointer ptr
+            const auto last_path = ptr.back();
+            ptr.pop_back();
+            basic_json& parent = result.at(ptr);
+
+            // remove child
+            if (parent.is_object())
+            {
+                // perform range check
+                auto it = parent.find(last_path);
+                if (JSON_HEDLEY_LIKELY(it != parent.end()))
+                {
+                    parent.erase(it);
+                }
+                else
+                {
+                    JSON_THROW(out_of_range::create(403, detail::concat("key '", last_path, "' not found"), this));
+                }
+            }
+            else if (parent.is_array())
+            {
+                // note erase performs range check
+                parent.erase(json_pointer::template array_index<basic_json_t>(last_path));
+            }
+        };
+
+        // type check: top level value must be an array
+        if (JSON_HEDLEY_UNLIKELY(!json_patch.is_array()))
+        {
+            JSON_THROW(parse_error::create(104, 0, "JSON patch must be an array of objects", &json_patch));
+        }
+
+        // iterate and apply the operations
+        for (const auto& val : json_patch)
+        {
+            // wrapper to get a value for an operation
+            const auto get_value = [&val](const std::string & op,
+                                          const std::string & member,
+                                          bool string_type) -> basic_json &
+            {
+                // find value
+                auto it = val.m_value.object->find(member);
+
+                // context-sensitive error message
+                const auto error_msg = (op == "op") ? "operation" : detail::concat("operation '", op, '\'');
+
+                // check if desired value is present
+                if (JSON_HEDLEY_UNLIKELY(it == val.m_value.object->end()))
+                {
+                    // NOLINTNEXTLINE(performance-inefficient-string-concatenation)
+                    JSON_THROW(parse_error::create(105, 0, detail::concat(error_msg, " must have member '", member, "'"), &val));
+                }
+
+                // check if result is of type string
+                if (JSON_HEDLEY_UNLIKELY(string_type && !it->second.is_string()))
+                {
+                    // NOLINTNEXTLINE(performance-inefficient-string-concatenation)
+                    JSON_THROW(parse_error::create(105, 0, detail::concat(error_msg, " must have string member '", member, "'"), &val));
+                }
+
+                // no error: return value
+                return it->second;
+            };
+
+            // type check: every element of the array must be an object
+            if (JSON_HEDLEY_UNLIKELY(!val.is_object()))
+            {
+                JSON_THROW(parse_error::create(104, 0, "JSON patch must be an array of objects", &val));
+            }
+
+            // collect mandatory members
+            const auto op = get_value("op", "op", true).template get<std::string>();
+            const auto path = get_value(op, "path", true).template get<std::string>();
+            json_pointer ptr(path);
+
+            switch (get_op(op))
+            {
+                case patch_operations::add:
+                {
+                    operation_add(ptr, get_value("add", "value", false));
+                    break;
+                }
+
+                case patch_operations::remove:
+                {
+                    operation_remove(ptr);
+                    break;
+                }
+
+                case patch_operations::replace:
+                {
+                    // the "path" location must exist - use at()
+                    result.at(ptr) = get_value("replace", "value", false);
+                    break;
+                }
+
+                case patch_operations::move:
+                {
+                    const auto from_path = get_value("move", "from", true).template get<std::string>();
+                    json_pointer from_ptr(from_path);
+
+                    // the "from" location must exist - use at()
+                    basic_json v = result.at(from_ptr);
+
+                    // The move operation is functionally identical to a
+                    // "remove" operation on the "from" location, followed
+                    // immediately by an "add" operation at the target
+                    // location with the value that was just removed.
+                    operation_remove(from_ptr);
+                    operation_add(ptr, v);
+                    break;
+                }
+
+                case patch_operations::copy:
+                {
+                    const auto from_path = get_value("copy", "from", true).template get<std::string>();
+                    const json_pointer from_ptr(from_path);
+
+                    // the "from" location must exist - use at()
+                    basic_json v = result.at(from_ptr);
+
+                    // The copy is functionally identical to an "add"
+                    // operation at the target location using the value
+                    // specified in the "from" member.
+                    operation_add(ptr, v);
+                    break;
+                }
+
+                case patch_operations::test:
+                {
+                    bool success = false;
+                    JSON_TRY
+                    {
+                        // check if "value" matches the one at "path"
+                        // the "path" location must exist - use at()
+                        success = (result.at(ptr) == get_value("test", "value", false));
+                    }
+                    JSON_INTERNAL_CATCH (out_of_range&)
+                    {
+                        // ignore out of range errors: success remains false
+                    }
+
+                    // throw an exception if test fails
+                    if (JSON_HEDLEY_UNLIKELY(!success))
+                    {
+                        JSON_THROW(other_error::create(501, detail::concat("unsuccessful: ", val.dump()), &val));
+                    }
+
+                    break;
+                }
+
+                case patch_operations::invalid:
+                default:
+                {
+                    // op must be "add", "remove", "replace", "move", "copy", or
+                    // "test"
+                    JSON_THROW(parse_error::create(105, 0, detail::concat("operation value '", op, "' is invalid"), &val));
+                }
+            }
+        }
+    }
+
+    /// @brief applies a JSON patch to a copy of the current object
+    /// @sa https://json.nlohmann.me/api/basic_json/patch/
+    basic_json patch(const basic_json& json_patch) const
+    {
+        basic_json result = *this;
+        result.patch_inplace(json_patch);
+        return result;
+    }
+
+    /// @brief creates a diff as a JSON patch
+    /// @sa https://json.nlohmann.me/api/basic_json/diff/
+    JSON_HEDLEY_WARN_UNUSED_RESULT
+    static basic_json diff(const basic_json& source, const basic_json& target,
+                           const std::string& path = "")
+    {
+        // the patch
+        basic_json result(value_t::array);
+
+        // if the values are the same, return empty patch
+        if (source == target)
+        {
+            return result;
+        }
+
+        if (source.type() != target.type())
+        {
+            // different types: replace value
+            result.push_back(
+            {
+                {"op", "replace"}, {"path", path}, {"value", target}
+            });
+            return result;
+        }
+
+        switch (source.type())
+        {
+            case value_t::array:
+            {
+                // first pass: traverse common elements
+                std::size_t i = 0;
+                while (i < source.size() && i < target.size())
+                {
+                    // recursive call to compare array values at index i
+                    auto temp_diff = diff(source[i], target[i], detail::concat(path, '/', std::to_string(i)));
+                    result.insert(result.end(), temp_diff.begin(), temp_diff.end());
+                    ++i;
+                }
+
+                // We now reached the end of at least one array
+                // in a second pass, traverse the remaining elements
+
+                // remove my remaining elements
+                const auto end_index = static_cast<difference_type>(result.size());
+                while (i < source.size())
+                {
+                    // add operations in reverse order to avoid invalid
+                    // indices
+                    result.insert(result.begin() + end_index, object(
+                    {
+                        {"op", "remove"},
+                        {"path", detail::concat(path, '/', std::to_string(i))}
+                    }));
+                    ++i;
+                }
+
+                // add other remaining elements
+                while (i < target.size())
+                {
+                    result.push_back(
+                    {
+                        {"op", "add"},
+                        {"path", detail::concat(path, "/-")},
+                        {"value", target[i]}
+                    });
+                    ++i;
+                }
+
+                break;
+            }
+
+            case value_t::object:
+            {
+                // first pass: traverse this object's elements
+                for (auto it = source.cbegin(); it != source.cend(); ++it)
+                {
+                    // escape the key name to be used in a JSON patch
+                    const auto path_key = detail::concat(path, '/', detail::escape(it.key()));
+
+                    if (target.find(it.key()) != target.end())
+                    {
+                        // recursive call to compare object values at key it
+                        auto temp_diff = diff(it.value(), target[it.key()], path_key);
+                        result.insert(result.end(), temp_diff.begin(), temp_diff.end());
+                    }
+                    else
+                    {
+                        // found a key that is not in o -> remove it
+                        result.push_back(object(
+                        {
+                            {"op", "remove"}, {"path", path_key}
+                        }));
+                    }
+                }
+
+                // second pass: traverse other object's elements
+                for (auto it = target.cbegin(); it != target.cend(); ++it)
+                {
+                    if (source.find(it.key()) == source.end())
+                    {
+                        // found a key that is not in this -> add it
+                        const auto path_key = detail::concat(path, '/', detail::escape(it.key()));
+                        result.push_back(
+                        {
+                            {"op", "add"}, {"path", path_key},
+                            {"value", it.value()}
+                        });
+                    }
+                }
+
+                break;
+            }
+
+            case value_t::null:
+            case value_t::string:
+            case value_t::boolean:
+            case value_t::number_integer:
+            case value_t::number_unsigned:
+            case value_t::number_float:
+            case value_t::binary:
+            case value_t::discarded:
+            default:
+            {
+                // both primitive type: replace value
+                result.push_back(
+                {
+                    {"op", "replace"}, {"path", path}, {"value", target}
+                });
+                break;
+            }
+        }
+
+        return result;
+    }
+    /// @}
+
+    ////////////////////////////////
+    // JSON Merge Patch functions //
+    ////////////////////////////////
+
+    /// @name JSON Merge Patch functions
+    /// @{
+
+    /// @brief applies a JSON Merge Patch
+    /// @sa https://json.nlohmann.me/api/basic_json/merge_patch/
+    void merge_patch(const basic_json& apply_patch)
+    {
+        if (apply_patch.is_object())
+        {
+            if (!is_object())
+            {
+                *this = object();
+            }
+            for (auto it = apply_patch.begin(); it != apply_patch.end(); ++it)
+            {
+                if (it.value().is_null())
+                {
+                    erase(it.key());
+                }
+                else
+                {
+                    operator[](it.key()).merge_patch(it.value());
+                }
+            }
+        }
+        else
+        {
+            *this = apply_patch;
+        }
+    }
+
+    /// @}
+};
+
+/// @brief user-defined to_string function for JSON values
+/// @sa https://json.nlohmann.me/api/basic_json/to_string/
+NLOHMANN_BASIC_JSON_TPL_DECLARATION
+std::string to_string(const NLOHMANN_BASIC_JSON_TPL& j)
+{
+    return j.dump();
+}
+
+inline namespace literals
+{
+inline namespace json_literals
+{
+
+/// @brief user-defined string literal for JSON values
+/// @sa https://json.nlohmann.me/api/basic_json/operator_literal_json/
+JSON_HEDLEY_NON_NULL(1)
+inline nlohmann::json operator "" _json(const char* s, std::size_t n)
+{
+    return nlohmann::json::parse(s, s + n);
+}
+
+/// @brief user-defined string literal for JSON pointer
+/// @sa https://json.nlohmann.me/api/basic_json/operator_literal_json_pointer/
+JSON_HEDLEY_NON_NULL(1)
+inline nlohmann::json::json_pointer operator "" _json_pointer(const char* s, std::size_t n)
+{
+    return nlohmann::json::json_pointer(std::string(s, n));
+}
+
+}  // namespace json_literals
+}  // namespace literals
+NLOHMANN_JSON_NAMESPACE_END
+
+///////////////////////
+// nonmember support //
+///////////////////////
+
+namespace std // NOLINT(cert-dcl58-cpp)
+{
+
+/// @brief hash value for JSON objects
+/// @sa https://json.nlohmann.me/api/basic_json/std_hash/
+NLOHMANN_BASIC_JSON_TPL_DECLARATION
+struct hash<nlohmann::NLOHMANN_BASIC_JSON_TPL>
+{
+    std::size_t operator()(const nlohmann::NLOHMANN_BASIC_JSON_TPL& j) const
+    {
+        return nlohmann::detail::hash(j);
+    }
+};
+
+// specialization for std::less<value_t>
+template<>
+struct less< ::nlohmann::detail::value_t> // do not remove the space after '<', see https://github.com/nlohmann/json/pull/679
+{
+    /*!
+    @brief compare two value_t enum values
+    @since version 3.0.0
+    */
+    bool operator()(::nlohmann::detail::value_t lhs,
+                    ::nlohmann::detail::value_t rhs) const noexcept
+    {
+#if JSON_HAS_THREE_WAY_COMPARISON
+        return std::is_lt(lhs <=> rhs); // *NOPAD*
+#else
+        return ::nlohmann::detail::operator<(lhs, rhs);
+#endif
+    }
+};
+
+// C++20 prohibit function specialization in the std namespace.
+#ifndef JSON_HAS_CPP_20
+
+/// @brief exchanges the values of two JSON objects
+/// @sa https://json.nlohmann.me/api/basic_json/std_swap/
+NLOHMANN_BASIC_JSON_TPL_DECLARATION
+inline void swap(nlohmann::NLOHMANN_BASIC_JSON_TPL& j1, nlohmann::NLOHMANN_BASIC_JSON_TPL& j2) noexcept(  // NOLINT(readability-inconsistent-declaration-parameter-name)
+    is_nothrow_move_constructible<nlohmann::NLOHMANN_BASIC_JSON_TPL>::value&&                          // NOLINT(misc-redundant-expression)
+    is_nothrow_move_assignable<nlohmann::NLOHMANN_BASIC_JSON_TPL>::value)
+{
+    j1.swap(j2);
+}
+
+#endif
+
+}  // namespace std
+
+#if JSON_USE_GLOBAL_UDLS
+    using nlohmann::literals::json_literals::operator "" _json; // NOLINT(misc-unused-using-decls,google-global-names-in-headers)
+    using nlohmann::literals::json_literals::operator "" _json_pointer; //NOLINT(misc-unused-using-decls,google-global-names-in-headers)
+#endif
+
+#include <nlohmann/detail/macro_unscope.hpp>
+
+#endif  // INCLUDE_NLOHMANN_JSON_HPP_
