@@ -958,5 +958,762 @@ ExitFunction:
 
 	return ret;
 }
+
+int genaNotifyAllExt(UpnpDevice_Handle device_handle,
+	char *UDN,
+	char *servId,
+	IXML_Document *PropSet)
+{
+	int ret = GENA_SUCCESS;
+	int line = 0;
+
+	DOMString propertySet = NULL;
+
+	UpnpPrintf(UPNP_INFO,
+		GENA,
+		__FILE__,
+		__LINE__,
+		"GENA BEGIN NOTIFY ALL EXT\n");
+
+	propertySet = ixmlPrintNode((IXML_Node *)PropSet);
+	if (propertySet == NULL) {
+		line = __LINE__;
+		ret = UPNP_E_INVALID_PARAM;
+		goto ExitFunction;
+	}
+	UpnpPrintf(UPNP_INFO,
+		GENA,
+		__FILE__,
+		__LINE__,
+		"GENERATED PROPERTY SET IN EXT NOTIFY: %s",
+		propertySet);
+
+	ret = genaNotifyAllCommon(device_handle, UDN, servId, propertySet);
+
+ExitFunction:
+
+	UpnpPrintf(UPNP_INFO,
+		GENA,
+		__FILE__,
+		line,
+		"GENA END NOTIFY ALL EXT, ret = %d\n",
+		ret);
+
+	return ret;
+}
+
+int genaNotifyAll(UpnpDevice_Handle device_handle,
+	char *UDN,
+	char *servId,
+	char **VarNames,
+	char **VarValues,
+	int var_count)
+{
+	int ret = GENA_SUCCESS;
+	int line = 0;
+
+	DOMString propertySet = NULL;
+
+	UpnpPrintf(
+		UPNP_INFO, GENA, __FILE__, __LINE__, "GENA BEGIN NOTIFY ALL\n");
+
+	ret = GeneratePropertySet(VarNames, VarValues, var_count, &propertySet);
+	if (ret != XML_SUCCESS) {
+		line = __LINE__;
+		goto ExitFunction;
+	}
+	UpnpPrintf(UPNP_INFO,
+		GENA,
+		__FILE__,
+		__LINE__,
+		"GENERATED PROPERTY SET IN EXT NOTIFY: %s",
+		propertySet);
+
+	ret = genaNotifyAllCommon(device_handle, UDN, servId, propertySet);
+
+ExitFunction:
+
+	UpnpPrintf(UPNP_INFO,
+		GENA,
+		__FILE__,
+		line,
+		"GENA END NOTIFY ALL, ret = %d\n",
+		ret);
+
+	return ret;
+}
+
+/*!
+ * \brief Returns OK message in the case of a subscription request.
+ *
+ * \return UPNP_E_SUCCESS if successful, otherwise the appropriate error code.
+ */
+static int respond_ok(
+	/*! [in] Socket connection of request. */
+	SOCKINFO *info,
+	/*! [in] Accepted duration. */
+	int time_out,
+	/*! [in] Accepted subscription. */
+	subscription *sub,
+	/*! [in] Http request. */
+	http_message_t *request)
+{
+	int major;
+	int minor;
+	membuffer response;
+	int return_code;
+	char timeout_str[100];
+	int upnp_timeout = UPNP_TIMEOUT;
+	int rc = 0;
+
+	http_CalcResponseVersion(
+		request->major_version, request->minor_version, &major, &minor);
+
+	if (time_out >= 0) {
+		rc = snprintf(timeout_str,
+			sizeof(timeout_str),
+			"TIMEOUT: Second-%d",
+			time_out);
+	} else {
+		memset(timeout_str, 0, sizeof(timeout_str));
+		strncpy(timeout_str,
+			"TIMEOUT: Second-infinite",
+			sizeof(timeout_str) - 1);
+	}
+	if (rc < 0 || (unsigned int)rc >= sizeof(timeout_str)) {
+		error_respond(info, HTTP_INTERNAL_SERVER_ERROR, request);
+		return UPNP_E_OUTOF_MEMORY;
+	}
+
+	membuffer_init(&response);
+	response.size_inc = 30;
+	if (http_MakeMessage(&response,
+		    major,
+		    minor,
+		    "R"
+		    "D"
+		    "S"
+		    "N"
+		    "Xc"
+		    "ssc"
+		    "scc",
+		    HTTP_OK,
+		    (off_t)0,
+		    X_USER_AGENT,
+		    "SID: ",
+		    sub->sid,
+		    timeout_str) != 0) {
+		membuffer_destroy(&response);
+		error_respond(info, HTTP_INTERNAL_SERVER_ERROR, request);
+		return UPNP_E_OUTOF_MEMORY;
+	}
+
+	return_code = http_SendMessage(
+		info, &upnp_timeout, "b", response.buf, response.length);
+
+	membuffer_destroy(&response);
+
+	return return_code;
+}
+
+/*!
+ * \brief Function to parse the Callback header value in subscription requests.
+ *
+ * Takes in a buffer containing URLS delimited by '<' and '>'. The entire buffer
+ * is copied into dynamic memory and stored in the URL_list. Pointers to the
+ * individual urls within this buffer are allocated and stored in the URL_list.
+ * Only URLs with network addresses are considered (i.e. host:port or domain
+ * name).
+ *
+ * \return The number of URLs parsed if successful, otherwise
+ * UPNP_E_OUTOF_MEMORY.
+ */
+static int create_url_list(
+	/*! [in] . */
+	memptr *url_list,
+	/*! [out] . */
+	URL_list *out)
+{
+	size_t URLcount = 0, URLcount2 = 0;
+	size_t i;
+	int return_code = 0;
+	uri_type temp;
+	token urls;
+	token *URLS;
+
+	urls.buff = url_list->buf;
+	urls.size = url_list->length;
+	URLS = &urls;
+
+	out->size = 0;
+	out->URLs = NULL;
+	out->parsedURLs = NULL;
+
+	for (i = 0; i < URLS->size; i++) {
+		if ((URLS->buff[i] == '<') && (i + 1 < URLS->size)) {
+			if (((return_code = parse_uri(&URLS->buff[i + 1],
+				      URLS->size - i + 1,
+				      &temp)) == HTTP_SUCCESS) &&
+				(temp.hostport.text.size != 0)) {
+				URLcount++;
+			} else {
+				if (return_code == UPNP_E_OUTOF_MEMORY) {
+					return return_code;
+				}
+			}
+		}
+	}
+
+	if (URLcount > 0) {
+		out->URLs = malloc(URLS->size + 1);
+		out->parsedURLs = malloc(sizeof(uri_type) * URLcount);
+		if (!out->URLs || !out->parsedURLs) {
+			free(out->URLs);
+			free(out->parsedURLs);
+			out->URLs = NULL;
+			out->parsedURLs = NULL;
+			return UPNP_E_OUTOF_MEMORY;
+		}
+		memcpy(out->URLs, URLS->buff, URLS->size);
+		out->URLs[URLS->size] = 0;
+		for (i = 0; i < URLS->size; i++) {
+			if ((URLS->buff[i] == '<') && (i + 1 < URLS->size)) {
+				if (((return_code = parse_uri(&out->URLs[i + 1],
+					      URLS->size - i + 1,
+					      &out->parsedURLs[URLcount2])) ==
+					    HTTP_SUCCESS) &&
+					(out->parsedURLs[URLcount2]
+							.hostport.text.size !=
+						0)) {
+					URLcount2++;
+					if (URLcount2 >= URLcount)
+						/*
+						 * break early here in case
+						 * there is a bogus URL that was
+						 * skipped above. This prevents
+						 * to access
+						 * out->parsedURLs[URLcount]
+						 * which is beyond the
+						 * allocation.
+						 */
+						break;
+				} else {
+					if (return_code ==
+						UPNP_E_OUTOF_MEMORY) {
+						free(out->URLs);
+						free(out->parsedURLs);
+						out->URLs = NULL;
+						out->parsedURLs = NULL;
+						return return_code;
+					}
+				}
+			}
+		}
+	}
+	out->size = URLcount;
+
+	return (int)URLcount;
+}
+
+/*!
+ * \brief Validate that the URLs passed by the user are on the same network
+ * segment than the device.
+ *
+ * Note: This is a fix for CallStanger a.k.a. CVE-2020-12695
+ *
+ * \return 0 if all URLs are on the same segment or -1 otherwise.
+ */
+int gena_validate_delivery_urls(
+	/*! [in] . */
+	SOCKINFO *info,
+	/*! [in] . */
+	URL_list *url_list)
+{
+	size_t i = 0;
+	struct in_addr genaAddr4;
+	struct in_addr genaNetmask;
+	struct sockaddr_in *deliveryAddr4 = NULL;
+	struct in6_addr genaAddr6Lla;
+	struct in6_addr genaAddr6UlaGua;
+	struct in6_addr *genaAddr6 = NULL;
+	unsigned int if_prefix;
+	struct sockaddr_in6 *deliveryAddr6 = NULL;
+	char deliveryAddrString[INET6_ADDRSTRLEN];
+
+	if (info == NULL || url_list == NULL) {
+		return 0;
+	}
+
+	switch (info->foreign_sockaddr.ss_family) {
+	case AF_INET:
+		if (!inet_pton(AF_INET, gIF_IPV4, &genaAddr4)) {
+			return -1;
+		}
+
+		if (!inet_pton(AF_INET, gIF_IPV4_NETMASK, &genaNetmask)) {
+			return -1;
+		}
+
+		for (i = 0; i < url_list->size; i++) {
+			deliveryAddr4 =
+				(struct sockaddr_in *)&url_list->parsedURLs[i]
+					.hostport.IPaddress;
+			if ((deliveryAddr4->sin_addr.s_addr &
+				    genaNetmask.s_addr) !=
+				(genaAddr4.s_addr & genaNetmask.s_addr)) {
+				inet_ntop(AF_INET,
+					&deliveryAddr4->sin_addr,
+					deliveryAddrString,
+					sizeof(deliveryAddrString));
+				UpnpPrintf(UPNP_CRITICAL,
+					GENA,
+					__FILE__,
+					__LINE__,
+					"DeliveryURL %s is invalid.\n"
+					"It is not in the expected network "
+					"segment (IPv4: %s, netmask: %s)\n",
+					deliveryAddrString,
+					gIF_IPV4,
+					gIF_IPV4_NETMASK);
+				return -1;
+			}
+		}
+		break;
+	case AF_INET6:
+		if (!inet_pton(AF_INET6, gIF_IPV6, &genaAddr6Lla)) {
+			return -1;
+		}
+
+		if (!inet_pton(AF_INET6, gIF_IPV6_ULA_GUA, &genaAddr6UlaGua)) {
+			return -1;
+		}
+
+		for (i = 0; i < url_list->size; i++) {
+			deliveryAddr6 =
+				(struct sockaddr_in6 *)&url_list->parsedURLs[i]
+					.hostport.IPaddress;
+			if (IN6_IS_ADDR_LINKLOCAL(&deliveryAddr6->sin6_addr)) {
+				genaAddr6 = &genaAddr6Lla;
+				if_prefix = gIF_IPV6_PREFIX_LENGTH;
+			} else {
+				genaAddr6 = &genaAddr6UlaGua;
+				if_prefix = gIF_IPV6_ULA_GUA_PREFIX_LENGTH;
+			}
+			/* We assume that IPv6 prefix is a multiple of 8 */
+			if (memcmp(deliveryAddr6->sin6_addr.s6_addr,
+				    genaAddr6->s6_addr,
+				    if_prefix / 8)) {
+				inet_ntop(AF_INET6,
+					&deliveryAddr6->sin6_addr,
+					deliveryAddrString,
+					sizeof(deliveryAddrString));
+				UpnpPrintf(UPNP_CRITICAL,
+					GENA,
+					__FILE__,
+					__LINE__,
+					"DeliveryURL %s is invalid.\n"
+					"It is not in the expected network "
+					"segment (IPv6: %s, prefix: %d)\n",
+					deliveryAddrString,
+					IN6_IS_ADDR_LINKLOCAL(
+						&deliveryAddr6->sin6_addr)
+						? gIF_IPV6
+						: gIF_IPV6_ULA_GUA,
+					if_prefix);
+				return -1;
+			}
+		}
+		break;
+	}
+	return 0;
+}
+
+void gena_process_subscription_request(SOCKINFO *info, http_message_t *request)
+{
+	UpnpSubscriptionRequest *request_struct = UpnpSubscriptionRequest_new();
+	Upnp_SID temp_sid;
+	int return_code = 1;
+	int time_out = 1801;
+	service_info *service;
+	subscription *sub;
+	uuid_upnp uid;
+	struct Handle_Info *handle_info;
+	void *cookie;
+	Upnp_FunPtr callback_fun;
+	UpnpDevice_Handle device_handle;
+	memptr nt_hdr;
+	char *event_url_path = NULL;
+	memptr callback_hdr;
+	memptr timeout_hdr;
+	int rc = 0;
+
+	UpnpPrintf(UPNP_INFO,
+		GENA,
+		__FILE__,
+		__LINE__,
+		"Subscription Request Received:\n");
+
+	if (httpmsg_find_hdr(request, HDR_NT, &nt_hdr) == NULL) {
+		error_respond(info, HTTP_BAD_REQUEST, request);
+		goto exit_function;
+	}
+
+	/* check NT header */
+	/* Windows Millenium Interoperability: */
+	/* we accept either upnp:event, or upnp:propchange for the NT header */
+	if (memptr_cmp_nocase(&nt_hdr, "upnp:event") != 0) {
+		error_respond(info, HTTP_PRECONDITION_FAILED, request);
+		goto exit_function;
+	}
+
+	/* if a SID is present then the we have a bad request "incompatible
+	 * headers" */
+	if (httpmsg_find_hdr(request, HDR_SID, NULL) != NULL) {
+		error_respond(info, HTTP_BAD_REQUEST, request);
+		goto exit_function;
+	}
+	/* look up service by eventURL */
+	event_url_path = str_alloc(
+		request->uri.pathquery.buff, request->uri.pathquery.size);
+	if (event_url_path == NULL) {
+		error_respond(info, HTTP_INTERNAL_SERVER_ERROR, request);
+		goto exit_function;
+	}
+
+	UpnpPrintf(UPNP_INFO,
+		GENA,
+		__FILE__,
+		__LINE__,
+		"SubscriptionRequest for event URL path: %s\n",
+		event_url_path);
+
+	HandleLock();
+
+	if (GetDeviceHandleInfoForPath(event_url_path,
+		    info->foreign_sockaddr.ss_family,
+		    &device_handle,
+		    &handle_info,
+		    &service) != HND_DEVICE) {
+		free(event_url_path);
+		error_respond(info, HTTP_INTERNAL_SERVER_ERROR, request);
+		HandleUnlock();
+		goto exit_function;
+	}
+	free(event_url_path);
+
+	if (service == NULL || !service->active) {
+		error_respond(info, HTTP_NOT_FOUND, request);
+		HandleUnlock();
+		goto exit_function;
+	}
+
+	UpnpPrintf(UPNP_INFO,
+		GENA,
+		__FILE__,
+		__LINE__,
+		"Subscription Request: Number of Subscriptions already %d\n "
+		"Max Subscriptions allowed: %d\n",
+		service->TotalSubscriptions,
+		handle_info->MaxSubscriptions);
+
+	/* too many subscriptions */
+	if (handle_info->MaxSubscriptions != -1 &&
+		service->TotalSubscriptions >= handle_info->MaxSubscriptions) {
+		error_respond(info, HTTP_INTERNAL_SERVER_ERROR, request);
+		HandleUnlock();
+		goto exit_function;
+	}
+	/* generate new subscription */
+	sub = (subscription *)malloc(sizeof(subscription));
+	if (sub == NULL) {
+		error_respond(info, HTTP_INTERNAL_SERVER_ERROR, request);
+		HandleUnlock();
+		goto exit_function;
+	}
+	sub->ToSendEventKey = 0;
+	sub->active = 0;
+	sub->next = NULL;
+	sub->DeliveryURLs.size = 0;
+	sub->DeliveryURLs.URLs = NULL;
+	sub->DeliveryURLs.parsedURLs = NULL;
+	if (ListInit(&sub->outgoing, 0, free) != 0) {
+		error_respond(info, HTTP_INTERNAL_SERVER_ERROR, request);
+		HandleUnlock();
+		goto exit_function;
+	}
+
+	/* check for valid callbacks */
+	if (httpmsg_find_hdr(request, HDR_CALLBACK, &callback_hdr) == NULL) {
+		error_respond(info, HTTP_PRECONDITION_FAILED, request);
+		freeSubscriptionList(sub);
+		HandleUnlock();
+		goto exit_function;
+	}
+	return_code = create_url_list(&callback_hdr, &sub->DeliveryURLs);
+	if (return_code == 0) {
+		error_respond(info, HTTP_PRECONDITION_FAILED, request);
+		freeSubscriptionList(sub);
+		HandleUnlock();
+		goto exit_function;
+	}
+	if (return_code == UPNP_E_OUTOF_MEMORY) {
+		error_respond(info, HTTP_INTERNAL_SERVER_ERROR, request);
+		freeSubscriptionList(sub);
+		HandleUnlock();
+		goto exit_function;
+	}
+	return_code = gena_validate_delivery_urls(info, &sub->DeliveryURLs);
+	if (return_code != 0) {
+		error_respond(info, HTTP_PRECONDITION_FAILED, request);
+		freeSubscriptionList(sub);
+		HandleUnlock();
+		goto exit_function;
+	}
+	/* set the timeout */
+	if (httpmsg_find_hdr(request, HDR_TIMEOUT, &timeout_hdr) != NULL) {
+		if (matchstr(timeout_hdr.buf,
+			    timeout_hdr.length,
+			    "%iSecond-%d%0",
+			    &time_out) == PARSE_OK) {
+			/* nothing */
+		} else if (memptr_cmp_nocase(&timeout_hdr, "Second-infinite") ==
+			   0) {
+			/* infinite timeout */
+			time_out = -1;
+		} else {
+			/* default is > 1800 seconds */
+			time_out = DEFAULT_TIMEOUT;
+		}
+	}
+	/* replace infinite timeout with max timeout, if possible */
+	if (handle_info->MaxSubscriptionTimeOut != -1) {
+		if (time_out == -1 ||
+			time_out > handle_info->MaxSubscriptionTimeOut) {
+			time_out = handle_info->MaxSubscriptionTimeOut;
+		}
+	}
+	if (time_out >= 0) {
+		sub->expireTime = time(NULL) + time_out;
+	} else {
+		/* infinite time */
+		sub->expireTime = 0;
+	}
+
+	/* generate SID */
+	uuid_create(&uid);
+	upnp_uuid_unpack(&uid, temp_sid);
+	rc = snprintf(sub->sid, sizeof(sub->sid), "uuid:%s", temp_sid);
+
+	/* respond OK */
+	if (rc < 0 || (unsigned int)rc >= sizeof(sub->sid) ||
+		(respond_ok(info, time_out, sub, request) != UPNP_E_SUCCESS)) {
+		freeSubscriptionList(sub);
+		HandleUnlock();
+		goto exit_function;
+	}
+	/* add to subscription list */
+	sub->next = service->subscriptionList;
+	service->subscriptionList = sub;
+	service->TotalSubscriptions++;
+
+	/* finally generate callback for init table dump */
+	UpnpSubscriptionRequest_strcpy_ServiceId(
+		request_struct, service->serviceId);
+	UpnpSubscriptionRequest_strcpy_UDN(request_struct, service->UDN);
+	UpnpSubscriptionRequest_strcpy_SID(request_struct, sub->sid);
+
+	/* copy callback */
+	callback_fun = handle_info->Callback;
+	cookie = handle_info->Cookie;
+
+	HandleUnlock();
+
+	/* make call back with request struct */
+	/* in the future should find a way of mainting that the handle */
+	/* is not unregistered in the middle of a callback */
+	callback_fun(UPNP_EVENT_SUBSCRIPTION_REQUEST, request_struct, cookie);
+
+exit_function:
+	UpnpSubscriptionRequest_delete(request_struct);
+}
+
+void gena_process_subscription_renewal_request(
+	SOCKINFO *info, http_message_t *request)
+{
+	Upnp_SID sid;
+	subscription *sub;
+	int time_out = 1801;
+	service_info *service;
+	struct Handle_Info *handle_info;
+	UpnpDevice_Handle device_handle;
+	memptr temp_hdr;
+	membuffer event_url_path;
+	memptr timeout_hdr;
+
+	/* if a CALLBACK or NT header is present, then it is an error */
+	if (httpmsg_find_hdr(request, HDR_CALLBACK, NULL) != NULL ||
+		httpmsg_find_hdr(request, HDR_NT, NULL) != NULL) {
+		error_respond(info, HTTP_BAD_REQUEST, request);
+		return;
+	}
+	/* get SID */
+	if (httpmsg_find_hdr(request, HDR_SID, &temp_hdr) == NULL ||
+		temp_hdr.length > SID_SIZE) {
+		error_respond(info, HTTP_PRECONDITION_FAILED, request);
+		return;
+	}
+	memcpy(sid, temp_hdr.buf, temp_hdr.length);
+	sid[temp_hdr.length] = '\0';
+
+	/* lookup service by eventURL */
+	membuffer_init(&event_url_path);
+	if (membuffer_append(&event_url_path,
+		    request->uri.pathquery.buff,
+		    request->uri.pathquery.size) != 0) {
+		error_respond(info, HTTP_INTERNAL_SERVER_ERROR, request);
+		return;
+	}
+
+	HandleLock();
+
+	if (GetDeviceHandleInfoForPath(event_url_path.buf,
+		    info->foreign_sockaddr.ss_family,
+		    &device_handle,
+		    &handle_info,
+		    &service) != HND_DEVICE) {
+		error_respond(info, HTTP_PRECONDITION_FAILED, request);
+		membuffer_destroy(&event_url_path);
+		HandleUnlock();
+		return;
+	}
+	membuffer_destroy(&event_url_path);
+
+	/* get subscription */
+	if (service == NULL || !service->active ||
+		((sub = GetSubscriptionSID(sid, service)) == NULL)) {
+		error_respond(info, HTTP_PRECONDITION_FAILED, request);
+		HandleUnlock();
+		return;
+	}
+
+	UpnpPrintf(UPNP_INFO,
+		GENA,
+		__FILE__,
+		__LINE__,
+		"Renew request: Number of subscriptions already: %d\n "
+		"Max Subscriptions allowed:%d\n",
+		service->TotalSubscriptions,
+		handle_info->MaxSubscriptions);
+	/* too many subscriptions */
+	if (handle_info->MaxSubscriptions != -1 &&
+		service->TotalSubscriptions > handle_info->MaxSubscriptions) {
+		error_respond(info, HTTP_INTERNAL_SERVER_ERROR, request);
+		RemoveSubscriptionSID(sub->sid, service);
+		HandleUnlock();
+		return;
+	}
+	/* set the timeout */
+	if (httpmsg_find_hdr(request, HDR_TIMEOUT, &timeout_hdr) != NULL) {
+		if (matchstr(timeout_hdr.buf,
+			    timeout_hdr.length,
+			    "%iSecond-%d%0",
+			    &time_out) == PARSE_OK) {
+
+			/*nothing */
+
+		} else if (memptr_cmp_nocase(&timeout_hdr, "Second-infinite") ==
+			   0) {
+
+			time_out = -1; /* inifinite timeout */
+
+		} else {
+			time_out =
+				DEFAULT_TIMEOUT; /* default is > 1800 seconds */
+		}
+	}
+
+	/* replace infinite timeout with max timeout, if possible */
+	if (handle_info->MaxSubscriptionTimeOut != -1) {
+		if (time_out == -1 ||
+			time_out > handle_info->MaxSubscriptionTimeOut) {
+			time_out = handle_info->MaxSubscriptionTimeOut;
+		}
+	}
+
+	if (time_out == -1) {
+		sub->expireTime = 0;
+	} else {
+		sub->expireTime = time(NULL) + time_out;
+	}
+
+	if (respond_ok(info, time_out, sub, request) != UPNP_E_SUCCESS) {
+		RemoveSubscriptionSID(sub->sid, service);
+	}
+
+	HandleUnlock();
+}
+
+void gena_process_unsubscribe_request(SOCKINFO *info, http_message_t *request)
+{
+	Upnp_SID sid;
+	service_info *service;
+	struct Handle_Info *handle_info;
+	UpnpDevice_Handle device_handle;
+
+	memptr temp_hdr;
+	membuffer event_url_path;
+
+	/* if a CALLBACK or NT header is present, then it is an error */
+	if (httpmsg_find_hdr(request, HDR_CALLBACK, NULL) != NULL ||
+		httpmsg_find_hdr(request, HDR_NT, NULL) != NULL) {
+		error_respond(info, HTTP_BAD_REQUEST, request);
+		return;
+	}
+	/* get SID */
+	if (httpmsg_find_hdr(request, HDR_SID, &temp_hdr) == NULL ||
+		temp_hdr.length > SID_SIZE) {
+		error_respond(info, HTTP_PRECONDITION_FAILED, request);
+		return;
+	}
+	memcpy(sid, temp_hdr.buf, temp_hdr.length);
+	sid[temp_hdr.length] = '\0';
+
+	/* lookup service by eventURL */
+	membuffer_init(&event_url_path);
+	if (membuffer_append(&event_url_path,
+		    request->uri.pathquery.buff,
+		    request->uri.pathquery.size) != 0) {
+		error_respond(info, HTTP_INTERNAL_SERVER_ERROR, request);
+		return;
+	}
+
+	HandleLock();
+
+	if (GetDeviceHandleInfoForPath(event_url_path.buf,
+		    info->foreign_sockaddr.ss_family,
+		    &device_handle,
+		    &handle_info,
+		    &service) != HND_DEVICE) {
+		error_respond(info, HTTP_PRECONDITION_FAILED, request);
+		membuffer_destroy(&event_url_path);
+		HandleUnlock();
+		return;
+	}
+	membuffer_destroy(&event_url_path);
+
+	/* validate service */
+	if (service == NULL || !service->active ||
+		GetSubscriptionSID(sid, service) == NULL) {
+		error_respond(info, HTTP_PRECONDITION_FAILED, request);
+		HandleUnlock();
+		return;
+	}
+
+	RemoveSubscriptionSID(sid, service);
+	error_respond(info, HTTP_OK, request); /* success */
+
+	HandleUnlock();
+}
+
 	#endif /* INCLUDE_DEVICE_APIS */
 #endif	       /* EXCLUDE_GENA */
