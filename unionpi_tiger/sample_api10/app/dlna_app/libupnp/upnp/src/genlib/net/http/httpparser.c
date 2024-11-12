@@ -1986,3 +1986,289 @@ parse_status_t parser_parse_entity(http_parser_t *parser)
 
 	return status;
 }
+
+/************************************************************************
+ * Function: parser_request_init
+ *
+ * Parameters:
+ *	OUT http_parser_t* parser ; HTTP Parser object
+ *
+ * Description: Initializes parser object for a request
+ *
+ * Returns:
+ *	 void
+ ************************************************************************/
+void parser_request_init(http_parser_t *parser)
+{
+	parser_init(parser);
+	parser->msg.is_request = 1;
+	parser->position = POS_REQUEST_LINE;
+}
+
+/************************************************************************
+ * Function: parser_response_init
+ *
+ * Parameters:
+ *	OUT http_parser_t* parser	; HTTP Parser object
+ *	IN http_method_t request_method	; Request method
+ *
+ * Description: Initializes parser object for a response
+ *
+ * Returns:
+ *	 void
+ ************************************************************************/
+void parser_response_init(http_parser_t *parser, http_method_t request_method)
+{
+	parser_init(parser);
+	parser->msg.is_request = 0;
+	parser->msg.request_method = request_method;
+	parser->msg.amount_discarded = (size_t)0;
+	parser->position = POS_RESPONSE_LINE;
+}
+
+/************************************************************************
+ * Function: parser_parse
+ *
+ * Parameters:
+ *	INOUT http_parser_t* parser ; HTTP Parser object
+ *
+ * Description: The parser function. Depending on the position of the
+ *	parser object the actual parsing function is invoked
+ *
+ * Returns:
+ *	PARSE_SUCCESS
+ *	PARSE_FAILURE
+ *	PARSE_INCOMPLETE
+ *	PARSE_INCOMPLETE_ENTITY
+ *	PARSE_NO_MATCH
+ ************************************************************************/
+parse_status_t parser_parse(http_parser_t *parser)
+{
+	parse_status_t status;
+
+	/*takes an http_parser_t with memory already allocated  */
+	/*in the message  */
+	assert(parser != NULL);
+
+	do {
+		switch (parser->position) {
+		case POS_ENTITY:
+			status = parser_parse_entity(parser);
+
+			break;
+
+		case POS_HEADERS:
+			status = parser_parse_headers(parser);
+
+			break;
+
+		case POS_REQUEST_LINE:
+			status = parser_parse_requestline(parser);
+
+			break;
+
+		case POS_RESPONSE_LINE:
+			status = parser_parse_responseline(parser);
+
+			break;
+
+		default: {
+			status = PARSE_FAILURE;
+			assert(0);
+		}
+		}
+
+	} while (status == (parse_status_t)PARSE_OK);
+
+	return status;
+}
+
+/************************************************************************
+ * Function: parser_append
+ *
+ * Parameters:
+ *	INOUT http_parser_t* parser ;	HTTP Parser Object
+ *	IN const char* buf	;	buffer to be appended to the parser
+ *					buffer
+ *	IN size_t buf_length ;		Size of the buffer
+ *
+ * Description: Append date to HTTP parser, and do the parsing.
+ *
+ * Returns:
+ *	PARSE_SUCCESS
+ *	PARSE_FAILURE
+ *	PARSE_INCOMPLETE
+ *	PARSE_INCOMPLETE_ENTITY
+ *	PARSE_NO_MATCH
+ ************************************************************************/
+parse_status_t parser_append(
+	http_parser_t *parser, const char *buf, size_t buf_length)
+{
+	int ret_code;
+
+	assert(parser != NULL);
+	assert(buf != NULL);
+
+	/* append data to buffer */
+	ret_code = membuffer_append(&parser->msg.msg, buf, buf_length);
+	if (ret_code != 0) {
+		/* set failure status */
+		parser->http_error_code = HTTP_INTERNAL_SERVER_ERROR;
+		return PARSE_FAILURE;
+	}
+
+	return parser_parse(parser);
+}
+
+/************************************************************************
+ * Function: raw_to_int
+ *
+ * Parameters:
+ *	IN memptr* raw_value ;	Buffer to be converted
+ *	IN int base ;		Base  to use for conversion
+ *
+ * Description: Converts raw character data to long-integer value
+ *
+ * Returns:
+ *	 int
+ ************************************************************************/
+int raw_to_int(memptr *raw_value, int base)
+{
+	long num;
+	char *end_ptr;
+
+	if (raw_value->length == (size_t)0)
+		return -1;
+	errno = 0;
+	num = strtol(raw_value->buf, &end_ptr, base);
+	if ((num < 0)
+		/* all and only those chars in token should be used for num */
+		|| (end_ptr != raw_value->buf + raw_value->length) ||
+		((num == LONG_MIN || num == LONG_MAX) && (errno == ERANGE))) {
+		return -1;
+	}
+	return (int)num;
+}
+
+/************************************************************************
+ * Function: raw_find_str
+ *
+ * Parameters:
+ *	IN memptr* raw_value ; Buffer containg the string
+ *	IN const char* str ;	Substring to be found
+ *
+ * Description: Find a substring from raw character string buffer
+ *
+ * Side effects: raw_value is transformed to lowercase.
+ *
+ * Returns:
+ *	 int - index at which the substring is found.
+ ************************************************************************/
+int raw_find_str(memptr *raw_value, const char *str)
+{
+	char c;
+	char *ptr;
+	int i = 0;
+
+	/* save */
+	c = raw_value->buf[raw_value->length];
+
+	/* Make it lowercase */
+	for (i = 0; raw_value->buf[i]; ++i) {
+		raw_value->buf[i] = (char)tolower(raw_value->buf[i]);
+	}
+
+	/* null-terminate */
+	raw_value->buf[raw_value->length] = 0;
+
+	/* Find the substring position */
+	ptr = strstr(raw_value->buf, str);
+
+	/* restore the "length" byte */
+	raw_value->buf[raw_value->length] = c;
+
+	if (ptr == 0) {
+		return -1;
+	}
+
+	/* return index */
+	return (int)(ptr - raw_value->buf);
+}
+
+/************************************************************************
+ * Function: method_to_str
+ *
+ * Parameters:
+ * IN http_method_t method ; HTTP method
+ *
+ * Description: A wrapper function that maps a method id to a method
+ *	nameConverts a http_method id stored in the HTTP Method
+ *
+ * Returns:
+ *	 const char* ptr - Ptr to the HTTP Method
+ ************************************************************************/
+const char *method_to_str(http_method_t method)
+{
+	int index;
+
+	index = map_int_to_str(method, Http_Method_Table, NUM_HTTP_METHODS);
+
+	assert(index != -1);
+
+	return index == -1 ? NULL : Http_Method_Table[index].name;
+}
+
+#ifdef DEBUG
+void print_http_headers(http_message_t *hmsg)
+{
+	ListNode *node;
+	/* NNS:	 dlist_node *node; */
+	http_header_t *header;
+
+	/* print start line */
+	if (hmsg->is_request) {
+		UpnpPrintf(UPNP_ALL,
+			HTTP,
+			__FILE__,
+			__LINE__,
+			"method = %d, version = %d.%d, url = %.*s\n",
+			hmsg->method,
+			hmsg->major_version,
+			hmsg->minor_version,
+			(int)hmsg->uri.pathquery.size,
+			hmsg->uri.pathquery.buff);
+	} else {
+		UpnpPrintf(UPNP_ALL,
+			HTTP,
+			__FILE__,
+			__LINE__,
+			"resp status = %d, version = %d.%d, status msg = "
+			"%.*s\n",
+			hmsg->status_code,
+			hmsg->major_version,
+			hmsg->minor_version,
+			(int)hmsg->status_msg.length,
+			hmsg->status_msg.buf);
+	}
+
+	/* print headers */
+	node = ListHead(&hmsg->headers);
+	/* NNS: node = dlist_first_node( &hmsg->headers ); */
+	while (node != NULL) {
+		header = (http_header_t *)node->item;
+		/* NNS: header = (http_header_t *)node->data; */
+		UpnpPrintf(UPNP_ALL,
+			HTTP,
+			__FILE__,
+			__LINE__,
+			"hdr name: %.*s, value: %.*s\n",
+			(int)header->name.length,
+			header->name.buf,
+			(int)header->value.length,
+			header->value.buf);
+
+		node = ListNext(&hmsg->headers, node);
+		/* NNS: node = dlist_next( &hmsg->headers, node ); */
+	}
+}
+#endif /* DEBUG */
