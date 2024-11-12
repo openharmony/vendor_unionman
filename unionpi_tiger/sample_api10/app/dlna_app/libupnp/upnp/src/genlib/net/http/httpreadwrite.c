@@ -1990,3 +1990,323 @@ ExitFunction:
 	va_end(argp);
 	return error_code;
 }
+
+/************************************************************************
+ * Function: http_CalcResponseVersion
+ *
+ * Parameters:
+ *	IN int request_major_vers;	Request major version
+ *	IN int request_minor_vers;	Request minor version
+ *	OUT int* response_major_vers;	Response mojor version
+ *	OUT int* response_minor_vers;	Response minor version
+ *
+ * Description:
+ *	Calculate HTTP response versions based on the request versions.
+ *
+ * Return: void
+ ************************************************************************/
+void http_CalcResponseVersion(int request_major_vers,
+	int request_minor_vers,
+	int *response_major_vers,
+	int *response_minor_vers)
+{
+	if ((request_major_vers > 1) ||
+		(request_major_vers == 1 && request_minor_vers >= 1)) {
+		*response_major_vers = 1;
+		*response_minor_vers = 1;
+	} else {
+		*response_major_vers = request_major_vers;
+		*response_minor_vers = request_minor_vers;
+	}
+}
+
+/************************************************************************
+ * Function: MakeGetMessageEx
+ *
+ * Parameters:
+ *	const char *url_str;	String as a URL
+ *	membuffer *request;	Buffer containing the request
+ *	uri_type *url; 		URI object containing the scheme, path
+ *				query token, etc.
+ *
+ * Description:
+ *	Makes the message for the HTTP GET method
+ *
+ * Returns:
+ *	UPNP_E_INVALID_URL
+ * 	Error Codes returned by http_MakeMessage
+ *	UPNP_E_SUCCESS
+ ************************************************************************/
+int MakeGetMessageEx(const char *url_str,
+	membuffer *request,
+	uri_type *url,
+	struct SendInstruction *pRangeSpecifier)
+{
+	size_t url_str_len;
+	int ret_code = UPNP_E_SUCCESS;
+	size_t hostlen = 0;
+	const char *hoststr;
+
+	url_str_len = strlen(url_str);
+	do {
+		UpnpPrintf(UPNP_INFO,
+			HTTP,
+			__FILE__,
+			__LINE__,
+			"DOWNLOAD URL : %s\n",
+			url_str);
+		ret_code = http_FixStrUrl(url_str, url_str_len, url);
+		if (ret_code != UPNP_E_SUCCESS) {
+			break;
+		}
+		/* make msg */
+		membuffer_init(request);
+		ret_code = get_hoststr(url_str, &hoststr, &hostlen);
+		if (ret_code != UPNP_E_SUCCESS) {
+			break;
+		}
+		UpnpPrintf(UPNP_INFO,
+			HTTP,
+			__FILE__,
+			__LINE__,
+			"HOSTNAME : %s Length : %" PRIzu "\n",
+			hoststr,
+			hostlen);
+		ret_code = http_MakeMessage(request,
+			1,
+			1,
+			"Q"
+			"s"
+			"bc"
+			"GDCUc",
+			HTTPMETHOD_GET,
+			url->pathquery.buff,
+			url->pathquery.size,
+			"HOST: ",
+			hoststr,
+			hostlen,
+			pRangeSpecifier);
+		if (ret_code != 0) {
+			UpnpPrintf(UPNP_INFO,
+				HTTP,
+				__FILE__,
+				__LINE__,
+				"HTTP Makemessage failed\n");
+			membuffer_destroy(request);
+			return ret_code;
+		}
+	} while (0);
+	UpnpPrintf(UPNP_INFO,
+		HTTP,
+		__FILE__,
+		__LINE__,
+		"HTTP Buffer:\n%s\n"
+		"----------END--------\n",
+		request->buf);
+
+	return ret_code;
+}
+
+#define SIZE_RANGE_BUFFER 50
+
+/************************************************************************
+ * Function: http_OpenHttpGetEx
+ *
+ * Parameters:
+ *	IN const char *url_str;		String as a URL
+ *	IN OUT void **Handle;		Pointer to buffer to store HTTP
+ *					post handle
+ *	IN OUT char **contentType;	Type of content
+ *	OUT int *contentLength;		length of content
+ *	OUT int *httpStatus;		HTTP status returned on receiving a
+ *					response message
+ *	IN int timeout;			time out value
+ *
+ * Description:
+ *	Makes the HTTP GET message, connects to the peer,
+ *	sends the HTTP GET request, gets the response and parses the
+ *	response.
+ *
+ * Return: int
+ *	UPNP_E_SUCCESS		- On Success
+ *	UPNP_E_INVALID_PARAM	- Invalid Paramters
+ *	UPNP_E_OUTOF_MEMORY
+ *	UPNP_E_SOCKET_ERROR
+ *	UPNP_E_BAD_RESPONSE
+ ************************************************************************/
+int http_OpenHttpGetEx(const char *url_str,
+	void **Handle,
+	char **contentType,
+	int *contentLength,
+	int *httpStatus,
+	int lowRange,
+	int highRange,
+	int timeout)
+{
+	int http_error_code;
+	memptr ctype;
+	SOCKET tcp_connection;
+	size_t sockaddr_len;
+	membuffer request;
+	http_connection_handle_t *handle = NULL;
+	uri_type url;
+	parse_status_t status;
+	int errCode = UPNP_E_SUCCESS;
+	/* char rangeBuf[SIZE_RANGE_BUFFER]; */
+	struct SendInstruction rangeBuf;
+	int rc = 0;
+
+	membuffer_init(&request);
+
+	do {
+		/* Checking Input parameters */
+		if (!url_str || !Handle || !contentType || !httpStatus) {
+			errCode = UPNP_E_INVALID_PARAM;
+			break;
+		}
+		/* Initialize output parameters */
+		*httpStatus = 0;
+		*Handle = handle;
+		*contentType = NULL;
+		*contentLength = 0;
+		if (lowRange > highRange) {
+			errCode = UPNP_E_INTERNAL_ERROR;
+			break;
+		}
+		memset(&rangeBuf, 0, sizeof(rangeBuf));
+		rc = snprintf(rangeBuf.RangeHeader,
+			sizeof(rangeBuf.RangeHeader),
+			"Range: bytes=%d-%d\r\n",
+			lowRange,
+			highRange);
+		if (rc < 0 || (unsigned int)rc >= sizeof(rangeBuf.RangeHeader))
+			break;
+		membuffer_init(&request);
+		errCode = MakeGetMessageEx(url_str, &request, &url, &rangeBuf);
+		if (errCode != UPNP_E_SUCCESS)
+			break;
+		handle = (http_connection_handle_t *)malloc(
+			sizeof(http_connection_handle_t));
+		if (!handle) {
+			errCode = UPNP_E_OUTOF_MEMORY;
+			break;
+		}
+		memset(handle, 0, sizeof(*handle));
+		parser_response_init(&handle->response, HTTPMETHOD_GET);
+		tcp_connection = socket(
+			(int)url.hostport.IPaddress.ss_family, SOCK_STREAM, 0);
+		if (tcp_connection == INVALID_SOCKET) {
+			errCode = UPNP_E_SOCKET_ERROR;
+			free(handle);
+			break;
+		}
+		if (sock_init(&handle->sock_info, tcp_connection) !=
+			UPNP_E_SUCCESS) {
+			sock_destroy(&handle->sock_info, SD_BOTH);
+			errCode = UPNP_E_SOCKET_ERROR;
+			free(handle);
+			break;
+		}
+		sockaddr_len = url.hostport.IPaddress.ss_family == AF_INET6
+				       ? sizeof(struct sockaddr_in6)
+				       : sizeof(struct sockaddr_in);
+		errCode = private_connect(handle->sock_info.socket,
+			(struct sockaddr *)&(url.hostport.IPaddress),
+			(socklen_t)sockaddr_len);
+		if (errCode == -1) {
+			sock_destroy(&handle->sock_info, SD_BOTH);
+			errCode = UPNP_E_SOCKET_CONNECT;
+			free(handle);
+			break;
+		}
+		/* send request */
+		errCode = http_SendMessage(&handle->sock_info,
+			&timeout,
+			"b",
+			request.buf,
+			request.length);
+		if (errCode != UPNP_E_SUCCESS) {
+			sock_destroy(&handle->sock_info, SD_BOTH);
+			free(handle);
+			break;
+		}
+		if (ReadResponseLineAndHeaders(&handle->sock_info,
+			    &handle->response,
+			    &timeout,
+			    &http_error_code) != (int)PARSE_OK) {
+			errCode = UPNP_E_BAD_RESPONSE;
+			free(handle);
+			break;
+		}
+		status = parser_get_entity_read_method(&handle->response);
+		if (status != (parse_status_t)PARSE_CONTINUE_1 &&
+			status != (parse_status_t)PARSE_SUCCESS) {
+			errCode = UPNP_E_BAD_RESPONSE;
+			free(handle);
+			break;
+		}
+		*httpStatus = handle->response.msg.status_code;
+		errCode = UPNP_E_SUCCESS;
+
+		if (!httpmsg_find_hdr(
+			    &handle->response.msg, HDR_CONTENT_TYPE, &ctype))
+			/* no content-type */
+			*contentType = NULL;
+		else
+			*contentType = ctype.buf;
+		if (handle->response.position == (parser_pos_t)POS_COMPLETE)
+			*contentLength = 0;
+		else if (handle->response.ent_position == ENTREAD_USING_CHUNKED)
+			*contentLength = UPNP_USING_CHUNKED;
+		else if (handle->response.ent_position == ENTREAD_USING_CLEN)
+			*contentLength = (int)handle->response.content_length;
+		else if (handle->response.ent_position == ENTREAD_UNTIL_CLOSE)
+			*contentLength = UPNP_UNTIL_CLOSE;
+		*Handle = handle;
+	} while (0);
+
+	membuffer_destroy(&request);
+
+	return errCode;
+}
+
+/************************************************************************
+ * Function: get_sdk_info
+ *
+ * Parameters:
+ *	OUT char *info;	buffer to store the operating system information
+ *	IN size_t infoSize; size of buffer
+ *
+ * Description:
+ *	Returns the server information for the operating system
+ *
+ * Return:
+ *	UPNP_INLINE void
+ ************************************************************************/
+/* 'info' should have a size of at least 100 bytes */
+void get_sdk_info(char *info, size_t infoSize)
+{
+#ifdef UPNP_ENABLE_UNSPECIFIED_SERVER
+	snprintf(info, infoSize, "Unspecified, UPnP/1.0, Unspecified\r\n");
+#else /* UPNP_ENABLE_UNSPECIFIED_SERVER */
+	#ifdef _WIN32
+	snprintf(info,
+		infoSize,
+		"UPnP/1.0, Portable SDK for UPnP devices/" UPNP_VERSION_STRING
+		"on windows\r\n");
+	#else
+	int ret_code;
+	struct utsname sys_info;
+
+	ret_code = uname(&sys_info);
+	if (ret_code == -1)
+		*info = '\0';
+	snprintf(info,
+		infoSize,
+		"%s/%s, UPnP/1.0, Portable SDK for UPnP "
+		"devices/" UPNP_VERSION_STRING "\r\n",
+		sys_info.sysname,
+		sys_info.release);
+	#endif
+#endif /* UPNP_ENABLE_UNSPECIFIED_SERVER */
+}
