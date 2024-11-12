@@ -20,8 +20,8 @@ pwm的占空比，就是指高电平保持的时间，与该pwm时钟周期时�
 导出PWM_1、PWM_2引脚目录
 
 ```
-$ echo 0 > /sys/class/pwm/pwmchip0
-$ echo 0 > /sys/class/pwm/pwmchip2
+$ echo 0 > /sys/class/pwm/pwmchip0/export
+$ echo 0 > /sys/class/pwm/pwmchip2/export
 ```
 
 此时就会生成对应的引脚目录pwm0
