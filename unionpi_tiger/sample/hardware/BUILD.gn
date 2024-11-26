@@ -20,6 +20,5 @@ group("hardware") {
     "gpio:gpio_test",
     "i2c:i2c_test",
     "lan_upgrade:lan_upgrade",
-    "uart:uart_test",
   ]
 }
