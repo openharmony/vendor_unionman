@@ -1667,5 +1667,1400 @@ typedef enum {
   CURLOPT(CURLOPT_PROXYUSERNAME, CURLOPTTYPE_STRINGPOINT, 175),
   CURLOPT(CURLOPT_PROXYPASSWORD, CURLOPTTYPE_STRINGPOINT, 176),
 
+  /* Comma separated list of hostnames defining no-proxy zones. These should
+     match both hostnames directly, and hostnames within a domain. For
+     example, local.com will match local.com and www.local.com, but NOT
+     notlocal.com or www.notlocal.com. For compatibility with other
+     implementations of this, .local.com will be considered to be the same as
+     local.com. A single * is the only valid wildcard, and effectively
+     disables the use of proxy. */
+  CURLOPT(CURLOPT_NOPROXY, CURLOPTTYPE_STRINGPOINT, 177),
+
+  /* block size for TFTP transfers */
+  CURLOPT(CURLOPT_TFTP_BLKSIZE, CURLOPTTYPE_LONG, 178),
+
+  /* Socks Service */
+  /* DEPRECATED, do not use! */
+  CURLOPT(CURLOPT_SOCKS5_GSSAPI_SERVICE, CURLOPTTYPE_STRINGPOINT, 179),
+
+  /* Socks Service */
+  CURLOPT(CURLOPT_SOCKS5_GSSAPI_NEC, CURLOPTTYPE_LONG, 180),
+
+  /* set the bitmask for the protocols that are allowed to be used for the
+     transfer, which thus helps the app which takes URLs from users or other
+     external inputs and want to restrict what protocol(s) to deal
+     with. Defaults to CURLPROTO_ALL. */
+  CURLOPT(CURLOPT_PROTOCOLS, CURLOPTTYPE_LONG, 181),
+
+  /* set the bitmask for the protocols that libcurl is allowed to follow to,
+     as a subset of the CURLOPT_PROTOCOLS ones. That means the protocol needs
+     to be set in both bitmasks to be allowed to get redirected to. */
+  CURLOPT(CURLOPT_REDIR_PROTOCOLS, CURLOPTTYPE_LONG, 182),
+
+  /* set the SSH knownhost file name to use */
+  CURLOPT(CURLOPT_SSH_KNOWNHOSTS, CURLOPTTYPE_STRINGPOINT, 183),
+
+  /* set the SSH host key callback, must point to a curl_sshkeycallback
+     function */
+  CURLOPT(CURLOPT_SSH_KEYFUNCTION, CURLOPTTYPE_FUNCTIONPOINT, 184),
+
+  /* set the SSH host key callback custom pointer */
+  CURLOPT(CURLOPT_SSH_KEYDATA, CURLOPTTYPE_CBPOINT, 185),
+
+  /* set the SMTP mail originator */
+  CURLOPT(CURLOPT_MAIL_FROM, CURLOPTTYPE_STRINGPOINT, 186),
+
+  /* set the list of SMTP mail receiver(s) */
+  CURLOPT(CURLOPT_MAIL_RCPT, CURLOPTTYPE_SLISTPOINT, 187),
+
+  /* FTP: send PRET before PASV */
+  CURLOPT(CURLOPT_FTP_USE_PRET, CURLOPTTYPE_LONG, 188),
+
+  /* RTSP request method (OPTIONS, SETUP, PLAY, etc...) */
+  CURLOPT(CURLOPT_RTSP_REQUEST, CURLOPTTYPE_VALUES, 189),
+
+  /* The RTSP session identifier */
+  CURLOPT(CURLOPT_RTSP_SESSION_ID, CURLOPTTYPE_STRINGPOINT, 190),
+
+  /* The RTSP stream URI */
+  CURLOPT(CURLOPT_RTSP_STREAM_URI, CURLOPTTYPE_STRINGPOINT, 191),
+
+  /* The Transport: header to use in RTSP requests */
+  CURLOPT(CURLOPT_RTSP_TRANSPORT, CURLOPTTYPE_STRINGPOINT, 192),
+
+  /* Manually initialize the client RTSP CSeq for this handle */
+  CURLOPT(CURLOPT_RTSP_CLIENT_CSEQ, CURLOPTTYPE_LONG, 193),
+
+  /* Manually initialize the server RTSP CSeq for this handle */
+  CURLOPT(CURLOPT_RTSP_SERVER_CSEQ, CURLOPTTYPE_LONG, 194),
+
+  /* The stream to pass to INTERLEAVEFUNCTION. */
+  CURLOPT(CURLOPT_INTERLEAVEDATA, CURLOPTTYPE_CBPOINT, 195),
+
+  /* Let the application define a custom write method for RTP data */
+  CURLOPT(CURLOPT_INTERLEAVEFUNCTION, CURLOPTTYPE_FUNCTIONPOINT, 196),
+
+  /* Turn on wildcard matching */
+  CURLOPT(CURLOPT_WILDCARDMATCH, CURLOPTTYPE_LONG, 197),
+
+  /* Directory matching callback called before downloading of an
+     individual file (chunk) started */
+  CURLOPT(CURLOPT_CHUNK_BGN_FUNCTION, CURLOPTTYPE_FUNCTIONPOINT, 198),
+
+  /* Directory matching callback called after the file (chunk)
+     was downloaded, or skipped */
+  CURLOPT(CURLOPT_CHUNK_END_FUNCTION, CURLOPTTYPE_FUNCTIONPOINT, 199),
+
+  /* Change match (fnmatch-like) callback for wildcard matching */
+  CURLOPT(CURLOPT_FNMATCH_FUNCTION, CURLOPTTYPE_FUNCTIONPOINT, 200),
+
+  /* Let the application define custom chunk data pointer */
+  CURLOPT(CURLOPT_CHUNK_DATA, CURLOPTTYPE_CBPOINT, 201),
+
+  /* FNMATCH_FUNCTION user pointer */
+  CURLOPT(CURLOPT_FNMATCH_DATA, CURLOPTTYPE_CBPOINT, 202),
+
+  /* send linked-list of name:port:address sets */
+  CURLOPT(CURLOPT_RESOLVE, CURLOPTTYPE_SLISTPOINT, 203),
+
+  /* Set a username for authenticated TLS */
+  CURLOPT(CURLOPT_TLSAUTH_USERNAME, CURLOPTTYPE_STRINGPOINT, 204),
+
+  /* Set a password for authenticated TLS */
+  CURLOPT(CURLOPT_TLSAUTH_PASSWORD, CURLOPTTYPE_STRINGPOINT, 205),
+
+  /* Set authentication type for authenticated TLS */
+  CURLOPT(CURLOPT_TLSAUTH_TYPE, CURLOPTTYPE_STRINGPOINT, 206),
+
+  /* Set to 1 to enable the "TE:" header in HTTP requests to ask for
+     compressed transfer-encoded responses. Set to 0 to disable the use of TE:
+     in outgoing requests. The current default is 0, but it might change in a
+     future libcurl release.
+
+     libcurl will ask for the compressed methods it knows of, and if that
+     isn't any, it will not ask for transfer-encoding at all even if this
+     option is set to 1.
+
+  */
+  CURLOPT(CURLOPT_TRANSFER_ENCODING, CURLOPTTYPE_LONG, 207),
+
+  /* Callback function for closing socket (instead of close(2)). The callback
+     should have type curl_closesocket_callback */
+  CURLOPT(CURLOPT_CLOSESOCKETFUNCTION, CURLOPTTYPE_FUNCTIONPOINT, 208),
+  CURLOPT(CURLOPT_CLOSESOCKETDATA, CURLOPTTYPE_CBPOINT, 209),
+
+  /* allow GSSAPI credential delegation */
+  CURLOPT(CURLOPT_GSSAPI_DELEGATION, CURLOPTTYPE_VALUES, 210),
+
+  /* Set the name servers to use for DNS resolution */
+  CURLOPT(CURLOPT_DNS_SERVERS, CURLOPTTYPE_STRINGPOINT, 211),
+
+  /* Time-out accept operations (currently for FTP only) after this amount
+     of milliseconds. */
+  CURLOPT(CURLOPT_ACCEPTTIMEOUT_MS, CURLOPTTYPE_LONG, 212),
+
+  /* Set TCP keepalive */
+  CURLOPT(CURLOPT_TCP_KEEPALIVE, CURLOPTTYPE_LONG, 213),
+
+  /* non-universal keepalive knobs (Linux, AIX, HP-UX, more) */
+  CURLOPT(CURLOPT_TCP_KEEPIDLE, CURLOPTTYPE_LONG, 214),
+  CURLOPT(CURLOPT_TCP_KEEPINTVL, CURLOPTTYPE_LONG, 215),
+
+  /* Enable/disable specific SSL features with a bitmask, see CURLSSLOPT_* */
+  CURLOPT(CURLOPT_SSL_OPTIONS, CURLOPTTYPE_VALUES, 216),
+
+  /* Set the SMTP auth originator */
+  CURLOPT(CURLOPT_MAIL_AUTH, CURLOPTTYPE_STRINGPOINT, 217),
+
+  /* Enable/disable SASL initial response */
+  CURLOPT(CURLOPT_SASL_IR, CURLOPTTYPE_LONG, 218),
+
+  /* Function that will be called instead of the internal progress display
+   * function. This function should be defined as the curl_xferinfo_callback
+   * prototype defines. (Deprecates CURLOPT_PROGRESSFUNCTION) */
+  CURLOPT(CURLOPT_XFERINFOFUNCTION, CURLOPTTYPE_FUNCTIONPOINT, 219),
+
+  /* The XOAUTH2 bearer token */
+  CURLOPT(CURLOPT_XOAUTH2_BEARER, CURLOPTTYPE_STRINGPOINT, 220),
+
+  /* Set the interface string to use as outgoing network
+   * interface for DNS requests.
+   * Only supported by the c-ares DNS backend */
+  CURLOPT(CURLOPT_DNS_INTERFACE, CURLOPTTYPE_STRINGPOINT, 221),
+
+  /* Set the local IPv4 address to use for outgoing DNS requests.
+   * Only supported by the c-ares DNS backend */
+  CURLOPT(CURLOPT_DNS_LOCAL_IP4, CURLOPTTYPE_STRINGPOINT, 222),
+
+  /* Set the local IPv6 address to use for outgoing DNS requests.
+   * Only supported by the c-ares DNS backend */
+  CURLOPT(CURLOPT_DNS_LOCAL_IP6, CURLOPTTYPE_STRINGPOINT, 223),
+
+  /* Set authentication options directly */
+  CURLOPT(CURLOPT_LOGIN_OPTIONS, CURLOPTTYPE_STRINGPOINT, 224),
+
+  /* Enable/disable TLS NPN extension (http2 over ssl might fail without) */
+  CURLOPT(CURLOPT_SSL_ENABLE_NPN, CURLOPTTYPE_LONG, 225),
+
+  /* Enable/disable TLS ALPN extension (http2 over ssl might fail without) */
+  CURLOPT(CURLOPT_SSL_ENABLE_ALPN, CURLOPTTYPE_LONG, 226),
+
+  /* Time to wait for a response to a HTTP request containing an
+   * Expect: 100-continue header before sending the data anyway. */
+  CURLOPT(CURLOPT_EXPECT_100_TIMEOUT_MS, CURLOPTTYPE_LONG, 227),
+
+  /* This points to a linked list of headers used for proxy requests only,
+     struct curl_slist kind */
+  CURLOPT(CURLOPT_PROXYHEADER, CURLOPTTYPE_SLISTPOINT, 228),
+
+  /* Pass in a bitmask of "header options" */
+  CURLOPT(CURLOPT_HEADEROPT, CURLOPTTYPE_VALUES, 229),
+
+  /* The public key in DER form used to validate the peer public key
+     this option is used only if SSL_VERIFYPEER is true */
+  CURLOPT(CURLOPT_PINNEDPUBLICKEY, CURLOPTTYPE_STRINGPOINT, 230),
+
+  /* Path to Unix domain socket */
+  CURLOPT(CURLOPT_UNIX_SOCKET_PATH, CURLOPTTYPE_STRINGPOINT, 231),
+
+  /* Set if we should verify the certificate status. */
+  CURLOPT(CURLOPT_SSL_VERIFYSTATUS, CURLOPTTYPE_LONG, 232),
+
+  /* Set if we should enable TLS false start. */
+  CURLOPT(CURLOPT_SSL_FALSESTART, CURLOPTTYPE_LONG, 233),
+
+  /* Do not squash dot-dot sequences */
+  CURLOPT(CURLOPT_PATH_AS_IS, CURLOPTTYPE_LONG, 234),
+
+  /* Proxy Service Name */
+  CURLOPT(CURLOPT_PROXY_SERVICE_NAME, CURLOPTTYPE_STRINGPOINT, 235),
+
+  /* Service Name */
+  CURLOPT(CURLOPT_SERVICE_NAME, CURLOPTTYPE_STRINGPOINT, 236),
+
+  /* Wait/don't wait for pipe/mutex to clarify */
+  CURLOPT(CURLOPT_PIPEWAIT, CURLOPTTYPE_LONG, 237),
+
+  /* Set the protocol used when curl is given a URL without a protocol */
+  CURLOPT(CURLOPT_DEFAULT_PROTOCOL, CURLOPTTYPE_STRINGPOINT, 238),
+
+  /* Set stream weight, 1 - 256 (default is 16) */
+  CURLOPT(CURLOPT_STREAM_WEIGHT, CURLOPTTYPE_LONG, 239),
+
+  /* Set stream dependency on another CURL handle */
+  CURLOPT(CURLOPT_STREAM_DEPENDS, CURLOPTTYPE_OBJECTPOINT, 240),
+
+  /* Set E-xclusive stream dependency on another CURL handle */
+  CURLOPT(CURLOPT_STREAM_DEPENDS_E, CURLOPTTYPE_OBJECTPOINT, 241),
+
+  /* Do not send any tftp option requests to the server */
+  CURLOPT(CURLOPT_TFTP_NO_OPTIONS, CURLOPTTYPE_LONG, 242),
+
+  /* Linked-list of host:port:connect-to-host:connect-to-port,
+     overrides the URL's host:port (only for the network layer) */
+  CURLOPT(CURLOPT_CONNECT_TO, CURLOPTTYPE_SLISTPOINT, 243),
+
+  /* Set TCP Fast Open */
+  CURLOPT(CURLOPT_TCP_FASTOPEN, CURLOPTTYPE_LONG, 244),
+
+  /* Continue to send data if the server responds early with an
+   * HTTP status code >= 300 */
+  CURLOPT(CURLOPT_KEEP_SENDING_ON_ERROR, CURLOPTTYPE_LONG, 245),
+
+  /* The CApath or CAfile used to validate the proxy certificate
+     this option is used only if PROXY_SSL_VERIFYPEER is true */
+  CURLOPT(CURLOPT_PROXY_CAINFO, CURLOPTTYPE_STRINGPOINT, 246),
+
+  /* The CApath directory used to validate the proxy certificate
+     this option is used only if PROXY_SSL_VERIFYPEER is true */
+  CURLOPT(CURLOPT_PROXY_CAPATH, CURLOPTTYPE_STRINGPOINT, 247),
+
+  /* Set if we should verify the proxy in ssl handshake,
+     set 1 to verify. */
+  CURLOPT(CURLOPT_PROXY_SSL_VERIFYPEER, CURLOPTTYPE_LONG, 248),
+
+  /* Set if we should verify the Common name from the proxy certificate in ssl
+   * handshake, set 1 to check existence, 2 to ensure that it matches
+   * the provided hostname. */
+  CURLOPT(CURLOPT_PROXY_SSL_VERIFYHOST, CURLOPTTYPE_LONG, 249),
+
+  /* What version to specifically try to use for proxy.
+     See CURL_SSLVERSION defines below. */
+  CURLOPT(CURLOPT_PROXY_SSLVERSION, CURLOPTTYPE_VALUES, 250),
+
+  /* Set a username for authenticated TLS for proxy */
+  CURLOPT(CURLOPT_PROXY_TLSAUTH_USERNAME, CURLOPTTYPE_STRINGPOINT, 251),
+
+  /* Set a password for authenticated TLS for proxy */
+  CURLOPT(CURLOPT_PROXY_TLSAUTH_PASSWORD, CURLOPTTYPE_STRINGPOINT, 252),
+
+  /* Set authentication type for authenticated TLS for proxy */
+  CURLOPT(CURLOPT_PROXY_TLSAUTH_TYPE, CURLOPTTYPE_STRINGPOINT, 253),
+
+  /* name of the file keeping your private SSL-certificate for proxy */
+  CURLOPT(CURLOPT_PROXY_SSLCERT, CURLOPTTYPE_STRINGPOINT, 254),
+
+  /* type of the file keeping your SSL-certificate ("DER", "PEM", "ENG") for
+     proxy */
+  CURLOPT(CURLOPT_PROXY_SSLCERTTYPE, CURLOPTTYPE_STRINGPOINT, 255),
+
+  /* name of the file keeping your private SSL-key for proxy */
+  CURLOPT(CURLOPT_PROXY_SSLKEY, CURLOPTTYPE_STRINGPOINT, 256),
+
+  /* type of the file keeping your private SSL-key ("DER", "PEM", "ENG") for
+     proxy */
+  CURLOPT(CURLOPT_PROXY_SSLKEYTYPE, CURLOPTTYPE_STRINGPOINT, 257),
+
+  /* password for the SSL private key for proxy */
+  CURLOPT(CURLOPT_PROXY_KEYPASSWD, CURLOPTTYPE_STRINGPOINT, 258),
+
+  /* Specify which SSL ciphers to use for proxy */
+  CURLOPT(CURLOPT_PROXY_SSL_CIPHER_LIST, CURLOPTTYPE_STRINGPOINT, 259),
+
+  /* CRL file for proxy */
+  CURLOPT(CURLOPT_PROXY_CRLFILE, CURLOPTTYPE_STRINGPOINT, 260),
+
+  /* Enable/disable specific SSL features with a bitmask for proxy, see
+     CURLSSLOPT_* */
+  CURLOPT(CURLOPT_PROXY_SSL_OPTIONS, CURLOPTTYPE_LONG, 261),
+
+  /* Name of pre proxy to use. */
+  CURLOPT(CURLOPT_PRE_PROXY, CURLOPTTYPE_STRINGPOINT, 262),
+
+  /* The public key in DER form used to validate the proxy public key
+     this option is used only if PROXY_SSL_VERIFYPEER is true */
+  CURLOPT(CURLOPT_PROXY_PINNEDPUBLICKEY, CURLOPTTYPE_STRINGPOINT, 263),
+
+  /* Path to an abstract Unix domain socket */
+  CURLOPT(CURLOPT_ABSTRACT_UNIX_SOCKET, CURLOPTTYPE_STRINGPOINT, 264),
+
+  /* Suppress proxy CONNECT response headers from user callbacks */
+  CURLOPT(CURLOPT_SUPPRESS_CONNECT_HEADERS, CURLOPTTYPE_LONG, 265),
+
+  /* The request target, instead of extracted from the URL */
+  CURLOPT(CURLOPT_REQUEST_TARGET, CURLOPTTYPE_STRINGPOINT, 266),
+
+  /* bitmask of allowed auth methods for connections to SOCKS5 proxies */
+  CURLOPT(CURLOPT_SOCKS5_AUTH, CURLOPTTYPE_LONG, 267),
+
+  /* Enable/disable SSH compression */
+  CURLOPT(CURLOPT_SSH_COMPRESSION, CURLOPTTYPE_LONG, 268),
+
+  /* Post MIME data. */
+  CURLOPT(CURLOPT_MIMEPOST, CURLOPTTYPE_OBJECTPOINT, 269),
+
+  /* Time to use with the CURLOPT_TIMECONDITION. Specified in number of
+     seconds since 1 Jan 1970. */
+  CURLOPT(CURLOPT_TIMEVALUE_LARGE, CURLOPTTYPE_OFF_T, 270),
+
+  /* Head start in milliseconds to give happy eyeballs. */
+  CURLOPT(CURLOPT_HAPPY_EYEBALLS_TIMEOUT_MS, CURLOPTTYPE_LONG, 271),
+
+  /* Function that will be called before a resolver request is made */
+  CURLOPT(CURLOPT_RESOLVER_START_FUNCTION, CURLOPTTYPE_FUNCTIONPOINT, 272),
+
+  /* User data to pass to the resolver start callback. */
+  CURLOPT(CURLOPT_RESOLVER_START_DATA, CURLOPTTYPE_CBPOINT, 273),
+
+  /* send HAProxy PROXY protocol header? */
+  CURLOPT(CURLOPT_HAPROXYPROTOCOL, CURLOPTTYPE_LONG, 274),
+
+  /* shuffle addresses before use when DNS returns multiple */
+  CURLOPT(CURLOPT_DNS_SHUFFLE_ADDRESSES, CURLOPTTYPE_LONG, 275),
+
+  /* Specify which TLS 1.3 ciphers suites to use */
+  CURLOPT(CURLOPT_TLS13_CIPHERS, CURLOPTTYPE_STRINGPOINT, 276),
+  CURLOPT(CURLOPT_PROXY_TLS13_CIPHERS, CURLOPTTYPE_STRINGPOINT, 277),
+
+  /* Disallow specifying username/login in URL. */
+  CURLOPT(CURLOPT_DISALLOW_USERNAME_IN_URL, CURLOPTTYPE_LONG, 278),
+
+  /* DNS-over-HTTPS URL */
+  CURLOPT(CURLOPT_DOH_URL, CURLOPTTYPE_STRINGPOINT, 279),
+
+  /* Preferred buffer size to use for uploads */
+  CURLOPT(CURLOPT_UPLOAD_BUFFERSIZE, CURLOPTTYPE_LONG, 280),
+
+  /* Time in ms between connection upkeep calls for long-lived connections. */
+  CURLOPT(CURLOPT_UPKEEP_INTERVAL_MS, CURLOPTTYPE_LONG, 281),
+
+  /* Specify URL using CURL URL API. */
+  CURLOPT(CURLOPT_CURLU, CURLOPTTYPE_OBJECTPOINT, 282),
+
+  /* add trailing data just after no more data is available */
+  CURLOPT(CURLOPT_TRAILERFUNCTION, CURLOPTTYPE_FUNCTIONPOINT, 283),
+
+  /* pointer to be passed to HTTP_TRAILER_FUNCTION */
+  CURLOPT(CURLOPT_TRAILERDATA, CURLOPTTYPE_CBPOINT, 284),
+
+  /* set this to 1L to allow HTTP/0.9 responses or 0L to disallow */
+  CURLOPT(CURLOPT_HTTP09_ALLOWED, CURLOPTTYPE_LONG, 285),
+
+  /* alt-svc control bitmask */
+  CURLOPT(CURLOPT_ALTSVC_CTRL, CURLOPTTYPE_LONG, 286),
+
+  /* alt-svc cache file name to possibly read from/write to */
+  CURLOPT(CURLOPT_ALTSVC, CURLOPTTYPE_STRINGPOINT, 287),
+
+  /* maximum age of a connection to consider it for reuse (in seconds) */
+  CURLOPT(CURLOPT_MAXAGE_CONN, CURLOPTTYPE_LONG, 288),
+
+  /* SASL authorisation identity */
+  CURLOPT(CURLOPT_SASL_AUTHZID, CURLOPTTYPE_STRINGPOINT, 289),
+
+  /* allow RCPT TO command to fail for some recipients */
+  CURLOPT(CURLOPT_MAIL_RCPT_ALLLOWFAILS, CURLOPTTYPE_LONG, 290),
+
+  /* the private SSL-certificate as a "blob" */
+  CURLOPT(CURLOPT_SSLCERT_BLOB, CURLOPTTYPE_BLOB, 291),
+  CURLOPT(CURLOPT_SSLKEY_BLOB, CURLOPTTYPE_BLOB, 292),
+  CURLOPT(CURLOPT_PROXY_SSLCERT_BLOB, CURLOPTTYPE_BLOB, 293),
+  CURLOPT(CURLOPT_PROXY_SSLKEY_BLOB, CURLOPTTYPE_BLOB, 294),
+  CURLOPT(CURLOPT_ISSUERCERT_BLOB, CURLOPTTYPE_BLOB, 295),
+
+  /* Issuer certificate for proxy */
+  CURLOPT(CURLOPT_PROXY_ISSUERCERT, CURLOPTTYPE_STRINGPOINT, 296),
+  CURLOPT(CURLOPT_PROXY_ISSUERCERT_BLOB, CURLOPTTYPE_BLOB, 297),
+
+  /* the EC curves requested by the TLS client (RFC 8422, 5.1);
+   * OpenSSL support via 'set_groups'/'set_curves':
+   * https://www.openssl.org/docs/manmaster/man3/SSL_CTX_set1_groups.html
+   */
+  CURLOPT(CURLOPT_SSL_EC_CURVES, CURLOPTTYPE_STRINGPOINT, 298),
+
+  /* HSTS bitmask */
+  CURLOPT(CURLOPT_HSTS_CTRL, CURLOPTTYPE_LONG, 299),
+  /* HSTS file name */
+  CURLOPT(CURLOPT_HSTS, CURLOPTTYPE_STRINGPOINT, 300),
+
+  /* HSTS read callback */
+  CURLOPT(CURLOPT_HSTSREADFUNCTION, CURLOPTTYPE_FUNCTIONPOINT, 301),
+  CURLOPT(CURLOPT_HSTSREADDATA, CURLOPTTYPE_CBPOINT, 302),
+
+  /* HSTS write callback */
+  CURLOPT(CURLOPT_HSTSWRITEFUNCTION, CURLOPTTYPE_FUNCTIONPOINT, 303),
+  CURLOPT(CURLOPT_HSTSWRITEDATA, CURLOPTTYPE_CBPOINT, 304),
+
+  /* Parameters for V4 signature */
+  CURLOPT(CURLOPT_AWS_SIGV4, CURLOPTTYPE_STRINGPOINT, 305),
+
+  /* Same as CURLOPT_SSL_VERIFYPEER but for DOH (DNS-over-HTTPS) servers. */
+  CURLOPT(CURLOPT_DOH_SSL_VERIFYPEER, CURLOPTTYPE_LONG, 306),
+
+  /* Same as CURLOPT_SSL_VERIFYHOST but for DOH (DNS-over-HTTPS) servers. */
+  CURLOPT(CURLOPT_DOH_SSL_VERIFYHOST, CURLOPTTYPE_LONG, 307),
+
+  /* Same as CURLOPT_SSL_VERIFYSTATUS but for DOH (DNS-over-HTTPS) servers. */
+  CURLOPT(CURLOPT_DOH_SSL_VERIFYSTATUS, CURLOPTTYPE_LONG, 308),
+
+  /* The CA certificates as "blob" used to validate the peer certificate
+     this option is used only if SSL_VERIFYPEER is true */
+  CURLOPT(CURLOPT_CAINFO_BLOB, CURLOPTTYPE_BLOB, 309),
+
+  /* The CA certificates as "blob" used to validate the proxy certificate
+     this option is used only if PROXY_SSL_VERIFYPEER is true */
+  CURLOPT(CURLOPT_PROXY_CAINFO_BLOB, CURLOPTTYPE_BLOB, 310),
+
+  CURLOPT_LASTENTRY /* the last unused */
+} CURLoption;
+
+#ifndef CURL_NO_OLDIES /* define this to test if your app builds with all
+                          the obsolete stuff removed! */
+
+/* Backwards compatibility with older names */
+/* These are scheduled to disappear by 2011 */
+
+/* This was added in version 7.19.1 */
+#define CURLOPT_POST301 CURLOPT_POSTREDIR
+
+/* These are scheduled to disappear by 2009 */
+
+/* The following were added in 7.17.0 */
+#define CURLOPT_SSLKEYPASSWD CURLOPT_KEYPASSWD
+#define CURLOPT_FTPAPPEND CURLOPT_APPEND
+#define CURLOPT_FTPLISTONLY CURLOPT_DIRLISTONLY
+#define CURLOPT_FTP_SSL CURLOPT_USE_SSL
+
+/* The following were added earlier */
+
+#define CURLOPT_SSLCERTPASSWD CURLOPT_KEYPASSWD
+#define CURLOPT_KRB4LEVEL CURLOPT_KRBLEVEL
+
+#else
+/* This is set if CURL_NO_OLDIES is defined at compile-time */
+#undef CURLOPT_DNS_USE_GLOBAL_CACHE /* soon obsolete */
+#endif
+
+
+  /* Below here follows defines for the CURLOPT_IPRESOLVE option. If a host
+     name resolves addresses using more than one IP protocol version, this
+     option might be handy to force libcurl to use a specific IP version. */
+#define CURL_IPRESOLVE_WHATEVER 0 /* default, uses addresses to all IP
+                                     versions that your system allows */
+#define CURL_IPRESOLVE_V4       1 /* uses only IPv4 addresses/connections */
+#define CURL_IPRESOLVE_V6       2 /* uses only IPv6 addresses/connections */
+
+  /* three convenient "aliases" that follow the name scheme better */
+#define CURLOPT_RTSPHEADER CURLOPT_HTTPHEADER
+
+  /* These enums are for use with the CURLOPT_HTTP_VERSION option. */
+enum {
+  CURL_HTTP_VERSION_NONE, /* setting this means we don't care, and that we'd
+                             like the library to choose the best possible
+                             for us! */
+  CURL_HTTP_VERSION_1_0,  /* please use HTTP 1.0 in the request */
+  CURL_HTTP_VERSION_1_1,  /* please use HTTP 1.1 in the request */
+  CURL_HTTP_VERSION_2_0,  /* please use HTTP 2 in the request */
+  CURL_HTTP_VERSION_2TLS, /* use version 2 for HTTPS, version 1.1 for HTTP */
+  CURL_HTTP_VERSION_2_PRIOR_KNOWLEDGE,  /* please use HTTP 2 without HTTP/1.1
+                                           Upgrade */
+  CURL_HTTP_VERSION_3 = 30, /* Makes use of explicit HTTP/3 without fallback.
+                               Use CURLOPT_ALTSVC to enable HTTP/3 upgrade */
+  CURL_HTTP_VERSION_LAST /* *ILLEGAL* http version */
+};
+
+/* Convenience definition simple because the name of the version is HTTP/2 and
+   not 2.0. The 2_0 version of the enum name was set while the version was
+   still planned to be 2.0 and we stick to it for compatibility. */
+#define CURL_HTTP_VERSION_2 CURL_HTTP_VERSION_2_0
+
+/*
+ * Public API enums for RTSP requests
+ */
+enum {
+    CURL_RTSPREQ_NONE, /* first in list */
+    CURL_RTSPREQ_OPTIONS,
+    CURL_RTSPREQ_DESCRIBE,
+    CURL_RTSPREQ_ANNOUNCE,
+    CURL_RTSPREQ_SETUP,
+    CURL_RTSPREQ_PLAY,
+    CURL_RTSPREQ_PAUSE,
+    CURL_RTSPREQ_TEARDOWN,
+    CURL_RTSPREQ_GET_PARAMETER,
+    CURL_RTSPREQ_SET_PARAMETER,
+    CURL_RTSPREQ_RECORD,
+    CURL_RTSPREQ_RECEIVE,
+    CURL_RTSPREQ_LAST /* last in list */
+};
+
+  /* These enums are for use with the CURLOPT_NETRC option. */
+enum CURL_NETRC_OPTION {
+  CURL_NETRC_IGNORED,     /* The .netrc will never be read.
+                           * This is the default. */
+  CURL_NETRC_OPTIONAL,    /* A user:password in the URL will be preferred
+                           * to one in the .netrc. */
+  CURL_NETRC_REQUIRED,    /* A user:password in the URL will be ignored.
+                           * Unless one is set programmatically, the .netrc
+                           * will be queried. */
+  CURL_NETRC_LAST
+};
+
+enum {
+  CURL_SSLVERSION_DEFAULT,
+  CURL_SSLVERSION_TLSv1, /* TLS 1.x */
+  CURL_SSLVERSION_SSLv2,
+  CURL_SSLVERSION_SSLv3,
+  CURL_SSLVERSION_TLSv1_0,
+  CURL_SSLVERSION_TLSv1_1,
+  CURL_SSLVERSION_TLSv1_2,
+  CURL_SSLVERSION_TLSv1_3,
+
+  CURL_SSLVERSION_LAST /* never use, keep last */
+};
+
+enum {
+  CURL_SSLVERSION_MAX_NONE =     0,
+  CURL_SSLVERSION_MAX_DEFAULT =  (CURL_SSLVERSION_TLSv1   << 16),
+  CURL_SSLVERSION_MAX_TLSv1_0 =  (CURL_SSLVERSION_TLSv1_0 << 16),
+  CURL_SSLVERSION_MAX_TLSv1_1 =  (CURL_SSLVERSION_TLSv1_1 << 16),
+  CURL_SSLVERSION_MAX_TLSv1_2 =  (CURL_SSLVERSION_TLSv1_2 << 16),
+  CURL_SSLVERSION_MAX_TLSv1_3 =  (CURL_SSLVERSION_TLSv1_3 << 16),
+
+  /* never use, keep last */
+  CURL_SSLVERSION_MAX_LAST =     (CURL_SSLVERSION_LAST    << 16)
+};
+
+enum CURL_TLSAUTH {
+  CURL_TLSAUTH_NONE,
+  CURL_TLSAUTH_SRP,
+  CURL_TLSAUTH_LAST /* never use, keep last */
+};
+
+/* symbols to use with CURLOPT_POSTREDIR.
+   CURL_REDIR_POST_301, CURL_REDIR_POST_302 and CURL_REDIR_POST_303
+   can be bitwise ORed so that CURL_REDIR_POST_301 | CURL_REDIR_POST_302
+   | CURL_REDIR_POST_303 == CURL_REDIR_POST_ALL */
+
+#define CURL_REDIR_GET_ALL  0
+#define CURL_REDIR_POST_301 1
+#define CURL_REDIR_POST_302 2
+#define CURL_REDIR_POST_303 4
+#define CURL_REDIR_POST_ALL \
+    (CURL_REDIR_POST_301|CURL_REDIR_POST_302|CURL_REDIR_POST_303)
+
+typedef enum {
+  CURL_TIMECOND_NONE,
+
+  CURL_TIMECOND_IFMODSINCE,
+  CURL_TIMECOND_IFUNMODSINCE,
+  CURL_TIMECOND_LASTMOD,
+
+  CURL_TIMECOND_LAST
+} curl_TimeCond;
+
+/* Special size_t value signaling a null-terminated string. */
+#define CURL_ZERO_TERMINATED ((size_t) -1)
+
+/* curl_strequal() and curl_strnequal() are subject for removal in a future
+   release */
+CURL_EXTERN int curl_strequal(const char *s1, const char *s2);
+CURL_EXTERN int curl_strnequal(const char *s1, const char *s2, size_t n);
+
+/* Mime/form handling support. */
+typedef struct curl_mime      curl_mime;      /* Mime context. */
+typedef struct curl_mimepart  curl_mimepart;  /* Mime part context. */
+
+/*
+ * NAME curl_mime_init()
+ *
+ * DESCRIPTION
+ *
+ * Create a mime context and return its handle. The easy parameter is the
+ * target handle.
+ */
+CURL_EXTERN curl_mime *curl_mime_init(CURL *easy);
+
+/*
+ * NAME curl_mime_free()
+ *
+ * DESCRIPTION
+ *
+ * release a mime handle and its substructures.
+ */
+CURL_EXTERN void curl_mime_free(curl_mime *mime);
+
+/*
+ * NAME curl_mime_addpart()
+ *
+ * DESCRIPTION
+ *
+ * Append a new empty part to the given mime context and return a handle to
+ * the created part.
+ */
+CURL_EXTERN curl_mimepart *curl_mime_addpart(curl_mime *mime);
+
+/*
+ * NAME curl_mime_name()
+ *
+ * DESCRIPTION
+ *
+ * Set mime/form part name.
+ */
+CURL_EXTERN CURLcode curl_mime_name(curl_mimepart *part, const char *name);
+
+/*
+ * NAME curl_mime_filename()
+ *
+ * DESCRIPTION
+ *
+ * Set mime part remote file name.
+ */
+CURL_EXTERN CURLcode curl_mime_filename(curl_mimepart *part,
+                                        const char *filename);
+
+/*
+ * NAME curl_mime_type()
+ *
+ * DESCRIPTION
+ *
+ * Set mime part type.
+ */
+CURL_EXTERN CURLcode curl_mime_type(curl_mimepart *part, const char *mimetype);
+
+/*
+ * NAME curl_mime_encoder()
+ *
+ * DESCRIPTION
+ *
+ * Set mime data transfer encoder.
+ */
+CURL_EXTERN CURLcode curl_mime_encoder(curl_mimepart *part,
+                                       const char *encoding);
+
+/*
+ * NAME curl_mime_data()
+ *
+ * DESCRIPTION
+ *
+ * Set mime part data source from memory data,
+ */
+CURL_EXTERN CURLcode curl_mime_data(curl_mimepart *part,
+                                    const char *data, size_t datasize);
+
+/*
+ * NAME curl_mime_filedata()
+ *
+ * DESCRIPTION
+ *
+ * Set mime part data source from named file.
+ */
+CURL_EXTERN CURLcode curl_mime_filedata(curl_mimepart *part,
+                                        const char *filename);
+
+/*
+ * NAME curl_mime_data_cb()
+ *
+ * DESCRIPTION
+ *
+ * Set mime part data source from callback function.
+ */
+CURL_EXTERN CURLcode curl_mime_data_cb(curl_mimepart *part,
+                                       curl_off_t datasize,
+                                       curl_read_callback readfunc,
+                                       curl_seek_callback seekfunc,
+                                       curl_free_callback freefunc,
+                                       void *arg);
+
+/*
+ * NAME curl_mime_subparts()
+ *
+ * DESCRIPTION
+ *
+ * Set mime part data source from subparts.
+ */
+CURL_EXTERN CURLcode curl_mime_subparts(curl_mimepart *part,
+                                        curl_mime *subparts);
+/*
+ * NAME curl_mime_headers()
+ *
+ * DESCRIPTION
+ *
+ * Set mime part headers.
+ */
+CURL_EXTERN CURLcode curl_mime_headers(curl_mimepart *part,
+                                       struct curl_slist *headers,
+                                       int take_ownership);
+
+typedef enum {
+  CURLFORM_NOTHING,        /********* the first one is unused ************/
+  CURLFORM_COPYNAME,
+  CURLFORM_PTRNAME,
+  CURLFORM_NAMELENGTH,
+  CURLFORM_COPYCONTENTS,
+  CURLFORM_PTRCONTENTS,
+  CURLFORM_CONTENTSLENGTH,
+  CURLFORM_FILECONTENT,
+  CURLFORM_ARRAY,
+  CURLFORM_OBSOLETE,
+  CURLFORM_FILE,
+
+  CURLFORM_BUFFER,
+  CURLFORM_BUFFERPTR,
+  CURLFORM_BUFFERLENGTH,
+
+  CURLFORM_CONTENTTYPE,
+  CURLFORM_CONTENTHEADER,
+  CURLFORM_FILENAME,
+  CURLFORM_END,
+  CURLFORM_OBSOLETE2,
+
+  CURLFORM_STREAM,
+  CURLFORM_CONTENTLEN, /* added in 7.46.0, provide a curl_off_t length */
+
+  CURLFORM_LASTENTRY /* the last unused */
+} CURLformoption;
+
+/* structure to be used as parameter for CURLFORM_ARRAY */
+struct curl_forms {
+  CURLformoption option;
+  const char     *value;
+};
+
+/* use this for multipart formpost building */
+/* Returns code for curl_formadd()
+ *
+ * Returns:
+ * CURL_FORMADD_OK             on success
+ * CURL_FORMADD_MEMORY         if the FormInfo allocation fails
+ * CURL_FORMADD_OPTION_TWICE   if one option is given twice for one Form
+ * CURL_FORMADD_NULL           if a null pointer was given for a char
+ * CURL_FORMADD_MEMORY         if the allocation of a FormInfo struct failed
+ * CURL_FORMADD_UNKNOWN_OPTION if an unknown option was used
+ * CURL_FORMADD_INCOMPLETE     if the some FormInfo is not complete (or error)
+ * CURL_FORMADD_MEMORY         if a curl_httppost struct cannot be allocated
+ * CURL_FORMADD_MEMORY         if some allocation for string copying failed.
+ * CURL_FORMADD_ILLEGAL_ARRAY  if an illegal option is used in an array
+ *
+ ***************************************************************************/
+typedef enum {
+  CURL_FORMADD_OK, /* first, no error */
+
+  CURL_FORMADD_MEMORY,
+  CURL_FORMADD_OPTION_TWICE,
+  CURL_FORMADD_NULL,
+  CURL_FORMADD_UNKNOWN_OPTION,
+  CURL_FORMADD_INCOMPLETE,
+  CURL_FORMADD_ILLEGAL_ARRAY,
+  CURL_FORMADD_DISABLED, /* libcurl was built with this disabled */
+
+  CURL_FORMADD_LAST /* last */
+} CURLFORMcode;
+
+/*
+ * NAME curl_formadd()
+ *
+ * DESCRIPTION
+ *
+ * Pretty advanced function for building multi-part formposts. Each invoke
+ * adds one part that together construct a full post. Then use
+ * CURLOPT_HTTPPOST to send it off to libcurl.
+ */
+CURL_EXTERN CURLFORMcode curl_formadd(struct curl_httppost **httppost,
+                                      struct curl_httppost **last_post,
+                                      ...);
+
+/*
+ * callback function for curl_formget()
+ * The void *arg pointer will be the one passed as second argument to
+ *   curl_formget().
+ * The character buffer passed to it must not be freed.
+ * Should return the buffer length passed to it as the argument "len" on
+ *   success.
+ */
+typedef size_t (*curl_formget_callback)(void *arg, const char *buf,
+                                        size_t len);
+
+/*
+ * NAME curl_formget()
+ *
+ * DESCRIPTION
+ *
+ * Serialize a curl_httppost struct built with curl_formadd().
+ * Accepts a void pointer as second argument which will be passed to
+ * the curl_formget_callback function.
+ * Returns 0 on success.
+ */
+CURL_EXTERN int curl_formget(struct curl_httppost *form, void *arg,
+                             curl_formget_callback append);
+/*
+ * NAME curl_formfree()
+ *
+ * DESCRIPTION
+ *
+ * Free a multipart formpost previously built with curl_formadd().
+ */
+CURL_EXTERN void curl_formfree(struct curl_httppost *form);
+
+/*
+ * NAME curl_getenv()
+ *
+ * DESCRIPTION
+ *
+ * Returns a malloc()'ed string that MUST be curl_free()ed after usage is
+ * complete. DEPRECATED - see lib/README.curlx
+ */
+CURL_EXTERN char *curl_getenv(const char *variable);
+
+/*
+ * NAME curl_version()
+ *
+ * DESCRIPTION
+ *
+ * Returns a static ascii string of the libcurl version.
+ */
+CURL_EXTERN char *curl_version(void);
+
+/*
+ * NAME curl_easy_escape()
+ *
+ * DESCRIPTION
+ *
+ * Escapes URL strings (converts all letters consider illegal in URLs to their
+ * %XX versions). This function returns a new allocated string or NULL if an
+ * error occurred.
+ */
+CURL_EXTERN char *curl_easy_escape(CURL *handle,
+                                   const char *string,
+                                   int length);
+
+/* the previous version: */
+CURL_EXTERN char *curl_escape(const char *string,
+                              int length);
+
+
+/*
+ * NAME curl_easy_unescape()
+ *
+ * DESCRIPTION
+ *
+ * Unescapes URL encoding in strings (converts all %XX codes to their 8bit
+ * versions). This function returns a new allocated string or NULL if an error
+ * occurred.
+ * Conversion Note: On non-ASCII platforms the ASCII %XX codes are
+ * converted into the host encoding.
+ */
+CURL_EXTERN char *curl_easy_unescape(CURL *handle,
+                                     const char *string,
+                                     int length,
+                                     int *outlength);
+
+/* the previous version */
+CURL_EXTERN char *curl_unescape(const char *string,
+                                int length);
+
+/*
+ * NAME curl_free()
+ *
+ * DESCRIPTION
+ *
+ * Provided for de-allocation in the same translation unit that did the
+ * allocation. Added in libcurl 7.10
+ */
+CURL_EXTERN void curl_free(void *p);
+
+/*
+ * NAME curl_global_init()
+ *
+ * DESCRIPTION
+ *
+ * curl_global_init() should be invoked exactly once for each application that
+ * uses libcurl and before any call of other libcurl functions.
+ *
+ * This function is not thread-safe!
+ */
+CURL_EXTERN CURLcode curl_global_init(long flags);
+
+/*
+ * NAME curl_global_init_mem()
+ *
+ * DESCRIPTION
+ *
+ * curl_global_init() or curl_global_init_mem() should be invoked exactly once
+ * for each application that uses libcurl.  This function can be used to
+ * initialize libcurl and set user defined memory management callback
+ * functions.  Users can implement memory management routines to check for
+ * memory leaks, check for mis-use of the curl library etc.  User registered
+ * callback routines will be invoked by this library instead of the system
+ * memory management routines like malloc, free etc.
+ */
+CURL_EXTERN CURLcode curl_global_init_mem(long flags,
+                                          curl_malloc_callback m,
+                                          curl_free_callback f,
+                                          curl_realloc_callback r,
+                                          curl_strdup_callback s,
+                                          curl_calloc_callback c);
+
+/*
+ * NAME curl_global_cleanup()
+ *
+ * DESCRIPTION
+ *
+ * curl_global_cleanup() should be invoked exactly once for each application
+ * that uses libcurl
+ */
+CURL_EXTERN void curl_global_cleanup(void);
+
+/* linked-list structure for the CURLOPT_QUOTE option (and other) */
+struct curl_slist {
+  char *data;
+  struct curl_slist *next;
+};
+
+/*
+ * NAME curl_global_sslset()
+ *
+ * DESCRIPTION
+ *
+ * When built with multiple SSL backends, curl_global_sslset() allows to
+ * choose one. This function can only be called once, and it must be called
+ * *before* curl_global_init().
+ *
+ * The backend can be identified by the id (e.g. CURLSSLBACKEND_OPENSSL). The
+ * backend can also be specified via the name parameter (passing -1 as id).
+ * If both id and name are specified, the name will be ignored. If neither id
+ * nor name are specified, the function will fail with
+ * CURLSSLSET_UNKNOWN_BACKEND and set the "avail" pointer to the
+ * NULL-terminated list of available backends.
+ *
+ * Upon success, the function returns CURLSSLSET_OK.
+ *
+ * If the specified SSL backend is not available, the function returns
+ * CURLSSLSET_UNKNOWN_BACKEND and sets the "avail" pointer to a NULL-terminated
+ * list of available SSL backends.
+ *
+ * The SSL backend can be set only once. If it has already been set, a
+ * subsequent attempt to change it will result in a CURLSSLSET_TOO_LATE.
+ */
+
+struct curl_ssl_backend {
+  curl_sslbackend id;
+  const char *name;
+};
+typedef struct curl_ssl_backend curl_ssl_backend;
+
+typedef enum {
+  CURLSSLSET_OK = 0,
+  CURLSSLSET_UNKNOWN_BACKEND,
+  CURLSSLSET_TOO_LATE,
+  CURLSSLSET_NO_BACKENDS /* libcurl was built without any SSL support */
+} CURLsslset;
+
+CURL_EXTERN CURLsslset curl_global_sslset(curl_sslbackend id, const char *name,
+                                          const curl_ssl_backend ***avail);
+
+/*
+ * NAME curl_slist_append()
+ *
+ * DESCRIPTION
+ *
+ * Appends a string to a linked list. If no list exists, it will be created
+ * first. Returns the new list, after appending.
+ */
+CURL_EXTERN struct curl_slist *curl_slist_append(struct curl_slist *,
+                                                 const char *);
+
+/*
+ * NAME curl_slist_free_all()
+ *
+ * DESCRIPTION
+ *
+ * free a previously built curl_slist.
+ */
+CURL_EXTERN void curl_slist_free_all(struct curl_slist *);
+
+/*
+ * NAME curl_getdate()
+ *
+ * DESCRIPTION
+ *
+ * Returns the time, in seconds since 1 Jan 1970 of the time string given in
+ * the first argument. The time argument in the second parameter is unused
+ * and should be set to NULL.
+ */
+CURL_EXTERN time_t curl_getdate(const char *p, const time_t *unused);
+
+/* info about the certificate chain, only for OpenSSL, GnuTLS, Schannel, NSS
+   and GSKit builds. Asked for with CURLOPT_CERTINFO / CURLINFO_CERTINFO */
+struct curl_certinfo {
+  int num_of_certs;             /* number of certificates with information */
+  struct curl_slist **certinfo; /* for each index in this array, there's a
+                                   linked list with textual information in the
+                                   format "name: value" */
+};
+
+/* Information about the SSL library used and the respective internal SSL
+   handle, which can be used to obtain further information regarding the
+   connection. Asked for with CURLINFO_TLS_SSL_PTR or CURLINFO_TLS_SESSION. */
+struct curl_tlssessioninfo {
+  curl_sslbackend backend;
+  void *internals;
+};
+
+#define CURLINFO_STRING   0x100000
+#define CURLINFO_LONG     0x200000
+#define CURLINFO_DOUBLE   0x300000
+#define CURLINFO_SLIST    0x400000
+#define CURLINFO_PTR      0x400000 /* same as SLIST */
+#define CURLINFO_SOCKET   0x500000
+#define CURLINFO_OFF_T    0x600000
+#define CURLINFO_MASK     0x0fffff
+#define CURLINFO_TYPEMASK 0xf00000
+
+typedef enum {
+  CURLINFO_NONE, /* first, never use this */
+  CURLINFO_EFFECTIVE_URL    = CURLINFO_STRING + 1,
+  CURLINFO_RESPONSE_CODE    = CURLINFO_LONG   + 2,
+  CURLINFO_TOTAL_TIME       = CURLINFO_DOUBLE + 3,
+  CURLINFO_NAMELOOKUP_TIME  = CURLINFO_DOUBLE + 4,
+  CURLINFO_CONNECT_TIME     = CURLINFO_DOUBLE + 5,
+  CURLINFO_PRETRANSFER_TIME = CURLINFO_DOUBLE + 6,
+  CURLINFO_SIZE_UPLOAD      = CURLINFO_DOUBLE + 7,
+  CURLINFO_SIZE_UPLOAD_T    = CURLINFO_OFF_T  + 7,
+  CURLINFO_SIZE_DOWNLOAD    = CURLINFO_DOUBLE + 8,
+  CURLINFO_SIZE_DOWNLOAD_T  = CURLINFO_OFF_T  + 8,
+  CURLINFO_SPEED_DOWNLOAD   = CURLINFO_DOUBLE + 9,
+  CURLINFO_SPEED_DOWNLOAD_T = CURLINFO_OFF_T  + 9,
+  CURLINFO_SPEED_UPLOAD     = CURLINFO_DOUBLE + 10,
+  CURLINFO_SPEED_UPLOAD_T   = CURLINFO_OFF_T  + 10,
+  CURLINFO_HEADER_SIZE      = CURLINFO_LONG   + 11,
+  CURLINFO_REQUEST_SIZE     = CURLINFO_LONG   + 12,
+  CURLINFO_SSL_VERIFYRESULT = CURLINFO_LONG   + 13,
+  CURLINFO_FILETIME         = CURLINFO_LONG   + 14,
+  CURLINFO_FILETIME_T       = CURLINFO_OFF_T  + 14,
+  CURLINFO_CONTENT_LENGTH_DOWNLOAD   = CURLINFO_DOUBLE + 15,
+  CURLINFO_CONTENT_LENGTH_DOWNLOAD_T = CURLINFO_OFF_T  + 15,
+  CURLINFO_CONTENT_LENGTH_UPLOAD     = CURLINFO_DOUBLE + 16,
+  CURLINFO_CONTENT_LENGTH_UPLOAD_T   = CURLINFO_OFF_T  + 16,
+  CURLINFO_STARTTRANSFER_TIME = CURLINFO_DOUBLE + 17,
+  CURLINFO_CONTENT_TYPE     = CURLINFO_STRING + 18,
+  CURLINFO_REDIRECT_TIME    = CURLINFO_DOUBLE + 19,
+  CURLINFO_REDIRECT_COUNT   = CURLINFO_LONG   + 20,
+  CURLINFO_PRIVATE          = CURLINFO_STRING + 21,
+  CURLINFO_HTTP_CONNECTCODE = CURLINFO_LONG   + 22,
+  CURLINFO_HTTPAUTH_AVAIL   = CURLINFO_LONG   + 23,
+  CURLINFO_PROXYAUTH_AVAIL  = CURLINFO_LONG   + 24,
+  CURLINFO_OS_ERRNO         = CURLINFO_LONG   + 25,
+  CURLINFO_NUM_CONNECTS     = CURLINFO_LONG   + 26,
+  CURLINFO_SSL_ENGINES      = CURLINFO_SLIST  + 27,
+  CURLINFO_COOKIELIST       = CURLINFO_SLIST  + 28,
+  CURLINFO_LASTSOCKET       = CURLINFO_LONG   + 29,
+  CURLINFO_FTP_ENTRY_PATH   = CURLINFO_STRING + 30,
+  CURLINFO_REDIRECT_URL     = CURLINFO_STRING + 31,
+  CURLINFO_PRIMARY_IP       = CURLINFO_STRING + 32,
+  CURLINFO_APPCONNECT_TIME  = CURLINFO_DOUBLE + 33,
+  CURLINFO_CERTINFO         = CURLINFO_PTR    + 34,
+  CURLINFO_CONDITION_UNMET  = CURLINFO_LONG   + 35,
+  CURLINFO_RTSP_SESSION_ID  = CURLINFO_STRING + 36,
+  CURLINFO_RTSP_CLIENT_CSEQ = CURLINFO_LONG   + 37,
+  CURLINFO_RTSP_SERVER_CSEQ = CURLINFO_LONG   + 38,
+  CURLINFO_RTSP_CSEQ_RECV   = CURLINFO_LONG   + 39,
+  CURLINFO_PRIMARY_PORT     = CURLINFO_LONG   + 40,
+  CURLINFO_LOCAL_IP         = CURLINFO_STRING + 41,
+  CURLINFO_LOCAL_PORT       = CURLINFO_LONG   + 42,
+  CURLINFO_TLS_SESSION      = CURLINFO_PTR    + 43,
+  CURLINFO_ACTIVESOCKET     = CURLINFO_SOCKET + 44,
+  CURLINFO_TLS_SSL_PTR      = CURLINFO_PTR    + 45,
+  CURLINFO_HTTP_VERSION     = CURLINFO_LONG   + 46,
+  CURLINFO_PROXY_SSL_VERIFYRESULT = CURLINFO_LONG + 47,
+  CURLINFO_PROTOCOL         = CURLINFO_LONG   + 48,
+  CURLINFO_SCHEME           = CURLINFO_STRING + 49,
+  CURLINFO_TOTAL_TIME_T     = CURLINFO_OFF_T + 50,
+  CURLINFO_NAMELOOKUP_TIME_T = CURLINFO_OFF_T + 51,
+  CURLINFO_CONNECT_TIME_T   = CURLINFO_OFF_T + 52,
+  CURLINFO_PRETRANSFER_TIME_T = CURLINFO_OFF_T + 53,
+  CURLINFO_STARTTRANSFER_TIME_T = CURLINFO_OFF_T + 54,
+  CURLINFO_REDIRECT_TIME_T  = CURLINFO_OFF_T + 55,
+  CURLINFO_APPCONNECT_TIME_T = CURLINFO_OFF_T + 56,
+  CURLINFO_RETRY_AFTER      = CURLINFO_OFF_T + 57,
+  CURLINFO_EFFECTIVE_METHOD = CURLINFO_STRING + 58,
+  CURLINFO_PROXY_ERROR      = CURLINFO_LONG + 59,
+  CURLINFO_REFERER          = CURLINFO_STRING + 60,
+
+  CURLINFO_LASTONE          = 60
+} CURLINFO;
+
+/* CURLINFO_RESPONSE_CODE is the new name for the option previously known as
+   CURLINFO_HTTP_CODE */
+#define CURLINFO_HTTP_CODE CURLINFO_RESPONSE_CODE
+
+typedef enum {
+  CURLCLOSEPOLICY_NONE, /* first, never use this */
+
+  CURLCLOSEPOLICY_OLDEST,
+  CURLCLOSEPOLICY_LEAST_RECENTLY_USED,
+  CURLCLOSEPOLICY_LEAST_TRAFFIC,
+  CURLCLOSEPOLICY_SLOWEST,
+  CURLCLOSEPOLICY_CALLBACK,
+
+  CURLCLOSEPOLICY_LAST /* last, never use this */
+} curl_closepolicy;
+
+#define CURL_GLOBAL_SSL (1<<0) /* no purpose since since 7.57.0 */
+#define CURL_GLOBAL_WIN32 (1<<1)
+#define CURL_GLOBAL_ALL (CURL_GLOBAL_SSL|CURL_GLOBAL_WIN32)
+#define CURL_GLOBAL_NOTHING 0
+#define CURL_GLOBAL_DEFAULT CURL_GLOBAL_ALL
+#define CURL_GLOBAL_ACK_EINTR (1<<2)
+
+
+/*****************************************************************************
+ * Setup defines, protos etc for the sharing stuff.
+ */
+
+/* Different data locks for a single share */
+typedef enum {
+  CURL_LOCK_DATA_NONE = 0,
+  /*  CURL_LOCK_DATA_SHARE is used internally to say that
+   *  the locking is just made to change the internal state of the share
+   *  itself.
+   */
+  CURL_LOCK_DATA_SHARE,
+  CURL_LOCK_DATA_COOKIE,
+  CURL_LOCK_DATA_DNS,
+  CURL_LOCK_DATA_SSL_SESSION,
+  CURL_LOCK_DATA_CONNECT,
+  CURL_LOCK_DATA_PSL,
+  CURL_LOCK_DATA_LAST
+} curl_lock_data;
+
+/* Different lock access types */
+typedef enum {
+  CURL_LOCK_ACCESS_NONE = 0,   /* unspecified action */
+  CURL_LOCK_ACCESS_SHARED = 1, /* for read perhaps */
+  CURL_LOCK_ACCESS_SINGLE = 2, /* for write perhaps */
+  CURL_LOCK_ACCESS_LAST        /* never use */
+} curl_lock_access;
+
+typedef void (*curl_lock_function)(CURL *handle,
+                                   curl_lock_data data,
+                                   curl_lock_access locktype,
+                                   void *userptr);
+typedef void (*curl_unlock_function)(CURL *handle,
+                                     curl_lock_data data,
+                                     void *userptr);
+
+
+typedef enum {
+  CURLSHE_OK,  /* all is fine */
+  CURLSHE_BAD_OPTION, /* 1 */
+  CURLSHE_IN_USE,     /* 2 */
+  CURLSHE_INVALID,    /* 3 */
+  CURLSHE_NOMEM,      /* 4 out of memory */
+  CURLSHE_NOT_BUILT_IN, /* 5 feature not present in lib */
+  CURLSHE_LAST        /* never use */
+} CURLSHcode;
+
+typedef enum {
+  CURLSHOPT_NONE,  /* don't use */
+  CURLSHOPT_SHARE,   /* specify a data type to share */
+  CURLSHOPT_UNSHARE, /* specify which data type to stop sharing */
+  CURLSHOPT_LOCKFUNC,   /* pass in a 'curl_lock_function' pointer */
+  CURLSHOPT_UNLOCKFUNC, /* pass in a 'curl_unlock_function' pointer */
+  CURLSHOPT_USERDATA,   /* pass in a user data pointer used in the lock/unlock
+                           callback functions */
+  CURLSHOPT_LAST  /* never use */
+} CURLSHoption;
+
+CURL_EXTERN CURLSH *curl_share_init(void);
+CURL_EXTERN CURLSHcode curl_share_setopt(CURLSH *, CURLSHoption option, ...);
+CURL_EXTERN CURLSHcode curl_share_cleanup(CURLSH *);
+
+/****************************************************************************
+ * Structures for querying information about the curl library at runtime.
+ */
+
+typedef enum {
+  CURLVERSION_FIRST,
+  CURLVERSION_SECOND,
+  CURLVERSION_THIRD,
+  CURLVERSION_FOURTH,
+  CURLVERSION_FIFTH,
+  CURLVERSION_SIXTH,
+  CURLVERSION_SEVENTH,
+  CURLVERSION_EIGHTH,
+  CURLVERSION_NINTH,
+  CURLVERSION_TENTH,
+  CURLVERSION_LAST /* never actually use this */
+} CURLversion;
+
+/* The 'CURLVERSION_NOW' is the symbolic name meant to be used by
+   basically all programs ever that want to get version information. It is
+   meant to be a built-in version number for what kind of struct the caller
+   expects. If the struct ever changes, we redefine the NOW to another enum
+   from above. */
+#define CURLVERSION_NOW CURLVERSION_TENTH
+
+struct curl_version_info_data {
+  CURLversion age;          /* age of the returned struct */
+  const char *version;      /* LIBCURL_VERSION */
+  unsigned int version_num; /* LIBCURL_VERSION_NUM */
+  const char *host;         /* OS/host/cpu/machine when configured */
+  int features;             /* bitmask, see defines below */
+  const char *ssl_version;  /* human readable string */
+  long ssl_version_num;     /* not used anymore, always 0 */
+  const char *libz_version; /* human readable string */
+  /* protocols is terminated by an entry with a NULL protoname */
+  const char * const *protocols;
+
+  /* The fields below this were added in CURLVERSION_SECOND */
+  const char *ares;
+  int ares_num;
+
+  /* This field was added in CURLVERSION_THIRD */
+  const char *libidn;
+
+  /* These field were added in CURLVERSION_FOURTH */
+
+  /* Same as '_libiconv_version' if built with HAVE_ICONV */
+  int iconv_ver_num;
+
+  const char *libssh_version; /* human readable string */
+
+  /* These fields were added in CURLVERSION_FIFTH */
+  unsigned int brotli_ver_num; /* Numeric Brotli version
+                                  (MAJOR << 24) | (MINOR << 12) | PATCH */
+  const char *brotli_version; /* human readable string. */
+
+  /* These fields were added in CURLVERSION_SIXTH */
+  unsigned int nghttp2_ver_num; /* Numeric nghttp2 version
+                                   (MAJOR << 16) | (MINOR << 8) | PATCH */
+  const char *nghttp2_version; /* human readable string. */
+  const char *quic_version;    /* human readable quic (+ HTTP/3) library +
+                                  version or NULL */
+
+  /* These fields were added in CURLVERSION_SEVENTH */
+  const char *cainfo;          /* the built-in default CURLOPT_CAINFO, might
+                                  be NULL */
+  const char *capath;          /* the built-in default CURLOPT_CAPATH, might
+                                  be NULL */
+
+  /* These fields were added in CURLVERSION_EIGHTH */
+  unsigned int zstd_ver_num; /* Numeric Zstd version
+                                  (MAJOR << 24) | (MINOR << 12) | PATCH */
+  const char *zstd_version; /* human readable string. */
+
+  /* These fields were added in CURLVERSION_NINTH */
+  const char *hyper_version; /* human readable string. */
+
+  /* These fields were added in CURLVERSION_TENTH */
+  const char *gsasl_version; /* human readable string. */
+};
+typedef struct curl_version_info_data curl_version_info_data;
+
+#define CURL_VERSION_IPV6         (1<<0)  /* IPv6-enabled */
+#define CURL_VERSION_KERBEROS4    (1<<1)  /* Kerberos V4 auth is supported
+                                             (deprecated) */
+#define CURL_VERSION_SSL          (1<<2)  /* SSL options are present */
+#define CURL_VERSION_LIBZ         (1<<3)  /* libz features are present */
+#define CURL_VERSION_NTLM         (1<<4)  /* NTLM auth is supported */
+#define CURL_VERSION_GSSNEGOTIATE (1<<5)  /* Negotiate auth is supported
+                                             (deprecated) */
+#define CURL_VERSION_DEBUG        (1<<6)  /* Built with debug capabilities */
+#define CURL_VERSION_ASYNCHDNS    (1<<7)  /* Asynchronous DNS resolves */
+#define CURL_VERSION_SPNEGO       (1<<8)  /* SPNEGO auth is supported */
+#define CURL_VERSION_LARGEFILE    (1<<9)  /* Supports files larger than 2GB */
+#define CURL_VERSION_IDN          (1<<10) /* Internationized Domain Names are
+                                             supported */
+#define CURL_VERSION_SSPI         (1<<11) /* Built against Windows SSPI */
+#define CURL_VERSION_CONV         (1<<12) /* Character conversions supported */
+#define CURL_VERSION_CURLDEBUG    (1<<13) /* Debug memory tracking supported */
+#define CURL_VERSION_TLSAUTH_SRP  (1<<14) /* TLS-SRP auth is supported */
+#define CURL_VERSION_NTLM_WB      (1<<15) /* NTLM delegation to winbind helper
+                                             is supported */
+#define CURL_VERSION_HTTP2        (1<<16) /* HTTP2 support built-in */
+#define CURL_VERSION_GSSAPI       (1<<17) /* Built against a GSS-API library */
+#define CURL_VERSION_KERBEROS5    (1<<18) /* Kerberos V5 auth is supported */
+#define CURL_VERSION_UNIX_SOCKETS (1<<19) /* Unix domain sockets support */
+#define CURL_VERSION_PSL          (1<<20) /* Mozilla's Public Suffix List, used
+                                             for cookie domain verification */
+#define CURL_VERSION_HTTPS_PROXY  (1<<21) /* HTTPS-proxy support built-in */
+#define CURL_VERSION_MULTI_SSL    (1<<22) /* Multiple SSL backends available */
+#define CURL_VERSION_BROTLI       (1<<23) /* Brotli features are present. */
+#define CURL_VERSION_ALTSVC       (1<<24) /* Alt-Svc handling built-in */
+#define CURL_VERSION_HTTP3        (1<<25) /* HTTP3 support built-in */
+#define CURL_VERSION_ZSTD         (1<<26) /* zstd features are present */
+#define CURL_VERSION_UNICODE      (1<<27) /* Unicode support on Windows */
+#define CURL_VERSION_HSTS         (1<<28) /* HSTS is supported */
+#define CURL_VERSION_GSASL        (1<<29) /* libgsasl is supported */
+
+ /*
+ * NAME curl_version_info()
+ *
+ * DESCRIPTION
+ *
+ * This function returns a pointer to a static copy of the version info
+ * struct. See above.
+ */
+CURL_EXTERN curl_version_info_data *curl_version_info(CURLversion);
+
+/*
+ * NAME curl_easy_strerror()
+ *
+ * DESCRIPTION
+ *
+ * The curl_easy_strerror function may be used to turn a CURLcode value
+ * into the equivalent human readable error string.  This is useful
+ * for printing meaningful error messages.
+ */
+CURL_EXTERN const char *curl_easy_strerror(CURLcode);
+
+/*
+ * NAME curl_share_strerror()
+ *
+ * DESCRIPTION
+ *
+ * The curl_share_strerror function may be used to turn a CURLSHcode value
+ * into the equivalent human readable error string.  This is useful
+ * for printing meaningful error messages.
+ */
+CURL_EXTERN const char *curl_share_strerror(CURLSHcode);
+
+/*
+ * NAME curl_easy_pause()
+ *
+ * DESCRIPTION
+ *
+ * The curl_easy_pause function pauses or unpauses transfers. Select the new
+ * state by setting the bitmask, use the convenience defines below.
+ *
+ */
+CURL_EXTERN CURLcode curl_easy_pause(CURL *handle, int bitmask);
+
+#define CURLPAUSE_RECV      (1<<0)
+#define CURLPAUSE_RECV_CONT (0)
+
+#define CURLPAUSE_SEND      (1<<2)
+#define CURLPAUSE_SEND_CONT (0)
+
+#define CURLPAUSE_ALL       (CURLPAUSE_RECV|CURLPAUSE_SEND)
+#define CURLPAUSE_CONT      (CURLPAUSE_RECV_CONT|CURLPAUSE_SEND_CONT)
+
+#ifdef  __cplusplus
+}
+#endif
+
+/* unfortunately, the easy.h and multi.h include files need options and info
+  stuff before they can be included! */
+#include "easy.h" /* nothing in curl is fun without the easy stuff */
+#include "multi.h"
+#include "urlapi.h"
+#include "options.h"
+
+/* the typechecker doesn't work in C++ (yet) */
+#if defined(__GNUC__) && defined(__GNUC_MINOR__) && \
+    ((__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 3)) && \
+    !defined(__cplusplus) && !defined(CURL_DISABLE_TYPECHECK)
+#include "typecheck-gcc.h"
+#else
+#if defined(__STDC__) && (__STDC__ >= 1)
+/* This preprocessor magic that replaces a call with the exact same call is
+   only done to make sure application authors pass exactly three arguments
+   to these functions. */
+#define curl_easy_setopt(handle,opt,param) curl_easy_setopt(handle,opt,param)
+#define curl_easy_getinfo(handle,info,arg) curl_easy_getinfo(handle,info,arg)
+#define curl_share_setopt(share,opt,param) curl_share_setopt(share,opt,param)
+#define curl_multi_setopt(handle,opt,param) curl_multi_setopt(handle,opt,param)
+#endif /* __STDC__ >= 1 */
+#endif /* gcc >= 4.3 && !__cplusplus */
 
 #endif /* CURLINC_CURL_H */
