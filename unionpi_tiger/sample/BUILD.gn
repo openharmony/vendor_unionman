@@ -16,6 +16,5 @@ import("//build/ohos.gni")
 group("sample_group") {
   deps = [
     # "hardware:hardware",
-    # "hdf:hdf",
   ]
 }
