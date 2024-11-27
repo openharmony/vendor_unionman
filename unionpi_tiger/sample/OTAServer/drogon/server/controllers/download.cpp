@@ -13,11 +13,15 @@
  * limitations under the License.
  */
 
+#include "download.h"
+
 #include <drogon/drogon.h>
 #include <fstream>
-#include "../untils/picosha2.h"
-#include "download.h"
+
+#include "sha256.h"
+
 using namespace drogon;
+
 void Download::getFile(
     const HttpRequestPtr& req, std::function<void(const HttpResponsePtr&)>&& callback, const std::string& filename)
 {
@@ -34,7 +38,7 @@ void Download::uploadFile(const HttpRequestPtr& req, std::function<void(const Ht
     MultiPartParser formData;
     if (formData.parse(req) != 0 || formData.getFiles().size() != 1) {
         HttpResponsePtr response = HttpResponse::newHttpResponse();
-        response->setBody("the file must only one");
+        response->setBody("the file must only one"s);
         response->setStatusCode(k403Forbidden);
         callback(response);
     }
@@ -42,13 +46,13 @@ void Download::uploadFile(const HttpRequestPtr& req, std::function<void(const Ht
     file.save();
     Info info;
     std::map<std::string, std::string> maps = formData.getParameters();
-    info.versionCode = maps["versionCode"];
-    info.versionName = maps["versionName"];
+    info.versionCode = maps["versionCode"s];
+    info.versionName = maps["versionName"s];
     info.url = "http://"s + req->getLocalAddr().toIpPort() + "/api/download/"s + file.getFileName();
     info.fileSize = file.fileLength();
-    info.verifyInfo = getFileSha256(app().getUploadPath() + "/"s + file.getFileName());
+    info.verifyInfo = sha256(app().getUploadPath() + "/"s + file.getFileName(), info.fileSize);
     info.description = maps["content"];
-    addInfoJsonFile("./config/serverInfo.json", info);
+    addInfoJsonFile("./config/serverInfo.json"s, info);
 
     HttpResponsePtr response = HttpResponse::newHttpResponse();
     response->setBody("success!");
@@ -81,7 +85,9 @@ void Download::saveJsonToFile(const std::string& path, const Json::Value json)
 
 bool Download::addInfoJsonFile(const std::string& path, const Info& info)
 {
-    Json::Value json = readJsonFromFile(path);
+    Json::Value json;
+    json["errMsg"] = "success";
+    json["searchStatus"] = 0;
     Json::Value& checkResults = json["checkResults"];
     Json::Value& descriptInfo = json["descriptInfo"];
     Json::Value checkResultsItem, descriptInfoItem;
@@ -98,14 +104,4 @@ bool Download::addInfoJsonFile(const std::string& path, const Info& info)
     descriptInfo.append(descriptInfoItem);
     saveJsonToFile(path, json);
     return true;
-}
-
-std::string Download::getFileSha256(const std::string& path)
-{
-    std::ifstream file(path, std::ios::binary);
-    LOG_ERROR_IF(!file.is_open()) << "open " << path << " error!";
-    std::vector<picosha2::byte_t> hash(picosha2::k_digest_size);
-    picosha2::hash256(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>(), hash.begin(), hash.end());
-    std::string value = picosha2::bytes_to_hex_string(hash.begin(), hash.end());
-    return value;
 }
