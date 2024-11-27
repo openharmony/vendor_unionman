@@ -19,7 +19,7 @@ endif ()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(${PROJECT_NAME} main.cpp "controllers/download.cpp" "dto/info.cpp"  "untils/tcpserver.cpp")
+add_executable(${PROJECT_NAME} main.cpp "dto/info.cpp" "controllers/download.cpp"  "untils/tcpserver.cpp" "untils/sha256.cpp")
 
 # ##############################################################################
 # If you include the drogon source code locally in your project, use this method
@@ -30,8 +30,6 @@ add_executable(${PROJECT_NAME} main.cpp "controllers/download.cpp" "dto/info.cpp
 # and comment out the following lines
 find_package(Drogon CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE Drogon::Drogon)
-find_package(Boost REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE Boost::boost)
 find_package(OpenSSL REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE OpenSSL::SSL)
 # ##############################################################################
@@ -50,7 +48,8 @@ endif ()
 aux_source_directory(controllers CTL_SRC)
 
 target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
+                                   ${CMAKE_CURRENT_SOURCE_DIR}/untils)
 target_sources(${PROJECT_NAME}
                PRIVATE
                ${SRC_DIR}
