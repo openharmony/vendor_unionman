@@ -1,0 +1,9 @@
+import("//build/ohos.gni")
+
+group("my_cpt") {
+  deps = [
+    # "hall_effect_sensor:hall_effect_sensor_test",
+    # "light_breaking:light_breaking_device",
+      "hall_and_light:hall_and_light"
+  ]
+}

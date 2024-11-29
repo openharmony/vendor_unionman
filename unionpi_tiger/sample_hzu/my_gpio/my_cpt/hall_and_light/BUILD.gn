@@ -1,0 +1,27 @@
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+ohos_executable("hall_and_light") {
+  output_name = "hall_and_light"
+  sources = [
+    
+    "src/light_main.c",
+    "src/hall_main.c",
+    "src/um_gpio.c",
+
+  ]
+
+  include_dirs = [ 
+    "include",
+    "//commonlibrary/c_utils/base/include" 
+    ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+
+  install_images = [ "system" ]
+  part_name = "my_cpt"
+  install_enable = true
+}
