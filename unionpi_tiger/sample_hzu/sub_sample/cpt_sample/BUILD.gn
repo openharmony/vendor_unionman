@@ -1,0 +1,10 @@
+import("//build/ohos.gni")
+group("cpt_sample"){
+  deps = [
+    #"hello:hello_test",
+    #"um_adc:my_test",
+    #"um_pwm:my_pwm",
+    "adc_pwm:adc_pwm_test",
+    #"um_gpio:my_gpio"
+  ]
+}

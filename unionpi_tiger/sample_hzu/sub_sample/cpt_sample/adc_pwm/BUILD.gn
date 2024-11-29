@@ -1,0 +1,24 @@
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+ohos_executable("adc_pwm_test") {
+  sources = [
+    "src/um_adc.c",
+    "src/um_pwm.c",
+    "src/main.c"
+  ]
+
+  include_dirs = [
+    "include",
+    "//commonlibrary/c_utils/base/include" 
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+
+  install_images = [ "system" ]
+  install_enable = true #是否默认安装，（缺省则不安装），可选
+  part_name = "cpt_sample"
+}
