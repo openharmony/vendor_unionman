@@ -1,0 +1,6 @@
+import("//build/ohos.gni")
+group("temp_led"){
+    deps = [
+        "temp_led:templed",
+    ]
+}

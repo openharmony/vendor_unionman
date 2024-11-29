@@ -1,0 +1,6 @@
+import("//build/ohos.gni")
+group("adc_part"){
+    deps = [
+        "adc_temp:adc_temp",
+    ]
+}

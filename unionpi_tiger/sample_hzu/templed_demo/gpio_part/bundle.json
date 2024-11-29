@@ -1,0 +1,37 @@
+{
+    "name": "@ohos/gpio_part",
+    "description": "control_gpio",
+    "version": "4.0",
+    "license": "Apache License 2.0",
+    "private": false,
+    "segment": {
+      "destPath": ""
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+      "name": "gpio_part",
+      "subsystem": "my_project",
+      "adapted_system_type": ["standard","mini","small"],
+      "rom":"10kB",
+      "ram":"10kB",
+      "deps": {
+        "components": [
+          "hilog",
+          "c_utils",
+          "hdf_core",
+          "napi"
+        ],
+        "third_party": [
+        ]
+      },
+      "build": {
+        "sub_component": [
+            "//my_project/gpio_part:gpio_part"
+        ],
+        "test": [
+        ],
+        "inner_kits": []
+      }
+    }
+}
