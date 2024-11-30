@@ -1,0 +1,35 @@
+{
+    "name": "@ohos/bujian1",
+    "description": "bujian1",
+    "version": "1.0",
+    "license": "Apache License 2.0",
+    "private": false,
+    "segment": {
+      "destPath": "zixitong/bujian1"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+      "name": "bujian1",
+      "subsystem": "zixitong",
+      "adapted_system_type": ["standard"],
+      "deps": {
+        "components": [
+          "hilog",
+          "c_utils",
+          "hdf_core",
+          "napi"
+        ],
+        "third_party": [
+        ]
+      },
+      "build": {
+        "sub_component": [
+            "//zixitong/bujian1:test1_group"
+        ],
+        "test": [
+        ],
+        "inner_kits": []
+      }
+    }
+}
