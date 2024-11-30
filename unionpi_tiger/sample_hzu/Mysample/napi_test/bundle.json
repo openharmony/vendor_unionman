@@ -1,0 +1,45 @@
+{
+    "name": "@ohos/napi_test", 
+    "description": "napi_test to practrce.",
+    "version": "4.0",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "Mysample/napi_test"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "napi_test",
+        "subsystem": "Mysample",
+        "syscap": [],
+        "features": [],
+        "adapted_system_type": [ "mini", "small", "standard" ],
+        "rom": "10KB",
+        "ram": "10KB",
+        "deps": {
+            "components": [  
+                "c_utils",
+                "hilog",
+                "hdf_core",
+                "napi"
+            ],
+            "third_party": [
+              
+            ]
+        },
+        "build": {
+            "sub_component": [
+           
+                "//Mysample/napi_test:napi_test" 
+                
+
+               
+            ],
+            "inner_kits": [],
+            "test": []
+        }
+    }
+}
+
+     
