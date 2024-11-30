@@ -1,0 +1,28 @@
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+ohos_executable("gpiohw") {
+  include_dirs = [
+    "include",
+    "//foundation/ace/napi/interfaces/kits",
+    "//commonlibrary/c_utils/base/include",
+    "//base/hiviwedfx/hilog/interfaces/native/innerkits/include",
+  ]
+  sources = [
+    "src/main.c",
+    "src/um_gpio.c",
+    "src/infrared_receiver.c",
+    "src/infrared_transmitter.c",
+  ]
+  #deps = [ "/foundation/arkui/napi:ace_napi" ]
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+  # relative_install_dir = "module"
+  install_images = ["system"]
+  # subsystem_name = "mynapisubsys"
+  part_name = "gpiohw_part"
+  install_enable = true
+}

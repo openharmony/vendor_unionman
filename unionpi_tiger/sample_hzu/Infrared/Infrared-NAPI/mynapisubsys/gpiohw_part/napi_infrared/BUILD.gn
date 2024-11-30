@@ -1,0 +1,24 @@
+
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+ohos_executable("infrared") {
+  include_dirs = [
+    "include"
+  ]
+  sources = [
+    "src/main.cpp"
+    "src/um_gpio.c"
+  ]
+  #deps = [ "/foundation/arkui/napi:ace_napi" ]
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+  # relative_install_dir = "module"
+  install_images = ["system"]
+  # subsystem_name = "mynapisubsys"
+  part_name = "napi_infrared"
+  install_enable = true
+}
