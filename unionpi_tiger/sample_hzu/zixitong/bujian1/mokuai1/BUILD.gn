@@ -1,0 +1,7 @@
+import("//build/ohos.gni")
+
+group("mokuai1") {
+  deps = [
+    "dacihuang:dacihuang",
+  ]
+}

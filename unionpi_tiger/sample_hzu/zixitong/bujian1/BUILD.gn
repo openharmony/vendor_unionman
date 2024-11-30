@@ -1,0 +1,13 @@
+import("//build/ohos.gni")
+
+group("test1_group") {
+  deps = [
+    "mokuai1:mokuai1",
+    #"hardware:hardware"
+    #"napisubsys/i2cnapipart/i2cnapidemo:i2cnapidemo",
+    #"mokuai1:test_ku",
+    #"hardware:hardware",
+    #"napi/napisubsys/i2cnapipart/i2cnapidemo:i2cnapidemo"
+    # "hdf:hdf",
+  ]
+}
