@@ -1,0 +1,22 @@
+import("//build/ohos.gni")
+
+ohos_shared_library("turnning_demo") {
+  include_dirs = [ "//foundation/ace/napi/interfaces/kits" ]
+
+  sources = [
+    "turnning.cpp",
+    "um_gpio.c",
+  ]
+
+  #deps = [ "//foundation/arkui/napi:ace_napi" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+
+  relative_install_dir = "module"
+  subsystem_name = "napisubsys"
+  part_name = "product_unionpi_tiger"
+}

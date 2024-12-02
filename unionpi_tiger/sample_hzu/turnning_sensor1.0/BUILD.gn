@@ -1,0 +1,11 @@
+import("//build/ohos.gni")
+
+group("sample_group") {
+  deps = [
+    #"hardware:hardware",
+    # "hdf:hdf",
+    #"napi/napisubsys/i2cnapipart/i2cnapidemo:i2cnapidemo",
+    "napi/napisubsys/turnning_component/turnning_demo:turnning_demo",
+
+  ]
+}
