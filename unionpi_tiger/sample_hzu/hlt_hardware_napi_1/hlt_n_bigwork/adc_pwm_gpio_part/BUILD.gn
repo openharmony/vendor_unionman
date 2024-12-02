@@ -1,0 +1,7 @@
+import("//build/ohos.gni")
+
+group("adc_pwm_gpio_part") {
+  deps = [
+        "adc_pwm_gpio_demo:adc_pwm_gpio_test",
+  ]
+}
