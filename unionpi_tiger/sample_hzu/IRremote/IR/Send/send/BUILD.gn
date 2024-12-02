@@ -1,0 +1,26 @@
+import("//build/ohos.gni")
+
+ohos_shared_library("pwmsend"){
+    include_dirs = [
+        "//foundation/ace/napi/interfaces/kits",
+        "//commonlibrary/c_utils/base/include",
+        "//base/hiviewdfx/hilog/interfaces/native/innerkits/include"
+        ]
+
+    sources = [
+        "main.c",
+        "um_pwm.c",
+        "Gree.c",
+        "Send.c"
+    ]
+
+    external_deps = [
+        "c_utils:utils",
+        "hilog:libhilog",
+        "napi:ace_napi"
+    ]
+
+    relative_install_dir = "module"
+    subsystem_name = "IR"
+    part_name = "Send"
+}

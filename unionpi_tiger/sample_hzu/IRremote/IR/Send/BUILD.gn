@@ -1,0 +1,7 @@
+import("//build/ohos.gni")
+
+group("Send_group"){
+    deps = [
+        "send:pwmsend"
+    ]
+}
