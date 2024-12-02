@@ -1,0 +1,6 @@
+import("//build/ohos.gni")
+group("pwm_gpio_napi_part"){
+    deps = [
+        "pwm_gpio_napidemo:pwm_gpio_test",
+    ]
+}
