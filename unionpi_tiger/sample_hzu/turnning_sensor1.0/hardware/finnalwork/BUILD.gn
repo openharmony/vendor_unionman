@@ -1,0 +1,22 @@
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+ohos_executable("finnalwork_test") {
+  output_name = "finnalwork_test"
+  sources = [
+    "main.c",
+    #"test.c",
+    "um_gpio.c",
+  ]
+
+  include_dirs = [ "//commonlibrary/c_utils/base/include" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+
+  install_images = [ "system" ]
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
