@@ -1,0 +1,26 @@
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+ohos_executable("Analog_test") {
+  sources = [
+  # "src/hello.c"
+    "src/Hall_main.c",
+  # "src/pwm_test.c",
+    "src/um_adc.c",
+    "src/um_pwm.c",
+  ]
+
+  include_dirs = [
+     "include",
+     "//commonlibrary/c_utils/base/include" 
+    ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+
+  install_images = [ "system" ]
+  install_enable = true #是否默认安装，（缺省则不安装），可选
+  part_name = "cpt_sample"
+}
