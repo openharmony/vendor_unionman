@@ -1,0 +1,34 @@
+{
+    "name": "@ohos/adc_pwm_gpio_part",
+    "description": "product_adc_pwm_gpio_part",
+    "version": "4.0",
+    "license": "Apache License 2.0",
+    "private": false,
+    "segment": {
+      "destPath": ""
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+      "name": "adc_pwm_gpio_part",
+      "subsystem": "hlt_n_bigwork",
+      "adapted_system_type": ["standard"],
+      "deps": {
+        "components": [
+          "hilog",
+          "c_utils",
+          "hdf_core"
+        ],
+        "third_party": [
+        ]
+      },
+      "build": {
+        "sub_component": [
+            "//hlt_n_bigwork/adc_pwm_gpio_part:adc_pwm_gpio_part"
+        ],
+        "test": [
+        ],
+        "inner_kits": []
+      }
+    }
+}
