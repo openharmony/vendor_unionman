@@ -1,0 +1,6 @@
+import("//build/ohos.gni")
+group("adc_gpio_napi_part"){
+    deps = [
+        "adc_gpio_component:adc_gpio_napi",
+    ]
+}
