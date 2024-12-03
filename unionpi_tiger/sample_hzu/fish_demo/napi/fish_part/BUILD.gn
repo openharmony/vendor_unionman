@@ -1,0 +1,4 @@
+import("//build/ohos.gni")
+group("fish_part") {
+  deps = [ "fish_tank_demo:fish_tank" ]
+}

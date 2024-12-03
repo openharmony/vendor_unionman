@@ -1,0 +1,40 @@
+{
+  "name": "@ohos/fish_part",
+  "description": "napisubsys fish_part",
+  "version": "0.0.1",
+  "license": "Apache License 2.0",
+  "pubiishAs": "code-segment",
+  "segment": {
+    "destPath": ""
+  },
+  "dirs": {},
+  "scripts": {},
+  "component": {
+    "name": "fish_part",
+    "subsystem": "napisubsys",
+    "syscap": [],
+    "feature": [],
+    "adapted_system_type": [
+      "mini",
+      "small",
+      "standard"
+    ],
+    "rom": "10KB",
+    "ram": "10KB",
+    "deps": {
+      "components": [
+        "hilog",
+        "c_utils",
+        "napi"
+      ],
+      "third_party": []
+    },
+    "build": {
+      "sub_component": [
+        "//napisubsys/fish_part:fish_part"
+      ],
+      "inner_kits": [],
+      "test": []
+    }
+  }
+}
