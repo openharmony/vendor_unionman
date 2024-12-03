@@ -1,0 +1,14 @@
+import("//build/ohos.gni")
+
+group("hardware") {
+  deps = [
+    #"adc:adc_test",
+    #"can:can_test",
+    #"gpio:gpio_test",
+    #"i2c:i2c_test a",
+    #"pwm:pwm_test",
+    #"spi:spi_test",
+    #"uart:uart_test",
+    "finnalwork:finnalwork_test",
+  ]
+}
