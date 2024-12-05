@@ -1,0 +1,24 @@
+{
+  "float": [
+    {
+      "name": "button_width",
+      "value": "150"
+    },
+    {
+      "name": "button_height",
+      "value": "50"
+    },
+    {
+      "name": "login_fontSize",
+      "value": "16fp"
+    },
+    {
+      "name": "LoadingProgress_width",
+      "value": "60"
+    },
+    {
+      "name": "LoadingProgress_height",
+      "value": "60"
+    }
+  ]
+}
