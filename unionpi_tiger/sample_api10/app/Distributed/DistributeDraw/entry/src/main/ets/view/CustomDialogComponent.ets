@@ -17,6 +17,7 @@ import common from '@ohos.app.ability.common';
 import deviceManager from '@ohos.distributedHardware.deviceManager';
 import prompt from '@ohos.promptAction';
 import CommonConstants from '../common/constants/CommonConstants';
+import Logger from '../common/utils/Logger';
 import DistributedObjectModel from '../viewmodel/DistributedObjectModel';
 import Position from '../viewmodel/Position';
 
@@ -162,6 +163,14 @@ export default struct DeviceListDialogComponent {
             prompt.showToast({
               message: $r('app.string.please_select_device')
             });
+          } else if (this.selectedIndex.length === 1 && this.selectedIndex[0] === 0) {
+            Logger.info('DeviceListDialogComponent', `stop ability`)
+            this.globalObject.update(true)
+            this.deviceList = []
+            if (this.controller !== undefined) {
+              this.controller.close()
+            }
+            return
           } else {
             if (this.controller !== undefined) {
               this.controller.close();
