@@ -1,0 +1,27 @@
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+ohos_executable("gpio_test") {
+  output_name = "gpio_test"
+  sources = [
+    "main.c",
+    "um_gpio.c",
+  ]
+
+  include_dirs = [
+    "//commonlibrary/c_utils/base/include",
+    "//commonlibrary/utils_lite/include",
+    "//kernel/liteos_m/kal/cmsis",
+    "//base/iothardware/peripheral/interfaces/inner_api",
+    ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+
+  install_images = [ "system" ]
+  relative_install_dir = "module"
+  subsystem_name="my_project"
+  part_name = "gpio_part"
+}

@@ -1,0 +1,6 @@
+import("//build/ohos.gni")
+group("gpio_part"){
+    deps = [
+        "gpio_demo:gpio_test",
+    ]
+}
