@@ -1,0 +1,38 @@
+{
+    "name": "@ohos/my_gpio",
+    "description": "my_gpio",
+    "version": "4.0",
+    "license": "Apache License 2.0",
+    "punlishAs": "code-segment",
+    "segment": {
+        "destPath": "my_gpio/my_cpt"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "my_cpt",               
+        "subsystem": "my_gpio", 
+        "syscap": [],
+        "feature": [],
+        "adapted_system_type": [ "mini", "small", "standard"],
+        "rom": "10KB",
+        "ram": "10KB",
+        "deps": {
+            "components":[
+                
+                "c_utils",
+                "hilog",
+                "napi"
+            ],
+            "third_party":[]
+        },
+        "build": {
+            "sub_component": [
+                "//my_gpio/my_cpt:my_cpt"
+            ],
+            "inner_kits": [],
+            "test": []
+        
+        }
+    }
+}
