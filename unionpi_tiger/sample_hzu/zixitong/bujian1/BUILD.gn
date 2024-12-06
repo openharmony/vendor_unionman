@@ -1,0 +1,7 @@
+import("//build/ohos.gni")
+
+group("test1_group") {
+  deps = [
+    "mokuai1:mokuai1",
+  ]
+}
