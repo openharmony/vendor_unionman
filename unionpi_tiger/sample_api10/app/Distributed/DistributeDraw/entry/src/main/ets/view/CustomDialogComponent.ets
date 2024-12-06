@@ -100,7 +100,11 @@ export default struct DeviceListDialogComponent {
               }
               .height($r('app.float.device_info_height'))
               .onClick(() => {
-                this.selectedIndex.push(index);
+                if (this.selectedIndex.includes(index)) {
+                  this.selectedIndex = this.selectedIndex.filter(item => item !== index)
+                } else {
+                  this.selectedIndex.push(index);
+                }
                 console.error("selectedIndex: " + JSON.stringify(this.selectedIndex))
               })
               .padding({
