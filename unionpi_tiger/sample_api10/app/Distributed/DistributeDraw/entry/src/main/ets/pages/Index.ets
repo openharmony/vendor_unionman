@@ -93,6 +93,14 @@ struct Index {
             this.goBack();
           })
         Blank()
+        Text("清理画板")
+          .margin(20)
+          .onClick(()=>{
+            this.globalObject.clear()
+            let height = this.canvasContext.height
+            let width = this.canvasContext.width
+            this.canvasContext.clearRect(0,0,width,height)
+          })
         Image($r('app.media.ic_hop'))
           .width($r('app.float.ic_hop_width'))
           .height($r('app.float.ic_hop_height'))
