@@ -1,6 +1,19 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "material": {
+          "certpath": "signature/DistributeDraw.cer",
+          "storePassword": "0000001B8EF7204A16E1E731A8263CD3AF7B072DF04CA5E474CC4556A033E73B8517BC586F786C061B1CA1",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B1F1DC441B734B7B3326061BA9CA97518358EB075FB1B03DC09557D1569CCBDA8315EF38541E6CD",
+          "profile": "signature/DistributeDraw.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "signature/DistributeDraw.p12"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",
