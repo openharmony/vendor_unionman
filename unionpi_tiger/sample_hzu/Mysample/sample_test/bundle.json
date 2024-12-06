@@ -1,0 +1,44 @@
+{
+    "name": "@ohos/sample_test", 
+    "description": "sample_test to practrce.",
+    "version": "4.0",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "Mysample/sample_test"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "sample_test",
+        "subsystem": "Mysample",
+        "syscap": [],
+        "features": [],
+        "adapted_system_type": [ "mini", "small", "standard" ],
+        "rom": "10KB",
+        "ram": "10KB",
+        "deps": {
+            "components": [  
+                "c_utils",
+                "hilog",
+                "hdf_core"
+            ],
+            "third_party": [
+              
+            ]
+        },
+        "build": {
+            "sub_component": [
+           
+                "//Mysample/sample_test:sample_test" 
+                
+
+               
+            ],
+            "inner_kits": [],
+            "test": []
+        }
+    }
+}
+
+     

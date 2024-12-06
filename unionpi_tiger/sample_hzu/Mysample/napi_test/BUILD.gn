@@ -1,0 +1,9 @@
+import("//build/ohos.gni")
+
+group("napi_test") {
+  deps = [
+   
+    "firetest_napi:firetest_napi"
+      
+  ]
+}
