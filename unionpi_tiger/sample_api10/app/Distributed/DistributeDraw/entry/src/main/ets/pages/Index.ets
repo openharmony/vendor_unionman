@@ -23,7 +23,15 @@ import remoteDeviceModel from '../common/utils/RemoteDeviceUtil';
 import DeviceListDialogComponent from '../view/CustomDialogComponent';
 import Logger from '../common/utils/Logger';
 import DistributedObjectModel from '../viewmodel/DistributedObjectModel';
+import { BusinessError } from '@ohos.base';
+import image from '@ohos.multimedia.image';
+import screenshot from '@ohos.screenshot';
+import fs from '@ohos.file.fs';
+import display from '@ohos.display';
+import promptAction from '@ohos.promptAction';
 
+const imagePackerApi = image.createImagePacker();
+let packOpts : image.PackingOption = { format:"image/jpeg", quality:98 };
 let storage = LocalStorage.getShared();
 
 @Entry(storage)
@@ -100,6 +108,47 @@ struct Index {
             let height = this.canvasContext.height
             let width = this.canvasContext.width
             this.canvasContext.clearRect(0,0,width,height)
+          })
+        Text("保存图片")
+          .margin(20)
+          .onClick(()=>{
+            let displayWidth = display.getDefaultDisplaySync().width
+            let displayHeight = display.getDefaultDisplaySync().height
+            let screenshotOptions: screenshot.ScreenshotOptions = {
+              "screenRect": {
+                "left": 0,
+                "top": 100,
+                "width": displayWidth ,
+                "height": displayHeight - 150},
+              "rotation": 0,
+              "displayId": 0
+            };
+            try {
+              screenshot.save(screenshotOptions, (err: BusinessError, pixelMap: image.PixelMap) => {
+                if (err) {
+                  console.log('Failed to save screenshot. Code: ' + JSON.stringify(err));
+                  return;
+                }
+                imagePackerApi.packing(pixelMap, packOpts).then( (data : ArrayBuffer) => {
+                  let context = getContext()
+                  let filePath = context.filesDir + "/save.jpg";
+                  let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+                  let writeLen = fs.writeSync(file.fd, data);
+                  console.info("write data to file succeed and size is:" + writeLen);
+                  fs.closeSync(file);
+                  promptAction.showToast({
+                    message: '保存成功',
+                    duration: 2000
+                  });
+                }).catch((error : BusinessError) => {
+                  console.error('Failed to pack the image. And the error is: ' + error);
+                })
+                console.log('Succeeded in saving screenshot. Pixel bytes number: ' + pixelMap.getPixelBytesNumber());
+                pixelMap.release(); // PixelMap使用完后及时释放内存
+              });
+            } catch (exception) {
+              console.error('Failed to save screenshot. Code: ' + JSON.stringify(exception));
+            };
           })
         Image($r('app.media.ic_hop'))
           .width($r('app.float.ic_hop_width'))
