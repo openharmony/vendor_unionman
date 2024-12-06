@@ -152,6 +152,14 @@ struct Index {
   share() {
     Logger.info('Index', `sessionId = ${this.sessionId}`);
     this.globalObject.setChangeCallback(() => {
+      let exit: boolean = this.globalObject.distributedObject.exit;
+      if (exit) {
+        let context = getContext(this) as common.UIAbilityContext
+        Logger.info('Index', `EXIT ${exit}`)
+        context.terminateSelf((error) => {
+          Logger.error('Index', `terminateSelf finished, error= ${error}`)
+        })
+      }
       this.positionList = this.globalObject.distributedObject.positionList;
       console.error("haoc "+JSON.stringify(this.globalObject.distributedObject.positionList))
       // this.redraw();

@@ -25,6 +25,7 @@ export default class DistributedObjectModel {
   constructor() {
     this.distributedObject = distributedObject.createDistributedObject({
       positionList: [],
+      exit: false,
     })
   }
 
@@ -60,14 +61,10 @@ export default class DistributedObjectModel {
     this.distributedObject.on('status', this.statusCallback)
   }
 
-  update(index: number, title: string, content: string, mark: number) {
-    Logger.info(TAG, `doUpdate,${title},${index}`)
-    let documents = this.distributedObject.documents
-    documents[index] = {
-      title: title, content: content, mark: mark
-    }
-    this.distributedObject.documents = documents
-    Logger.info(TAG, `update my documents,${JSON.stringify(this.distributedObject.documents)}`)
+  update(exit: boolean) {
+    Logger.info(TAG, `doUpdate,${exit}`)
+    this.distributedObject.exit = exit
+    Logger.info(TAG, `update exit,${JSON.stringify(this.distributedObject.exit)}`)
   }
 
   add(isFirstPosition: boolean, isEndPosition: boolean, positionX: number, positionY: number) {
