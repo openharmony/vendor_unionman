@@ -1,0 +1,37 @@
+{
+    "name": "@ohos/adc_part",
+    "description": "control_adc",
+    "version": "4.0",
+    "license": "Apache License 2.0",
+    "private": false,
+    "segment": {
+      "destPath": ""
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+      "name": "adc_part",
+      "subsystem": "my_project",
+      "adapted_system_type": ["standard","mini","small"],
+      "rom":"10kB",
+      "ram":"10kB",
+      "deps": {
+        "components": [
+          "hilog",
+          "c_utils",
+          "hdf_core",
+          "napi"
+        ],
+        "third_party": [
+        ]
+      },
+      "build": {
+        "sub_component": [
+            "//my_project/adc_part:adc_part"
+        ],
+        "test": [
+        ],
+        "inner_kits": []
+      }
+    }
+}
