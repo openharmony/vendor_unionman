@@ -1,0 +1,27 @@
+
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+ohos_executable("firetest") {
+  output_name = "firetest"
+  sources = [
+    "src/main.c",
+    "src/um_gpio.c",
+  ]
+
+  include_dirs = [ #头文件路径有《》的不用写
+    "//commonlibrary/c_utils/base/include",
+     "include",
+  
+   ]
+
+  external_deps = [#外部模块，需要在.json里写一部分
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+
+  install_images = [ "system" ]
+  part_name = "sample_test"
+  install_enable=true
+}
+ 

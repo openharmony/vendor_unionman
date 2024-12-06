@@ -1,0 +1,10 @@
+import("//build/ohos.gni")
+
+group("sample_test") {
+  deps = [
+   
+      "gpiotest:gpiotest",
+     "firetest:firetest"
+      
+  ]
+}
