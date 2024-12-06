@@ -229,11 +229,11 @@ struct Index {
             this.canvasContext.lineWidth = CommonConstants.CANVAS_LINE_WIDTH;
             this.canvasContext.lineJoin = CommonConstants.CANVAS_LINE_JOIN;
             this.canvasContext.moveTo(position.positionX, position.positionY);
+            this.canvasContext.lineTo(position.positionX-1, position.positionY-1);
+            this.canvasContext.stroke();
           } else {
             this.canvasContext.lineTo(position.positionX, position.positionY);
-            if (position.isEndPosition) {
-              this.canvasContext.stroke();
-            }
+            this.canvasContext.stroke();
           }
         });
       }
@@ -304,11 +304,14 @@ struct Index {
         this.canvasContext.lineWidth = CommonConstants.CANVAS_LINE_WIDTH;
         this.canvasContext.lineJoin = CommonConstants.CANVAS_LINE_JOIN;
         this.canvasContext.moveTo(positionX, positionY);
+        this.canvasContext.lineTo(positionX-1, positionY-1);
+        this.canvasContext.stroke();
         this.pushData(true, false, positionX, positionY);
         break;
       }
       case TouchType.Move: {
         this.canvasContext.lineTo(positionX, positionY);
+        this.canvasContext.stroke();
         this.pushData(false, false, positionX, positionY);
         break;
       }
