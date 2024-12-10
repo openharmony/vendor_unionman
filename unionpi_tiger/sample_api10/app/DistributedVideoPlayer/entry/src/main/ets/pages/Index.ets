@@ -193,7 +193,7 @@ struct Index {
         // 等待对端获取到数据再退出
         setTimeout(() => {
           context.terminateSelf()
-        }, 1000)
+        }, 1500)
       }
     }
     if (EXIT === key) {
