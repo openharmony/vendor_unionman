@@ -208,6 +208,7 @@ struct Index {
 
   share() {
     Logger.info('Index', `sessionId = ${this.sessionId}`);
+    this.globalObject.update(this.positionList, false)
     this.globalObject.setChangeCallback(() => {
       let exit: boolean = this.globalObject.distributedObject.exit;
       if (exit) {
