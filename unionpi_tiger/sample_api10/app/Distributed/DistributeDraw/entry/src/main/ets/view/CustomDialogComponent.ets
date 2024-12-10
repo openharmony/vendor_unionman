@@ -169,7 +169,7 @@ export default struct DeviceListDialogComponent {
             });
           } else if (this.selectedIndex.length === 1 && this.selectedIndex[0] === 0) {
             Logger.info('DeviceListDialogComponent', `stop ability`)
-            this.globalObject.update(true)
+            this.globalObject.update(this.positionList, true)
             this.deviceList = []
             if (this.controller !== undefined) {
               this.controller.close()
@@ -185,7 +185,6 @@ export default struct DeviceListDialogComponent {
             }
             this.globalObject = new DistributedObjectModel();
             this.sessionId = this.globalObject.genSessionId();
-            console.error("genSessionId " + this.sessionId)
             AppStorage.SetOrCreate('sessionId', this.sessionId);
             this.share()
             this.startAbility(getContext(this) as common.UIAbilityContext, selectedDeviceList,

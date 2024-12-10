@@ -16,8 +16,7 @@
 import deviceManager from '@ohos.distributedHardware.deviceManager';
 import common from '@ohos.app.ability.common';
 import Want from '@ohos.app.ability.Want';
-import CommonConstants from '../constants/CommonConstants';
-import { DeviceInfoInterface, AuthExtraInfoInterface } from '../constants/CommonConstants';
+import CommonConstants, { AuthExtraInfoInterface, DeviceInfoInterface } from '../constants/CommonConstants';
 import Position from '../../viewmodel/Position';
 import Logger from './Logger';
 
@@ -223,7 +222,6 @@ class RemoteDeviceUtil {
     positionList: Position[]
   ): void {
     for (let index = 0; index < devices.length; index++) {
-      console.error(`authenticateDevice devices[${index}].deviceId ${devices[index].deviceName}`)
       let tmpList = this.trustedDeviceList.filter((item: deviceManager.DeviceInfo) => devices[index].deviceId === item.deviceId);
       if (tmpList.length > 0) {
         this.startAbility(context, devices[index], sessionId, positionList);
