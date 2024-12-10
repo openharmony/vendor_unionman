@@ -148,6 +148,7 @@ struct Index {
           .height(40)
           .backgroundColor(Color.Transparent)
           .onClick(() => {
+            this.positionList = []
             this.globalObject.clear()
             let height = this.canvasContext.height
             let width = this.canvasContext.width
