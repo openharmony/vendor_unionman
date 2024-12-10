@@ -255,21 +255,21 @@ struct Index {
    * Redraw the track.
    */
   redraw(): void {
-    // this.canvasContext.clearRect(0, 0, this.canvasContext.width, this.canvasContext.height);
-    // this.positionList.forEach((position) => {
-    //   Logger.info('Index', `redraw position=${JSON.stringify(position)}`);
-    //   if (position.isFirstPosition) {
-    //     this.canvasContext.beginPath();
-    //     this.canvasContext.lineWidth = CommonConstants.CANVAS_LINE_WIDTH;
-    //     this.canvasContext.lineJoin = CommonConstants.CANVAS_LINE_JOIN;
-    //     this.canvasContext.moveTo(position.positionX, position.positionY);
-    //   } else {
-    //     this.canvasContext.lineTo(position.positionX, position.positionY);
-    //     if (position.isEndPosition) {
-    //       this.canvasContext.stroke();
-    //     }
-    //   }
-    // });
+    this.canvasContext.clearRect(0, 0, this.canvasContext.width, this.canvasContext.height);
+    this.positionList.forEach((position) => {
+      Logger.info('Index', `redraw position=${JSON.stringify(position)}`);
+      if (position.isFirstPosition) {
+        this.canvasContext.beginPath();
+        this.canvasContext.lineWidth = CommonConstants.CANVAS_LINE_WIDTH;
+        this.canvasContext.lineJoin = CommonConstants.CANVAS_LINE_JOIN;
+        this.canvasContext.moveTo(position.positionX, position.positionY);
+      } else {
+        this.canvasContext.lineTo(position.positionX, position.positionY);
+        if (position.isEndPosition) {
+          this.canvasContext.stroke();
+        }
+      }
+    });
   }
 
   /**
