@@ -287,7 +287,7 @@ struct Index {
       }
     }
     this.redraw();
-    // this.globalObject.add(false, true, positionX, positionY)
+    this.globalObject.update(this.positionList, false)
     // this.kvStoreModel.put(CommonConstants.CHANGE_POSITION, JSON.stringify(this.positionList));
   }
 
