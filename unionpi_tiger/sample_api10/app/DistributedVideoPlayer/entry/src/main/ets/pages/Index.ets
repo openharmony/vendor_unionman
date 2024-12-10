@@ -190,7 +190,10 @@ struct Index {
       this.kvStoreModel.put(DATA_CHANGE, JSON.stringify(video))
       if (this.continuationMode == 'continuation') {
         let context = GlobalThis.getInstance().getObject("context") as common.UIAbilityContext
-        context.terminateSelf()
+        // 等待对端获取到数据再退出
+        setTimeout(() => {
+          context.terminateSelf()
+        }, 1000)
       }
     }
     if (EXIT === key) {
@@ -253,16 +256,17 @@ struct Index {
       })
       let fdPath = await this.prepareVideo()
       await this.avPlayer.initVideoPlayer(fdPath, this.surfaceId)
-      if (GlobalThis.getInstance().getObject("firstHop") && GlobalThis.getInstance().getObject("isDistributed")) {
-        this.setCurrentTime()
-      }
-      if (GlobalThis.getInstance().getObject("firstHop") && GlobalThis.getInstance()
-        .getObject("deviceID") === "remote") {
-        this.dataChange()
-        GlobalThis.getInstance().setObject("firstHop", false)
-        let video = new DistributedDataModel(this.title, this.currentTime, this.SpeedIndex, this.isPlay, false)
-        this.kvStoreModel.put(DATA_CHANGE, JSON.stringify(video))
-      }
+      // 等待avPlayer初始化完成
+      setTimeout(() => {
+        if (GlobalThis.getInstance().getObject("firstHop") && GlobalThis.getInstance().getObject("isDistributed")) {
+          this.setCurrentTime()
+        }
+        if (GlobalThis.getInstance().getObject("firstHop") && GlobalThis.getInstance()
+          .getObject("deviceID") === "remote") {
+          GlobalThis.getInstance().setObject("firstHop", false)
+          this.dataChange()
+        }
+      }, 200)
     } catch (error) {
       Logger.info(TAG, `initVideo error ${JSON.stringify(error)}`)
     }
