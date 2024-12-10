@@ -14,6 +14,7 @@
  */
 import distributedObject from '@ohos.data.distributedDataObject'
 import Logger from '../common/utils/Logger';
+import Position from './Position';
 
 const TAG: string = 'DistributedObjectModel'
 
@@ -61,10 +62,11 @@ export default class DistributedObjectModel {
     this.distributedObject.on('status', this.statusCallback)
   }
 
-  update(exit: boolean) {
-    Logger.info(TAG, `doUpdate,${exit}`)
+  update(positionList: Position[], exit: boolean) {
+    Logger.info(TAG, `doUpdate,${positionList} ${exit}`)
+    this.distributedObject.positionList = positionList
     this.distributedObject.exit = exit
-    Logger.info(TAG, `update exit,${JSON.stringify(this.distributedObject.exit)}`)
+    Logger.info(TAG, `update positionList and exit, ${JSON.stringify(this.distributedObject.positionList)}, ${JSON.stringify(this.distributedObject.exit)}`)
   }
 
   add(isFirstPosition: boolean, isEndPosition: boolean, positionX: number, positionY: number) {
