@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import distributedObject from '@ohos.data.distributedDataObject'
+import distributedObject from '@ohos.data.distributedDataObject';
 import Logger from '../common/utils/Logger';
 import Position from './Position';
 
