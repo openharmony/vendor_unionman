@@ -37,7 +37,6 @@ export default class EntryAbility extends UIAbility {
       `onCreate want=${JSON.stringify(this.want)}, launchParam=${JSON.stringify(launchParam)}`);
     remoteDeviceModel.createDeviceManager();
     if (this.want?.parameters?.sessionId) {
-      console.error("onCreate sessionId: " + this.want.parameters.sessionId)
       let sessionId = this.want.parameters.sessionId ? this.want.parameters.sessionId : '';
       AppStorage.SetOrCreate('sessionId', sessionId);
       AppStorage.SetOrCreate('objectModel', new DistributedObjectModel());
@@ -50,13 +49,12 @@ export default class EntryAbility extends UIAbility {
       `onNewWant want=${JSON.stringify(this.want)}, launchParam=${JSON.stringify(launchParam)}`);
 
     // if (this.want?.parameters?.positionList) {
-      // let positionList: Position[] = JSON.parse((this.want.parameters.positionList) as string);
-      // this.storage.setOrCreate('positionList', positionList);
+    // let positionList: Position[] = JSON.parse((this.want.parameters.positionList) as string);
+    // this.storage.setOrCreate('positionList', positionList);
     //   this.storage.setOrCreate('updateCanvas', true);
     // }
 
     if (this.want?.parameters?.sessionId) {
-      console.error("onNewWant sessionId: " + this.want.parameters.sessionId)
       AppStorage.SetOrCreate('sessionId', this.want.parameters.sessionId);
       let objectModel = AppStorage.Get('objectModel') as DistributedObjectModel;
       objectModel.off();

@@ -14,11 +14,9 @@
  */
 
 import common from '@ohos.app.ability.common';
-import distributedKVStore from '@ohos.data.distributedKVStore';
 import deviceManager from '@ohos.distributedHardware.deviceManager';
 import CommonConstants from '../common/constants/CommonConstants';
 import Position from '../viewmodel/Position';
-import KvStoreModel from '../viewmodel/KvStoreModel';
 import remoteDeviceModel from '../common/utils/RemoteDeviceUtil';
 import DeviceListDialogComponent from '../view/CustomDialogComponent';
 import Logger from '../common/utils/Logger';
@@ -31,7 +29,7 @@ import display from '@ohos.display';
 import promptAction from '@ohos.promptAction';
 
 const imagePackerApi = image.createImagePacker();
-let packOpts : image.PackingOption = { format:"image/jpeg", quality:98 };
+let packOpts: image.PackingOption = { format: "image/jpeg", quality: 98 };
 let storage = LocalStorage.getShared();
 
 @Entry(storage)
@@ -103,23 +101,23 @@ struct Index {
         Blank()
         Text("清理画板")
           .margin(20)
-          .onClick(()=>{
+          .onClick(() => {
             this.globalObject.clear()
             let height = this.canvasContext.height
             let width = this.canvasContext.width
-            this.canvasContext.clearRect(0,0,width,height)
+            this.canvasContext.clearRect(0, 0, width, height)
           })
         Text("保存图片")
           .margin(20)
-          .onClick(()=>{
+          .onClick(() => {
             let displayWidth = display.getDefaultDisplaySync().width
             let displayHeight = display.getDefaultDisplaySync().height
             let screenshotOptions: screenshot.ScreenshotOptions = {
               "screenRect": {
                 "left": 0,
                 "top": 100,
-                "width": displayWidth ,
-                "height": displayHeight - 150},
+                "width": displayWidth,
+                "height": displayHeight - 150 },
               "rotation": 0,
               "displayId": 0
             };
@@ -129,7 +127,7 @@ struct Index {
                   console.log('Failed to save screenshot. Code: ' + JSON.stringify(err));
                   return;
                 }
-                imagePackerApi.packing(pixelMap, packOpts).then( (data : ArrayBuffer) => {
+                imagePackerApi.packing(pixelMap, packOpts).then((data: ArrayBuffer) => {
                   let context = getContext()
                   let filePath = context.filesDir + "/save.jpg";
                   let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
@@ -140,7 +138,7 @@ struct Index {
                     message: '保存成功',
                     duration: 2000
                   });
-                }).catch((error : BusinessError) => {
+                }).catch((error: BusinessError) => {
                   console.error('Failed to pack the image. And the error is: ' + error);
                 })
                 console.log('Succeeded in saving screenshot. Pixel bytes number: ' + pixelMap.getPixelBytesNumber());
@@ -148,7 +146,8 @@ struct Index {
               });
             } catch (exception) {
               console.error('Failed to save screenshot. Code: ' + JSON.stringify(exception));
-            };
+            }
+            ;
           })
         Image($r('app.media.ic_hop'))
           .width($r('app.float.ic_hop_width'))
@@ -219,7 +218,6 @@ struct Index {
         })
       }
       this.positionList = this.globalObject.distributedObject.positionList;
-      console.error("haoc "+JSON.stringify(this.globalObject.distributedObject.positionList))
       // this.redraw();
       if (this.canvasContext) {
         this.canvasContext.clearRect(0, 0, this.canvasContext.width, this.canvasContext.height);
@@ -230,7 +228,7 @@ struct Index {
             this.canvasContext.lineWidth = CommonConstants.CANVAS_LINE_WIDTH;
             this.canvasContext.lineJoin = CommonConstants.CANVAS_LINE_JOIN;
             this.canvasContext.moveTo(position.positionX, position.positionY);
-            this.canvasContext.lineTo(position.positionX-1, position.positionY-1);
+            this.canvasContext.lineTo(position.positionX - 1, position.positionY - 1);
             this.canvasContext.stroke();
           } else {
             this.canvasContext.lineTo(position.positionX, position.positionY);
@@ -305,7 +303,7 @@ struct Index {
         this.canvasContext.lineWidth = CommonConstants.CANVAS_LINE_WIDTH;
         this.canvasContext.lineJoin = CommonConstants.CANVAS_LINE_JOIN;
         this.canvasContext.moveTo(positionX, positionY);
-        this.canvasContext.lineTo(positionX-1, positionY-1);
+        this.canvasContext.lineTo(positionX - 1, positionY - 1);
         this.canvasContext.stroke();
         this.pushData(true, false, positionX, positionY);
         break;
