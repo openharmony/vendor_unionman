@@ -89,26 +89,80 @@ struct Index {
   }
 
   build() {
-    Column() {
+    Stack({ alignContent: Alignment.Top }) {
       Row() {
-        Image($r('app.media.ic_back'))
-          .width($r('app.float.ic_back_width'))
-          .height($r('app.float.ic_back_height'))
-          .margin({ left: CommonConstants.ICON_MARGIN_LEFT })
+        Canvas(this.canvasContext)
+          .width(CommonConstants.FULL_PERCENT)
+          .height(CommonConstants.FULL_PERCENT)
+          .backgroundColor($r('app.color.start_window_background'))
+          .onReady(() => {
+            this.redraw();
+          })
+      }
+      .onTouch((event: TouchEvent) => {
+        this.onTouchEvent(event);
+      })
+      .width(CommonConstants.FULL_PERCENT)
+      .layoutWeight(CommonConstants.NUMBER_ONE)
+
+      Row() {
+        Button({ type: ButtonType.Circle }) {
+          Image($r('app.media.chevron_left'))
+            .width(18)
+            .height(28)
+            .margin({ bottom: 8, left: 9 })
+            .fillColor(Color.White)
+        }
+        .width(40)
+        .height(40)
+        .backgroundColor("#B2000000")
+        .margin({ left: CommonConstants.ICON_MARGIN_LEFT })
+        .align(Alignment.Start)
+        .onClick(() => {
+          this.context.terminateSelf()
+        })
+
+        Blank()
+
+        Row() {
+          Button({ type: ButtonType.Circle }) {
+            Image($r('app.media.undo'))
+              .width(24)
+              .height(24)
+              .fillColor(Color.White)
+          }
+          .width(40)
+          .height(40)
+          .backgroundColor(Color.Transparent)
           .onClick(() => {
             this.goBack();
           })
-        Blank()
-        Text("清理画板")
-          .margin(20)
+
+          Button({ type: ButtonType.Circle }) {
+            Image($r('app.media.clean'))
+              .width(24)
+              .height(24)
+              .fillColor(Color.White)
+          }
+          .width(40)
+          .height(40)
+          .backgroundColor(Color.Transparent)
           .onClick(() => {
             this.globalObject.clear()
             let height = this.canvasContext.height
             let width = this.canvasContext.width
             this.canvasContext.clearRect(0, 0, width, height)
           })
-        Text("保存图片")
-          .margin(20)
+
+          Button({ type: ButtonType.Circle }) {
+            Image($r('app.media.save'))
+              .width(24)
+              .height(24)
+              .fillColor(Color.White)
+          }
+          .width(40)
+          .height(40)
+          .backgroundColor(Color.Transparent)
           .onClick(() => {
             let displayWidth = display.getDefaultDisplaySync().width
             let displayHeight = display.getDefaultDisplaySync().height
@@ -149,31 +203,30 @@ struct Index {
             }
             ;
           })
-        Image($r('app.media.ic_hop'))
-          .width($r('app.float.ic_hop_width'))
-          .height($r('app.float.ic_hop_height'))
-          .margin({ right: CommonConstants.ICON_MARGIN_LEFT })
+
+          Button({ type: ButtonType.Circle }) {
+            Image($r('app.media.share'))
+              .width(24)
+              .height(24)
+              .fillColor(Color.White)
+          }
+          .width(40)
+          .height(40)
+          .backgroundColor(Color.Transparent)
           .onClick(() => {
             this.onContinueAbilityClick();
           })
+        }
+        .width(200)
+        .height(40)
+        .borderRadius(25)
+        .backgroundColor("#B2000000")
+        .margin({ right: CommonConstants.ICON_MARGIN_LEFT })
+        .justifyContent(FlexAlign.SpaceEvenly)
+        .backdropBlur(1)
       }
       .width(CommonConstants.FULL_PERCENT)
       .height(CommonConstants.TITLE_HEIGHT)
-
-      Row() {
-        Canvas(this.canvasContext)
-          .width(CommonConstants.FULL_PERCENT)
-          .height(CommonConstants.FULL_PERCENT)
-          .backgroundColor($r('app.color.start_window_background'))
-          .onReady(() => {
-            this.redraw();
-          })
-      }
-      .onTouch((event: TouchEvent) => {
-        this.onTouchEvent(event);
-      })
-      .width(CommonConstants.FULL_PERCENT)
-      .layoutWeight(CommonConstants.NUMBER_ONE)
     }
     .height(CommonConstants.FULL_PERCENT)
     .width(CommonConstants.FULL_PERCENT)
