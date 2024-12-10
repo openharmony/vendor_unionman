@@ -34,6 +34,16 @@
     ],
     "requestPermissions": [
       {
+        "name": "ohos.permission.CAPTURE_SCREEN",
+        "reason": "$string:access_service_dm_reason",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "inuse"
+        }
+      },
+      {
         "name": "ohos.permission.ACCESS_SERVICE_DM",
         "reason": "$string:access_service_dm_reason",
         "usedScene": {
