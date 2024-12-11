@@ -1,0 +1,49 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "material": {
+          "certpath": "C:/Users/guipeng.chen/.ohos/config/openharmony/default_adc_app_3ut3nj_qIjKKenL01_Os8xdxuPuyZGJurT8XOk81NzA=.cer",
+          "storePassword": "0000001B1B199B67478333D28EA9F2B1260C404FC6702D507A5391A50F265BA8A4B4E8DDF3964EAF5B62E2",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001BA4197A4993FA055A3C6D75968601A8DD37889481189C29C85A2C3431A4C0B9454B6997D4ACD566",
+          "profile": "C:/Users/guipeng.chen/.ohos/config/openharmony/default_adc_app_3ut3nj_qIjKKenL01_Os8xdxuPuyZGJurT8XOk81NzA=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:/Users/guipeng.chen/.ohos/config/openharmony/default_adc_app_3ut3nj_qIjKKenL01_Os8xdxuPuyZGJurT8XOk81NzA=.p12"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compileSdkVersion": 11,
+        "compatibleSdkVersion": 11,
+        "runtimeOS": "OpenHarmony",
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
