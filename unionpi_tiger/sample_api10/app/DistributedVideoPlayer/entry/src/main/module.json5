@@ -74,7 +74,7 @@
         }
       },
       {
-        "name": "ohos.permission.WRITE_MEDIA",
+        "name": "ohos.permission.WRITE_IMAGEVIDEO",
         "reason": "$string:media_reason",
         "usedScene": {
           "abilities": [
