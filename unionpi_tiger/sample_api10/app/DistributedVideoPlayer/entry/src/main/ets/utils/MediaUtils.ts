@@ -23,7 +23,6 @@ import Logger from '../model/Logger';
 import DateTimeUtil from './DateTimeUtil';
 import { GlobalThis } from './globalThis';
 import dataSharePredicates from '@ohos.data.dataSharePredicates';
-import { BusinessError } from '@ohos.base';
 
 const TAG: string = 'MediaUtils';
 let context = GlobalThis.getInstance().getObject("context") as common.UIAbilityContext;
@@ -37,25 +36,22 @@ export default class MediaUtils {
   }
 
   async createAndGetFile() {
-    let photoType: photoAccessHelper.PhotoType = photoAccessHelper.PhotoType.IMAGE;
-    let info = {
-      prefix: 'IMG_', suffix: '.jpg'
-    }
-    let dateTimeUtil = new DateTimeUtil()
-    let name = `${dateTimeUtil.getDate()}_${dateTimeUtil.getTime()}`
-    let displayName = `${info.prefix}${name}${info.suffix}`
-    let options: photoAccessHelper.CreateOptions = {
-      title: displayName
-    }
-    let asset_uri: string;
-    this.phAccessHelper.createAsset(photoType, info.suffix, options, (err, uri) => {
-      if (uri !== undefined) {
-        asset_uri = uri
-        Logger.info(TAG, 'createAsset successfully, uri:' + uri);
-      } else {
-        Logger.error(TAG, `createAsset failed, error: ${err.code}, ${err.message}`);
+    let asset_uri: string
+    try {
+      let photoType: photoAccessHelper.PhotoType = photoAccessHelper.PhotoType.IMAGE;
+      let extension: string = 'jpg';
+      let dateTimeUtil = new DateTimeUtil()
+      let name = `${dateTimeUtil.getDate()}_${dateTimeUtil.getTime()}`
+      let displayName = `DistributedVideoPlayer_${name}`
+      let options: photoAccessHelper.CreateOptions = {
+        title: displayName
       }
-    });
+      asset_uri = await this.phAccessHelper.createAsset(photoType, extension, options);
+      Logger.info(TAG, 'createAsset uri' + asset_uri);
+      Logger.info(TAG, 'createAsset successfully');
+    } catch (err) {
+      Logger.error(TAG, `createAsset failed, error: ${err.code}, ${err.message}`);
+    }
     return asset_uri
   }
 
@@ -73,7 +69,7 @@ export default class MediaUtils {
     try {
       await fs.write(file.fd, arrayBuffer);
     } catch (err) {
-      Logger.error(`write failed, code is ${err.code}, message is ${err.message}`)
+      Logger.error(TAG, `write failed, code is ${err.code}, message is ${err.message}`)
     }
     await fs.close(file.fd);
     Logger.info(TAG, `write done`)
