@@ -32,6 +32,7 @@ let preferenceSetting: preferences.Preferences | null = null;
 struct Setting {
   @State deviceLists: Array<deviceManager.DeviceInfo> = [];
   @StorageLink('continuationMode') @Watch('continuationModeChange') continuationMode: string = 'continuation';
+  @StorageLink('loop') @Watch('loopChange') loop: boolean = true;
   private remoteDeviceModel: RemoteDeviceModel = new RemoteDeviceModel();
 
   async aboutToAppear() {
@@ -46,6 +47,11 @@ struct Setting {
 
   async continuationModeChange() {
     preferenceSetting!.put('continuationMode', this.continuationMode)
+    preferenceSetting!.flush()
+  }
+
+  async loopChange() {
+    preferenceSetting!.put('loop', this.loop)
     preferenceSetting!.flush()
   }
 
@@ -119,6 +125,27 @@ struct Setting {
       .borderRadius(20)
       .backgroundColor('#464646')
       .alignItems(VerticalAlign.Center)
+
+      Row({ space: 10 }) {
+        Text('重复播放')
+          .fontColor(Color.White)
+          .fontFamily('HarmonyHeiTi')
+          .fontSize(20)
+
+        Blank()
+
+        Toggle({ type: ToggleType.Switch, isOn: this.loop })
+          .onChange((isOn: boolean) => {
+            this.loop = isOn
+          })
+      }
+      .width('100%')
+      .height(100)
+      .padding(10)
+      .borderRadius(20)
+      .backgroundColor('#464646')
+      .alignItems(VerticalAlign.Center)
+      .margin({ top: 10 })
 
       Row() {
         Text('认证设备管理')

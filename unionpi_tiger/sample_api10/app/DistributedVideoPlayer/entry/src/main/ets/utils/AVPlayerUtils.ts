@@ -24,6 +24,7 @@ export default class AVPlayerUtils {
   private avPlayerState: string = ''
   private playPath: string = ''
   private surfaceID: string = ''
+  private loop: boolean = true
   private timeUpdateCallBack: (time: number) => void = undefined
 
   async initVideoPlayer(playSrc: string, surfaceID: string) {
@@ -75,6 +76,7 @@ export default class AVPlayerUtils {
         case 'prepared': // prepare调用成功后上报该状态机
           Logger.info(TAG, 'AVPlayer state prepared called.');
           this.avPlayerState = 'prepared';
+          this.avPlayer.loop = this.loop;
           break;
         case 'playing': // play成功调用后触发该状态机上报
           Logger.info(TAG, 'AVPlayer state playing called.');
@@ -113,7 +115,7 @@ export default class AVPlayerUtils {
   async seek(time: number) {
     Logger.info(TAG, 'seek')
     if (typeof (this.avPlayer) != 'undefined' &&
-    (this.avPlayerState === 'prepared' || this.avPlayerState === 'playing' || this.avPlayerState === 'paused' || this.avPlayerState === 'completed')) {
+      (this.avPlayerState === 'prepared' || this.avPlayerState === 'playing' || this.avPlayerState === 'paused' || this.avPlayerState === 'completed')) {
       this.avPlayer.seek(time * 1000)
     }
   }
@@ -122,6 +124,16 @@ export default class AVPlayerUtils {
     Logger.info(TAG, 'setSpeed')
     if (typeof (this.avPlayer) != 'undefined') {
       this.avPlayer.setSpeed(speed)
+    }
+  }
+
+  async setLoop(loop: boolean) {
+    Logger.info(TAG, 'setLoop')
+    if (typeof (this.avPlayer) != 'undefined' &&
+      (this.avPlayerState === 'prepared' || this.avPlayerState === 'playing' || this.avPlayerState === 'paused' || this.avPlayerState === 'completed')) {
+      this.avPlayer.loop = loop
+    } else {
+      this.loop = loop
     }
   }
 
