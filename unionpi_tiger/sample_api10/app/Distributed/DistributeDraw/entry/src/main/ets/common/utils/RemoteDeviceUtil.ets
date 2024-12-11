@@ -219,12 +219,13 @@ class RemoteDeviceUtil {
     context: common.UIAbilityContext,
     devices: deviceManager.DeviceInfo[],
     sessionId: string,
-    positionList: Position[]
+    positionList: Position[],
+    strokeStyle: string
   ): void {
     for (let index = 0; index < devices.length; index++) {
       let tmpList = this.trustedDeviceList.filter((item: deviceManager.DeviceInfo) => devices[index].deviceId === item.deviceId);
       if (tmpList.length > 0) {
-        this.startAbility(context, devices[index], sessionId, positionList);
+        this.startAbility(context, devices[index], sessionId, positionList, strokeStyle);
         continue;
       }
 
@@ -265,14 +266,15 @@ class RemoteDeviceUtil {
    * @param device Device information.
    * @param positionList Position list.
    */
-  startAbility(context: common.UIAbilityContext, device: deviceManager.DeviceInfo, sessionId: string, positionList: Position[]): void {
+  startAbility(context: common.UIAbilityContext, device: deviceManager.DeviceInfo, sessionId: string, positionList: Position[], strokeStyle: string): void {
     let wantValue: Want = {
       bundleName: context.abilityInfo.bundleName,
       abilityName: CommonConstants.ABILITY_NAME,
       deviceId: device.networkId,
       parameters: {
         sessionId: sessionId,
-        positionList: JSON.stringify(positionList)
+        positionList: JSON.stringify(positionList),
+        strokeStyle: strokeStyle
       }
     };
 

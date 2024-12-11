@@ -37,6 +37,7 @@ struct Index {
   @LocalStorageProp('updateCanvas') @Watch('updateCanvas') update: boolean = false;
   private settings: RenderingContextSettings = new RenderingContextSettings(true);
   private canvasContext: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.settings);
+  @LocalStorageProp('strokeStyle') strokeStyle: string = '#000000';
   // private kvStoreModel: KvStoreModel = new KvStoreModel();
   private context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
   private mediaUtil: MediaUtils = new MediaUtils(this.context)
@@ -48,6 +49,7 @@ struct Index {
       deviceList: this.deviceList,
       sessionId: this.sessionId,
       positionList: this.positionList,
+      strokeStyle: this.strokeStyle,
       cancel: this.onCancel
     }),
     alignment: DialogAlignment.Bottom,
@@ -80,6 +82,37 @@ struct Index {
    */
   updateCanvas(): void {
     this.redraw();
+  }
+
+  @Builder
+  CanvasColorsMenu() {
+    Flex({
+      direction: FlexDirection.Column,
+      wrap: FlexWrap.Wrap,
+      justifyContent: FlexAlign.SpaceEvenly,
+      alignItems: ItemAlign.Center,
+      alignContent: FlexAlign.Start
+    }) {
+      ForEach(CommonConstants.CANVAS_COLORS, (item: string, index: number) => {
+        Button({ type: ButtonType.Circle })
+          .width($r('app.float.ic_toolbar_btn_width'))
+          .height($r('app.float.ic_toolbar_btn_height'))
+          .border(item === this.strokeStyle ? {
+            width: 6,
+            color: item,
+            style: BorderStyle.Solid
+          } : {})
+          .backgroundColor(item === this.strokeStyle ? (item === "#FFFFFF" ? Color.Black : Color.White) : item)
+          .margin(3)
+          .onClick(() => {
+            this.strokeStyle = item
+            this.globalObject.update(this.positionList, false, this.strokeStyle)
+          })
+      })
+    }
+    .constraintSize({
+      maxHeight: 200
+    })
   }
 
   build() {
@@ -121,8 +154,8 @@ struct Index {
         Row() {
           Button({ type: ButtonType.Circle }) {
             Image($r('app.media.undo'))
-              .width(24)
-              .height(24)
+              .width($r('app.float.ic_toolbar_btn_width'))
+              .height($r('app.float.ic_toolbar_btn_height'))
               .fillColor(Color.White)
           }
           .width(40)
@@ -134,8 +167,8 @@ struct Index {
 
           Button({ type: ButtonType.Circle }) {
             Image($r('app.media.clean'))
-              .width(24)
-              .height(24)
+              .width($r('app.float.ic_toolbar_btn_width'))
+              .height($r('app.float.ic_toolbar_btn_height'))
               .fillColor(Color.White)
           }
           .width(40)
@@ -151,8 +184,8 @@ struct Index {
 
           Button({ type: ButtonType.Circle }) {
             Image($r('app.media.save'))
-              .width(24)
-              .height(24)
+              .width($r('app.float.ic_toolbar_btn_width'))
+              .height($r('app.float.ic_toolbar_btn_height'))
               .fillColor(Color.White)
           }
           .width(40)
@@ -164,9 +197,21 @@ struct Index {
           })
 
           Button({ type: ButtonType.Circle }) {
+            Row()
+              .clip(new Circle({ width: 24, height: 24 }))
+              .width($r('app.float.ic_toolbar_btn_width'))
+              .height($r('app.float.ic_toolbar_btn_height'))
+              .backgroundColor(this.strokeStyle)
+          }
+          .width(40)
+          .height(40)
+          .backgroundColor(Color.Transparent)
+          .bindMenu(this.CanvasColorsMenu)
+
+          Button({ type: ButtonType.Circle }) {
             Image($r('app.media.share'))
-              .width(24)
-              .height(24)
+              .width($r('app.float.ic_toolbar_btn_width'))
+              .height($r('app.float.ic_toolbar_btn_height'))
               .fillColor(Color.White)
           }
           .width(40)
@@ -219,7 +264,7 @@ struct Index {
 
   share() {
     Logger.info('Index', `sessionId = ${this.sessionId}`);
-    this.globalObject.update(this.positionList, false)
+    this.globalObject.update(this.positionList, false, this.strokeStyle)
     this.globalObject.setChangeCallback(() => {
       let exit: boolean = this.globalObject.distributedObject.exit;
       if (exit) {
@@ -230,6 +275,7 @@ struct Index {
         })
       }
       this.positionList = this.globalObject.distributedObject.positionList;
+      this.strokeStyle = this.globalObject.distributedObject.strokeStyle;
       // this.redraw();
       if (this.canvasContext) {
         this.canvasContext.clearRect(0, 0, this.canvasContext.width, this.canvasContext.height);
@@ -237,6 +283,7 @@ struct Index {
           Logger.info('Index', `redraw position=${JSON.stringify(position)}`);
           if (position.isFirstPosition) {
             this.canvasContext.beginPath();
+            this.canvasContext.strokeStyle = position.strokeStyle;
             this.canvasContext.lineWidth = CommonConstants.CANVAS_LINE_WIDTH;
             this.canvasContext.lineJoin = CommonConstants.CANVAS_LINE_JOIN;
             this.canvasContext.moveTo(position.positionX, position.positionY);
@@ -273,6 +320,7 @@ struct Index {
       Logger.info('Index', `redraw position=${JSON.stringify(position)}`);
       if (position.isFirstPosition) {
         this.canvasContext.beginPath();
+        this.canvasContext.strokeStyle = position.strokeStyle;
         this.canvasContext.lineWidth = CommonConstants.CANVAS_LINE_WIDTH;
         this.canvasContext.lineJoin = CommonConstants.CANVAS_LINE_JOIN;
         this.canvasContext.moveTo(position.positionX, position.positionY);
@@ -300,7 +348,7 @@ struct Index {
       }
     }
     this.redraw();
-    this.globalObject.update(this.positionList, false)
+    this.globalObject.update(this.positionList, false, this.strokeStyle)
     // this.kvStoreModel.put(CommonConstants.CHANGE_POSITION, JSON.stringify(this.positionList));
   }
 
@@ -315,6 +363,7 @@ struct Index {
     switch (event.type) {
       case TouchType.Down: {
         this.canvasContext.beginPath();
+        this.canvasContext.strokeStyle = this.strokeStyle;
         this.canvasContext.lineWidth = CommonConstants.CANVAS_LINE_WIDTH;
         this.canvasContext.lineJoin = CommonConstants.CANVAS_LINE_JOIN;
         this.canvasContext.moveTo(positionX, positionY);
@@ -350,9 +399,9 @@ struct Index {
    * @param positionY Indicates the vertical coordinate information.
    */
   pushData(isFirstPosition: boolean, isEndPosition: boolean, positionX: number, positionY: number): void {
-    let position = new Position(isFirstPosition, isEndPosition, positionX, positionY);
+    let position = new Position(isFirstPosition, isEndPosition, positionX, positionY, this.strokeStyle);
     this.positionList.push(position);
-    this.globalObject.add(isFirstPosition, isEndPosition, positionX, positionY)
+    this.globalObject.add(isFirstPosition, isEndPosition, positionX, positionY, this.strokeStyle)
     // if (position.isEndPosition) {
     //   this.kvStoreModel.put(CommonConstants.CHANGE_POSITION, JSON.stringify(this.positionList));
     // }
@@ -376,9 +425,10 @@ struct Index {
     context: common.UIAbilityContext,
     devices: deviceManager.DeviceInfo[],
     sessionId: string,
-    positionList: Position[]
+    positionList: Position[],
+    strokeStyle: string
   ): void {
-    remoteDeviceModel.authenticateDevice(context, devices, sessionId, positionList);
+    remoteDeviceModel.authenticateDevice(context, devices, sessionId, positionList, strokeStyle);
     remoteDeviceModel.stopDeviceDiscovery();
   }
 }
