@@ -27,6 +27,7 @@ export default class DistributedObjectModel {
     this.distributedObject = distributedObject.createDistributedObject({
       positionList: [],
       exit: false,
+      strokeStyle: "#000000",
     })
   }
 
@@ -62,19 +63,24 @@ export default class DistributedObjectModel {
     this.distributedObject.on('status', this.statusCallback)
   }
 
-  update(positionList: Position[], exit: boolean) {
-    Logger.info(TAG, `doUpdate,${positionList} ${exit}`)
+  update(positionList: Position[], exit: boolean, strokeStyle: string) {
+    Logger.info(TAG, `doUpdate,${positionList} ${exit} ${strokeStyle}`)
     this.distributedObject.positionList = positionList
     this.distributedObject.exit = exit
-    Logger.info(TAG, `update positionList and exit, ${JSON.stringify(this.distributedObject.positionList)}, ${JSON.stringify(this.distributedObject.exit)}`)
+    this.distributedObject.strokeStyle = strokeStyle
+    Logger.info(TAG, `update positionList and exit, ${JSON.stringify(this.distributedObject.positionList)}, ${JSON.stringify(this.distributedObject.exit)}, ${JSON.stringify(this.distributedObject.strokeStyle)}`)
   }
 
-  add(isFirstPosition: boolean, isEndPosition: boolean, positionX: number, positionY: number) {
-    Logger.info(TAG, `doAdd,${isFirstPosition},${isEndPosition},${positionX},${positionY}`)
+  add(isFirstPosition: boolean, isEndPosition: boolean, positionX: number, positionY: number, strokeStyle: string) {
+    Logger.info(TAG, `doAdd,${isFirstPosition},${isEndPosition},${positionX},${positionY},${strokeStyle}`)
     Logger.info(TAG, `doAdd,${JSON.stringify(this.distributedObject.positionList)}`)
     this.distributedObject.positionList = [...this.distributedObject.positionList,
       {
-        isFirstPosition: isFirstPosition, isEndPosition: isEndPosition, positionX: positionX, positionY: positionY
+        isFirstPosition: isFirstPosition,
+        isEndPosition: isEndPosition,
+        positionX: positionX,
+        positionY: positionY,
+        strokeStyle: strokeStyle
       }]
     Logger.info(TAG, `add positionList,${JSON.stringify(this.distributedObject.positionList)}`)
   }

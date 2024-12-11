@@ -34,10 +34,11 @@ export default struct DeviceListDialogComponent {
   private sessionId: string = '';
   @StorageLink('objectModel') globalObject: DistributedObjectModel = new DistributedObjectModel();
   @Link positionList: Position[];
+  @Link strokeStyle: string;
   private canvasContext: CanvasRenderingContext2D | undefined = undefined;
   @Link deviceList: deviceManager.DeviceInfo[];
   controller?: CustomDialogController;
-  startAbility: (context: common.UIAbilityContext, devices: deviceManager.DeviceInfo[], sessionId: string, positionList: Position[]) => void
+  startAbility: (context: common.UIAbilityContext, devices: deviceManager.DeviceInfo[], sessionId: string, positionList: Position[], strokeStyle: string) => void
     = () => {
   };
   share: () => void
@@ -169,7 +170,7 @@ export default struct DeviceListDialogComponent {
             });
           } else if (this.selectedIndex.length === 1 && this.selectedIndex[0] === 0) {
             Logger.info('DeviceListDialogComponent', `stop ability`)
-            this.globalObject.update(this.positionList, true)
+            this.globalObject.update(this.positionList, true, this.strokeStyle)
             this.deviceList = []
             if (this.controller !== undefined) {
               this.controller.close()
@@ -188,7 +189,7 @@ export default struct DeviceListDialogComponent {
             AppStorage.SetOrCreate('sessionId', this.sessionId);
             this.share()
             this.startAbility(getContext(this) as common.UIAbilityContext, selectedDeviceList,
-              this.sessionId, this.positionList);
+              this.sessionId, this.positionList, this.strokeStyle);
           }
         })
       }
