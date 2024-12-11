@@ -62,6 +62,26 @@
           ],
           "when": "inuse"
         }
+      },
+      {
+        "name": "ohos.permission.READ_MEDIA",
+        "reason": "$string:media_reason",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "inuse"
+        }
+      },
+      {
+        "name": "ohos.permission.WRITE_IMAGEVIDEO",
+        "reason": "$string:media_reason",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "inuse"
+        }
       }
     ]
   }

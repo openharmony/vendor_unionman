@@ -35,6 +35,10 @@
     {
       "name": "distributed_datasync_reason",
       "value": "request for distribute store"
+    },
+    {
+      "name": "media_reason",
+      "value": "Allows applications to read media files from external storage"
     }
   ]
 }
