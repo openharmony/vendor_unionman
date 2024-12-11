@@ -25,7 +25,7 @@ import remoteDeviceModel from '../common/utils/RemoteDeviceUtil';
 import Position from '../viewmodel/Position';
 import DistributedObjectModel from '../viewmodel/DistributedObjectModel';
 
-const permissions: Array<Permissions> = ['ohos.permission.DISTRIBUTED_DATASYNC'];
+const permissions: Array<Permissions> = ['ohos.permission.DISTRIBUTED_DATASYNC', "ohos.permission.READ_MEDIA", "ohos.permission.WRITE_IMAGEVIDEO"];
 
 export default class EntryAbility extends UIAbility {
   storage: LocalStorage = new LocalStorage();
