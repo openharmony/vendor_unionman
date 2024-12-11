@@ -1,0 +1,37 @@
+{
+	"name":"@ohos/cpt_sample",
+	"description":"sub sample",
+	"version":"4.0",
+	"license":"Apache License 2.0",
+	"publishAs":"code-segment",
+	"segment":{
+		"destPath":""
+	},
+	"dirs":{},
+	"scripts":{},
+	"component":{
+		"name": "cpt_sample",
+		"subsystem" :"sub_sample",
+		"syscap":[],
+		"features":[],
+		"adapted_system_type":[ "mini","small","standard" ],
+		"rom": "10KB",
+		"ram": "10KB",
+		"deps" :{
+			"components":[
+				"c_utils",
+				"hilog",
+				"napi",
+          		"hdf_core"
+			],
+			"third_party":[]
+		},
+		"build":{
+			"sub_component":[
+				"//sub_sample/cpt_sample:cpt_sample"
+			],
+			"inner_kits":[],
+			"test":[]
+		}
+	}
+}
