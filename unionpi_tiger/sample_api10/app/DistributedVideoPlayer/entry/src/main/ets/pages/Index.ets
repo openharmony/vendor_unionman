@@ -99,6 +99,7 @@ struct Index {
   @State isLoading: boolean = true;
   // 流转模式
   @StorageLink('continuationMode') continuationMode: preferences.ValueType = 'continuation'
+  @StorageLink('loop') @Watch("loopChange") loop: preferences.ValueType = true
   // 控制栏定时器id
   private controlBarTimeoutID: number = -1
   private tabsController: TabsController = new TabsController()
@@ -178,6 +179,7 @@ struct Index {
     let context = GlobalThis.getInstance().getObject("context") as common.UIAbilityContext
     preferenceSetting = await preferences.getPreferences(context, PREFERENCES_NAME)
     this.continuationMode = await preferenceSetting.get('continuationMode', 'continuation')
+    this.loop = await preferenceSetting.get('loop', true)
   }
 
   startAbilityCallBack = (key: string) => {
@@ -377,6 +379,10 @@ struct Index {
     Logger.info(TAG, 'setSpeed')
     this.avPlayer.setSpeed(this.SpeedIndex)
     this.distributedDataSync()
+  }
+
+  loopChange() {
+    this.avPlayer.setLoop(this.loop as boolean)
   }
 
   build() {
