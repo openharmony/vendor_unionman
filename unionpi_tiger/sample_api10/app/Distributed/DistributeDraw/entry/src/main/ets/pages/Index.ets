@@ -21,15 +21,8 @@ import remoteDeviceModel from '../common/utils/RemoteDeviceUtil';
 import DeviceListDialogComponent from '../view/CustomDialogComponent';
 import Logger from '../common/utils/Logger';
 import DistributedObjectModel from '../viewmodel/DistributedObjectModel';
-import { BusinessError } from '@ohos.base';
-import image from '@ohos.multimedia.image';
-import screenshot from '@ohos.screenshot';
-import fs from '@ohos.file.fs';
-import display from '@ohos.display';
-import promptAction from '@ohos.promptAction';
+import MediaUtils from '../common/utils/MediaUtils';
 
-const imagePackerApi = image.createImagePacker();
-let packOpts: image.PackingOption = { format: "image/jpeg", quality: 98 };
 let storage = LocalStorage.getShared();
 
 @Entry(storage)
@@ -46,6 +39,7 @@ struct Index {
   private canvasContext: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.settings);
   // private kvStoreModel: KvStoreModel = new KvStoreModel();
   private context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
+  private mediaUtil: MediaUtils = new MediaUtils(this.context)
   private dialogController: CustomDialogController = new CustomDialogController({
     builder: DeviceListDialogComponent({
       startAbility: this.startAbilityContinuation,
@@ -165,44 +159,8 @@ struct Index {
           .height(40)
           .backgroundColor(Color.Transparent)
           .onClick(() => {
-            let displayWidth = display.getDefaultDisplaySync().width
-            let displayHeight = display.getDefaultDisplaySync().height
-            let screenshotOptions: screenshot.ScreenshotOptions = {
-              "screenRect": {
-                "left": 0,
-                "top": 100,
-                "width": displayWidth,
-                "height": displayHeight - 150 },
-              "rotation": 0,
-              "displayId": 0
-            };
-            try {
-              screenshot.save(screenshotOptions, (err: BusinessError, pixelMap: image.PixelMap) => {
-                if (err) {
-                  console.log('Failed to save screenshot. Code: ' + JSON.stringify(err));
-                  return;
-                }
-                imagePackerApi.packing(pixelMap, packOpts).then((data: ArrayBuffer) => {
-                  let context = getContext()
-                  let filePath = context.filesDir + "/save.jpg";
-                  let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
-                  let writeLen = fs.writeSync(file.fd, data);
-                  console.info("write data to file succeed and size is:" + writeLen);
-                  fs.closeSync(file);
-                  promptAction.showToast({
-                    message: '保存成功',
-                    duration: 2000
-                  });
-                }).catch((error: BusinessError) => {
-                  console.error('Failed to pack the image. And the error is: ' + error);
-                })
-                console.log('Succeeded in saving screenshot. Pixel bytes number: ' + pixelMap.getPixelBytesNumber());
-                pixelMap.release(); // PixelMap使用完后及时释放内存
-              });
-            } catch (exception) {
-              console.error('Failed to save screenshot. Code: ' + JSON.stringify(exception));
-            }
-            ;
+            let pixelMap: PixelMap = this.canvasContext.getPixelMap(0, 0, this.canvasContext.width, this.canvasContext.height)
+            this.mediaUtil.savePicture(pixelMap)
           })
 
           Button({ type: ButtonType.Circle }) {
@@ -308,6 +266,9 @@ struct Index {
    */
   redraw(): void {
     this.canvasContext.clearRect(0, 0, this.canvasContext.width, this.canvasContext.height);
+    // 绘制白色背景
+    this.canvasContext.fillStyle = '#FFFFFF';
+    this.canvasContext.fillRect(0, 0, this.canvasContext.width, this.canvasContext.height);
     this.positionList.forEach((position) => {
       Logger.info('Index', `redraw position=${JSON.stringify(position)}`);
       if (position.isFirstPosition) {

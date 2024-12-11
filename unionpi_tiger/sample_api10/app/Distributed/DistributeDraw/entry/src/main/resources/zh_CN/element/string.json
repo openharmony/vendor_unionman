@@ -35,6 +35,10 @@
     {
       "name": "distributed_datasync_reason",
       "value": "分布式键值数据库申请权限"
+    },
+    {
+      "name": "media_reason",
+      "value": "用于分布式视频播放器访问用户媒体文件中的地理位置信息"
     }
   ]
 }
