@@ -34,10 +34,16 @@ export default class Position {
    */
   positionY: number;
 
-  constructor(isFirstPosition: boolean, isEndPosition: boolean, positionX: number, positionY: number) {
+  /**
+   * StrokeStyle.
+   */
+  strokeStyle: string;
+
+  constructor(isFirstPosition: boolean, isEndPosition: boolean, positionX: number, positionY: number, strokeStyle: string) {
     this.isFirstPosition = isFirstPosition;
     this.isEndPosition = isEndPosition;
     this.positionX = positionX;
     this.positionY = positionY;
+    this.strokeStyle = strokeStyle;
   }
 }

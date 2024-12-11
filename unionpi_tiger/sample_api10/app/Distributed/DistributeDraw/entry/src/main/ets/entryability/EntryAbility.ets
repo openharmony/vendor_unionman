@@ -74,6 +74,10 @@ export default class EntryAbility extends UIAbility {
       let positionList: Position[] = JSON.parse((this.want.parameters.positionList) as string);
       this.storage.setOrCreate('positionList', positionList);
     }
+    if (this?.want?.parameters?.strokeStyle) {
+      let strokeStyle: string = this.want.parameters.strokeStyle as string;
+      this.storage.setOrCreate('strokeStyle', strokeStyle);
+    }
 
     checkPermissions(this.context);
 
