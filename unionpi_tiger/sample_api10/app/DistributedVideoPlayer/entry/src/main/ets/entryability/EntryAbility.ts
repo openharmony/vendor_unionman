@@ -40,7 +40,7 @@ export default class EntryAbility extends UIAbility {
     // Main window is created, set main page for this ability
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
     let AtManager = abilityAccessCtrl.createAtManager();
-    AtManager.requestPermissionsFromUser(this.context, ["ohos.permission.DISTRIBUTED_DATASYNC", "ohos.permission.READ_MEDIA", "ohos.permission.WRITE_MEDIA", "ohos.permission.READ_IMAGEVIDEO"])
+    AtManager.requestPermissionsFromUser(this.context, ["ohos.permission.DISTRIBUTED_DATASYNC", "ohos.permission.READ_MEDIA", "ohos.permission.WRITE_IMAGEVIDEO", "ohos.permission.READ_IMAGEVIDEO"])
     windowStage.getMainWindowSync().setWindowSystemBarEnable([])
 
     windowStage.loadContent('pages/Index', (err, data) => {
