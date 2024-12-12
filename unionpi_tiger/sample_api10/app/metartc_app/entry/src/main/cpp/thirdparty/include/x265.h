@@ -1386,7 +1386,7 @@ typedef struct x265_param
          * It scales the quantization step size according to the spatial activity of one
          * coding unit relative to frame average spatial activity. This AQ method utilizes
          * the minimum variance of sub-unit in each coding unit to represent the coding
-         * unit°Øs spatial complexity. */
+         * unitís spatial complexity. */
         int       hevcAq;
 
         /* Sets the strength of AQ bias towards low detail CTUs. Valid only if
@@ -1519,8 +1519,8 @@ typedef struct x265_param
         int videoFormat;
 
         /* Video full range flag indicates the black level and range of the luma
-         * and chroma signals as derived from E°‰Y, E°‰PB, and E°‰PR or E°‰R, E°‰G,
-         * and E°‰B real-valued component signals. The default is false */
+         * and chroma signals as derived from E'Y, E'PB, and E'PR or E'R, E'G,
+         * and E'B real-valued component signals. The default is false */
         int bEnableVideoFullRangeFlag;
 
         /* Color description present flag in the VUI. If this is set then
