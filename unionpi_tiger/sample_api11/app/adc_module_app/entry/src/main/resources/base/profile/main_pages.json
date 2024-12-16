@@ -1,0 +1,8 @@
+{
+  "src": [
+    "pages/Index",
+    "pages/myMenu",
+    "pages/myset",
+    "pages/welcome"
+  ]
+}
