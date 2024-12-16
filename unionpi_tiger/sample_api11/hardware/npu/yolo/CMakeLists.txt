@@ -1,0 +1,37 @@
+cmake_minimum_required(VERSION 3.5.1)
+SET(CMAKE_SYSTEM_NAME Linux)
+
+#SET(ARM_32 arm_32)
+SET(ARM_64 arm_64)
+SET(GCC_PATH /homeF/junwen.dai/a311d/linux_nnsdk_v1.9.4)
+
+PROJECT(AML_NN_SDK)
+SET(INCLUDE_PATH ../linux_nn_sdk_V1.9)
+SET(OPENCV_ROOT ./opencv)
+include_directories(${INCLUDE_PATH}/include ./include ${OPENCV_ROOT}/include)
+
+if(DEFINED ARM_64)
+	SET(COMPILER ${GCC_PATH}/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin)
+	SET(CMAKE_C_COMPILER ${COMPILER}/aarch64-linux-gnu-gcc)
+	SET(CMAKE_CXX_COMPILER ${COMPILER}/aarch64-linux-gnu-g++)
+	SET(LINK_DIR ../linux_nn_sdk_V1.9/lib/lib64 ${OPENCV_ROOT}/lib64 ./)
+elseif(DEFINED ARM_32)
+	SET(COMPILER ${GCC_PATH}/gcc-linaro-6.3.1-2017.05-x86_64_arm-linux-gnueabihf/bin)
+	SET(CMAKE_C_COMPILER  ${COMPILER}/arm-linux-gnueabihf-gcc)
+	SET(CMAKE_CXX_COMPILER  ${COMPILER}/arm-linux-gnueabihf-g++)
+	SET(LINK_DIR ../linux_nn_sdk_V1.9/lib/lib32 ${OPENCV_ROOT}/lib32 ./)
+endif()
+
+link_directories(${LINK_DIR})
+aux_source_directory(. SRC_LIST)
+#link_libraries(nnsdk libjpeg.a )
+link_libraries(nnsdk opencv_imgcodecs opencv_imgproc opencv_highgui opencv_dnn opencv_core opencv_videoio libjpeg.a )
+
+
+if(DEFINED ARM_64)
+	ADD_EXECUTABLE(sdk19_64 ${SRC_LIST})
+	target_link_libraries(sdk19_64 -lpthread -lm -ldl)
+elseif(DEFINED ARM_32)
+	ADD_EXECUTABLE(sdk19_32 ${SRC_LIST})
+	target_link_libraries(sdk19_32 -lpthread -lm)
+endif()
