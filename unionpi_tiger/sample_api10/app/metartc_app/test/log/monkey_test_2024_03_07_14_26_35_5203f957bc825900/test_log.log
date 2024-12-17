@@ -1,0 +1,579 @@
+2024-03-07 14:26:35,828 - INFO:init test environment
+2024-03-07 14:26:35,942 - INFO:result = Thu Mar  7 14:26:35 CST 2024
+2024-03-07 14:26:38,784 - INFO:wukong execute time = 52200
+2024-03-07 14:26:39,002 - INFO:start Crash Thread
+2024-03-07 14:26:39,003 - INFO:MonkeyPressTest start()
+2024-03-07 14:26:39,003 - INFO:monkey  test command hdc -t 150100424a5444345203f957bc825900 shell "wukong exec -a 0.05 -t 0.05 -C 0.65 -S 0.1 -m 0.05 -k 0.05 -i 500 -T 870 &"
+2024-03-07 14:26:39,004 - INFO: execute_time = 52200
+2024-03-07 14:26:39,007 - INFO:hdc -t 150100424a5444345203f957bc825900 shell "ps -efw -ORES,Virt"
+2024-03-07 14:26:39,321 - INFO:wukong line = Thu Mar  7 14:26:39 2024 : RUN : Interval: 500
+2024-03-07 14:26:39,329 - INFO:wukong line = Thu Mar  7 14:26:39 2024 : RUN : Time: 870.000000
+2024-03-07 14:26:39,339 - INFO:wukong line = Thu Mar  7 14:26:39 2024 : INF : (  115) EnvInit : "Report currentTestDir: (/data/local/tmp/wukong/report/20240307_142639/)"
+2024-03-07 14:26:39,339 - INFO:wukong line = Thu Mar  7 14:26:39 2024 : INF : (  120) EnvInit : "Report CSV: (/data/local/tmp/wukong/report/20240307_142639/wukong_report.csv)"
+2024-03-07 14:26:39,354 - INFO:wukong line = Thu Mar  7 14:26:39 2024 : INF : (  121) EnvInit : "Report JSON: (/data/local/tmp/wukong/report/20240307_142639/data.js)"
+2024-03-07 14:26:39,354 - INFO:wukong line = Thu Mar  7 14:26:39 2024 : INF : (  124) EnvInit : "Report exception dir: (/data/local/tmp/wukong/report/20240307_142639/exception/)"
+2024-03-07 14:26:39,451 - INFO:wukong line = Thu Mar  7 14:26:39 2024 : INF : (   92) StartCrashDirListen : create listener thread
+2024-03-07 14:26:39,559 - INFO:wukong line = Thu Mar  7 14:26:39 2024 : INF : (   94) StartCrashDirListen : thread detach
+2024-03-07 14:26:39,639 - INFO:wukong line = Thu Mar  7 14:26:39 2024 : INF : (   55) ListenCrashDir : init notify
+2024-03-07 14:26:39,715 - INFO:wukong line = Thu Mar  7 14:26:39 2024 : INF : (   60) ListenCrashDir : add_watch
+2024-03-07 14:26:39,810 - INFO:wukong line = Thu Mar  7 14:26:39 2024 : INF : (   68) InitCsvFile : "CSV: (/data/local/tmp/wukong/wukong_20240307_142639.csv)"
+2024-03-07 14:26:39,902 - INFO:wukong line = Thu Mar  7 14:26:39 2024 : RUN : Seed: 1709792799
+2024-03-07 14:26:39,979 - INFO:wukong line = Start connect to AAMS
+2024-03-07 14:26:40,090 - INFO:wukong line = Success connect to AAMS
+2024-03-07 14:26:40,165 - INFO:wukong line = Thu Mar  7 14:26:40 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (com.ohos.camera) startup successful"
+2024-03-07 14:26:41,037 - INFO:wukong line = Thu Mar  7 14:26:40 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (96, 27)"
+2024-03-07 14:26:41,541 - INFO:get_ps_data end 
+2024-03-07 14:26:41,542 - INFO:sleep 30s
+2024-03-07 14:26:42,447 - INFO:wukong line = Thu Mar  7 14:26:42 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1431, 495)"
+2024-03-07 14:26:43,285 - INFO:wukong line = Thu Mar  7 14:26:43 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1441, 819)"
+2024-03-07 14:26:44,114 - INFO:wukong line = Thu Mar  7 14:26:44 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1411, 723)"
+2024-03-07 14:26:44,636 - INFO:wukong line = Thu Mar  7 14:26:44 2024 : INF : (   73) RandomInput : "Swap: (404, 720) -> (954, 374)"
+2024-03-07 14:26:46,298 - INFO:wukong line = Thu Mar  7 14:26:46 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (com.ohos.photos) startup successful"
+2024-03-07 14:26:47,381 - INFO:wukong line = Thu Mar  7 14:26:47 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (72, 384)"
+2024-03-07 14:26:47,907 - INFO:wukong line = Thu Mar  7 14:26:47 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_MEDIA_EJECT"
+2024-03-07 14:26:48,708 - INFO:wukong line = Thu Mar  7 14:26:48 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (72, 354)"
+2024-03-07 14:26:49,536 - INFO:wukong line = Thu Mar  7 14:26:49 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (144, 501)"
+2024-03-07 14:26:50,848 - INFO:wukong line = Thu Mar  7 14:26:50 2024 : INF : (   73) RandomInput : "Swap: (488, 311) -> (937, 168)"
+2024-03-07 14:26:52,706 - INFO:wukong line = Thu Mar  7 14:26:52 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1032, 611)"
+2024-03-07 14:26:53,519 - INFO:wukong line = Thu Mar  7 14:26:53 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (144, 522)"
+2024-03-07 14:26:54,315 - INFO:wukong line = Thu Mar  7 14:26:54 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (72, 384)"
+2024-03-07 14:26:54,844 - INFO:wukong line = Thu Mar  7 14:26:54 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_ALT_RIGHT"
+2024-03-07 14:26:55,626 - INFO:wukong line = Thu Mar  7 14:26:55 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (72, 384)"
+2024-03-07 14:26:56,417 - INFO:wukong line = Thu Mar  7 14:26:56 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (144, 522)"
+2024-03-07 14:26:57,196 - INFO:wukong line = Thu Mar  7 14:26:57 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1032, 569)"
+2024-03-07 14:26:57,972 - INFO:wukong line = Thu Mar  7 14:26:57 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:26:59,508 - INFO:wukong line = Thu Mar  7 14:26:59 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1205, 125)"
+2024-03-07 14:27:01,031 - INFO:wukong line = Thu Mar  7 14:27:00 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1151, 960)"
+2024-03-07 14:27:02,713 - INFO:wukong line = Thu Mar  7 14:27:02 2024 : INF : (   73) RandomInput : "Swap: (372, 796) -> (810, 292)"
+2024-03-07 14:27:04,484 - INFO:wukong line = Thu Mar  7 14:27:04 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:27:06,000 - INFO:wukong line = Thu Mar  7 14:27:05 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (937, 915)"
+2024-03-07 14:27:06,540 - INFO:wukong line = Thu Mar  7 14:27:06 2024 : INF : (   62) RandomInput : "Mouse: (1092, 626) Mouse Type: (MOUSE_LEFT)"
+2024-03-07 14:27:07,573 - INFO:wukong line = Thu Mar  7 14:27:06 2024 : INF : (   77) RandomInput : "Touch: (1019, 5)"
+2024-03-07 14:27:07,591 - INFO:wukong line = Thu Mar  7 14:27:07 2024 : INF : (   73) RandomInput : "Swap: (730, 665) -> (416, 155)"
+2024-03-07 14:27:09,406 - INFO:wukong line = Thu Mar  7 14:27:09 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (com.example.metartc) startup successful"
+2024-03-07 14:27:11,693 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep cppcrash" ,length = 0 
+2024-03-07 14:27:11,860 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep jscrash" ,length = 0 
+2024-03-07 14:27:11,976 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep appfreeze" ,length = 0 
+2024-03-07 14:27:12,097 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep sysfreeze" ,length = 0 
+2024-03-07 14:27:12,097 - INFO:sleep 30s
+2024-03-07 14:27:14,380 - INFO:wukong line = Thu Mar  7 14:27:14 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (78, 27)"
+2024-03-07 14:27:15,217 - INFO:wukong line = Thu Mar  7 14:27:15 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (258, 27)"
+2024-03-07 14:27:16,241 - INFO:wukong line = Thu Mar  7 14:27:16 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1449, 199)"
+2024-03-07 14:27:17,373 - INFO:wukong line = Thu Mar  7 14:27:17 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (78, 27)"
+2024-03-07 14:27:19,131 - INFO:wukong line = Thu Mar  7 14:27:19 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (657, 146)"
+2024-03-07 14:27:20,243 - INFO:wukong line = Thu Mar  7 14:27:20 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (96, 27)"
+2024-03-07 14:27:20,768 - INFO:wukong line = Thu Mar  7 14:27:20 2024 : INF : (   62) RandomInput : "Mouse: (129, 1015) Mouse Type: (MOUSE_LEFT)"
+2024-03-07 14:27:21,280 - INFO:wukong line = Thu Mar  7 14:27:21 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_MEDIA_CLOSE"
+2024-03-07 14:27:21,303 - INFO:wukong line = Thu Mar  7 14:27:21 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_PLUS"
+2024-03-07 14:27:21,304 - INFO:wukong line = Thu Mar  7 14:27:21 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_8"
+2024-03-07 14:27:21,319 - INFO:wukong line = Thu Mar  7 14:27:21 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_TAB"
+2024-03-07 14:27:21,336 - INFO:wukong line = Thu Mar  7 14:27:21 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_SHIFT_RIGHT"
+2024-03-07 14:27:21,351 - INFO:wukong line = Thu Mar  7 14:27:21 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_E"
+2024-03-07 14:27:21,367 - INFO:wukong line = Thu Mar  7 14:27:21 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_K"
+2024-03-07 14:27:21,382 - INFO:wukong line = Thu Mar  7 14:27:21 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_PERIOD"
+2024-03-07 14:27:21,398 - INFO:wukong line = Thu Mar  7 14:27:21 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_F9"
+2024-03-07 14:27:21,413 - INFO:wukong line = Thu Mar  7 14:27:21 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_MOVE_END"
+2024-03-07 14:27:21,874 - INFO:wukong line = Thu Mar  7 14:27:21 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_VOLUME_DOWN"
+2024-03-07 14:27:22,785 - INFO:wukong line = Thu Mar  7 14:27:22 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (96, 27)"
+2024-03-07 14:27:23,915 - INFO:wukong line = Thu Mar  7 14:27:23 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (228, 145)"
+2024-03-07 14:27:24,901 - INFO:wukong line = Thu Mar  7 14:27:24 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (96, 27)"
+2024-03-07 14:27:26,031 - INFO:wukong line = Thu Mar  7 14:27:25 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1449, 199)"
+2024-03-07 14:27:26,555 - INFO:wukong line = Thu Mar  7 14:27:26 2024 : INF : (   73) RandomInput : "Swap: (593, 500) -> (1738, 210)"
+2024-03-07 14:27:29,346 - INFO:wukong line = Thu Mar  7 14:27:29 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1110, 306)"
+2024-03-07 14:27:29,936 - INFO:wukong line = Thu Mar  7 14:27:29 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (ohos.samples.distributedmusicplayer) startup successful"
+2024-03-07 14:27:30,487 - INFO:wukong line = Thu Mar  7 14:27:30 2024 : ERR : (  213) UpdateComponentInfo : "Accessibility Ability get root element info failed! Errorcode : (4007) "
+2024-03-07 14:27:31,031 - INFO:wukong line = Thu Mar  7 14:27:30 2024 : INF : (   73) RandomInput : "Swap: (885, 74) -> (309, 664)"
+2024-03-07 14:27:32,755 - INFO:wukong line = Thu Mar  7 14:27:32 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:27:33,416 - INFO:wukong line = Thu Mar  7 14:27:33 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:27:33,932 - INFO:wukong line = Thu Mar  7 14:27:33 2024 : INF : (   73) RandomInput : "Swap: (106, 424) -> (385, 968)"
+2024-03-07 14:27:35,726 - INFO:wukong line = Thu Mar  7 14:27:35 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (891, 545)"
+2024-03-07 14:27:36,253 - INFO:wukong line = Thu Mar  7 14:27:36 2024 : INF : (   73) RandomInput : "Swap: (788, 514) -> (1706, 408)"
+2024-03-07 14:27:38,016 - INFO:wukong line = Thu Mar  7 14:27:37 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1100, 601)"
+2024-03-07 14:27:38,862 - INFO:wukong line = Thu Mar  7 14:27:38 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1008, 69)"
+2024-03-07 14:27:39,393 - INFO:wukong line = Thu Mar  7 14:27:39 2024 : INF : (   62) RandomInput : "Mouse: (1591, 410) Mouse Type: (MOUSE_LEFT)"
+2024-03-07 14:27:39,918 - INFO:wukong line = Thu Mar  7 14:27:39 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_VOLUME_UP"
+2024-03-07 14:27:41,520 - INFO:wukong line = Thu Mar  7 14:27:41 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:27:42,212 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep cppcrash" ,length = 1 
+2024-03-07 14:27:42,321 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep jscrash" ,length = 0 
+2024-03-07 14:27:42,446 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep appfreeze" ,length = 0 
+2024-03-07 14:27:42,557 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep sysfreeze" ,length = 0 
+2024-03-07 14:27:42,557 - INFO:data_list = {'cppcrash-composer_host-3036-20240307142714'}length = 1
+2024-03-07 14:27:42,558 - INFO:file recv_command :hdc -t 150100424a5444345203f957bc825900 file recv /data/log/faultlog/faultlogger/cppcrash-composer_host-3036-20240307142714 R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1
+2024-03-07 14:27:42,649 - INFO:file recv result :[I][2024-03-07 14:27:42] HdcFile::TransferSummary success
+FileTransfer finish, Size:4278, File count = 1, time:7ms rate:611.14kB/s
+2024-03-07 14:27:42,869 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.000.20240307-142637.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [Fail]Error opening file: no such file or directory, path:/data/log/hilog/hilog.000.20240307-142637.gz
+2024-03-07 14:27:42,971 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.001.20240307-142640.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:42] HdcFile::TransferSummary success
+FileTransfer finish, Size:432912, File count = 1, time:32ms rate:13528.50kB/s
+2024-03-07 14:27:43,079 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.002.20240307-142643.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:43] HdcFile::TransferSummary success
+FileTransfer finish, Size:404680, File count = 1, time:33ms rate:12263.03kB/s
+2024-03-07 14:27:43,182 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.003.20240307-142647.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:43] HdcFile::TransferSummary success
+FileTransfer finish, Size:340678, File count = 1, time:25ms rate:13627.12kB/s
+2024-03-07 14:27:43,259 - INFO:wukong line = Thu Mar  7 14:27:43 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (77, 169)"
+2024-03-07 14:27:43,312 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.004.20240307-142651.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:43] HdcFile::TransferSummary success
+FileTransfer finish, Size:332517, File count = 1, time:42ms rate:7917.07kB/s
+2024-03-07 14:27:43,413 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.005.20240307-142655.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:43] HdcFile::TransferSummary success
+FileTransfer finish, Size:318891, File count = 1, time:23ms rate:13864.83kB/s
+2024-03-07 14:27:43,516 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.006.20240307-142658.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:43] HdcFile::TransferSummary success
+FileTransfer finish, Size:341342, File count = 1, time:28ms rate:12190.79kB/s
+2024-03-07 14:27:43,617 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.007.20240307-142700.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:43] HdcFile::TransferSummary success
+FileTransfer finish, Size:368386, File count = 1, time:21ms rate:17542.19kB/s
+2024-03-07 14:27:43,729 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.008.20240307-142701.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:43] HdcFile::TransferSummary success
+FileTransfer finish, Size:437569, File count = 1, time:26ms rate:16829.58kB/s
+2024-03-07 14:27:43,841 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.009.20240307-142705.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:43] HdcFile::TransferSummary success
+FileTransfer finish, Size:349116, File count = 1, time:25ms rate:13964.64kB/s
+2024-03-07 14:27:43,936 - INFO:wukong line = Thu Mar  7 14:27:43 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 331)"
+2024-03-07 14:27:43,949 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.010.20240307-142709.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:43] HdcFile::TransferSummary success
+FileTransfer finish, Size:437957, File count = 1, time:27ms rate:16220.63kB/s
+2024-03-07 14:27:44,064 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.011.20240307-142715.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:44] HdcFile::TransferSummary success
+FileTransfer finish, Size:445881, File count = 1, time:32ms rate:13933.78kB/s
+2024-03-07 14:27:44,177 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.012.20240307-142717.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:44] HdcFile::TransferSummary success
+FileTransfer finish, Size:460385, File count = 1, time:34ms rate:13540.74kB/s
+2024-03-07 14:27:44,290 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.013.20240307-142720.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:44] HdcFile::TransferSummary success
+FileTransfer finish, Size:487683, File count = 1, time:37ms rate:13180.62kB/s
+2024-03-07 14:27:44,395 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.014.20240307-142723.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:44] HdcFile::TransferSummary success
+FileTransfer finish, Size:470222, File count = 1, time:36ms rate:13061.72kB/s
+2024-03-07 14:27:44,518 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.015.20240307-142725.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:44] HdcFile::TransferSummary success
+FileTransfer finish, Size:501317, File count = 1, time:36ms rate:13925.47kB/s
+2024-03-07 14:27:44,605 - INFO:wukong line = Thu Mar  7 14:27:44 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (959, 949)"
+2024-03-07 14:27:44,647 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.016.20240307-142727.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:44] HdcFile::TransferSummary success
+FileTransfer finish, Size:507524, File count = 1, time:43ms rate:11802.88kB/s
+2024-03-07 14:27:44,780 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.017.20240307-142730.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:44] HdcFile::TransferSummary success
+FileTransfer finish, Size:424667, File count = 1, time:29ms rate:14643.69kB/s
+2024-03-07 14:27:44,900 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.018.20240307-142734.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:44] HdcFile::TransferSummary success
+FileTransfer finish, Size:370197, File count = 1, time:36ms rate:10283.25kB/s
+2024-03-07 14:27:44,996 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/hilog.019.20240307-142740.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:44] HdcFile::TransferSummary success
+FileTransfer finish, Size:352912, File count = 1, time:25ms rate:14116.48kB/s
+2024-03-07 14:27:45,077 - INFO:get_cur_hilg_data command = hdc -t 150100424a5444345203f957bc825900 file recv /data/log/hilog/kmsg.000.20240307-142637.gz R:\prj\um\rtc_entry\metartc\test\log\monkey_test_2024_03_07_14_26_35_5203f957bc825900\1 
+result = [I][2024-03-07 14:27:45] HdcFile::TransferSummary success
+FileTransfer finish, Size:61931, File count = 1, time:9ms rate:6881.22kB/s
+2024-03-07 14:27:45,077 - INFO:hdc -t 150100424a5444345203f957bc825900 shell "ps -efw -ORES,Virt"
+2024-03-07 14:27:45,134 - INFO:wukong line = Thu Mar  7 14:27:45 2024 : INF : (   73) RandomInput : "Swap: (688, 194) -> (113, 194)"
+2024-03-07 14:27:46,840 - INFO:wukong line = Thu Mar  7 14:27:46 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1852, 115)"
+2024-03-07 14:27:47,400 - INFO:wukong line = Thu Mar  7 14:27:47 2024 : INF : (   73) RandomInput : "Swap: (1485, 999) -> (1457, 550)"
+2024-03-07 14:27:47,675 - INFO:get_ps_data end 
+2024-03-07 14:27:48,000 - INFO:_get_dump_data end 
+2024-03-07 14:27:48,003 - INFO:hdc -t 150100424a5444345203f957bc825900 shell "cat /proc/meminfo"
+2024-03-07 14:27:48,110 - INFO:get_meminfo_data end 
+2024-03-07 14:27:48,222 - INFO:get_process_heap_info end 
+2024-03-07 14:27:48,224 - INFO:hdc -t 150100424a5444345203f957bc825900 shell "hidumper --mem"
+2024-03-07 14:27:49,134 - INFO:wukong line = Thu Mar  7 14:27:49 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (157, 384)"
+2024-03-07 14:27:49,649 - INFO:wukong line = Thu Mar  7 14:27:49 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_4"
+2024-03-07 14:27:50,168 - INFO:wukong line = Thu Mar  7 14:27:50 2024 : INF : (   73) RandomInput : "Swap: (824, 545) -> (1429, 7)"
+2024-03-07 14:27:51,872 - INFO:wukong line = Thu Mar  7 14:27:51 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (864, 300)"
+2024-03-07 14:27:53,017 - INFO:wukong line = Thu Mar  7 14:27:52 2024 : INF : (   73) RandomInput : "Swap: (1574, 878) -> (1427, 1042)"
+2024-03-07 14:27:54,718 - INFO:wukong line = Thu Mar  7 14:27:54 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (863, 633)"
+2024-03-07 14:27:55,236 - INFO:wukong line = Thu Mar  7 14:27:55 2024 : INF : (   73) RandomInput : "Swap: (91, 945) -> (1243, 24)"
+2024-03-07 14:27:56,991 - INFO:wukong line = Thu Mar  7 14:27:56 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (864, 514)"
+2024-03-07 14:27:57,178 - INFO:hidumper_mem_out.close end 
+2024-03-07 14:27:57,178 - INFO:get_hidumper_mem end 
+2024-03-07 14:27:57,178 - INFO:get_current_phone_status end 
+2024-03-07 14:27:58,006 - INFO:wukong line = Thu Mar  7 14:27:57 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_4"
+2024-03-07 14:27:58,024 - INFO:wukong line = Thu Mar  7 14:27:57 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_DPAD_UP"
+2024-03-07 14:27:58,039 - INFO:wukong line = Thu Mar  7 14:27:57 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_2"
+2024-03-07 14:27:58,055 - INFO:wukong line = Thu Mar  7 14:27:57 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_1"
+2024-03-07 14:27:58,071 - INFO:wukong line = Thu Mar  7 14:27:57 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_DOT"
+2024-03-07 14:27:58,087 - INFO:wukong line = Thu Mar  7 14:27:57 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_INSERT"
+2024-03-07 14:27:58,103 - INFO:wukong line = Thu Mar  7 14:27:57 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_ADD"
+2024-03-07 14:27:58,118 - INFO:wukong line = Thu Mar  7 14:27:57 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_PAGE_UP"
+2024-03-07 14:27:58,134 - INFO:wukong line = Thu Mar  7 14:27:57 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_ADD"
+2024-03-07 14:27:58,149 - INFO:wukong line = Thu Mar  7 14:27:57 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_7"
+2024-03-07 14:27:58,164 - INFO:wukong line = Thu Mar  7 14:27:57 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_DOT"
+2024-03-07 14:27:59,278 - INFO:wukong line = Thu Mar  7 14:27:59 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (863, 435)"
+2024-03-07 14:28:00,320 - INFO:wukong line = Thu Mar  7 14:27:59 2024 : INF : (   77) RandomInput : "Touch: (519, 780)"
+2024-03-07 14:28:00,455 - INFO:wukong line = Thu Mar  7 14:28:00 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:28:01,217 - INFO:wukong line = Thu Mar  7 14:28:01 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (145, 321)"
+2024-03-07 14:28:01,840 - INFO:wukong line = Thu Mar  7 14:28:01 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (864, 300)"
+2024-03-07 14:28:02,114 - INFO:pid_data = 
+2024-03-07 14:28:02,116 - INFO:get_hilog_buffer_data end 
+2024-03-07 14:28:02,116 - INFO: check end next cycles
+2024-03-07 14:28:02,116 - INFO:sleep 30s
+2024-03-07 14:28:02,472 - INFO:wukong line = Thu Mar  7 14:28:02 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (864, 300)"
+2024-03-07 14:28:03,000 - INFO:wukong line = Thu Mar  7 14:28:02 2024 : INF : (   73) RandomInput : "Swap: (935, 640) -> (913, 854)"
+2024-03-07 14:28:06,221 - INFO:wukong line = Thu Mar  7 14:28:06 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (864, 300)"
+2024-03-07 14:28:06,845 - INFO:wukong line = Thu Mar  7 14:28:06 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (864, 483)"
+2024-03-07 14:28:07,370 - INFO:wukong line = Thu Mar  7 14:28:07 2024 : INF : (   73) RandomInput : "Swap: (338, 336) -> (335, 198)"
+2024-03-07 14:28:09,115 - INFO:wukong line = Thu Mar  7 14:28:08 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (864, 483)"
+2024-03-07 14:28:09,724 - INFO:wukong line = Thu Mar  7 14:28:09 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:28:10,467 - INFO:wukong line = Thu Mar  7 14:28:10 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (157, 384)"
+2024-03-07 14:28:11,121 - INFO:wukong line = Thu Mar  7 14:28:10 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (864, 300)"
+2024-03-07 14:28:11,663 - INFO:wukong line = Thu Mar  7 14:28:11 2024 : INF : (   77) RandomInput : "Touch: (605, 543)"
+2024-03-07 14:28:12,303 - INFO:wukong line = Thu Mar  7 14:28:12 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (864, 514)"
+2024-03-07 14:28:12,931 - INFO:wukong line = Thu Mar  7 14:28:12 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (864, 300)"
+2024-03-07 14:28:13,462 - INFO:wukong line = Thu Mar  7 14:28:13 2024 : INF : (   62) RandomInput : "Mouse: (1232, 399) Mouse Type: (MOUSE_RIGHT)"
+2024-03-07 14:28:14,784 - INFO:wukong line = Thu Mar  7 14:28:14 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (864, 300)"
+2024-03-07 14:28:15,482 - INFO:wukong line = Thu Mar  7 14:28:15 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (46, 119)"
+2024-03-07 14:28:16,138 - INFO:wukong line = Thu Mar  7 14:28:16 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (46, 119)"
+2024-03-07 14:28:16,779 - INFO:wukong line = Thu Mar  7 14:28:16 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (46, 119)"
+2024-03-07 14:28:17,434 - INFO:wukong line = Thu Mar  7 14:28:17 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (204, 120)"
+2024-03-07 14:28:18,064 - INFO:wukong line = Thu Mar  7 14:28:17 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (46, 119)"
+2024-03-07 14:28:18,698 - INFO:wukong line = Thu Mar  7 14:28:18 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (863, 633)"
+2024-03-07 14:28:19,224 - INFO:wukong line = Thu Mar  7 14:28:19 2024 : INF : (   62) RandomInput : "Mouse: (1050, 1023) Mouse Type: (MOUSE_LEFT)"
+2024-03-07 14:28:19,898 - INFO:wukong line = Thu Mar  7 14:28:19 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (204, 120)"
+2024-03-07 14:28:20,544 - INFO:wukong line = Thu Mar  7 14:28:20 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (46, 119)"
+2024-03-07 14:28:21,936 - INFO:wukong line = Thu Mar  7 14:28:21 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (864, 514)"
+2024-03-07 14:28:22,569 - INFO:wukong line = Thu Mar  7 14:28:22 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (204, 120)"
+2024-03-07 14:28:23,097 - INFO:wukong line = Thu Mar  7 14:28:22 2024 : INF : (   73) RandomInput : "Swap: (1888, 679) -> (433, 358)"
+2024-03-07 14:28:24,743 - INFO:wukong line = Thu Mar  7 14:28:24 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_E"
+2024-03-07 14:28:25,280 - INFO:wukong line = Thu Mar  7 14:28:25 2024 : INF : (   77) RandomInput : "Touch: (205, 16)"
+2024-03-07 14:28:25,824 - INFO:wukong line = Thu Mar  7 14:28:25 2024 : INF : (   62) RandomInput : "Mouse: (1351, 770) Mouse Type: (MOUSE_LEFT)"
+2024-03-07 14:28:26,351 - INFO:wukong line = Thu Mar  7 14:28:26 2024 : INF : (   62) RandomInput : "Mouse: (1696, 693) Mouse Type: (MOUSE_RIGHT)"
+2024-03-07 14:28:27,023 - INFO:wukong line = Thu Mar  7 14:28:26 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:28:27,546 - INFO:wukong line = Thu Mar  7 14:28:27 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_VOLUME_UP"
+2024-03-07 14:28:28,168 - INFO:wukong line = Thu Mar  7 14:28:28 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (204, 120)"
+2024-03-07 14:28:28,697 - INFO:wukong line = Thu Mar  7 14:28:28 2024 : INF : (   73) RandomInput : "Swap: (645, 408) -> (1383, 343)"
+2024-03-07 14:28:31,617 - INFO:wukong line = Thu Mar  7 14:28:31 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:28:32,245 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep cppcrash" ,length = 1 
+2024-03-07 14:28:32,339 - INFO:wukong line = Thu Mar  7 14:28:32 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (122, 495)"
+2024-03-07 14:28:32,370 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep jscrash" ,length = 0 
+2024-03-07 14:28:32,495 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep appfreeze" ,length = 0 
+2024-03-07 14:28:32,706 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep sysfreeze" ,length = 0 
+2024-03-07 14:28:32,719 - INFO:sleep 30s
+2024-03-07 14:28:33,004 - INFO:wukong line = Thu Mar  7 14:28:32 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (959, 949)"
+2024-03-07 14:28:33,658 - INFO:wukong line = Thu Mar  7 14:28:33 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (61, 115)"
+2024-03-07 14:28:34,367 - INFO:wukong line = Thu Mar  7 14:28:34 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (124, 273)"
+2024-03-07 14:28:34,893 - INFO:wukong line = Thu Mar  7 14:28:34 2024 : INF : (   73) RandomInput : "Swap: (423, 538) -> (1288, 544)"
+2024-03-07 14:28:36,631 - INFO:wukong line = Thu Mar  7 14:28:36 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:28:37,147 - INFO:wukong line = Thu Mar  7 14:28:37 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_M"
+2024-03-07 14:28:37,858 - INFO:wukong line = Thu Mar  7 14:28:37 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:28:38,380 - INFO:wukong line = Thu Mar  7 14:28:38 2024 : INF : (   62) RandomInput : "Mouse: (552, 715) Mouse Type: (MOUSE_RIGHT)"
+2024-03-07 14:28:39,041 - INFO:wukong line = Thu Mar  7 14:28:38 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (964, 115)"
+2024-03-07 14:28:39,703 - INFO:wukong line = Thu Mar  7 14:28:39 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (69, 115)"
+2024-03-07 14:28:40,364 - INFO:wukong line = Thu Mar  7 14:28:40 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 331)"
+2024-03-07 14:28:41,637 - INFO:wukong line = Thu Mar  7 14:28:41 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 473)"
+2024-03-07 14:28:42,737 - INFO:wukong line = Thu Mar  7 14:28:42 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (com.ohos.note) startup successful"
+2024-03-07 14:28:43,372 - INFO:wukong line = Thu Mar  7 14:28:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:28:45,231 - INFO:wukong line = Thu Mar  7 14:28:45 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1023, 960)"
+2024-03-07 14:28:46,751 - INFO:wukong line = Thu Mar  7 14:28:46 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (258, 27)"
+2024-03-07 14:28:48,188 - INFO:wukong line = Thu Mar  7 14:28:48 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (464, 311)"
+2024-03-07 14:28:49,256 - INFO:wukong line = Thu Mar  7 14:28:48 2024 : INF : (   77) RandomInput : "Touch: (487, 327)"
+2024-03-07 14:28:49,596 - INFO:wukong line = Thu Mar  7 14:28:49 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (483, 118)"
+2024-03-07 14:28:50,127 - INFO:wukong line = Thu Mar  7 14:28:49 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_VOLUME_DOWN"
+2024-03-07 14:28:51,008 - INFO:wukong line = Thu Mar  7 14:28:50 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (967, 216)"
+2024-03-07 14:28:51,577 - INFO:wukong line = Thu Mar  7 14:28:51 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (com.ohos.contacts) startup successful"
+2024-03-07 14:28:53,432 - INFO:wukong line = Thu Mar  7 14:28:53 2024 : INF : (   73) RandomInput : "Swap: (1614, 128) -> (1463, 749)"
+2024-03-07 14:28:55,565 - INFO:wukong line = Thu Mar  7 14:28:54 2024 : INF : (   77) RandomInput : "Touch: (1422, 593)"
+2024-03-07 14:28:55,579 - INFO:wukong line = Thu Mar  7 14:28:55 2024 : INF : (   73) RandomInput : "Swap: (1896, 322) -> (1773, 124)"
+2024-03-07 14:28:58,141 - INFO:wukong line = Thu Mar  7 14:28:58 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1645, 487)"
+2024-03-07 14:28:59,614 - INFO:wukong line = Thu Mar  7 14:28:59 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1128, 671)"
+2024-03-07 14:29:01,181 - INFO:wukong line = Thu Mar  7 14:29:01 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1386, 343)"
+2024-03-07 14:29:02,670 - INFO:wukong line = Thu Mar  7 14:29:02 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (204, 27)"
+2024-03-07 14:29:02,857 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep cppcrash" ,length = 1 
+2024-03-07 14:29:02,994 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep jscrash" ,length = 0 
+2024-03-07 14:29:03,131 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep appfreeze" ,length = 0 
+2024-03-07 14:29:03,199 - INFO:wukong line = Thu Mar  7 14:29:03 2024 : INF : (   73) RandomInput : "Swap: (1821, 1006) -> (269, 916)"
+2024-03-07 14:29:03,257 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep sysfreeze" ,length = 0 
+2024-03-07 14:29:03,258 - INFO:sleep 30s
+2024-03-07 14:29:06,112 - INFO:wukong line = Thu Mar  7 14:29:05 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (78, 27)"
+2024-03-07 14:29:06,638 - INFO:wukong line = Thu Mar  7 14:29:06 2024 : INF : (   73) RandomInput : "Swap: (953, 395) -> (1346, 346)"
+2024-03-07 14:29:10,755 - INFO:wukong line = Thu Mar  7 14:29:10 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1127, 343)"
+2024-03-07 14:29:12,462 - INFO:wukong line = Thu Mar  7 14:29:12 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:29:14,139 - INFO:wukong line = Thu Mar  7 14:29:14 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (391, 125)"
+2024-03-07 14:29:14,691 - INFO:wukong line = Thu Mar  7 14:29:14 2024 : INF : (   77) RandomInput : "Touch: (1638, 367)"
+2024-03-07 14:29:16,256 - INFO:wukong line = Thu Mar  7 14:29:15 2024 : INF : (   77) RandomInput : "Touch: (718, 630)"
+2024-03-07 14:29:17,684 - INFO:wukong line = Thu Mar  7 14:29:17 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1023, 960)"
+2024-03-07 14:29:18,211 - INFO:wukong line = Thu Mar  7 14:29:18 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_VOLUME_DOWN"
+2024-03-07 14:29:19,038 - INFO:wukong line = Thu Mar  7 14:29:18 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (45, 27)"
+2024-03-07 14:29:20,101 - INFO:wukong line = Thu Mar  7 14:29:19 2024 : INF : (   77) RandomInput : "Touch: (1153, 569)"
+2024-03-07 14:29:20,420 - INFO:wukong line = Thu Mar  7 14:29:20 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (258, 27)"
+2024-03-07 14:29:21,231 - INFO:wukong line = Thu Mar  7 14:29:21 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (204, 27)"
+2024-03-07 14:29:22,461 - INFO:wukong line = Thu Mar  7 14:29:22 2024 : INF : (   73) RandomInput : "Swap: (353, 551) -> (1197, 18)"
+2024-03-07 14:29:24,420 - INFO:wukong line = Thu Mar  7 14:29:24 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (258, 27)"
+2024-03-07 14:29:24,973 - INFO:wukong line = Thu Mar  7 14:29:24 2024 : INF : (   77) RandomInput : "Touch: (1262, 646)"
+2024-03-07 14:29:25,830 - INFO:wukong line = Thu Mar  7 14:29:25 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (45, 27)"
+2024-03-07 14:29:26,630 - INFO:wukong line = Thu Mar  7 14:29:26 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (967, 216)"
+2024-03-07 14:29:27,529 - INFO:wukong line = Thu Mar  7 14:29:27 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (150, 27)"
+2024-03-07 14:29:28,424 - INFO:wukong line = Thu Mar  7 14:29:28 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (150, 27)"
+2024-03-07 14:29:29,491 - INFO:wukong line = Thu Mar  7 14:29:29 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (78, 27)"
+2024-03-07 14:29:30,253 - INFO:wukong line = Thu Mar  7 14:29:30 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (386, 120)"
+2024-03-07 14:29:30,824 - INFO:wukong line = Thu Mar  7 14:29:30 2024 : INF : (   73) RandomInput : "Swap: (10, 879) -> (732, 472)"
+2024-03-07 14:29:33,401 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep cppcrash" ,length = 1 
+2024-03-07 14:29:33,528 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep jscrash" ,length = 0 
+2024-03-07 14:29:33,666 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep appfreeze" ,length = 0 
+2024-03-07 14:29:33,798 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep sysfreeze" ,length = 0 
+2024-03-07 14:29:33,798 - INFO:sleep 30s
+2024-03-07 14:29:34,865 - INFO:wukong line = Thu Mar  7 14:29:34 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:29:35,552 - INFO:wukong line = Thu Mar  7 14:29:35 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (com.ohos.settings) startup successful"
+2024-03-07 14:29:37,009 - INFO:wukong line = Thu Mar  7 14:29:36 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (150, 27)"
+2024-03-07 14:29:37,502 - INFO:wukong line = Thu Mar  7 14:29:37 2024 : INF : (   62) RandomInput : "Mouse: (1725, 772) Mouse Type: (MOUSE_RIGHT)"
+2024-03-07 14:29:38,029 - INFO:wukong line = Thu Mar  7 14:29:37 2024 : INF : (   73) RandomInput : "Swap: (745, 360) -> (1749, 161)"
+2024-03-07 14:29:40,572 - INFO:wukong line = Thu Mar  7 14:29:40 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (386, 991)"
+2024-03-07 14:29:41,436 - INFO:wukong line = Thu Mar  7 14:29:41 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (45, 27)"
+2024-03-07 14:29:42,214 - INFO:wukong line = Thu Mar  7 14:29:42 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:29:43,549 - INFO:wukong line = Thu Mar  7 14:29:43 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (381, 203)"
+2024-03-07 14:29:44,098 - INFO:wukong line = Thu Mar  7 14:29:43 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (com.ohos.settings) startup successful"
+2024-03-07 14:29:45,153 - INFO:wukong line = Thu Mar  7 14:29:45 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (com.ohos.contacts) startup successful"
+2024-03-07 14:29:45,729 - INFO:wukong line = Thu Mar  7 14:29:45 2024 : ERR : (  213) UpdateComponentInfo : "Accessibility Ability get root element info failed! Errorcode : (4005) "
+2024-03-07 14:29:46,322 - INFO:wukong line = Thu Mar  7 14:29:46 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (com.example.otatest) startup successful"
+2024-03-07 14:29:47,750 - INFO:wukong line = Thu Mar  7 14:29:47 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (959, 949)"
+2024-03-07 14:29:49,403 - INFO:wukong line = Thu Mar  7 14:29:49 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (348, 169)"
+2024-03-07 14:29:50,094 - INFO:wukong line = Thu Mar  7 14:29:49 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 395)"
+2024-03-07 14:29:50,823 - INFO:wukong line = Thu Mar  7 14:29:50 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 395)"
+2024-03-07 14:29:51,534 - INFO:wukong line = Thu Mar  7 14:29:51 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 396)"
+2024-03-07 14:29:52,064 - INFO:wukong line = Thu Mar  7 14:29:51 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_G"
+2024-03-07 14:29:52,084 - INFO:wukong line = Thu Mar  7 14:29:51 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACKSLASH"
+2024-03-07 14:29:52,103 - INFO:wukong line = Thu Mar  7 14:29:51 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_PERIOD"
+2024-03-07 14:29:52,120 - INFO:wukong line = Thu Mar  7 14:29:51 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_A"
+2024-03-07 14:29:52,133 - INFO:wukong line = Thu Mar  7 14:29:51 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_I"
+2024-03-07 14:29:52,148 - INFO:wukong line = Thu Mar  7 14:29:52 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_1"
+2024-03-07 14:29:52,164 - INFO:wukong line = Thu Mar  7 14:29:52 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_F10"
+2024-03-07 14:29:52,831 - INFO:wukong line = Thu Mar  7 14:29:52 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 396)"
+2024-03-07 14:29:53,569 - INFO:wukong line = Thu Mar  7 14:29:53 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:29:54,046 - INFO:wukong line = Thu Mar  7 14:29:53 2024 : INF : (   73) RandomInput : "Swap: (11, 193) -> (1626, 738)"
+2024-03-07 14:29:55,827 - INFO:wukong line = Thu Mar  7 14:29:55 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_MEDIA_PAUSE"
+2024-03-07 14:29:55,851 - INFO:wukong line = Thu Mar  7 14:29:55 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_2"
+2024-03-07 14:29:55,870 - INFO:wukong line = Thu Mar  7 14:29:55 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_Z"
+2024-03-07 14:29:55,885 - INFO:wukong line = Thu Mar  7 14:29:55 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_4"
+2024-03-07 14:29:55,901 - INFO:wukong line = Thu Mar  7 14:29:55 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_MULTIPLY"
+2024-03-07 14:29:55,917 - INFO:wukong line = Thu Mar  7 14:29:55 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_SLASH"
+2024-03-07 14:29:55,932 - INFO:wukong line = Thu Mar  7 14:29:55 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_F8"
+2024-03-07 14:29:55,948 - INFO:wukong line = Thu Mar  7 14:29:55 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_4"
+2024-03-07 14:29:57,692 - INFO:wukong line = Thu Mar  7 14:29:57 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (937, 915)"
+2024-03-07 14:30:00,297 - INFO:wukong line = Thu Mar  7 14:30:00 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1163, 169)"
+2024-03-07 14:30:01,110 - INFO:wukong line = Thu Mar  7 14:30:00 2024 : INF : (   73) RandomInput : "Swap: (184, 885) -> (1490, 833)"
+2024-03-07 14:30:03,767 - INFO:wukong line = Thu Mar  7 14:30:03 2024 : INF : (   77) RandomInput : "Touch: (902, 5)"
+2024-03-07 14:30:03,929 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep cppcrash" ,length = 1 
+2024-03-07 14:30:04,063 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep jscrash" ,length = 0 
+2024-03-07 14:30:04,191 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep appfreeze" ,length = 0 
+2024-03-07 14:30:04,318 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep sysfreeze" ,length = 0 
+2024-03-07 14:30:04,319 - INFO:sleep 30s
+2024-03-07 14:30:04,654 - INFO:wukong line = Thu Mar  7 14:30:04 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:30:09,002 - INFO:wukong line = Thu Mar  7 14:30:08 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_VOLUME_UP"
+2024-03-07 14:30:10,761 - INFO:wukong line = Thu Mar  7 14:30:10 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (77, 169)"
+2024-03-07 14:30:11,284 - INFO:wukong line = Thu Mar  7 14:30:11 2024 : INF : (   62) RandomInput : "Mouse: (1097, 543) Mouse Type: (MOUSE_RIGHT)"
+2024-03-07 14:30:11,923 - INFO:wukong line = Thu Mar  7 14:30:11 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1852, 115)"
+2024-03-07 14:30:12,616 - INFO:wukong line = Thu Mar  7 14:30:12 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (122, 495)"
+2024-03-07 14:30:13,290 - INFO:wukong line = Thu Mar  7 14:30:13 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:30:13,838 - INFO:wukong line = Thu Mar  7 14:30:13 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (ohos.samples.clock) startup successful"
+2024-03-07 14:30:14,411 - INFO:wukong line = Thu Mar  7 14:30:14 2024 : INF : (   62) RandomInput : "Mouse: (645, 183) Mouse Type: (MOUSE_LEFT)"
+2024-03-07 14:30:15,581 - INFO:wukong line = Thu Mar  7 14:30:15 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (ohos.samples.distributedcalc) startup successful"
+2024-03-07 14:30:16,161 - INFO:wukong line = Thu Mar  7 14:30:16 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_PAGE_DOWN"
+2024-03-07 14:30:16,176 - INFO:wukong line = Thu Mar  7 14:30:16 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_W"
+2024-03-07 14:30:16,186 - INFO:wukong line = Thu Mar  7 14:30:16 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_H"
+2024-03-07 14:30:16,195 - INFO:wukong line = Thu Mar  7 14:30:16 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_DPAD_LEFT"
+2024-03-07 14:30:16,214 - INFO:wukong line = Thu Mar  7 14:30:16 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_TAB"
+2024-03-07 14:30:16,254 - INFO:wukong line = Thu Mar  7 14:30:16 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_CTRL_LEFT"
+2024-03-07 14:30:16,942 - INFO:wukong line = Thu Mar  7 14:30:16 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1100, 601)"
+2024-03-07 14:30:17,587 - INFO:wukong line = Thu Mar  7 14:30:17 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (com.yarward.factorytest) startup successful"
+2024-03-07 14:30:18,659 - INFO:wukong line = Thu Mar  7 14:30:18 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (258, 27)"
+2024-03-07 14:30:19,333 - INFO:wukong line = Thu Mar  7 14:30:19 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1100, 607)"
+2024-03-07 14:30:20,018 - INFO:wukong line = Thu Mar  7 14:30:19 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 447)"
+2024-03-07 14:30:20,573 - INFO:wukong line = Thu Mar  7 14:30:20 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (com.ohos.camera) startup successful"
+2024-03-07 14:30:21,656 - INFO:wukong line = Thu Mar  7 14:30:20 2024 : INF : (   73) RandomInput : "Swap: (1865, 368) -> (368, 1009)"
+2024-03-07 14:30:22,753 - INFO:wukong line = Thu Mar  7 14:30:22 2024 : INF : (   73) RandomInput : "Swap: (1079, 847) -> (491, 237)"
+2024-03-07 14:30:26,095 - INFO:wukong line = Thu Mar  7 14:30:25 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1431, 399)"
+2024-03-07 14:30:26,968 - INFO:wukong line = Thu Mar  7 14:30:26 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1481, 818)"
+2024-03-07 14:30:27,773 - INFO:wukong line = Thu Mar  7 14:30:27 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1429, 771)"
+2024-03-07 14:30:28,559 - INFO:wukong line = Thu Mar  7 14:30:28 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1411, 723)"
+2024-03-07 14:30:29,377 - INFO:wukong line = Thu Mar  7 14:30:29 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1441, 867)"
+2024-03-07 14:30:30,194 - INFO:wukong line = Thu Mar  7 14:30:30 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1430, 494)"
+2024-03-07 14:30:31,066 - INFO:wukong line = Thu Mar  7 14:30:30 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1429, 771)"
+2024-03-07 14:30:31,599 - INFO:wukong line = Thu Mar  7 14:30:31 2024 : INF : (   73) RandomInput : "Swap: (1735, 532) -> (1859, 723)"
+2024-03-07 14:30:33,244 - INFO:wukong line = Thu Mar  7 14:30:33 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_MEDIA_PLAY"
+2024-03-07 14:30:33,256 - INFO:wukong line = Thu Mar  7 14:30:33 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_6"
+2024-03-07 14:30:33,267 - INFO:wukong line = Thu Mar  7 14:30:33 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_MINUS"
+2024-03-07 14:30:33,282 - INFO:wukong line = Thu Mar  7 14:30:33 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_F2"
+2024-03-07 14:30:33,299 - INFO:wukong line = Thu Mar  7 14:30:33 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_9"
+2024-03-07 14:30:33,315 - INFO:wukong line = Thu Mar  7 14:30:33 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_ESCAPE"
+2024-03-07 14:30:33,330 - INFO:wukong line = Thu Mar  7 14:30:33 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_SLASH"
+2024-03-07 14:30:33,346 - INFO:wukong line = Thu Mar  7 14:30:33 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_9"
+2024-03-07 14:30:33,361 - INFO:wukong line = Thu Mar  7 14:30:33 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_1"
+2024-03-07 14:30:33,377 - INFO:wukong line = Thu Mar  7 14:30:33 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_POUND"
+2024-03-07 14:30:34,180 - INFO:wukong line = Thu Mar  7 14:30:34 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1431, 591)"
+2024-03-07 14:30:34,572 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep cppcrash" ,length = 1 
+2024-03-07 14:30:34,709 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep jscrash" ,length = 0 
+2024-03-07 14:30:34,832 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep appfreeze" ,length = 0 
+2024-03-07 14:30:34,941 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep sysfreeze" ,length = 0 
+2024-03-07 14:30:34,941 - INFO:sleep 30s
+2024-03-07 14:30:35,722 - INFO:wukong line = Thu Mar  7 14:30:35 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1441, 867)"
+2024-03-07 14:30:36,567 - INFO:wukong line = Thu Mar  7 14:30:36 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1431, 591)"
+2024-03-07 14:30:37,382 - INFO:wukong line = Thu Mar  7 14:30:37 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1430, 261)"
+2024-03-07 14:30:38,218 - INFO:wukong line = Thu Mar  7 14:30:38 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:30:38,750 - INFO:wukong line = Thu Mar  7 14:30:38 2024 : INF : (   73) RandomInput : "Swap: (1716, 243) -> (369, 873)"
+2024-03-07 14:30:41,764 - INFO:wukong line = Thu Mar  7 14:30:41 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (255, 125)"
+2024-03-07 14:30:42,296 - INFO:wukong line = Thu Mar  7 14:30:42 2024 : INF : (   73) RandomInput : "Swap: (725, 490) -> (1427, 289)"
+2024-03-07 14:30:43,934 - INFO:wukong line = Thu Mar  7 14:30:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_PAGE_UP"
+2024-03-07 14:30:43,957 - INFO:wukong line = Thu Mar  7 14:30:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_DOT"
+2024-03-07 14:30:43,971 - INFO:wukong line = Thu Mar  7 14:30:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_1"
+2024-03-07 14:30:43,985 - INFO:wukong line = Thu Mar  7 14:30:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_Q"
+2024-03-07 14:30:43,994 - INFO:wukong line = Thu Mar  7 14:30:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_F7"
+2024-03-07 14:30:44,008 - INFO:wukong line = Thu Mar  7 14:30:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_CAPS_LOCK"
+2024-03-07 14:30:44,023 - INFO:wukong line = Thu Mar  7 14:30:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_AT"
+2024-03-07 14:30:44,039 - INFO:wukong line = Thu Mar  7 14:30:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_ADD"
+2024-03-07 14:30:44,055 - INFO:wukong line = Thu Mar  7 14:30:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_2"
+2024-03-07 14:30:44,070 - INFO:wukong line = Thu Mar  7 14:30:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_COMMA"
+2024-03-07 14:30:44,086 - INFO:wukong line = Thu Mar  7 14:30:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_NUMPAD_4"
+2024-03-07 14:30:44,101 - INFO:wukong line = Thu Mar  7 14:30:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_SCROLL_LOCK"
+2024-03-07 14:30:44,117 - INFO:wukong line = Thu Mar  7 14:30:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_7"
+2024-03-07 14:30:44,133 - INFO:wukong line = Thu Mar  7 14:30:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_MEDIA_CLOSE"
+2024-03-07 14:30:44,220 - INFO:wukong line = Thu Mar  7 14:30:43 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_6"
+2024-03-07 14:30:46,040 - INFO:wukong line = Thu Mar  7 14:30:45 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1065, 915)"
+2024-03-07 14:30:47,910 - INFO:wukong line = Thu Mar  7 14:30:47 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (120, 125)"
+2024-03-07 14:30:49,595 - INFO:wukong line = Thu Mar  7 14:30:49 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (348, 169)"
+2024-03-07 14:30:50,969 - INFO:wukong line = Thu Mar  7 14:30:50 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 396)"
+2024-03-07 14:30:51,647 - INFO:wukong line = Thu Mar  7 14:30:51 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 396)"
+2024-03-07 14:30:52,335 - INFO:wukong line = Thu Mar  7 14:30:52 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1062, 69)"
+2024-03-07 14:30:53,011 - INFO:wukong line = Thu Mar  7 14:30:52 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1026, 69)"
+2024-03-07 14:30:53,688 - INFO:wukong line = Thu Mar  7 14:30:53 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1044, 69)"
+2024-03-07 14:30:54,270 - INFO:wukong line = Thu Mar  7 14:30:54 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (ohos.samples.distributedcalc) startup successful"
+2024-03-07 14:30:55,367 - INFO:wukong line = Thu Mar  7 14:30:55 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:30:57,178 - INFO:wukong line = Thu Mar  7 14:30:57 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1027, 169)"
+2024-03-07 14:30:57,706 - INFO:wukong line = Thu Mar  7 14:30:57 2024 : ERR : (  213) UpdateComponentInfo : "Accessibility Ability get root element info failed! Errorcode : (4007) "
+2024-03-07 14:30:58,454 - INFO:wukong line = Thu Mar  7 14:30:58 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (723, 762)"
+2024-03-07 14:30:58,981 - INFO:wukong line = Thu Mar  7 14:30:58 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_VOLUME_UP"
+2024-03-07 14:30:59,809 - INFO:wukong line = Thu Mar  7 14:30:59 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:31:01,560 - INFO:wukong line = Thu Mar  7 14:31:01 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (798, 125)"
+2024-03-07 14:31:03,910 - INFO:wukong line = Thu Mar  7 14:31:03 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1163, 225)"
+2024-03-07 14:31:04,802 - INFO:wukong line = Thu Mar  7 14:31:04 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (204, 27)"
+2024-03-07 14:31:05,066 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep cppcrash" ,length = 1 
+2024-03-07 14:31:05,208 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep jscrash" ,length = 0 
+2024-03-07 14:31:05,315 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep appfreeze" ,length = 0 
+2024-03-07 14:31:05,351 - INFO:wukong line = Thu Mar  7 14:31:05 2024 : INF : (   73) RandomInput : "Swap: (27, 507) -> (536, 1036)"
+2024-03-07 14:31:05,436 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep sysfreeze" ,length = 0 
+2024-03-07 14:31:05,436 - INFO:sleep 30s
+2024-03-07 14:31:07,369 - INFO:wukong line = Thu Mar  7 14:31:07 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (204, 27)"
+2024-03-07 14:31:08,280 - INFO:wukong line = Thu Mar  7 14:31:08 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (78, 27)"
+2024-03-07 14:31:09,165 - INFO:wukong line = Thu Mar  7 14:31:09 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (150, 27)"
+2024-03-07 14:31:09,697 - INFO:wukong line = Thu Mar  7 14:31:09 2024 : INF : (   73) RandomInput : "Swap: (598, 98) -> (1883, 779)"
+2024-03-07 14:31:11,318 - INFO:wukong line = Thu Mar  7 14:31:11 2024 : INF : (   77) RandomInput : "Touch: (446, 114)"
+2024-03-07 14:31:12,199 - INFO:wukong line = Thu Mar  7 14:31:12 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (657, 210)"
+2024-03-07 14:31:13,047 - INFO:wukong line = Thu Mar  7 14:31:12 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:31:14,746 - INFO:wukong line = Thu Mar  7 14:31:14 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (348, 225)"
+2024-03-07 14:31:16,139 - INFO:wukong line = Thu Mar  7 14:31:16 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 396)"
+2024-03-07 14:31:16,805 - INFO:wukong line = Thu Mar  7 14:31:16 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 396)"
+2024-03-07 14:31:17,338 - INFO:wukong line = Thu Mar  7 14:31:17 2024 : INF : (   62) RandomInput : "Mouse: (1774, 687) Mouse Type: (MOUSE_RIGHT)"
+2024-03-07 14:31:18,050 - INFO:wukong line = Thu Mar  7 14:31:17 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 395)"
+2024-03-07 14:31:18,741 - INFO:wukong line = Thu Mar  7 14:31:18 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1008, 69)"
+2024-03-07 14:31:19,271 - INFO:wukong line = Thu Mar  7 14:31:19 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_VOLUME_UP"
+2024-03-07 14:31:19,807 - INFO:wukong line = Thu Mar  7 14:31:19 2024 : INF : (   73) RandomInput : "Swap: (1127, 817) -> (1355, 762)"
+2024-03-07 14:31:21,569 - INFO:wukong line = Thu Mar  7 14:31:21 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (com.ohos.note) startup successful"
+2024-03-07 14:31:22,191 - INFO:wukong line = Thu Mar  7 14:31:22 2024 : INF : (   77) RandomInput : "Touch: (1714, 6)"
+2024-03-07 14:31:22,744 - INFO:wukong line = Thu Mar  7 14:31:22 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (com.ohos.settings) startup successful"
+2024-03-07 14:31:24,362 - INFO:wukong line = Thu Mar  7 14:31:24 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (45, 27)"
+2024-03-07 14:31:25,702 - INFO:wukong line = Thu Mar  7 14:31:25 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (96, 27)"
+2024-03-07 14:31:26,462 - INFO:wukong line = Thu Mar  7 14:31:26 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (150, 27)"
+2024-03-07 14:31:27,216 - INFO:wukong line = Thu Mar  7 14:31:27 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (96, 27)"
+2024-03-07 14:31:27,974 - INFO:wukong line = Thu Mar  7 14:31:27 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (204, 27)"
+2024-03-07 14:31:28,780 - INFO:wukong line = Thu Mar  7 14:31:28 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (204, 27)"
+2024-03-07 14:31:29,562 - INFO:wukong line = Thu Mar  7 14:31:29 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:31:30,087 - INFO:wukong line = Thu Mar  7 14:31:29 2024 : INF : (   73) RandomInput : "Swap: (1748, 485) -> (303, 595)"
+2024-03-07 14:31:32,638 - INFO:wukong line = Thu Mar  7 14:31:32 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1543, 993)"
+2024-03-07 14:31:33,478 - INFO:wukong line = Thu Mar  7 14:31:33 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (204, 27)"
+2024-03-07 14:31:34,300 - INFO:wukong line = Thu Mar  7 14:31:34 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:31:34,822 - INFO:wukong line = Thu Mar  7 14:31:34 2024 : INF : (   62) RandomInput : "Mouse: (23, 65) Mouse Type: (MOUSE_RIGHT)"
+2024-03-07 14:31:35,603 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep cppcrash" ,length = 1 
+2024-03-07 14:31:35,745 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep jscrash" ,length = 0 
+2024-03-07 14:31:35,887 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep appfreeze" ,length = 0 
+2024-03-07 14:31:36,024 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep sysfreeze" ,length = 0 
+2024-03-07 14:31:36,025 - INFO:sleep 30s
+2024-03-07 14:31:36,895 - INFO:wukong line = Thu Mar  7 14:31:36 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (386, 395)"
+2024-03-07 14:31:37,972 - INFO:wukong line = Thu Mar  7 14:31:37 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 540)"
+2024-03-07 14:31:39,152 - INFO:wukong line = Thu Mar  7 14:31:39 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 297)"
+2024-03-07 14:31:39,667 - INFO:wukong line = Thu Mar  7 14:31:39 2024 : INF : (   73) RandomInput : "Swap: (1778, 758) -> (245, 646)"
+2024-03-07 14:31:42,041 - INFO:wukong line = Thu Mar  7 14:31:41 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (45, 27)"
+2024-03-07 14:31:43,389 - INFO:wukong line = Thu Mar  7 14:31:43 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 540)"
+2024-03-07 14:31:43,947 - INFO:wukong line = Thu Mar  7 14:31:43 2024 : INF : (   73) RandomInput : "Swap: (1263, 858) -> (1568, 396)"
+2024-03-07 14:31:46,352 - INFO:wukong line = Thu Mar  7 14:31:46 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (204, 27)"
+2024-03-07 14:31:46,873 - INFO:wukong line = Thu Mar  7 14:31:46 2024 : INF : (   73) RandomInput : "Swap: (1142, 369) -> (851, 493)"
+2024-03-07 14:31:49,212 - INFO:wukong line = Thu Mar  7 14:31:49 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 441)"
+2024-03-07 14:31:51,455 - INFO:wukong line = Thu Mar  7 14:31:51 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:31:52,736 - INFO:wukong line = Thu Mar  7 14:31:52 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (386, 120)"
+2024-03-07 14:31:54,225 - INFO:wukong line = Thu Mar  7 14:31:54 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (204, 27)"
+2024-03-07 14:31:55,782 - INFO:wukong line = Thu Mar  7 14:31:55 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1525, 993)"
+2024-03-07 14:31:56,616 - INFO:wukong line = Thu Mar  7 14:31:56 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (96, 27)"
+2024-03-07 14:31:57,487 - INFO:wukong line = Thu Mar  7 14:31:57 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (258, 27)"
+2024-03-07 14:31:58,285 - INFO:wukong line = Thu Mar  7 14:31:58 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (96, 27)"
+2024-03-07 14:31:59,099 - INFO:wukong line = Thu Mar  7 14:31:58 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (416, 215)"
+2024-03-07 14:31:59,851 - INFO:wukong line = Thu Mar  7 14:31:59 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (204, 27)"
+2024-03-07 14:32:00,425 - INFO:wukong line = Thu Mar  7 14:32:00 2024 : INF : (   62) RandomInput : "Mouse: (106, 950) Mouse Type: (MOUSE_RIGHT)"
+2024-03-07 14:32:00,978 - INFO:wukong line = Thu Mar  7 14:32:00 2024 : INF : (   62) RandomInput : "Mouse: (667, 443) Mouse Type: (MOUSE_LEFT)"
+2024-03-07 14:32:03,208 - INFO:wukong line = Thu Mar  7 14:32:03 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (482, 237)"
+2024-03-07 14:32:03,756 - INFO:wukong line = Thu Mar  7 14:32:03 2024 : INF : (   73) RandomInput : "Swap: (1107, 624) -> (1898, 360)"
+2024-03-07 14:32:05,853 - INFO:wukong line = Thu Mar  7 14:32:05 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (500, 118)"
+2024-03-07 14:32:06,166 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep cppcrash" ,length = 1 
+2024-03-07 14:32:06,293 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep jscrash" ,length = 0 
+2024-03-07 14:32:06,429 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep appfreeze" ,length = 0 
+2024-03-07 14:32:06,539 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep sysfreeze" ,length = 0 
+2024-03-07 14:32:06,540 - INFO:sleep 30s
+2024-03-07 14:32:06,725 - INFO:wukong line = Thu Mar  7 14:32:06 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (258, 27)"
+2024-03-07 14:32:07,687 - INFO:wukong line = Thu Mar  7 14:32:07 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1534, 478)"
+2024-03-07 14:32:08,896 - INFO:wukong line = Thu Mar  7 14:32:08 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:32:09,754 - INFO:wukong line = Thu Mar  7 14:32:09 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (386, 120)"
+2024-03-07 14:32:11,314 - INFO:wukong line = Thu Mar  7 14:32:11 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (386, 120)"
+2024-03-07 14:32:11,845 - INFO:wukong line = Thu Mar  7 14:32:11 2024 : INF : (   62) RandomInput : "Mouse: (280, 435) Mouse Type: (MOUSE_RIGHT)"
+2024-03-07 14:32:12,625 - INFO:wukong line = Thu Mar  7 14:32:12 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (386, 120)"
+2024-03-07 14:32:13,188 - INFO:wukong line = Thu Mar  7 14:32:13 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (com.ohos.note) startup successful"
+2024-03-07 14:32:14,593 - INFO:wukong line = Thu Mar  7 14:32:14 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:32:16,509 - INFO:wukong line = Thu Mar  7 14:32:16 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (484, 169)"
+2024-03-07 14:32:17,069 - INFO:wukong line = Thu Mar  7 14:32:16 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:32:18,116 - INFO:wukong line = Thu Mar  7 14:32:17 2024 : INF : (   73) RandomInput : "Swap: (565, 422) -> (813, 349)"
+2024-03-07 14:32:21,436 - INFO:wukong line = Thu Mar  7 14:32:21 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (484, 169)"
+2024-03-07 14:32:22,017 - INFO:wukong line = Thu Mar  7 14:32:21 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:32:22,595 - INFO:wukong line = Thu Mar  7 14:32:22 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (com.ohos.camera) startup successful"
+2024-03-07 14:32:23,833 - INFO:wukong line = Thu Mar  7 14:32:23 2024 : INF : (   77) RandomInput : "Touch: (1726, 391)"
+2024-03-07 14:32:23,885 - INFO:wukong line = Thu Mar  7 14:32:23 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (ohos.samples.clock) startup successful"
+2024-03-07 14:32:24,528 - INFO:wukong line = Thu Mar  7 14:32:24 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1044, 69)"
+2024-03-07 14:32:25,197 - INFO:wukong line = Thu Mar  7 14:32:25 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1062, 69)"
+2024-03-07 14:32:25,881 - INFO:wukong line = Thu Mar  7 14:32:25 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1044, 69)"
+2024-03-07 14:32:26,411 - INFO:wukong line = Thu Mar  7 14:32:26 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_VOLUME_DOWN"
+2024-03-07 14:32:27,778 - INFO:wukong line = Thu Mar  7 14:32:27 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:32:28,312 - INFO:wukong line = Thu Mar  7 14:32:28 2024 : INF : (   62) RandomInput : "Mouse: (1441, 461) Mouse Type: (MOUSE_LEFT)"
+2024-03-07 14:32:30,162 - INFO:wukong line = Thu Mar  7 14:32:30 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1023, 960)"
+2024-03-07 14:32:31,562 - INFO:wukong line = Thu Mar  7 14:32:31 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1496, 397)"
+2024-03-07 14:32:32,114 - INFO:wukong line = Thu Mar  7 14:32:31 2024 : INF : (   93) PrintResultOfStartAbility : "Bundle Name: (ohos.samples.clock) startup successful"
+2024-03-07 14:32:32,871 - INFO:wukong line = Thu Mar  7 14:32:32 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 396)"
+2024-03-07 14:32:33,600 - INFO:wukong line = Thu Mar  7 14:32:33 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 396)"
+2024-03-07 14:32:34,272 - INFO:wukong line = Thu Mar  7 14:32:34 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 396)"
+2024-03-07 14:32:34,954 - INFO:wukong line = Thu Mar  7 14:32:34 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:32:36,829 - INFO:wukong line = Thu Mar  7 14:32:36 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (891, 169)"
+2024-03-07 14:32:37,920 - INFO:wukong line = Thu Mar  7 14:32:37 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1689, 517)"
+2024-03-07 14:32:38,451 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep cppcrash" ,length = 1 
+2024-03-07 14:32:39,327 - INFO:wukong line = Thu Mar  7 14:32:39 2024 : INF : (   77) RandomInput : "Touch: (1585, 137)"
+2024-03-07 14:32:40,381 - INFO:wukong line = Thu Mar  7 14:32:40 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 768)"
+2024-03-07 14:32:40,533 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep jscrash" ,length = 0 
+2024-03-07 14:32:40,909 - INFO:wukong line = Thu Mar  7 14:32:40 2024 : INF : (   62) RandomInput : "Mouse: (158, 233) Mouse Type: (MOUSE_LEFT)"
+2024-03-07 14:32:41,922 - INFO:wukong line = Thu Mar  7 14:32:41 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 643)"
+2024-03-07 14:32:42,218 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep appfreeze" ,length = 0 
+2024-03-07 14:32:43,111 - INFO:wukong line = Thu Mar  7 14:32:42 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (162, 160)"
+2024-03-07 14:32:44,140 - INFO:_get_log loc_cmd = hdc -t 150100424a5444345203f957bc825900 shell "ls /data/log/faultlog/faultlogger | grep sysfreeze" ,length = 0 
+2024-03-07 14:32:44,152 - INFO:sleep 30s
+2024-03-07 14:32:44,368 - INFO:wukong line = Thu Mar  7 14:32:44 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1193, 915)"
+2024-03-07 14:32:44,903 - INFO:wukong line = Thu Mar  7 14:32:44 2024 : INF : (   62) RandomInput : "Mouse: (812, 783) Mouse Type: (MOUSE_RIGHT)"
+2024-03-07 14:32:46,815 - INFO:wukong line = Thu Mar  7 14:32:46 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (662, 125)"
+2024-03-07 14:32:49,084 - INFO:wukong line = Thu Mar  7 14:32:48 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (484, 169)"
+2024-03-07 14:32:49,670 - INFO:wukong line = Thu Mar  7 14:32:49 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_BACK"
+2024-03-07 14:32:51,607 - INFO:wukong line = Thu Mar  7 14:32:51 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1151, 960)"
+2024-03-07 14:32:52,111 - INFO:wukong line = Thu Mar  7 14:32:51 2024 : INF : (   62) RandomInput : "Mouse: (67, 49) Mouse Type: (MOUSE_LEFT)"
+2024-03-07 14:32:53,553 - INFO:wukong line = Thu Mar  7 14:32:53 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (906, 120)"
+2024-03-07 14:32:54,272 - INFO:wukong line = Thu Mar  7 14:32:54 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1866, 120)"
+2024-03-07 14:32:54,808 - INFO:wukong line = Thu Mar  7 14:32:54 2024 : INF : (   44) SingleKeyCodeInput : "keycodeType: KEYCODE_VOLUME_UP"
+2024-03-07 14:32:55,645 - INFO:wukong line = Thu Mar  7 14:32:55 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (906, 120)"
+2024-03-07 14:32:56,160 - INFO:wukong line = Thu Mar  7 14:32:55 2024 : INF : (   73) RandomInput : "Swap: (112, 702) -> (1219, 279)"
+2024-03-07 14:32:58,025 - INFO:wukong line = Thu Mar  7 14:32:57 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 576)"
+2024-03-07 14:32:58,746 - INFO:wukong line = Thu Mar  7 14:32:58 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 576)"
+2024-03-07 14:32:59,469 - INFO:wukong line = Thu Mar  7 14:32:59 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (1866, 120)"
+2024-03-07 14:33:00,273 - INFO:wukong line = Thu Mar  7 14:33:00 2024 : INF : (  227) ComponentTouchInput : "component Content: Touch Position: (960, 430)"
+2024-03-07 14:33:00,451 - INFO:run exception =  
+2024-03-07 14:33:00,698 - INFO:get_fault_debug_log end 
+2024-03-07 14:33:00,828 - INFO:hdc -t 150100424a5444345203f957bc825900 shell "uptime -p"
+2024-03-07 14:33:00,952 - INFO:get_uptime_log end 
+2024-03-07 14:33:01,198 - INFO:wukong process info = root         27456     1 13 14:26:38 ?    00:00:49 wukong exec -a 0.05 -t 0.05 -C 0.65 -S 0.1 -m 0.05 -k 0.05 -i 500 -T 870
