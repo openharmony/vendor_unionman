@@ -7258,3 +7258,336 @@
 03-07 14:27:57.158   342   843 I C01799/MemMgr: ReclaimStrategyManager::HandleAppStateChanged_ pid:1183 bundle:20010015 com.example.kikakeyboard userId:100 score:1 action:OTHERS
 03-07 14:27:57.159   342   843 I C01799/MemMgr: ReclaimStrategyManager::HandleAppStateChanged_ others app action! OTHERS
 03-07 14:27:57.159   342   746 I C01799/MemMgr: KernelInterface::EchoToPath echo 1 > /proc/1183/oom_score_adj
+03-07 14:27:57.162   592   592 D C01401/Bufferqueue: <183>Map: handle_->virAddr has been maped
+03-07 14:27:57.162   592   592 D C01401/Bufferqueue: <183>Map: handle_->virAddr has been maped
+03-07 14:27:57.162   592   592 D C02500/DISP: [GbmFlushCache:409] 
+03-07 14:27:57.162   592   592 D C02500/DISP: [DmaBufferSync:232] 
+03-07 14:27:57.171   592   592 D C01400/SyncFence: GetFenceInfo SYNC_IOC_FILE_INFO ioctl failed, ret: -1
+03-07 14:27:57.171   592   592 D C01401/Bufferqueue: (FrameBuffer) AcquireBuffer: Success Buffer seq id: 909 Queue id: 2542620639511 AcquireFence:-1
+03-07 14:27:57.171   592  1122 D C01400/SyncFence: Error waiting for SyncFence: <private>
+03-07 14:27:57.171   592   592 D C01401/Bufferqueue: (FrameBuffer) FlushBuffer: Success Buffer seq id: 909 Queue id: 2542620639511 AcquireFence:-1
+03-07 14:27:57.171   592   592 D C01400/OHOS::ROSEN: RsDebug RSSurfaceOhosRaster::FlushFrame fence:53
+03-07 14:27:57.171   592   592 D C01400/OHOS::RS: RsDebug RSPhysicalScreenProcessor::Redraw flush frame buffer end
+03-07 14:27:57.172 28133 28135 D C02500/DISP_CMD: ProcessRequestCmd: PackSection, cmd-[66] = REQUEST_CMD_SET_DISPLAY_CLIENT_DAMAGE
+03-07 14:27:57.172 28133 28135 E C02500/DISP: [0;32;31m[SetDisplayClientDamage:146] <private> is not supported[m
+03-07 14:27:57.172 28133 28135 E C02500/DISP_CMD: OnSetDisplayClientDamage, SetDisplayClientDamage error
+03-07 14:27:57.172 28133 28135 D C02500/DISP_CMD: ProcessRequestCmd: PackSection, cmd-[65] = REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER
+03-07 14:27:57.172 28133 28135 D C02500/DISP_CACHE_MGR: apply NativeBufferCache: callerId=0, seqNo=0
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [CallDisplayFunction:39] device Id : 0
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [SetLayerBuffer:213] 
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [HdiLayerBuffer:41] 
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [~HdiLayerBuffer:51] 
+03-07 14:27:57.172 28133 28135 D C02500/DISP_CMD: ProcessRequestCmd: PackSection, cmd-[67] = REQUEST_CMD_COMMIT
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [CallDisplayFunction:39] device Id : 0
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [Commit:199] 
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [Apply:189] composer layers size 5
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [ClearRect:175] 
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 15 w:1920 h:1080 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.172 28133 28135 E C02500/DISP: [0;32;31m[WaitAcquireFence:273] fd is invalid[m
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [rkFillRect:179] fd 15
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [BlitLayer:139] 
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [BlitLayer:142] init the src iSurface
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 30 w:1920 h:1080 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [BlitLayer:147] init the dst iSurface
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 15 w:1920 h:1080 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [BlitLayer:151] blendType 3
+03-07 14:27:57.172 28133 28135 D C02500/DISP: [BlitLayer:158] src alpha ff
+03-07 14:27:57.173 28133 28135 D C02500/DISP: [BlitLayer:161]  the roate type is 0
+03-07 14:27:57.173 28133 28135 D C02500/DISP: [BlitLayer:164] crop x: 0 y : 0 w : 1920 h: 1080
+03-07 14:27:57.173 28133 28135 D C02500/DISP: [BlitLayer:166] displayRect x: 0 y : 0 w : 1920 h : 1080
+03-07 14:27:57.173 28133 28135 D C02500/DISP: [doFlit:343] gfx src fd 30, w 1920, h 1080, sw 1920 sh 1080
+03-07 14:27:57.173 28133 28135 D C02500/DISP: [doFlit:346] gfx dst fd 15, w 1920, h 1080, sw 1920 sh 1080
+03-07 14:27:57.173   313 27704 D C04200/WindowManagerAgentStub: <31>OnRemoteRequest: code is 4
+03-07 14:27:57.173   313 27704 I C04200/WindowManager: <158>Notify WindowVisibilityInfo to caller
+03-07 14:27:57.174   313   728 I C01702/CgroupAdjuster: AdjustProcessGroup for 1183, source : 10
+03-07 14:27:57.174   313   728 I C01702/CgroupAdjuster: ApplyProcessGroup Set 1183's cgroup from 0 to 2.
+03-07 14:27:57.175   313   719 I C01700/RSS: FrameAwarePlugin:DispatchResource type:8, value:0
+03-07 14:27:57.175   313   719 I C01706/ueaServer-FrameMsgIntf: CgroupChanged pid is 1183, uid is 20010015, oldGroup is 0, newGroup is 2
+03-07 14:27:57.175   313   719 I C01700/RSS: add curForeAppCount uid is 20010015, pid is 1183, bundleName is com.example.kikakeyboard
+03-07 14:27:57.175   313   727 I C01706/ueaServer-IntelliSenseServer: web test CgroupChange NewForeground uid is 20010015
+03-07 14:27:57.175   313   719 I C01700/RSS: FrameAwarePlugin::OnDispatchResource success.
+03-07 14:27:57.175   313   727 I C01706/ueaServer-IntelliSenseServer: [ReportMessage]pid 1183 change to foreground.
+03-07 14:27:57.175   313   727 I C01706/rtg_interface: create rtg grp success, get rtg id 9.
+03-07 14:27:57.175   313   727 E C01706/qos_manager: thread 727 belong to user 0 open auth node failed
+03-07 14:27:57.175   313   727 E C01706/ueaServer-IntelliSenseServer: auth_enable 20010015 failed
+03-07 14:27:57.177 28133 28135 D C02500/DISP: [BlitLayer:139] 
+03-07 14:27:57.177 28133 28135 D C02500/DISP: [BlitLayer:142] init the src iSurface
+03-07 14:27:57.177 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 35 w:1920 h:924 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.177 28133 28135 D C02500/DISP: [BlitLayer:147] init the dst iSurface
+03-07 14:27:57.177 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 15 w:1920 h:1080 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.177 28133 28135 D C02500/DISP: [BlitLayer:151] blendType 3
+03-07 14:27:57.177 28133 28135 D C02500/DISP: [BlitLayer:158] src alpha ff
+03-07 14:27:57.177 28133 28135 D C02500/DISP: [BlitLayer:161]  the roate type is 0
+03-07 14:27:57.177 28133 28135 D C02500/DISP: [BlitLayer:164] crop x: 0 y : 0 w : 1920 h: 924
+03-07 14:27:57.177 28133 28135 D C02500/DISP: [BlitLayer:166] displayRect x: 0 y : 78 w : 1920 h : 924
+03-07 14:27:57.177 28133 28135 D C02500/DISP: [doFlit:343] gfx src fd 35, w 1920, h 924, sw 1920 sh 924
+03-07 14:27:57.177 28133 28135 D C02500/DISP: [doFlit:346] gfx dst fd 15, w 1920, h 1080, sw 1920 sh 1080
+03-07 14:27:57.181 28133 28135 D C02500/DISP: [BlitLayer:139] 
+03-07 14:27:57.181 28133 28135 D C02500/DISP: [BlitLayer:142] init the src iSurface
+03-07 14:27:57.181 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 44 w:1920 h:464 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.181 28133 28135 D C02500/DISP: [BlitLayer:147] init the dst iSurface
+03-07 14:27:57.181 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 15 w:1920 h:1080 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.181 28133 28135 D C02500/DISP: [BlitLayer:151] blendType 3
+03-07 14:27:57.181 28133 28135 D C02500/DISP: [BlitLayer:158] src alpha ff
+03-07 14:27:57.181 28133 28135 D C02500/DISP: [BlitLayer:161]  the roate type is 0
+03-07 14:27:57.181 28133 28135 D C02500/DISP: [BlitLayer:164] crop x: 0 y : 0 w : 1920 h: 464
+03-07 14:27:57.181 28133 28135 D C02500/DISP: [BlitLayer:166] displayRect x: 0 y : 538 w : 1920 h : 464
+03-07 14:27:57.181 28133 28135 D C02500/DISP: [doFlit:343] gfx src fd 44, w 1920, h 464, sw 1920 sh 464
+03-07 14:27:57.181 28133 28135 D C02500/DISP: [doFlit:346] gfx dst fd 15, w 1920, h 1080, sw 1920 sh 1080
+03-07 14:27:57.183 28133 28135 D C02500/DISP: [BlitLayer:139] 
+03-07 14:27:57.183 28133 28135 D C02500/DISP: [BlitLayer:142] init the src iSurface
+03-07 14:27:57.183 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 26 w:1920 h:78 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.183 28133 28135 D C02500/DISP: [BlitLayer:147] init the dst iSurface
+03-07 14:27:57.183 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 15 w:1920 h:1080 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.183 28133 28135 D C02500/DISP: [BlitLayer:151] blendType 3
+03-07 14:27:57.183 28133 28135 D C02500/DISP: [BlitLayer:158] src alpha ff
+03-07 14:27:57.183 28133 28135 D C02500/DISP: [BlitLayer:161]  the roate type is 0
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [BlitLayer:164] crop x: 0 y : 0 w : 1920 h: 78
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [BlitLayer:166] displayRect x: 0 y : 0 w : 1920 h : 78
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [doFlit:343] gfx src fd 26, w 1920, h 78, sw 1920 sh 78
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [doFlit:346] gfx dst fd 15, w 1920, h 1080, sw 1920 sh 1080
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [BlitLayer:139] 
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [BlitLayer:142] init the src iSurface
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 37 w:1920 h:78 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [BlitLayer:147] init the dst iSurface
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 15 w:1920 h:1080 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [BlitLayer:151] blendType 3
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [BlitLayer:158] src alpha ff
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [BlitLayer:161]  the roate type is 0
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [BlitLayer:164] crop x: 0 y : 0 w : 1920 h: 78
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [BlitLayer:166] displayRect x: 0 y : 1002 w : 1920 h : 78
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [doFlit:343] gfx src fd 37, w 1920, h 78, sw 1920 sh 78
+03-07 14:27:57.184 28133 28135 D C02500/DISP: [doFlit:346] gfx dst fd 15, w 1920, h 1080, sw 1920 sh 1080
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [Commit:40] commit modSet=0
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [Apply:128] 
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [Apply:140] Apply Set OutFence crtc id: 108, fencePropId 19
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [Apply:144] mCompLayers size 1
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [ApplyPlane:62] 
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [ApplyPlane:64] set the fence in prop
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [GetGemBuffer:81] 
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [DrmGemBuffer:27] 
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [Init:38] hdl 0
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [ConvertToDrmFormat:84] fmtIn 12, outFmt 875708993
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [Init:48] mGemHandle 2  mFdId 143
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [Init:51] w: 1920  h: 1080 mDrmFormat : 875708993 gemHandles: 2 pitches: 7680 offsets: 0
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [~DrmGemBuffer:57] 
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [IsValid:75] 
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [ApplyPlane:79] set the fb planeid 84, propId 17, fbId 143
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [ApplyPlane:85] set the crtc planeId 84, propId 20, crtcId 108
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [UpdateMode:94] 
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [GetModeBlockFromId:375] id 0
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [DrmModeBlock:383] 
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [Init:395] mBlockId 139
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [UpdateMode:99] set crtc to active
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [UpdateMode:105] set the mode
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [UpdateMode:108] set the mode planeId 108, propId 23, GetBlockId: 139
+03-07 14:27:57.185 28133 28135 D C02500/DISP: [UpdateMode:113] set the connector id: 138, propId 20, crtcId 108
+03-07 14:27:57.196 28133 28135 D C02500/DISP: [~DrmModeBlock:401] mBlockId 139
+03-07 14:27:57.196 28133 28135 D C02500/DISP: [Commit:202] the release fence is 17
+03-07 14:27:57.197   592   592 D C01401/Bufferqueue: (FrameBuffer) ReleaseBuffer: Succ push Buffer seq id: 911 Qid: 2542620639511 to free list, releaseFence: 91
+03-07 14:27:57.197   592   592 D C01400/Composer: Repaint: Repaint: end
+03-07 14:27:57.197 28133 28135 D C02500/DISP: [CallDisplayFunction:39] device Id : 0
+03-07 14:27:57.197 28133 28135 D C02500/DISP: [CallDisplayFunction:39] device Id : 0
+03-07 14:27:57.197 28133 28135 D C02500/DISP: [GetDisplayReleaseFence:153] set the layer fences
+03-07 14:27:57.197 28133 28135 D C02500/DISP: [GetDisplayReleaseFence:162] layer id 14 fencefd -1
+03-07 14:27:57.197 28133 28135 D C02500/DISP: [GetDisplayReleaseFence:162] layer id 16 fencefd -1
+03-07 14:27:57.197 28133 28135 D C02500/DISP: [GetDisplayReleaseFence:162] layer id 17 fencefd -1
+03-07 14:27:57.197 28133 28135 D C02500/DISP: [GetDisplayReleaseFence:162] layer id 7 fencefd -1
+03-07 14:27:57.197 28133 28135 D C02500/DISP: [GetDisplayReleaseFence:162] layer id 8 fencefd -1
+03-07 14:27:57.197   592   592 D C01401/Bufferqueue: (otatest0) ReleaseBuffer: Succ push Buffer seq id: 938 Qid: 2542620639518 to free list, releaseFence: -1
+03-07 14:27:57.198   588  1129 D C01400/OHOS::ROSEN: RSUIDirector::RecvMessages success
+03-07 14:27:57.198   592   592 D C01401/Bufferqueue: (otatest0) AcquireBuffer: Success Buffer seq id: 936 Queue id: 2542620639518 AcquireFence:89
+03-07 14:27:57.198   588  1129 D C01400/OHOS::ROSEN: RSUIDirector::PostTask success
+03-07 14:27:57.198   592   592 D C01400/OHOS::RS: RsDebug surfaceHandler(id: 121783797678081) AcquireBuffer success, timestamp = 245125921380898.
+03-07 14:27:57.198   588   740 D C01400/OHOS::ROSEN: RSUIDirector::ProcessMessages success
+03-07 14:27:57.198   592   592 D C01400/OHOS::RS: RSMainThread::CalcOcclusion animate:0 isUniRender:0
+03-07 14:27:57.198   592   592 D C01400/OHOS::RS: RSMainThread::CalcOcclusionImplementation name: SystemUi_NavigationBar id: 4638564679695 rect: [0, 1002, 1920, 78]
+03-07 14:27:57.198   592   592 D C01400/OHOS::RS: RSMainThread::CalcOcclusionImplementation name: SystemUi_StatusBar id: 4638564679686 rect: [0, 0, 1920, 78]
+03-07 14:27:57.198   592   592 D C01400/OHOS::RS: RSMainThread::CalcOcclusionImplementation name: softKeyboard1 id: 5080946311169 rect: [0, 538, 1920, 464]
+03-07 14:27:57.198   592   592 D C01400/OHOS::RS: RSMainThread::CalcOcclusionImplementation name: otatest0 id: 121783797678081 rect: [0, 78, 1920, 924]
+03-07 14:27:57.198   592   592 D C01400/OHOS::RS: RSMainThread::CalcOcclusionImplementation name: EntryView id: 7267084664833 rect: [0, 0, 1920, 1080]
+03-07 14:27:57.198   592   592 D C01400/OHOS::RS: RsDebug RSRenderServiceVisitor::ProcessDisplayRenderNode: nodeid:[2525440770147] screenid:[0]         isSecurityDisplay:[false] child size:[5] total size:[5]
+03-07 14:27:57.198   592   592 D C01400/OHOS::RS: RsDebug RSPhysicalScreenProcessor::ProcessSurface id = 7267084664833 Notify RT buffer available
+03-07 14:27:57.198   592   592 D C01400/OHOS::RS: RsDebug RSComposerAdapter::CreateBufferLayer surfaceNode id:7267084664833 name:[EntryView] dst [0 0 1920 1080]SrcRect [1920 1080] rawbuffer [1920 1080] surfaceBuffer [1920 1080], z:0.000000, globalZOrder:0, blendType = 3
+03-07 14:27:57.198   592   592 D C01400/OHOS::RS: RsDebug RSPhysicalScreenProcessor::ProcessSurface id = 121783797678081 Notify RT buffer available
+03-07 14:27:57.198   592   592 D C01400/OHOS::RS: RsDebug RSComposerAdapter::CreateBufferLayer surfaceNode id:121783797678081 name:[otatest0] dst [0 78 1920 924]SrcRect [1920 924] rawbuffer [1920 924] surfaceBuffer [1920 924], z:1.000000, globalZOrder:1, blendType = 3
+03-07 14:27:57.198   592   592 D C01400/OHOS::RS: RsDebug RSComposerAdapter::CheckStatusBeforeCreateLayer:node(2525440770150) has no available buffer.
+03-07 14:27:57.199   592   592 D C01400/OHOS::RS: RSPhysicalScreenProcessor::ProcessSurface: failed to createLayer for node(id: 2525440770150)
+03-07 14:27:57.199   592   592 D C01400/OHOS::RS: RsDebug RSPhysicalScreenProcessor::ProcessSurface id = 5080946311169 Notify RT buffer available
+03-07 14:27:57.199   592   592 D C01400/OHOS::RS: RsDebug RSComposerAdapter::CreateBufferLayer surfaceNode id:5080946311169 name:[softKeyboard1] dst [0 538 1920 464]SrcRect [1920 464] rawbuffer [1920 464] surfaceBuffer [1920 464], z:3.000000, globalZOrder:3, blendType = 3
+03-07 14:27:57.199   592   592 D C01400/OHOS::RS: RsDebug RSPhysicalScreenProcessor::ProcessSurface id = 4638564679686 Notify RT buffer available
+03-07 14:27:57.199   592   592 D C01400/OHOS::RS: RsDebug RSComposerAdapter::CreateBufferLayer surfaceNode id:4638564679686 name:[SystemUi_StatusBar] dst [0 0 1920 78]SrcRect [1920 78] rawbuffer [1920 78] surfaceBuffer [1920 78], z:4.000000, globalZOrder:4, blendType = 3
+03-07 14:27:57.199   592   592 D C01400/OHOS::RS: RsDebug RSPhysicalScreenProcessor::ProcessSurface id = 4638564679695 Notify RT buffer available
+03-07 14:27:57.199   592   592 D C01400/OHOS::RS: RsDebug RSComposerAdapter::CreateBufferLayer surfaceNode id:4638564679695 name:[SystemUi_NavigationBar] dst [0 1002 1920 78]SrcRect [1920 78] rawbuffer [1920 78] surfaceBuffer [1920 78], z:5.000000, globalZOrder:5, blendType = 3
+03-07 14:27:57.199   592   592 D C01400/Composer: Repaint: Repaint: start
+03-07 14:27:57.199 28133 28135 D C02500/DISP_CMD: ProcessRequestCmd: PackSection, cmd-[80] = unknow command id.
+03-07 14:27:57.199 28133 28135 E C02500/DISP: [0;32;31m[SetLayerMaskInfo:318] <private> is not supported[m
+03-07 14:27:57.199 28133 28135 E C02500/DISP_CMD: 823@OnSetLayerMaskInfo: check failed
+03-07 14:27:57.199 28133 28135 D C02500/DISP_CMD: ProcessRequestCmd: PackSection, cmd-[76] = REQUEST_CMD_SET_LAYER_BUFFER
+03-07 14:27:57.200 28133 28135 D C02500/DISP_CACHE_MGR: apply NativeBufferCache: callerId=16, seqNo=0
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [CallLayerFunction:51] device Id : 0
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [GetHdiLayer:214] id : 16
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [SetLayerBuffer:213] 
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [HdiLayerBuffer:41] 
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [~HdiLayerBuffer:51] 
+03-07 14:27:57.200 28133 28135 D C02500/DISP_CMD: ProcessRequestCmd: PackSection, cmd-[80] = unknow command id.
+03-07 14:27:57.200 28133 28135 E C02500/DISP: [0;32;31m[SetLayerMaskInfo:318] <private> is not supported[m
+03-07 14:27:57.200 28133 28135 E C02500/DISP_CMD: 823@OnSetLayerMaskInfo: check failed
+03-07 14:27:57.200 28133 28135 D C02500/DISP_CMD: ProcessRequestCmd: PackSection, cmd-[80] = unknow command id.
+03-07 14:27:57.200 28133 28135 E C02500/DISP: [0;32;31m[SetLayerMaskInfo:318] <private> is not supported[m
+03-07 14:27:57.200 28133 28135 E C02500/DISP_CMD: 823@OnSetLayerMaskInfo: check failed
+03-07 14:27:57.200 28133 28135 D C02500/DISP_CMD: ProcessRequestCmd: PackSection, cmd-[80] = unknow command id.
+03-07 14:27:57.200 28133 28135 E C02500/DISP: [0;32;31m[SetLayerMaskInfo:318] <private> is not supported[m
+03-07 14:27:57.200 28133 28135 E C02500/DISP_CMD: 823@OnSetLayerMaskInfo: check failed
+03-07 14:27:57.200 28133 28135 D C02500/DISP_CMD: ProcessRequestCmd: PackSection, cmd-[80] = unknow command id.
+03-07 14:27:57.200 28133 28135 E C02500/DISP: [0;32;31m[SetLayerMaskInfo:318] <private> is not supported[m
+03-07 14:27:57.200 28133 28135 E C02500/DISP_CMD: 823@OnSetLayerMaskInfo: check failed
+03-07 14:27:57.200 28133 28135 D C02500/DISP_CMD: ProcessRequestCmd: PackSection, cmd-[64] = REQUEST_CMD_PREPARE_DISPLAY_LAYERS
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [CallDisplayFunction:39] device Id : 0
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [PrepareDisplayLayers:170] 
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [PrepareDisplayLayers:177]  mLayers  size 5 layers size 5
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [SetLayerZorder:121] id : 0 zorder : 3 
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [SetLayers:92] layers size 5
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [CanHandle:85] 
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [SetDeviceSelect:117] 1
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [CanHandle:85] 
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [SetDeviceSelect:117] 1
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [CanHandle:85] 
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [SetDeviceSelect:117] 1
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [CanHandle:85] 
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [SetDeviceSelect:117] 1
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [CanHandle:85] 
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [SetDeviceSelect:117] 1
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [SetLayers:109] composer layers size 5
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [SetLayers:50] 
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [CallDisplayFunction:39] device Id : 0
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [CallDisplayFunction:39] device Id : 0
+03-07 14:27:57.200 28133 28135 D C02500/DISP: [GetDisplayCompChange:133] set the layers and type
+03-07 14:27:57.201   592   592 D C01400/OHOS::RS: RsDebug RSPhysicalScreenProcessor::Redraw flush frame buffer start
+03-07 14:27:57.201   592   592 D C01401/Bufferqueue: (FrameBuffer) ReuseBuffer: RequestBuffer Succ Buffer[1920 1080] in seq id: 911 qid: 2542620639511 releaseFence: 91
+03-07 14:27:57.201   592   592 D C02500/DISP: [GbmInvalidateCache:403] 
+03-07 14:27:57.201   592   592 D C02500/DISP: [DmaBufferSync:232] 
+03-07 14:27:57.209   592   592 D C01401/Bufferqueue: <183>Map: handle_->virAddr has been maped
+03-07 14:27:57.209   592   592 D C01401/Bufferqueue: <183>Map: handle_->virAddr has been maped
+03-07 14:27:57.209   592   592 D C02500/DISP: [GbmFlushCache:409] 
+03-07 14:27:57.209   592   592 D C02500/DISP: [DmaBufferSync:232] 
+03-07 14:27:57.216   592   592 D C01400/SyncFence: GetFenceInfo SYNC_IOC_FILE_INFO ioctl failed, ret: -1
+03-07 14:27:57.216   592   592 D C01401/Bufferqueue: (FrameBuffer) AcquireBuffer: Success Buffer seq id: 911 Queue id: 2542620639511 AcquireFence:-1
+03-07 14:27:57.216   592  1122 D C01400/SyncFence: Error waiting for SyncFence: <private>
+03-07 14:27:57.216   592   592 D C01401/Bufferqueue: (FrameBuffer) FlushBuffer: Success Buffer seq id: 911 Queue id: 2542620639511 AcquireFence:-1
+03-07 14:27:57.216   592   592 D C01400/OHOS::ROSEN: RsDebug RSSurfaceOhosRaster::FlushFrame fence:53
+03-07 14:27:57.216   592   592 D C01400/OHOS::RS: RsDebug RSPhysicalScreenProcessor::Redraw flush frame buffer end
+03-07 14:27:57.217 28133 28135 D C02500/DISP_CMD: ProcessRequestCmd: PackSection, cmd-[66] = REQUEST_CMD_SET_DISPLAY_CLIENT_DAMAGE
+03-07 14:27:57.217 28133 28135 E C02500/DISP: [0;32;31m[SetDisplayClientDamage:146] <private> is not supported[m
+03-07 14:27:57.217 28133 28135 E C02500/DISP_CMD: OnSetDisplayClientDamage, SetDisplayClientDamage error
+03-07 14:27:57.217 28133 28135 D C02500/DISP_CMD: ProcessRequestCmd: PackSection, cmd-[65] = REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER
+03-07 14:27:57.217 28133 28135 D C02500/DISP_CACHE_MGR: apply NativeBufferCache: callerId=0, seqNo=1
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [CallDisplayFunction:39] device Id : 0
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [SetLayerBuffer:213] 
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [HdiLayerBuffer:41] 
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [~HdiLayerBuffer:51] 
+03-07 14:27:57.217 28133 28135 D C02500/DISP_CMD: ProcessRequestCmd: PackSection, cmd-[67] = REQUEST_CMD_COMMIT
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [CallDisplayFunction:39] device Id : 0
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [Commit:199] 
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [Apply:189] composer layers size 5
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [ClearRect:175] 
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 17 w:1920 h:1080 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.217 28133 28135 E C02500/DISP: [0;32;31m[WaitAcquireFence:273] fd is invalid[m
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [rkFillRect:179] fd 17
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [BlitLayer:139] 
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [BlitLayer:142] init the src iSurface
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 30 w:1920 h:1080 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [BlitLayer:147] init the dst iSurface
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 17 w:1920 h:1080 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [BlitLayer:151] blendType 3
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [BlitLayer:158] src alpha ff
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [BlitLayer:161]  the roate type is 0
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [BlitLayer:164] crop x: 0 y : 0 w : 1920 h: 1080
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [BlitLayer:166] displayRect x: 0 y : 0 w : 1920 h : 1080
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [doFlit:343] gfx src fd 30, w 1920, h 1080, sw 1920 sh 1080
+03-07 14:27:57.217 28133 28135 D C02500/DISP: [doFlit:346] gfx dst fd 17, w 1920, h 1080, sw 1920 sh 1080
+03-07 14:27:57.222 28133 28135 D C02500/DISP: [BlitLayer:139] 
+03-07 14:27:57.222 28133 28135 D C02500/DISP: [BlitLayer:142] init the src iSurface
+03-07 14:27:57.222 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 32 w:1920 h:924 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.222 28133 28135 D C02500/DISP: [BlitLayer:147] init the dst iSurface
+03-07 14:27:57.222 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 17 w:1920 h:1080 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.222 28133 28135 D C02500/DISP: [BlitLayer:151] blendType 3
+03-07 14:27:57.222 28133 28135 D C02500/DISP: [BlitLayer:158] src alpha ff
+03-07 14:27:57.222 28133 28135 D C02500/DISP: [BlitLayer:161]  the roate type is 0
+03-07 14:27:57.222 28133 28135 D C02500/DISP: [BlitLayer:164] crop x: 0 y : 0 w : 1920 h: 924
+03-07 14:27:57.222 28133 28135 D C02500/DISP: [BlitLayer:166] displayRect x: 0 y : 78 w : 1920 h : 924
+03-07 14:27:57.222 28133 28135 D C02500/DISP: [doFlit:343] gfx src fd 32, w 1920, h 924, sw 1920 sh 924
+03-07 14:27:57.222 28133 28135 D C02500/DISP: [doFlit:346] gfx dst fd 17, w 1920, h 1080, sw 1920 sh 1080
+03-07 14:27:57.225 28133 28135 D C02500/DISP: [BlitLayer:139] 
+03-07 14:27:57.226 28133 28135 D C02500/DISP: [BlitLayer:142] init the src iSurface
+03-07 14:27:57.226 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 44 w:1920 h:464 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.226 28133 28135 D C02500/DISP: [BlitLayer:147] init the dst iSurface
+03-07 14:27:57.226 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 17 w:1920 h:1080 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.226 28133 28135 D C02500/DISP: [BlitLayer:151] blendType 3
+03-07 14:27:57.226 28133 28135 D C02500/DISP: [BlitLayer:158] src alpha ff
+03-07 14:27:57.226 28133 28135 D C02500/DISP: [BlitLayer:161]  the roate type is 0
+03-07 14:27:57.226 28133 28135 D C02500/DISP: [BlitLayer:164] crop x: 0 y : 0 w : 1920 h: 464
+03-07 14:27:57.226 28133 28135 D C02500/DISP: [BlitLayer:166] displayRect x: 0 y : 538 w : 1920 h : 464
+03-07 14:27:57.226 28133 28135 D C02500/DISP: [doFlit:343] gfx src fd 44, w 1920, h 464, sw 1920 sh 464
+03-07 14:27:57.226 28133 28135 D C02500/DISP: [doFlit:346] gfx dst fd 17, w 1920, h 1080, sw 1920 sh 1080
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [BlitLayer:139] 
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [BlitLayer:142] init the src iSurface
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 26 w:1920 h:78 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [BlitLayer:147] init the dst iSurface
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 17 w:1920 h:1080 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [BlitLayer:151] blendType 3
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [BlitLayer:158] src alpha ff
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [BlitLayer:161]  the roate type is 0
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [BlitLayer:164] crop x: 0 y : 0 w : 1920 h: 78
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [BlitLayer:166] displayRect x: 0 y : 0 w : 1920 h : 78
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [doFlit:343] gfx src fd 26, w 1920, h 78, sw 1920 sh 78
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [doFlit:346] gfx dst fd 17, w 1920, h 1080, sw 1920 sh 1080
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [BlitLayer:139] 
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [BlitLayer:142] init the src iSurface
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 37 w:1920 h:78 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [BlitLayer:147] init the dst iSurface
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [InitGfxSurface:127] iSurface fd 17 w:1920 h:1080 addr:0x0 fmt:12 stride:7680
+03-07 14:27:57.228 28133 28135 D C02500/DISP: [BlitLayer:151] blendType 3
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [BlitLayer:158] src alpha ff
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [BlitLayer:161]  the roate type is 0
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [BlitLayer:164] crop x: 0 y : 0 w : 1920 h: 78
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [BlitLayer:166] displayRect x: 0 y : 1002 w : 1920 h : 78
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [doFlit:343] gfx src fd 37, w 1920, h 78, sw 1920 sh 78
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [doFlit:346] gfx dst fd 17, w 1920, h 1080, sw 1920 sh 1080
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [Commit:40] commit modSet=0
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [Apply:128] 
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [Apply:140] Apply Set OutFence crtc id: 108, fencePropId 19
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [Apply:144] mCompLayers size 1
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [ApplyPlane:62] 
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [ApplyPlane:64] set the fence in prop
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [GetGemBuffer:81] 
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [DrmGemBuffer:27] 
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [Init:38] hdl 0
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [ConvertToDrmFormat:84] fmtIn 12, outFmt 875708993
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [Init:48] mGemHandle 1  mFdId 140
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [Init:51] w: 1920  h: 1080 mDrmFormat : 875708993 gemHandles: 1 pitches: 7680 offsets: 0
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [~DrmGemBuffer:57] 
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [IsValid:75] 
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [ApplyPlane:79] set the fb planeid 84, propId 17, fbId 140
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [ApplyPlane:85] set the crtc planeId 84, propId 20, crtcId 108
+03-07 14:27:57.229 28133 28135 D C02500/DISP: [UpdateMode:94] 
+03-07 14:27:57.230 28133 28135 D C02500/DISP: [GetModeBlockFromId:375] id 0
+03-07 14:27:57.230 28133 28135 D C02500/DISP: [DrmModeBlock:383] 
+03-07 14:27:57.230 28133 28135 D C02500/DISP: [Init:395] mBlockId 142
+03-07 14:27:57.230 28133 28135 D C02500/DISP: [UpdateMode:99] set crtc to active
+03-07 14:27:57.230 28133 28135 D C02500/DISP: [UpdateMode:105] set the mode
+03-07 14:27:57.230 28133 28135 D C02500/DISP: [UpdateMode:108] set the mode planeId 108, propId 23, GetBlockId: 142
+03-07 14:27:57.230 28133 28135 D C02500/DISP: [UpdateMode:113] set the connector id: 138, propId 20, crtcId 108
+03-07 14:27:57.247 28133 28135 D C02500/DISP: [~DrmModeBlock:401] mBlockId 142
+03-07 14:27:57.247 28133 28135 D C02500/DISP: [Commit:202] the release fence is 15
+03-07 14:27:57.247   592   592 D C01401/Bufferqueue: (FrameBuffer) ReleaseBuffer: Succ push Buffer seq id: 909 Qid: 2542620639511 to free list, releaseFence: 60
+03-07 14:27:57.247   592   592 D C01400/Composer: Repaint: Repaint: end
+03-07 14:27:57.247 28133 28135 D C02500/DISP: [CallDisplayFunction:39] device Id : 0
+03-07 14:27:57.247 28133 28135 D C02500/DISP: [CallDisplayFunction:39] device Id : 0
+03-07 14:27:57.247 28133 28135 D C02500/DISP: [GetDisplayReleaseFence:153] set the layer fences
+03-07 14:27:57.247 28133 28135 D C02500/DISP: [GetDisplayReleaseFence:162] layer id 14 fencefd -1
+03-07 14:27:57.247 28133 28135 D C02500/DISP: [GetDisplayReleaseFence:162] layer id 16 fencefd -1
+03-07 14:27:57.247 28133 28135 D C02500/DISP: [GetDisplayReleaseFence:162] layer id 17 fencefd -1
+03-07 14:27:57.248 28133 28135 D C02500/DISP: [GetDisplayReleaseFence:162] layer id 7 fencefd -1
+03-07 14:27:57.248 28133 28135 D C02500/DISP: [GetDisplayReleaseFence:162] layer id 8 fencefd -1
+03-07 14:27:57.248   592   592 D C01401/Bufferqueue: (otatest0) ReleaseBuffer: Succ push Buffer seq id: 937 Qid: 2542620639518 to free list, releaseFence: -1
