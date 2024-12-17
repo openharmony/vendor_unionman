@@ -1,0 +1,332 @@
+
+-------------------------------[memory]-------------------------------
+
+Total Memory Usage by PID:
+PID     Name                Total Pss(xxx in SwapPss)   Total Vss   Total Rss   Total Uss          GL       Graph
+1    	init                   1175(0 in SwapPss) kB  2111468 kB     3508 kB     1136 kB        0 kB        0 kB
+212  	watchdog_servic         270(0 in SwapPss) kB  2110508 kB     2540 kB      240 kB        0 kB        0 kB
+226  	hilogd                 4389(0 in SwapPss) kB  2115584 kB     6836 kB     4356 kB        0 kB        0 kB
+228  	hdf_devmgr              651(0 in SwapPss) kB  2113864 kB     3668 kB      608 kB        0 kB        0 kB
+229  	appspawn              23559(0 in SwapPss) kB  2816116 kB   106868 kB    12096 kB        0 kB        0 kB
+230  	hiview                 9785(0 in SwapPss) kB  2180788 kB    39200 kB     8572 kB        0 kB        0 kB
+231  	storage_manager        4711(0 in SwapPss) kB  2163632 kB    24052 kB     3636 kB        0 kB        0 kB
+232  	storage_daemon         2416(0 in SwapPss) kB  2122188 kB     9724 kB     1916 kB        0 kB        0 kB
+233  	param_watcher          1257(0 in SwapPss) kB  2120904 kB     6784 kB     1168 kB        0 kB        0 kB
+234  	samgr                  2768(0 in SwapPss) kB  2129504 kB    10968 kB     2552 kB        0 kB        0 kB
+235  	device_manager         1829(0 in SwapPss) kB  2121628 kB     7772 kB     1612 kB        0 kB        0 kB
+236  	get_faultlog.sh         441(0 in SwapPss) kB  2110900 kB     2936 kB      320 kB        0 kB        0 kB
+306  	bluetooth_servi        9858(0 in SwapPss) kB  2145620 kB    22016 kB     9292 kB        0 kB        0 kB
+313  	resource_schedu       12184(0 in SwapPss) kB  2199392 kB    51580 kB     9692 kB        0 kB        0 kB
+314  	device_usage_st        4830(0 in SwapPss) kB  2140660 kB    21832 kB     4200 kB        0 kB        0 kB
+315  	deviceauth_serv        2289(0 in SwapPss) kB  2123396 kB    10648 kB     2012 kB        0 kB        0 kB
+316  	concurrent_task        1250(0 in SwapPss) kB  2120988 kB     6856 kB     1160 kB        0 kB        0 kB
+338  	accessibility          9735(0 in SwapPss) kB  2192644 kB    46688 kB     7740 kB        0 kB        0 kB
+341  	huks_service           3666(0 in SwapPss) kB  2134768 kB    18008 kB     2956 kB        0 kB        0 kB
+342  	memmgrservice          3703(0 in SwapPss) kB  2139576 kB    17640 kB     3256 kB        0 kB        0 kB
+345  	pulseaudio            11535(0 in SwapPss) kB  2194008 kB    18948 kB    11200 kB        0 kB        0 kB
+348  	uinput_inject           509(0 in SwapPss) kB  2111768 kB     3672 kB      456 kB        0 kB        0 kB
+349  	multimodalinput       11024(0 in SwapPss) kB  2221304 kB    47972 kB     9164 kB        0 kB        0 kB
+361  	netmanager             5466(0 in SwapPss) kB  2140724 kB    21076 kB     4728 kB        0 kB        0 kB
+367  	wallpaper_servi        6774(0 in SwapPss) kB  2176988 kB    35064 kB     5712 kB        0 kB        0 kB
+368  	telephony             10856(0 in SwapPss) kB  2180328 kB    29916 kB     9168 kB        0 kB        0 kB
+397  	rkisp_3A_server        8744(0 in SwapPss) kB   313408 kB     8748 kB     8744 kB        0 kB        0 kB
+402  	time_service           2391(0 in SwapPss) kB  2125584 kB    10060 kB     2176 kB        0 kB        0 kB
+403  	msdp                   6312(0 in SwapPss) kB  2174196 kB    32540 kB     5204 kB        0 kB        0 kB
+405  	bgtaskmgr_servi        8933(0 in SwapPss) kB  2211628 kB    41736 kB     6980 kB        0 kB        0 kB
+407  	audio_policy           7854(0 in SwapPss) kB  2239512 kB    33068 kB     6268 kB        0 kB        0 kB
+408  	wifi_hal_servic         565(0 in SwapPss) kB  2110808 kB     2848 kB      532 kB        0 kB        0 kB
+410  	intell_voice_ho         689(0 in SwapPss) kB  2113188 kB     3920 kB      628 kB        0 kB        0 kB
+411  	fingerprint_aut         748(0 in SwapPss) kB  2113248 kB     3904 kB      688 kB        0 kB        0 kB
+412  	user_auth_host         1852(0 in SwapPss) kB  2117580 kB     7492 kB     1620 kB        0 kB        0 kB
+413  	pin_auth_host          1816(0 in SwapPss) kB  2117688 kB     7460 kB     1580 kB        0 kB        0 kB
+414  	edm                    8589(0 in SwapPss) kB  2180776 kB    40216 kB     6824 kB        0 kB        0 kB
+468  	face_auth_host          796(0 in SwapPss) kB  2113304 kB     4052 kB      732 kB        0 kB        0 kB
+487  	codec_host             1545(0 in SwapPss) kB  2114660 kB     5204 kB     1192 kB        0 kB        0 kB
+489  	light_host              652(0 in SwapPss) kB  2113188 kB     3844 kB      592 kB        0 kB        0 kB
+495  	vibrator_host           673(0 in SwapPss) kB  2113208 kB     3944 kB      608 kB        0 kB        0 kB
+496  	sensor_host             735(0 in SwapPss) kB  2113432 kB     4044 kB      676 kB        0 kB        0 kB
+497  	input_user_host         412(0 in SwapPss) kB  2112896 kB     3400 kB      372 kB        0 kB        0 kB
+532  	camera_host            2956(0 in SwapPss) kB  2119052 kB     7372 kB     2552 kB        0 kB        0 kB
+533  	audio_host             2680(0 in SwapPss) kB  2116548 kB     5924 kB     2568 kB        0 kB        0 kB
+534  	wifi_host               761(0 in SwapPss) kB  2113280 kB     4004 kB      692 kB        0 kB        0 kB
+535  	power_host             1455(0 in SwapPss) kB  2116828 kB     5904 kB     1324 kB        0 kB        0 kB
+536  	usb_host               1155(0 in SwapPss) kB  2114228 kB     4544 kB     1084 kB        0 kB        0 kB
+537  	blue_host               713(0 in SwapPss) kB  2113376 kB     3952 kB      656 kB        0 kB        0 kB
+550  	allocator_host          667(0 in SwapPss) kB  2113608 kB     4028 kB      580 kB        0 kB        0 kB
+553  	sensors                1903(0 in SwapPss) kB  2122108 kB     8036 kB     1756 kB        0 kB        0 kB
+573  	distributeddata        7477(0 in SwapPss) kB  2143792 kB    26584 kB     6480 kB        0 kB        0 kB
+574  	av_codec_servic        4757(0 in SwapPss) kB  2136620 kB    12676 kB     4012 kB        0 kB        0 kB
+587  	ui_service             1882(0 in SwapPss) kB  2125484 kB    10644 kB     1704 kB        0 kB        0 kB
+588  	foundation           111692(0 in SwapPss) kB 10787848 kB   165296 kB   105316 kB        0 kB        0 kB
+592  	render_service        74499(0 in SwapPss) kB  2244048 kB    98604 kB    72852 kB        0 kB        0 kB
+615  	cupsd                  1830(0 in SwapPss) kB  2116560 kB     5116 kB     1764 kB        0 kB        0 kB
+618  	inputmethod_ser        9326(0 in SwapPss) kB  2191976 kB    46576 kB     7340 kB        0 kB        0 kB
+622  	faultloggerd            363(0 in SwapPss) kB  2110916 kB     2976 kB      328 kB        0 kB        0 kB
+623  	av_session             4940(0 in SwapPss) kB  2164984 kB    24016 kB     4200 kB        0 kB        0 kB
+626  	accesstoken_ser        3510(0 in SwapPss) kB  2124688 kB    10876 kB     3216 kB        0 kB        0 kB
+627  	netsysnative           2541(0 in SwapPss) kB  2126736 kB    10248 kB     2232 kB        0 kB        0 kB
+655  	softbus_server         6538(0 in SwapPss) kB  2158856 kB    23556 kB     5424 kB        0 kB        0 kB
+656  	useriam                3495(0 in SwapPss) kB  2127772 kB    12416 kB     3176 kB        0 kB        0 kB
+657  	accountmgr             4493(0 in SwapPss) kB  2133320 kB    18344 kB     3968 kB        0 kB        0 kB
+661  	camera_service         6231(0 in SwapPss) kB  2172276 kB    30088 kB     5388 kB        0 kB        0 kB
+675  	privacy_service        2007(0 in SwapPss) kB  2124504 kB    10140 kB     1788 kB        0 kB        0 kB
+676  	media_service         20476(0 in SwapPss) kB  2199828 kB    48124 kB    18468 kB        0 kB        0 kB
+677  	hdcd                   1924(0 in SwapPss) kB  2118396 kB     5880 kB     1668 kB        0 kB        0 kB
+681  	hdcd                   1118(0 in SwapPss) kB  2115796 kB     5120 kB      860 kB        0 kB        0 kB
+804  	ipc_shell_serve         707(0 in SwapPss) kB  2112960 kB     3484 kB      672 kB        0 kB        0 kB
+848  	appspawn               2533(0 in SwapPss) kB  2234036 kB    11212 kB     1736 kB        0 kB        0 kB
+876  	pinauth                1927(0 in SwapPss) kB  2123568 kB     8868 kB     1692 kB        0 kB        0 kB
+927  	wifi_manager_se        4631(0 in SwapPss) kB  2133156 kB    16140 kB     4048 kB        0 kB        0 kB
+1080 	m.ohos.systemui       70703(0 in SwapPss) kB  2974868 kB   161080 kB    57320 kB        0 kB        0 kB
+1114 	d.factorytestoh       24373(0 in SwapPss) kB  2898012 kB    98320 kB    16764 kB        0 kB        0 kB
+1176 	edialibrarydata       14526(0 in SwapPss) kB  2827524 kB    57020 kB    10752 kB        0 kB        0 kB
+1183 	ard:inputMethod       30747(0 in SwapPss) kB  2904304 kB   100452 kB    23352 kB        0 kB        0 kB
+1227 	dhcp_client_ser        1287(0 in SwapPss) kB  2122176 kB     4388 kB     1236 kB        0 kB        0 kB
+1516 	enterpriseAdmin        6050(0 in SwapPss) kB  2820216 kB    40756 kB     2660 kB        0 kB        0 kB
+1692 	m.ohos.launcher      126961(0 in SwapPss) kB  3059788 kB   213540 kB   115532 kB        0 kB        0 kB
+7517 	example.metartc       69789(0 in SwapPss) kB  3073840 kB   157076 kB    58232 kB        0 kB        0 kB
+7679 	sh                      413(0 in SwapPss) kB  2110852 kB     2960 kB      288 kB        0 kB        0 kB
+7682 	start_lldb_serv         429(0 in SwapPss) kB  2110884 kB     2988 kB      304 kB        0 kB        0 kB
+7690 	lldb-server            4280(0 in SwapPss) kB    21356 kB     6528 kB     2040 kB        0 kB        0 kB
+7691 	lldb-server            5804(0 in SwapPss) kB    22980 kB     8052 kB     3564 kB        0 kB        0 kB
+7930 	pasteboard_serv        6755(0 in SwapPss) kB  2177280 kB    35548 kB     5520 kB        0 kB        0 kB
+27456	wukong                 7417(0 in SwapPss) kB  2177676 kB    35756 kB     6288 kB        0 kB        0 kB
+27523	com.ohos.camera       50234(0 in SwapPss) kB  2932364 kB   137456 kB    37592 kB        0 kB        0 kB
+28098	ueventd                 354(0 in SwapPss) kB  2110588 kB     2744 kB      320 kB        0 kB        0 kB
+28133	composer_host          1871(0 in SwapPss) kB  2115144 kB     5516 kB     1660 kB        0 kB        0 kB
+28355	example.otatest       39670(0 in SwapPss) kB  2907396 kB   123840 kB    27944 kB        0 kB        0 kB
+28401	updater_sa             4848(0 in SwapPss) kB  2133064 kB    16596 kB     4400 kB        0 kB        0 kB
+28450	hidumper               1276(0 in SwapPss) kB  2120604 kB     6588 kB     1184 kB        0 kB        0 kB
+28455	hidumper_servic        5106(0 in SwapPss) kB  2164052 kB    25640 kB     4404 kB        0 kB        0 kB
+
+Total Memory Usage by Size:
+PID     Name                Total Pss(xxx in SwapPss)   Total Vss   Total Rss   Total Uss          GL       Graph
+1692 	m.ohos.launcher      126961(0 in SwapPss) kB  3059788 kB   213540 kB   115532 kB        0 kB        0 kB
+588  	foundation           111692(0 in SwapPss) kB 10787848 kB   165296 kB   105316 kB        0 kB        0 kB
+592  	render_service        74499(0 in SwapPss) kB  2244048 kB    98604 kB    72852 kB        0 kB        0 kB
+1080 	m.ohos.systemui       70703(0 in SwapPss) kB  2974868 kB   161080 kB    57320 kB        0 kB        0 kB
+7517 	example.metartc       69789(0 in SwapPss) kB  3073840 kB   157076 kB    58232 kB        0 kB        0 kB
+27523	com.ohos.camera       50234(0 in SwapPss) kB  2932364 kB   137456 kB    37592 kB        0 kB        0 kB
+28355	example.otatest       39670(0 in SwapPss) kB  2907396 kB   123840 kB    27944 kB        0 kB        0 kB
+1183 	ard:inputMethod       30747(0 in SwapPss) kB  2904304 kB   100452 kB    23352 kB        0 kB        0 kB
+1114 	d.factorytestoh       24373(0 in SwapPss) kB  2898012 kB    98320 kB    16764 kB        0 kB        0 kB
+229  	appspawn              23559(0 in SwapPss) kB  2816116 kB   106868 kB    12096 kB        0 kB        0 kB
+676  	media_service         20476(0 in SwapPss) kB  2199828 kB    48124 kB    18468 kB        0 kB        0 kB
+1176 	edialibrarydata       14526(0 in SwapPss) kB  2827524 kB    57020 kB    10752 kB        0 kB        0 kB
+313  	resource_schedu       12184(0 in SwapPss) kB  2199392 kB    51580 kB     9692 kB        0 kB        0 kB
+345  	pulseaudio            11535(0 in SwapPss) kB  2194008 kB    18948 kB    11200 kB        0 kB        0 kB
+349  	multimodalinput       11024(0 in SwapPss) kB  2221304 kB    47972 kB     9164 kB        0 kB        0 kB
+368  	telephony             10856(0 in SwapPss) kB  2180328 kB    29916 kB     9168 kB        0 kB        0 kB
+306  	bluetooth_servi        9858(0 in SwapPss) kB  2145620 kB    22016 kB     9292 kB        0 kB        0 kB
+230  	hiview                 9785(0 in SwapPss) kB  2180788 kB    39200 kB     8572 kB        0 kB        0 kB
+338  	accessibility          9735(0 in SwapPss) kB  2192644 kB    46688 kB     7740 kB        0 kB        0 kB
+618  	inputmethod_ser        9326(0 in SwapPss) kB  2191976 kB    46576 kB     7340 kB        0 kB        0 kB
+405  	bgtaskmgr_servi        8933(0 in SwapPss) kB  2211628 kB    41736 kB     6980 kB        0 kB        0 kB
+397  	rkisp_3A_server        8744(0 in SwapPss) kB   313408 kB     8748 kB     8744 kB        0 kB        0 kB
+414  	edm                    8589(0 in SwapPss) kB  2180776 kB    40216 kB     6824 kB        0 kB        0 kB
+407  	audio_policy           7854(0 in SwapPss) kB  2239512 kB    33068 kB     6268 kB        0 kB        0 kB
+573  	distributeddata        7477(0 in SwapPss) kB  2143792 kB    26584 kB     6480 kB        0 kB        0 kB
+27456	wukong                 7417(0 in SwapPss) kB  2177676 kB    35756 kB     6288 kB        0 kB        0 kB
+367  	wallpaper_servi        6774(0 in SwapPss) kB  2176988 kB    35064 kB     5712 kB        0 kB        0 kB
+7930 	pasteboard_serv        6755(0 in SwapPss) kB  2177280 kB    35548 kB     5520 kB        0 kB        0 kB
+655  	softbus_server         6538(0 in SwapPss) kB  2158856 kB    23556 kB     5424 kB        0 kB        0 kB
+403  	msdp                   6312(0 in SwapPss) kB  2174196 kB    32540 kB     5204 kB        0 kB        0 kB
+661  	camera_service         6231(0 in SwapPss) kB  2172276 kB    30088 kB     5388 kB        0 kB        0 kB
+1516 	enterpriseAdmin        6050(0 in SwapPss) kB  2820216 kB    40756 kB     2660 kB        0 kB        0 kB
+7691 	lldb-server            5804(0 in SwapPss) kB    22980 kB     8052 kB     3564 kB        0 kB        0 kB
+361  	netmanager             5466(0 in SwapPss) kB  2140724 kB    21076 kB     4728 kB        0 kB        0 kB
+28455	hidumper_servic        5106(0 in SwapPss) kB  2164052 kB    25640 kB     4404 kB        0 kB        0 kB
+623  	av_session             4940(0 in SwapPss) kB  2164984 kB    24016 kB     4200 kB        0 kB        0 kB
+28401	updater_sa             4848(0 in SwapPss) kB  2133064 kB    16596 kB     4400 kB        0 kB        0 kB
+314  	device_usage_st        4830(0 in SwapPss) kB  2140660 kB    21832 kB     4200 kB        0 kB        0 kB
+574  	av_codec_servic        4757(0 in SwapPss) kB  2136620 kB    12676 kB     4012 kB        0 kB        0 kB
+231  	storage_manager        4711(0 in SwapPss) kB  2163632 kB    24052 kB     3636 kB        0 kB        0 kB
+927  	wifi_manager_se        4631(0 in SwapPss) kB  2133156 kB    16140 kB     4048 kB        0 kB        0 kB
+657  	accountmgr             4493(0 in SwapPss) kB  2133320 kB    18344 kB     3968 kB        0 kB        0 kB
+226  	hilogd                 4389(0 in SwapPss) kB  2115584 kB     6836 kB     4356 kB        0 kB        0 kB
+7690 	lldb-server            4280(0 in SwapPss) kB    21356 kB     6528 kB     2040 kB        0 kB        0 kB
+342  	memmgrservice          3703(0 in SwapPss) kB  2139576 kB    17640 kB     3256 kB        0 kB        0 kB
+341  	huks_service           3666(0 in SwapPss) kB  2134768 kB    18008 kB     2956 kB        0 kB        0 kB
+626  	accesstoken_ser        3510(0 in SwapPss) kB  2124688 kB    10876 kB     3216 kB        0 kB        0 kB
+656  	useriam                3495(0 in SwapPss) kB  2127772 kB    12416 kB     3176 kB        0 kB        0 kB
+532  	camera_host            2956(0 in SwapPss) kB  2119052 kB     7372 kB     2552 kB        0 kB        0 kB
+234  	samgr                  2768(0 in SwapPss) kB  2129504 kB    10968 kB     2552 kB        0 kB        0 kB
+533  	audio_host             2680(0 in SwapPss) kB  2116548 kB     5924 kB     2568 kB        0 kB        0 kB
+627  	netsysnative           2541(0 in SwapPss) kB  2126736 kB    10248 kB     2232 kB        0 kB        0 kB
+848  	appspawn               2533(0 in SwapPss) kB  2234036 kB    11212 kB     1736 kB        0 kB        0 kB
+232  	storage_daemon         2416(0 in SwapPss) kB  2122188 kB     9724 kB     1916 kB        0 kB        0 kB
+402  	time_service           2391(0 in SwapPss) kB  2125584 kB    10060 kB     2176 kB        0 kB        0 kB
+315  	deviceauth_serv        2289(0 in SwapPss) kB  2123396 kB    10648 kB     2012 kB        0 kB        0 kB
+675  	privacy_service        2007(0 in SwapPss) kB  2124504 kB    10140 kB     1788 kB        0 kB        0 kB
+876  	pinauth                1927(0 in SwapPss) kB  2123568 kB     8868 kB     1692 kB        0 kB        0 kB
+677  	hdcd                   1924(0 in SwapPss) kB  2118396 kB     5880 kB     1668 kB        0 kB        0 kB
+553  	sensors                1903(0 in SwapPss) kB  2122108 kB     8036 kB     1756 kB        0 kB        0 kB
+587  	ui_service             1882(0 in SwapPss) kB  2125484 kB    10644 kB     1704 kB        0 kB        0 kB
+28133	composer_host          1871(0 in SwapPss) kB  2115144 kB     5516 kB     1660 kB        0 kB        0 kB
+412  	user_auth_host         1852(0 in SwapPss) kB  2117580 kB     7492 kB     1620 kB        0 kB        0 kB
+615  	cupsd                  1830(0 in SwapPss) kB  2116560 kB     5116 kB     1764 kB        0 kB        0 kB
+235  	device_manager         1829(0 in SwapPss) kB  2121628 kB     7772 kB     1612 kB        0 kB        0 kB
+413  	pin_auth_host          1816(0 in SwapPss) kB  2117688 kB     7460 kB     1580 kB        0 kB        0 kB
+487  	codec_host             1545(0 in SwapPss) kB  2114660 kB     5204 kB     1192 kB        0 kB        0 kB
+535  	power_host             1455(0 in SwapPss) kB  2116828 kB     5904 kB     1324 kB        0 kB        0 kB
+1227 	dhcp_client_ser        1287(0 in SwapPss) kB  2122176 kB     4388 kB     1236 kB        0 kB        0 kB
+28450	hidumper               1276(0 in SwapPss) kB  2120604 kB     6588 kB     1184 kB        0 kB        0 kB
+233  	param_watcher          1257(0 in SwapPss) kB  2120904 kB     6784 kB     1168 kB        0 kB        0 kB
+316  	concurrent_task        1250(0 in SwapPss) kB  2120988 kB     6856 kB     1160 kB        0 kB        0 kB
+1    	init                   1175(0 in SwapPss) kB  2111468 kB     3508 kB     1136 kB        0 kB        0 kB
+536  	usb_host               1155(0 in SwapPss) kB  2114228 kB     4544 kB     1084 kB        0 kB        0 kB
+681  	hdcd                   1118(0 in SwapPss) kB  2115796 kB     5120 kB      860 kB        0 kB        0 kB
+468  	face_auth_host          796(0 in SwapPss) kB  2113304 kB     4052 kB      732 kB        0 kB        0 kB
+534  	wifi_host               761(0 in SwapPss) kB  2113280 kB     4004 kB      692 kB        0 kB        0 kB
+411  	fingerprint_aut         748(0 in SwapPss) kB  2113248 kB     3904 kB      688 kB        0 kB        0 kB
+496  	sensor_host             735(0 in SwapPss) kB  2113432 kB     4044 kB      676 kB        0 kB        0 kB
+537  	blue_host               713(0 in SwapPss) kB  2113376 kB     3952 kB      656 kB        0 kB        0 kB
+804  	ipc_shell_serve         707(0 in SwapPss) kB  2112960 kB     3484 kB      672 kB        0 kB        0 kB
+410  	intell_voice_ho         689(0 in SwapPss) kB  2113188 kB     3920 kB      628 kB        0 kB        0 kB
+495  	vibrator_host           673(0 in SwapPss) kB  2113208 kB     3944 kB      608 kB        0 kB        0 kB
+550  	allocator_host          667(0 in SwapPss) kB  2113608 kB     4028 kB      580 kB        0 kB        0 kB
+489  	light_host              652(0 in SwapPss) kB  2113188 kB     3844 kB      592 kB        0 kB        0 kB
+228  	hdf_devmgr              651(0 in SwapPss) kB  2113864 kB     3668 kB      608 kB        0 kB        0 kB
+408  	wifi_hal_servic         565(0 in SwapPss) kB  2110808 kB     2848 kB      532 kB        0 kB        0 kB
+348  	uinput_inject           509(0 in SwapPss) kB  2111768 kB     3672 kB      456 kB        0 kB        0 kB
+236  	get_faultlog.sh         441(0 in SwapPss) kB  2110900 kB     2936 kB      320 kB        0 kB        0 kB
+7682 	start_lldb_serv         429(0 in SwapPss) kB  2110884 kB     2988 kB      304 kB        0 kB        0 kB
+7679 	sh                      413(0 in SwapPss) kB  2110852 kB     2960 kB      288 kB        0 kB        0 kB
+497  	input_user_host         412(0 in SwapPss) kB  2112896 kB     3400 kB      372 kB        0 kB        0 kB
+622  	faultloggerd            363(0 in SwapPss) kB  2110916 kB     2976 kB      328 kB        0 kB        0 kB
+28098	ueventd                 354(0 in SwapPss) kB  2110588 kB     2744 kB      320 kB        0 kB        0 kB
+212  	watchdog_servic         270(0 in SwapPss) kB  2110508 kB     2540 kB      240 kB        0 kB        0 kB
+
+Total Pss by OOM adjustment:
+System: 531263 kB
+	foundation(pid=588):         111692 kB
+	render_service(pid=592):     74499 kB
+	appspawn(pid=229):           23559 kB
+	media_service(pid=676):      20476 kB
+	resource_schedu(pid=313):    12184 kB
+	pulseaudio(pid=345):         11535 kB
+	multimodalinput(pid=349):    11024 kB
+	telephony(pid=368):          10856 kB
+	bluetooth_servi(pid=306):    9858 kB
+	hiview(pid=230):             9785 kB
+	accessibility(pid=338):      9735 kB
+	inputmethod_ser(pid=618):    9326 kB
+	bgtaskmgr_servi(pid=405):    8933 kB
+	rkisp_3A_server(pid=397):    8744 kB
+	edm(pid=414):                8589 kB
+	audio_policy(pid=407):       7854 kB
+	distributeddata(pid=573):    7477 kB
+	wukong(pid=27456):           7417 kB
+	wallpaper_servi(pid=367):    6774 kB
+	pasteboard_serv(pid=7930):   6755 kB
+	softbus_server(pid=655):     6538 kB
+	msdp(pid=403):               6312 kB
+	camera_service(pid=661):     6231 kB
+	lldb-server(pid=7691):       5804 kB
+	netmanager(pid=361):         5466 kB
+	hidumper_servic(pid=28455):  5106 kB
+	av_session(pid=623):         4940 kB
+	updater_sa(pid=28401):       4848 kB
+	device_usage_st(pid=314):    4830 kB
+	av_codec_servic(pid=574):    4757 kB
+	storage_manager(pid=231):    4711 kB
+	wifi_manager_se(pid=927):    4631 kB
+	accountmgr(pid=657):         4493 kB
+	hilogd(pid=226):             4389 kB
+	lldb-server(pid=7690):       4280 kB
+	memmgrservice(pid=342):      3703 kB
+	huks_service(pid=341):       3666 kB
+	accesstoken_ser(pid=626):    3510 kB
+	useriam(pid=656):            3495 kB
+	camera_host(pid=532):        2956 kB
+	samgr(pid=234):              2768 kB
+	audio_host(pid=533):         2680 kB
+	netsysnative(pid=627):       2541 kB
+	appspawn(pid=848):           2533 kB
+	storage_daemon(pid=232):     2416 kB
+	time_service(pid=402):       2391 kB
+	deviceauth_serv(pid=315):    2289 kB
+	privacy_service(pid=675):    2007 kB
+	pinauth(pid=876):            1927 kB
+	hdcd(pid=677):               1924 kB
+	sensors(pid=553):            1903 kB
+	ui_service(pid=587):         1882 kB
+	composer_host(pid=28133):    1871 kB
+	user_auth_host(pid=412):     1852 kB
+	cupsd(pid=615):              1830 kB
+	device_manager(pid=235):     1829 kB
+	pin_auth_host(pid=413):      1816 kB
+	codec_host(pid=487):         1545 kB
+	power_host(pid=535):         1455 kB
+	dhcp_client_ser(pid=1227):   1287 kB
+	hidumper(pid=28450):         1276 kB
+	param_watcher(pid=233):      1257 kB
+	concurrent_task(pid=316):    1250 kB
+	init(pid=1):                 1175 kB
+	usb_host(pid=536):           1155 kB
+	hdcd(pid=681):               1118 kB
+	face_auth_host(pid=468):     796 kB
+	wifi_host(pid=534):          761 kB
+	fingerprint_aut(pid=411):    748 kB
+	sensor_host(pid=496):        735 kB
+	blue_host(pid=537):          713 kB
+	ipc_shell_serve(pid=804):    707 kB
+	intell_voice_ho(pid=410):    689 kB
+	vibrator_host(pid=495):      673 kB
+	allocator_host(pid=550):     667 kB
+	light_host(pid=489):         652 kB
+	hdf_devmgr(pid=228):         651 kB
+	wifi_hal_servic(pid=408):    565 kB
+	uinput_inject(pid=348):      509 kB
+	get_faultlog.sh(pid=236):    441 kB
+	start_lldb_serv(pid=7682):   429 kB
+	sh(pid=7679):                413 kB
+	input_user_host(pid=497):    412 kB
+	faultloggerd(pid=622):       363 kB
+	ueventd(pid=28098):          354 kB
+	watchdog_servic(pid=212):    270 kB
+Persistent: 70703 kB
+	m.ohos.systemui(pid=1080):   70703 kB
+Foreground: 39670 kB
+	example.otatest(pid=28355):  39670 kB
+Suspend-delay: 20576 kB
+	edialibrarydata(pid=1176):   14526 kB
+	enterpriseAdmin(pid=1516):   6050 kB
+Perceived: 0 kB
+Background: 175143 kB
+	example.metartc(pid=7517):   69789 kB
+	com.ohos.camera(pid=27523):  50234 kB
+	ard:inputMethod(pid=1183):   30747 kB
+	d.factorytestoh(pid=1114):   24373 kB
+Undefined: 126961 kB
+	m.ohos.launcher(pid=1692):   126961 kB
+
+Total Pss by Category:
+File-backed Page(523055 kB):
+       347147 kB : .so
+        70948 kB : dev
+        64824 kB : dmabuf
+        24548 kB : other
+        14956 kB : .ttf
+          480 kB : .db
+          152 kB : .hap
+Anonymous Page(431906 kB):
+       256963 kB : native heap
+       124270 kB : other
+        39247 kB : ark ts heap
+        11426 kB : stack
+            0 kB : guard
+DMA(0 kB):
+            0 kB : GL
+            0 kB : Graph
+
+      Total RAM:3916148 kB
+       Free RAM:2739468 kB (1176132 cached + 1563336 free)
+       Used RAM:2167033 kB (954961 total pss + 1212072 kernel)
+       Lost RAM:18446744073708561263 kB
+
+Total RAM by Category:
+ Hardware Usage:0 kB
+      CMA Usage:1297 kB
+   Kernel Usage:1173964 kB
+Processes Usage:954961 kB

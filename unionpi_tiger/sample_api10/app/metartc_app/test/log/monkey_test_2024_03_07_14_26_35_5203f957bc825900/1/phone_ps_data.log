@@ -1,0 +1,246 @@
+UID            PID  PPID C STIME TTY          TIME  RES VIRT CMD
+root             1     0 0 18:22:31 ?     00:00:06 3.4M 2.0G init --second-stage
+root             2     0 0 18:22:31 ?     00:00:00    0    0 [kthreadd]
+root             3     2 0 18:22:31 ?     00:00:00    0    0 [rcu_gp]
+root             4     2 0 18:22:31 ?     00:00:00    0    0 [rcu_par_gp]
+root             8     2 0 18:22:31 ?     00:00:00    0    0 [mm_percpu_wq]
+root             9     2 0 18:22:31 ?     00:00:00    0    0 [rcu_tasks_rude_]
+root            10     2 0 18:22:31 ?     00:02:35    0    0 [ksoftirqd/0]
+root            11     2 0 18:22:31 ?     00:08:58    0    0 [rcu_sched]
+root            12     2 0 18:22:31 ?     00:00:10    0    0 [migration/0]
+root            13     2 0 18:22:31 ?     00:00:00    0    0 [cpuhp/0]
+root            14     2 0 18:22:31 ?     00:00:00    0    0 [cpuhp/1]
+root            15     2 0 18:22:31 ?     00:00:13    0    0 [migration/1]
+root            16     2 0 18:22:31 ?     00:00:09    0    0 [ksoftirqd/1]
+root            19     2 0 18:22:31 ?     00:00:00    0    0 [cpuhp/2]
+root            20     2 0 18:22:31 ?     00:00:15    0    0 [migration/2]
+root            21     2 0 18:22:31 ?     00:00:24    0    0 [ksoftirqd/2]
+root            24     2 0 18:22:31 ?     00:00:00    0    0 [cpuhp/3]
+root            25     2 0 18:22:31 ?     00:00:17    0    0 [migration/3]
+root            26     2 0 18:22:31 ?     00:00:10    0    0 [ksoftirqd/3]
+root            29     2 0 18:22:31 ?     00:00:00    0    0 [cpuhp/4]
+root            30     2 0 18:22:31 ?     00:00:01    0    0 [migration/4]
+root            31     2 0 18:22:31 ?     00:00:08    0    0 [ksoftirqd/4]
+root            34     2 0 18:22:31 ?     00:00:00    0    0 [cpuhp/5]
+root            35     2 0 18:22:31 ?     00:00:00    0    0 [migration/5]
+root            36     2 0 18:22:31 ?     00:00:04    0    0 [ksoftirqd/5]
+root            39     2 0 18:22:31 ?     00:00:00    0    0 [kdevtmpfs]
+root            40     2 0 18:22:31 ?     00:00:00    0    0 [netns]
+root            48     2 0 18:22:31 ?     00:00:00    0    0 [kauditd]
+root            49     2 0 18:22:31 ?     00:00:50    0    0 [khungtaskd]
+root            50     2 0 18:22:31 ?     00:00:00    0    0 [oom_reaper]
+root            51     2 0 18:22:31 ?     00:00:00    0    0 [writeback]
+root            63     2 0 18:22:31 ?     00:00:00    0    0 [cryptd]
+root            91     2 0 18:22:31 ?     00:00:00    0    0 [kblockd]
+root            93     2 0 18:22:31 ?     00:00:00    0    0 [tpm_dev_wq]
+root            94     2 0 18:22:31 ?     00:00:00    0    0 [devfreq_wq]
+root            95     2 0 18:22:31 ?     00:00:02    0    0 [watchdogd]
+root            98     2 0 18:22:31 ?     00:00:00    0    0 [rpciod]
+root           100     2 0 18:22:31 ?     00:00:00    0    0 [xprtiod]
+root           101     2 0 18:22:31 ?     00:00:00    0    0 [cfg80211]
+root           129     2 0 18:22:31 ?     00:00:00    0    0 [kswapd0]
+root           130     2 0 18:22:31 ?     00:00:38    0    0 [snapshotd]
+root           131     2 0 18:22:31 ?     00:00:00    0    0 [zswapd0]
+root           132     2 0 18:22:31 ?     00:00:00    0    0 [nfsiod]
+root           133     2 0 18:22:31 ?     00:00:00    0    0 [xfsalloc]
+root           134     2 0 18:22:31 ?     00:00:00    0    0 [xfs_mru_cache]
+root           136     2 0 18:22:32 ?     00:00:00    0    0 [irq/77-rockchip]
+root           137     2 0 18:22:32 ?     00:00:00    0    0 [irq/78-rockchip]
+root           138     2 0 18:22:32 ?     00:00:44    0    0 [queue_work0]
+root           139     2 0 18:22:32 ?     00:00:34    0    0 [queue_work1]
+root           140     2 0 18:22:32 ?     00:01:03    0    0 [irq/56-ff660000]
+root           141     2 0 18:22:32 ?     00:00:00    0    0 [irq/54-ff650400]
+root           142     2 0 18:22:32 ?     00:01:58    0    0 [irq/53-ff650000]
+root           143     2 0 18:22:32 ?     00:00:00    0    0 [dmabuf-deferred]
+root           144     2 0 18:22:32 ?     00:00:00    0    0 [nvme-wq]
+root           145     2 0 18:22:32 ?     00:00:00    0    0 [nvme-reset-wq]
+root           146     2 0 18:22:32 ?     00:00:00    0    0 [nvme-delete-wq]
+root           147     2 0 18:22:32 ?     00:00:00    0    0 [uas]
+root           150     2 0 18:22:33 ?     00:00:01    0    0 [irq/81-ilitek_t]
+root           152     2 0 18:22:33 ?     00:00:00    0    0 [irq/82-rk808]
+root           153     2 0 18:22:33 ?     00:00:00    0    0 [fusb302_wq]
+root           154     2 0 18:22:33 ?     00:01:18    0    0 [irq/92-fusb302]
+root           155     2 0 18:22:34 ?     00:00:01    0    0 [irq/49-rockchip]
+root           156     2 1 18:22:34 ?     00:23:46    0    0 [sugov:0]
+root           158     2 1 18:22:34 ?     00:21:14    0    0 [sugov:4]
+root           160     2 0 18:22:34 ?     00:00:00    0    0 [sdhci]
+root           161     2 0 18:22:34 ?     00:00:00    0    0 [irq/37-mmc0]
+root           162     2 0 18:22:34 ?     00:00:00    0    0 [hung_wp_screen_]
+root           163     2 0 18:22:34 ?     00:00:00    0    0 [ipv6_addrconf]
+root           166     2 0 18:22:34 ?     00:00:00    0    0 [krfcommd]
+root           167     2 0 18:22:34 ?     00:00:00    0    0 [kstrp]
+root           171     2 0 18:22:34 ?     00:00:00    0    0 [mmc_complete]
+root           174     2 0 18:22:34 ?     00:00:00    0    0 [core_ctl/0]
+root           175     2 0 18:22:34 ?     00:00:00    0    0 [core_ctl/4]
+root           177     2 0 18:22:34 ?     00:06:57    0    0 [irq/59-rga]
+root           178     2 0 18:22:34 ?     00:00:00    0    0 [irq/96-rockchip]
+root           179     2 0 18:22:34 ?     00:00:00    0    0 [irq/97-rockchip]
+root           180     2 0 18:22:34 ?     00:00:00    0    0 [irq/98-rockchip]
+root           185     2 0 18:22:34 ?     00:00:00    0    0 [irq/68-analogix]
+root           189     2 0 18:22:34 ?     00:00:00    0    0 [card0-crtc0]
+root           190     2 0 18:22:34 ?     00:00:00    0    0 [card0-crtc1]
+root           191     2 0 18:22:34 ?     00:00:00    0    0 [irq/70-panfrost]
+root           192     2 0 18:22:34 ?     00:00:25    0    0 [pan_js]
+root           193     2 0 18:22:34 ?     00:00:43    0    0 [pan_js]
+root           194     2 0 18:22:34 ?     00:00:00    0    0 [pan_js]
+root           195     2 0 18:22:34 ?     00:00:00    0    0 [stmmac_wq]
+root           198     2 0 18:22:34 ?     00:00:00    0    0 [spi0]
+root           199     2 0 18:22:34 ?     00:00:00    0    0 [light_queue]
+root           200     2 0 18:22:34 ?     00:00:00    0    0 [vibrator_queue]
+root           201     2 0 18:22:34 ?     00:00:00    0    0 [usb pnp notify ]
+root           202     2 0 18:22:34 ?     00:00:00    0    0 [gadget pnp noti]
+root           203     2 0 18:22:34 ?     00:00:00    0    0 [hdf_proximity_w]
+root           204     2 0 18:22:34 ?     00:00:00    0    0 [hdf_als_work_qu]
+root           209     2 0 18:22:35 ?     00:00:00    0    0 [ext4-rsv-conver]
+root           210     2 0 18:22:35 ?     00:00:00    0    0 [ext4-rsv-conver]
+watchdog       212     1 0 18:22:35 ?     00:00:02 1.5M 2.0G watchdog_service 10 20
+root           215     2 0 18:22:35 ?     00:00:00    0    0 [ext4-rsv-conver]
+root           216     2 0 18:22:35 ?     00:00:00    0    0 [ext4-rsv-conver]
+root           220     2 0 18:22:37 ?     00:00:00    0    0 [f2fs_flush-179:]
+root           221     2 0 18:22:37 ?     00:00:00    0    0 [f2fs_discard-17]
+root           223     2 0 18:22:37 ?     00:00:00    0    0 [f2fs_gc-179:13]
+logd           226     1 5 18:22:38 ?     03:25:16 6.6M 2.0G hilogd
+hdf_devmgr     228     1 0 18:22:38 ?     00:00:00 3.5M 2.0G hdf_devmgr
+root           229     1 0 18:22:38 ?     00:00:03 104M 2.6G appspawn
+hiview         230     1 0 18:22:38 ?     00:07:26  38M 2.0G hiview
+storage_manager 231    1 0 18:22:38 ?     00:00:00  23M 2.0G storage_manager
+root           232     1 0 18:22:38 ?     00:00:00 9.4M 2.0G storage_daemon
+paramwatcher   233     1 0 18:22:38 ?     00:00:00 6.6M 2.0G param_watcher
+samgr          234     1 0 18:22:38 ?     00:01:50  10M 2.0G samgr
+device_manager 235     1 0 18:22:38 ?     00:00:27 7.5M 2.0G device_manager
+root           236     1 0 18:22:38 ?     00:12:51 2.8M 2.0G sh /system/bin/get_faultlog.sh
+root           304     2 0 18:22:38 ?     00:00:00    0    0 [kworker/u13:1-f2fs_post_read_wq]
+bluetooth      306     1 0 18:22:38 ?     00:00:18  21M 2.0G bluetooth_servi
+root           313     1 0 18:22:38 ?     00:00:05  50M 2.0G resource_schedu
+device_usage_stats 314 1 0 18:22:38 ?     00:00:02  21M 2.0G device_usage_st
+deviceauth     315     1 0 18:22:38 ?     00:00:00  10M 2.0G deviceauth_service
+system         316     1 0 18:22:38 ?     00:00:00 6.6M 2.0G concurrent_task
+accessibility  338     1 0 18:22:38 ?     00:00:05  45M 2.0G accessibility
+huks_server    341     1 0 18:22:38 ?     00:00:00  17M 2.0G huks_service
+memmgr         342     1 0 18:22:38 ?     00:00:07  17M 2.0G memmgrservice
+audio          345     1 2 18:22:38 ?     01:07:15  18M 2.0G pulseaudio
+input          348     1 0 18:22:38 ?     00:00:12 3.5M 2.0G uinput_inject
+input          349     1 0 18:22:38 ?     00:00:21  47M 2.1G multimodalinput
+net_manager    361     1 0 18:22:38 ?     00:07:43  20M 2.0G netmanager
+wallpaper      367     1 0 18:22:38 ?     00:00:02  34M 2.0G wallpaper_servi
+radio          368     1 0 18:22:38 ?     00:00:00  29M 2.0G telephony
+root           378     2 0 18:22:38 ?     00:00:00    0    0 [dhd_eventd]
+root           381     2 0 18:22:38 ?     00:00:00    0    0 [ext_eventd]
+root           384     2 0 18:22:38 ?     00:00:00    0    0 [dhd_watchdog_th]
+ispserver      397     1 2 18:22:38 ?     01:02:59 8.1M 306M rkisp_3A_server --mmedia=/dev/media0
+time           402     1 0 18:22:38 ?     00:00:42  10M 2.0G time_service
+msdp           403     1 0 18:22:38 ?     00:00:00  32M 2.0G msdp
+bgtask         405     1 0 18:22:38 ?     00:00:01  40M 2.1G bgtaskmgr_servi
+audio          407     1 0 18:22:38 ?     00:02:06  32M 2.1G audio_policy
+wifi           408     1 0 18:22:38 ?     00:00:00 2.7M 2.0G wifi_hal_service
+intell_voice_host 410  1 0 18:22:38 ?     00:00:00 3.8M 2.0G intell_voice_host       23 intell_voice_host
+fingerprint_auth_host 411 1 0 18:22:38 ?  00:00:00 3.8M 2.0G fingerprint_auth_host   20 fingerprint_auth_host
+user_auth_host 412     1 0 18:22:38 ?     00:00:00 7.3M 2.0G user_auth_host          19 user_auth_host
+pin_auth_host  413     1 0 18:22:38 ?     00:00:00 7.2M 2.0G pin_auth_host           18 pin_auth_host
+edm            414     1 0 18:22:38 ?     00:00:00  39M 2.0G edm
+face_auth_host 468     1 0 18:22:38 ?     00:00:00 3.9M 2.0G face_auth_host          17 face_auth_host
+codec_host     487     1 0 18:22:38 ?     00:00:00 4.9M 2.0G codec_host              14 codec_host
+light_host     489     1 0 18:22:38 ?     00:00:00 3.7M 2.0G light_host              13 light_host
+vibrator_host  495     1 0 18:22:38 ?     00:00:00 3.8M 2.0G vibrator_host           12 vibrator_host
+sensor_host    496     1 0 18:22:38 ?     00:00:00 3.9M 2.0G sensor_host             11 sensor_host
+input_user_host 497    1 0 18:22:38 ?     00:00:00 3.3M 2.0G input_user_host         8 input_user_host
+camera_host    532     1 10 18:22:39 ?    07:05:34 7.1M 2.0G camera_host             7 camera_host
+audio_host     533     1 1 18:22:39 ?     00:40:10 5.7M 2.0G audio_host              6 audio_host
+wifi_host      534     1 0 18:22:39 ?     00:00:00 3.8M 2.0G wifi_host               5 wifi_host
+power_host     535     1 0 18:22:39 ?     00:02:05 5.7M 2.0G power_host              4 power_host
+usb_host       536     1 0 18:22:39 ?     00:00:00 4.4M 2.0G usb_host                3 usb_host
+blue_host      537     1 0 18:22:39 ?     00:00:11 3.8M 2.0G blue_host               1 blue_host
+allocator_host 550     1 0 18:22:39 ?     00:00:07 3.9M 2.0G allocator_host          10 allocator_host
+sensor         553     1 0 18:22:39 ?     00:00:00 7.8M 2.0G sensors
+ddms           573     1 0 18:22:39 ?     00:04:02  26M 2.0G distributeddata
+media          574     1 2 18:22:39 ?     01:05:06  12M 2.0G av_codec_servic
+uiserver       587     1 0 18:22:39 ?     00:00:00  10M 2.0G ui_service
+foundation     588     1 0 18:22:39 ?     00:07:25 161M  10G foundation
+graphics       592     1 15 18:22:39 ?    10:29:24  33M 2.1G render_service
+print          615     1 0 18:22:39 ?     00:00:00 4.9M 2.0G cupsd -f -c /etc/cups/cupsd.conf -s /etc/cups/cups-files.conf
+inputmethod    618     1 0 18:22:39 ?     00:00:31  45M 2.0G inputmethod_ser
+faultloggerd   622     1 0 18:22:39 ?     00:00:00 2.9M 2.0G faultloggerd
+av_session     623     1 0 18:22:39 ?     00:01:12  23M 2.0G av_session
+access_token   626     1 0 18:22:39 ?     00:02:05  11M 2.0G accesstoken_ser
+netsysnative   627     1 0 18:22:39 ?     00:01:04  10M 2.0G netsysnative
+dsoftbus       655     1 0 18:22:39 ?     00:01:31  23M 2.0G softbus_server
+useriam        656     1 0 18:22:39 ?     00:00:27  12M 2.0G useriam
+account        657     1 0 18:22:39 ?     00:02:03  18M 2.0G accountmgr
+cameraserver   661     1 0 18:22:39 ?     00:13:32  29M 2.0G camera_service
+access_token   675     1 0 18:22:39 ?     00:00:01  10M 2.0G privacy_service
+media          676     1 0 18:22:39 ?     00:02:01  47M 2.0G media_service
+root           677     1 3 18:22:39 ?     01:45:55 5.6M 2.0G hdcd -u
+root           681     1 0 18:22:39 ?     00:00:00 4.9M 2.0G hdcd -t
+root           793     2 1 18:22:40 ?     00:38:06    0    0 [irq/79-dwc3]
+root           804     1 0 18:22:40 ?     00:00:00 3.2M 2.0G ipc_shell_server
+nwebspawn      848   229 0 18:22:40 ?     00:00:00  11M 2.1G nwebspawn
+useriam        876     1 0 18:22:40 ?     00:00:00 8.6M 2.0G pinauth
+wifi           927     1 0 18:22:40 ?     00:02:22  16M 2.0G wifi_manager_se
+10010         1080   229 0 18:22:42 ?     00:03:39 156M 2.8G com.ohos.systemui
+root          1087     2 0 18:22:42 ?     00:00:00    0    0 [share_item_time]
+root          1088     2 0 18:22:42 ?     00:00:00    0    0 [dfs_ino_wb1]
+root          1089     2 0 18:22:42 ?     00:00:00    0    0 [dfs_sb_wb1]
+root          1090     2 0 18:22:42 ?     00:00:00    0    0 [dfs_srv_wb1]
+root          1091     2 0 18:22:42 ?     00:00:00    0    0 [share_item_time]
+root          1092     2 0 18:22:42 ?     00:00:00    0    0 [dfs_ino_wb2]
+root          1093     2 0 18:22:42 ?     00:00:00    0    0 [dfs_sb_wb2]
+root          1094     2 0 18:22:42 ?     00:00:00    0    0 [dfs_srv_wb2]
+20010039      1114   229 0 18:22:42 ?     00:00:55  95M 2.7G com.yarward.factorytestoh
+20010023      1176   229 0 18:22:43 ?     00:02:15  55M 2.6G com.ohos.medialibrary.medialibrarydata
+20010015      1183   229 0 18:22:43 ?     00:01:06  97M 2.7G com.example.kikakeyboard:inputMethod
+root          1188     2 0 06:50:54 ?     00:00:00    0    0 [kworker/1:2H]
+net_manager   1227     1 0 18:22:43 ?     00:00:50 3.9M 2.0G dhcp_client_service start eth0 -a
+20010035      1516   229 0 18:22:47 ?     00:00:12  39M 2.6G com.unionman.bootmanager:enterpriseAdmin
+wifi          1558   927 0 18:22:48 ?     00:00:00    0    0 [dhcp_client_ser]
+wifi          1569   927 0 18:22:50 ?     00:00:00    0    0 [dhcp_client_ser]
+root          1593     2 0 18:22:51 ?     00:00:00    0    0 [psimon]
+20010026      1692   229 0 18:23:12 ?     00:01:29 208M 2.9G com.ohos.launcher
+wifi          1838   927 0 18:23:26 ?     00:00:00    0    0 [dhcp_client_ser]
+root          6605     2 0 13:49:12 ?     00:00:00    0    0 [kworker/u12:0-events_freezable_power_]
+root          7430     2 0 13:50:26 ?     00:00:00    0    0 [kworker/4:0H-kblockd]
+root          7440     2 0 13:50:26 ?     00:00:00    0    0 [kworker/0:2H-kblockd]
+root          7443     2 0 13:50:26 ?     00:00:00    0    0 [kworker/3:0H-kblockd]
+20010045      7517   229 10 13:50:29 ?    00:03:46 153M 2.9G com.example.metartc
+root          7679   677 0 13:50:32 ?     00:00:00 2.8M 2.0G sh -c /data/data/com.example.metartc/lldb/bin/start_lldb_server.sh /data/data/com.example.metartc/lldb unix-abstract /com.example.metartc platform-1709790631337.sock /data/local/tmp "lldb process:gdb-remote packets";
+root          7682  7679 0 13:50:32 ?     00:00:00 2.9M 2.0G sh /data/data/com.example.metartc/lldb/bin/start_lldb_server.sh /data/data/com.example.metartc/lldb unix-abstract /com.example.metartc platform-1709790631337.sock /data/local/tmp lldb process:gdb-remote packets
+root          7690  7682 0 13:50:32 ?     00:00:00 6.3M  21M lldb-server platform --listen unix-abstract:///com.example.metartc/platform-1709790631337.sock --log-file /data/data/com.example.metartc/lldb/log/platform.log --log-channels lldb process:gdb-remote packets process:gdb-remote packets
+root          7691  7690 0 13:50:32 ?     00:00:02 7.8M  22M lldb-server gdbserver unix-abstract:///data/local/tmp/gdbserver.73f01e --native-regs --pipe 7 --log-file=/data/data/com.example.metartc/lldb/log/gdb-server.log --log-channels=lldb process:gdb-remote packets process:gdb-remote packets
+pasteboard    7930     1 0 11:14:20 ?     00:00:00  35M 2.0G pasteboard_serv
+root          9535     2 0 13:00:39 ?     00:00:01    0    0 [kworker/1:2-events]
+root         10276     2 0 18:52:41 ?     00:00:00    0    0 [kworker/u13:2-f2fs_post_read_wq]
+root         10748     2 3 13:02:42 ?     00:02:11    0    0 [kworker/2:1+fusb302_wq]
+root         11218     2 1 13:57:05 ?     00:00:25    0    0 [kworker/2:0-events]
+root         12155     2 0 13:58:43 ?     00:00:00    0    0 [kworker/4:1H-kblockd]
+root         12156     2 0 13:58:43 ?     00:00:00    0    0 [kworker/5:1H-kblockd]
+root         12157     2 0 13:58:43 ?     00:00:00    0    0 [kworker/1:1H-kblockd]
+root         12158     2 0 13:58:43 ?     00:00:00    0    0 [kworker/3:1H-kblockd]
+root         12159     2 0 13:58:43 ?     00:00:00    0    0 [kworker/2:0H-kblockd]
+root         12160     2 0 13:58:43 ?     00:00:00    0    0 [kworker/0:0H-kblockd]
+root         15353     2 0 11:26:13 ?     00:00:00    0    0 [kworker/2:1H-kblockd]
+root         17396     2 0 14:08:08 ?     00:00:00    0    0 [kworker/u12:1-events_power_efficient]
+root         19987     2 4 13:18:16 ?     00:02:45    0    0 [kworker/4:2-events]
+root         20697     2 0 13:19:29 ?     00:00:00    0    0 [kworker/3:3-events]
+root         21824     2 0 13:21:15 ?     00:00:00    0    0 [kworker/5:0-events]
+root         22235     2 0 14:17:11 ?     00:00:00    0    0 [kworker/u12:2-events_unbound]
+root         23466     2 0 14:19:23 ?     00:00:00    0    0 [kworker/4:1-mm_percpu_wq]
+root         23524     2 0 13:24:07 ?     00:00:01    0    0 [kworker/0:1-pm]
+root         24844     2 0 13:26:24 ?     00:00:00    0    0 [kworker/5:2-mm_percpu_wq]
+root         25110     2 2 13:26:51 ?     00:01:06    0    0 [kworker/2:2-events]
+root         26253     2 0 13:28:52 ?     00:00:00    0    0 [kworker/1:0-events]
+root         26261     2 0 14:24:24 ?     00:00:00    0    0 [kworker/4:0-events_freezable]
+root         26512     2 0 13:29:18 ?     00:00:01    0    0 [kworker/3:2-events]
+root         26516     2 0 14:25:05 ?     00:00:00    0    0 [kworker/2:2H-kblockd]
+root         26611     2 0 13:29:29 ?     00:00:00    0    0 [kworker/0:2-events]
+root         26695     2 0 12:36:13 ?     00:00:00    0    0 [kworker/5:2H-kblockd]
+root         27456     1 11 14:26:37 ?    00:00:07  35M 2.0G wukong exec -a 0.05 -t 0.05 -C 0.65 -S 0.1 -m 0.05 -k 0.05 -i 500 -T 870
+20010018     27523   229 3 14:26:38 ?     00:00:01 133M 2.7G com.ohos.camera
+root         27542     2 0 14:26:39 ?     00:00:00    0    0 [kworker/3:2H]
+root         27867     2 0 14:27:00 ?     00:00:00    0    0 [kworker/5:0H-kblockd]
+ueventd      28098     1 0 14:27:12 ?     00:00:00 2.6M 2.0G ueventd
+composer_host 28133    1 6 14:27:13 ?     00:00:01 5.3M 2.0G composer_host           9 composer_host -8 1
+root         28154     2 0 14:27:20 ?     00:00:00    0    0 [kworker/1:0H]
+root         28156     2 0 14:27:20 ?     00:00:00    0    0 [kworker/4:2H]
+root         28158     2 0 14:27:20 ?     00:00:00    0    0 [kworker/0:1H]
+20010013     28355   229 23 14:27:42 ?    00:00:00 109M 2.7G com.example.otatest
+update       28401     1 8 14:27:43 ?     00:00:00  16M 2.0G updater_sa
+root         28423   677 8 14:27:43 ?     00:00:00 2.8M 2.0G ps -efw -ORES,Virt
