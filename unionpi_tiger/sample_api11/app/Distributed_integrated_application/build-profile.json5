@@ -1,0 +1,61 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "material": {
+          "certpath": "C:/Users/jianhao.jiang/.ohos/config/openharmony/default_Distributed_integrated_application_cs2E1KUrWYcAg8p_9MQYQVS1-Y9BpZ8AvKTfM6KhjK0=.cer",
+          "storePassword": "0000001BB4D48041476D3D1BDEB5FDE7DD7AA86066C4F66F9B23A00933FB80F9BDDBD5B0755E051AF8960D",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001BAD80AF0B0D331D654CC481A3388617E4065372D288BD3C8634EE3E3990D68424A8B60A6F49D229",
+          "profile": "C:/Users/jianhao.jiang/.ohos/config/openharmony/default_Distributed_integrated_application_cs2E1KUrWYcAg8p_9MQYQVS1-Y9BpZ8AvKTfM6KhjK0=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:/Users/jianhao.jiang/.ohos/config/openharmony/default_Distributed_integrated_application_cs2E1KUrWYcAg8p_9MQYQVS1-Y9BpZ8AvKTfM6KhjK0=.p12"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compileSdkVersion": 11,
+        "compatibleSdkVersion": 11,
+        "runtimeOS": "OpenHarmony",
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "control_application",
+      "srcPath": "./control_application",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "peripheral_application",
+      "srcPath": "./peripheral_application",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
