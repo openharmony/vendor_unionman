@@ -1,21 +1,10 @@
-# Copyright (c) 2022 Unionman Technology Co., Ltd.
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+import pwmtest from '@ohos.pwmtest';
+import i2cnapidemo from '@ohos.i2cnapidemo';
 import DistributedData from '@ohos.data.distributedKVStore';
 import common from '@ohos.app.ability.common';
 import { BusinessError } from '@ohos.base';
 import Prompt from '@system.prompt';
-import { RequestPermission, CreateWork } from './pullwork'
+import { RequestPermission } from './pullwork'
 import prompt from '@ohos.prompt';
 
 let kvManager: DistributedData.KVManager;
@@ -108,7 +97,6 @@ function WriteData(key: string, value: string) {
   }
 }
 
-
 @Extend(Button)
 function ButtonStyle() {
   .fontSize(25)
@@ -118,20 +106,26 @@ function ButtonStyle() {
   .backgroundColor('#0D9FFB')
 }
 
+
 @Entry
 @Component
 struct Second {
   @State ReadTemperatureC: number = 0;
   @State ReadHumidity: number = 0;
   @State ReadTemperatureF: number = 0;
-  @State message: string = '使用教程:一.ON/OFF（舵机） 二.拉起APP 三.获取 四.订阅'
+  @State message: string = '使用教程:一.启动/重启 二.滑动选择后按下模式选择 三.获取'
+  @State pwm_Angle: number = 0;
+  private select1: number = 3
+  private Mps: string[] = ['Mps:0.5Hz', 'Mps:1Hz', 'Mps:2Hz', 'Mps:4Hz', 'Mps:10Hz']
+  private select2: number = 1
+  private Repeatability: string[] = ['刷新率:低', '刷新率:中', '刷新率:高']
   private intervalID: number = 0;
   tem: string = "Tem";
+  tem_value: number = 0;
   hum: string = "Hum";
+  hum_value: number = 0;
   temf: string = "Temf";
-  @State pwm_Angle: number = 0;
-  @State power: string = 'ON'
-  @State start: boolean = true
+  temf_value: number = 0;
   Angle_key: string = "Pwm";
 
   aboutToAppear() {
@@ -139,54 +133,46 @@ struct Second {
     setTimeout(() => {
       GetKVStore();
     }, 10);
-    RequestPermission('com.example.distributed_integrated_application');
+    RequestPermission('');
   }
 
   build() {
     Column() {
       Row() {
         Column() {
-          // 根据设置的角度，模拟舵机转动角度
-          Gauge({ value: 0, min: -90, max: 90 })
-            .startAngle(-90)
-            .endAngle(90)
-            .colors([[Color.Gray, 1]])
-            .strokeWidth(30)
-            .value(this.pwm_Angle - 90)
-            .height('60%')
-            .width('100%')
-            .margin({ top: 20 })
+          Row() {
+            TextPicker({ range: this.Mps, selected: this.select1 })
+              .onChange((value: string[] | string, index: number | number[]) => {
+                console.info('Picker item changed, value: ' + value + ', index: ' + index)
+                this.select1 = index as number;
+              })
+              .width('50%')
+              .height('100%')
+              .margin({
+                bottom: 10
+              })
 
-          // 设置舵机的转动角度
-          Slider({
-            value: this.pwm_Angle,
-            min: 0,
-            max: 180,
-            step: 1,
-            style: SliderStyle.OutSet
-          })
-            .width('60%')
-            .blockColor(Color.Gray)
-            .trackColor(Color.Gray)
-            .selectedColor(0x317aff)
-            .showSteps(true)
-            .showTips(true)
-            .onChange((value: number) => {
-              // 根据开关的标识位，来选择是否转动舵机
-              if (this.start) {
-                this.pwm_Angle = value
-                WriteData(this.Angle_key, this.pwm_Angle.toString());
-                console.info("onChange pwm_Angle = " + this.pwm_Angle)
-              }
-            })
+            TextPicker({ range: this.Repeatability, selected: this.select2 })
+              .onChange((value: string[] | string, index: number | number[]) => {
+                console.info('Picker item changed, value: ' + value + ', index: ' + index)
+                this.select2 = index as number;
+              })
 
+              .margin({
+                bottom: 10
+              })
+              .width('50%')
+              .height('100%')
+          }
+          .height('50%')
         }
         .width('50%')
 
         Column() {
           Text("温度：" + this.ReadTemperatureC.toFixed(4) + "°C\n" +
             "湿度：" + this.ReadHumidity.toFixed(4) + "%RH\n" +
-            "温度：" + this.ReadTemperatureF.toFixed(4) + "°F")
+            "温度：" + this.ReadTemperatureF.toFixed(4) + "°F\n" +
+            "舵机角度：" + this.pwm_Angle.toFixed(2) + "°")
             .fontSize(35)
             .fontWeight(FontWeight.Bold)
             .textAlign(TextAlign.Start)
@@ -205,7 +191,7 @@ struct Second {
       }
 
       Row() {
-        Button(this.power)
+        Button('启动/重启')
           .ButtonStyle()
           .margin({
             right: 40
@@ -213,24 +199,25 @@ struct Second {
           .width('20%')
           .height('10%')
           .onClick(() => {
-            // 开关标记为进行判断
-            if (this.start) {
+            if (i2cnapidemo.ReadTemperatureC() <= 800) {
+              i2cnapidemo.SoftReset();
+              clearInterval(this.intervalID);
               prompt.showToast({
-                message: "关闭舵机", // 显示文本
+                message: "启动/重启成功", // 显示文本
+                duration: 500, // 显示时长
+                bottom: 100 // 距离底部的距离
               })
-              this.power = "OFF"
-            } else {
-              prompt.showToast({
-                message: "打开舵机", // 显示文本
-              })
-              this.power = "ON"
             }
-            // 开关标记位取反
-            this.start = !this.start
+            else {
+              prompt.showToast({
+                message: "启动失败，请检查连线", // 显示文本
+                duration: 1000, // 显示时长
+                bottom: 100 // 距离底部的距离
+              })
+            }
           })
 
-        // 拉起另一块板子的app
-        Button('拉起')
+        Button('模式选择')
           .ButtonStyle()
           .margin({
             right: 70
@@ -238,10 +225,23 @@ struct Second {
           .width('20%')
           .height('10%')
           .onClick(() => {
-            CreateWork("com.example.distributed_integrated_application", "com.example.distributed_integrated_application", "com.example.control_application.Peripheral_applicationAbility");
+            if (i2cnapidemo.ReadTemperatureC() <= 800) {
+              i2cnapidemo.ModeSet(this.select1, this.select2);
+              prompt.showToast({
+                message: "模式选择成功", // 显示文本
+                duration: 500, // 显示时长
+                bottom: 100 // 距离底部的距离
+              })
+            }
+            else {
+              prompt.showToast({
+                message: "模式选择失败，请检查连线", // 显示文本
+                duration: 1000, // 显示时长
+                bottom: 100 // 距离底部的距离
+              })
+            }
           })
 
-        // 从数据库中获取对应的值
         Button('获取')
           .ButtonStyle()
           .margin({
@@ -251,21 +251,23 @@ struct Second {
           .height('10%')
           .onClick(() => {
             this.intervalID = setInterval(() => {
-              kvStore.get(this.tem).then((result) => {
-                this.ReadTemperatureC = result as number;
+              i2cnapidemo.ReadData();
+              this.ReadTemperatureC = i2cnapidemo.ReadTemperatureC();
+              this.tem_value = this.ReadTemperatureC;
+              WriteData(this.tem, this.tem_value.toString());
+              this.ReadHumidity = i2cnapidemo.ReadHumidity();
+              this.hum_value = this.ReadHumidity;
+              WriteData(this.hum, this.hum_value.toString());
+              this.ReadTemperatureF = i2cnapidemo.ReadTemperatureF();
+              this.temf_value = this.ReadTemperatureF;
+              WriteData(this.temf, this.temf_value.toString());
+              kvStore.get(this.Angle_key).then((result) => {
+                this.pwm_Angle = result as number;
               });
-              kvStore.get(this.hum).then((result) => {
-                this.ReadHumidity = result as number;
-              });
-              kvStore.get(this.temf).then((result) => {
-                this.ReadTemperatureF = result as number;
-              });
-              console.info("xxxxxx " + this.ReadTemperatureC);
-            }, 1000);
-
+              pwmtest.setPwmStatus(1, this.pwm_Angle);
+            }, 100);
           })
 
-        // 订阅数据库的数据变化
         Button("订阅")
           .ButtonStyle()
           .width('16%')
