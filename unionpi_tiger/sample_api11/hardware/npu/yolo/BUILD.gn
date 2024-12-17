@@ -1,0 +1,206 @@
+# Copyright (c) 2022 Unionman Technology Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/ohos.gni")
+
+ohos_prebuilt_etc("galcore") {
+  source = "modules/galcore.ko"
+  module_install_dir = "modules"
+  install_images = [ chipset_base_dir ]
+  part_name = "product_unionpi_tiger"
+}
+ohos_prebuilt_etc("yolov5s") {
+  source = "yolov5s.nb"
+  part_name = "product_unionpi_tiger"
+}
+
+ohos_prebuilt_etc("lenetn") {
+  source = "lenet.nb"
+  part_name = "product_unionpi_tiger"
+}
+
+ohos_prebuilt_executable("lenet") {
+  source = "lenet"
+  module_install_dir = "bin"
+  install_enable = true
+  part_name = "product_unionpi_tiger"
+}
+
+ohos_prebuilt_executable("sdk19_64") {
+  source = "sdk19_64"
+  module_install_dir = "bin"
+  install_enable = true
+  part_name = "product_unionpi_tiger"
+}
+
+ohos_prebuilt_executable("ld-linux-aarch64") {
+  source = "lib/ld-linux-aarch64.so.1"
+  module_install_dir = "bin"
+  install_enable = true
+  part_name = "product_unionpi_tiger"
+}
+
+ohos_prebuilt_shared_library("libArchModelSw") {
+  source = "lib/libArchModelSw.so"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libc") {
+  source = "lib/libc.so.6"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libCLC") {
+  source = "lib/libCLC.so"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libdl") {
+  source = "lib/libdl.so.2"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libGAL") {
+  source = "lib/libGAL.so"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libgcc_s") {
+  source = "lib/libgcc_s.so.1"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libm") {
+  source = "lib/libm.so.6"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libNNArchPerf") {
+  source = "lib/libNNArchPerf.so"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libnnsdk") {
+  source = "lib/libnnsdk.so"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libopencv_core") {
+  source = "lib/libopencv_core.so.3.4"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libopencv_dnn") {
+  source = "lib/libopencv_dnn.so.3.4"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libopencv_highgui") {
+  source = "lib/libopencv_highgui.so.3.4"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libopencv_imgcodecs") {
+  source = "lib/libopencv_imgcodecs.so.3.4"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libopencv_imgproc") {
+  source = "lib/libopencv_imgproc.so.3.4"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libopencv_videoio") {
+  source = "lib/libopencv_videoio.so.3.4"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libOpenVX") {
+  source = "lib/libOpenVX.so"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libOpenVXU") {
+  source = "lib/libOpenVXU.so"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libovxlib") {
+  source = "lib/libovxlib.so"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libpthread") {
+  source = "lib/libpthread.so.0"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("librt") {
+  source = "lib/librt.so.1"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libstdc++") {
+  source = "lib/libstdc++.so.6"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libVSC") {
+  source = "lib/libVSC.so"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libVSC_Lite") {
+  source = "lib/libVSC_Lite.so"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+ohos_prebuilt_shared_library("libz") {
+  source = "lib/libz.so.1"
+  part_name = "product_unionpi_tiger"
+  install_enable = true
+}
+
+group("npu_dep") {
+  deps = [
+    ":galcore",
+    ":ld-linux-aarch64",
+    ":lenet",
+    ":lenetn",
+    ":libArchModelSw",
+    ":libCLC",
+    ":libGAL",
+    ":libNNArchPerf",
+    ":libOpenVX",
+    ":libOpenVXU",
+    ":libVSC",
+    ":libVSC_Lite",
+    ":libc",
+    ":libdl",
+    ":libgcc_s",
+    ":libm",
+    ":libnnsdk",
+    ":libopencv_core",
+    ":libopencv_dnn",
+    ":libopencv_highgui",
+    ":libopencv_imgcodecs",
+    ":libopencv_imgproc",
+    ":libopencv_videoio",
+    ":libovxlib",
+    ":libpthread",
+    ":librt",
+    ":libstdc++",
+    ":libz",
+    ":sdk19_64",
+    ":yolov5s",
+  ]
+}
