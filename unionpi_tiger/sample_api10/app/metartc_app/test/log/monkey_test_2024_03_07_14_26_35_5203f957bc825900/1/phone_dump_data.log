@@ -1,0 +1,112 @@
+User ID #100
+  Current mission lists:
+    MissionList Type #NORMAL
+      Mission ID #43  mission name #[#com.example.otatest:entry:EntryAbility]  lockedState #0
+      AbilityRecord ID #97
+        app name [com.example.otatest]
+        main name [EntryAbility]
+        bundle name [com.example.otatest]
+        ability type [PAGE]
+        state #FOREGROUND  start time [245112042]
+        app state #FOREGROUND
+        ready #1  window attached #0  launcher #0
+        callee connections: 
+        isKeepAlive: false
+        missionAffinity: 
+    MissionList Type #NORMAL
+      Mission ID #38  mission name #[#com.example.metartc:entry:EntryAbility]  lockedState #0
+      AbilityRecord ID #88
+        app name [com.example.metartc]
+        main name [EntryAbility]
+        bundle name [com.example.metartc]
+        ability type [PAGE]
+        state #BACKGROUND  start time [242878384]
+        app state #BACKGROUND
+        ready #1  window attached #0  launcher #0
+        callee connections: 
+        isKeepAlive: false
+        missionAffinity: 
+    MissionList Type #NORMAL
+      Mission ID #39  mission name #[#com.ohos.camera:tablet:com.ohos.camera.MainAbility]  lockedState #0
+      AbilityRecord ID #90
+        app name [com.ohos.camera]
+        main name [com.ohos.camera.MainAbility]
+        bundle name [com.ohos.camera]
+        ability type [PAGE]
+        state #BACKGROUND  start time [245048890]
+        app state #BACKGROUND
+        ready #1  window attached #0  launcher #0
+        callee connections: 
+        isKeepAlive: false
+        missionAffinity: 
+    MissionList Type #LAUNCHER
+      Mission ID #1  mission name #[#com.yarward.factorytestoh:entry:EntryAbility]  lockedState #0
+      AbilityRecord ID #6
+        app name [com.yarward.factorytestoh]
+        main name [EntryAbility]
+        bundle name [com.yarward.factorytestoh]
+        ability type [PAGE]
+        state #BACKGROUND  start time [11523]
+        app state #BACKGROUND
+        ready #1  window attached #0  launcher #1
+        callee connections: 
+        isKeepAlive: false
+        can restart num #3
+        missionAffinity: 
+  default stand mission list:
+    MissionList Type #DEFAULT_STANDARD
+  default single mission list:
+    MissionList Type #DEFAULT_SINGLE
+  launcher mission list:
+    MissionList Type #LAUNCHER
+      Mission ID #1  mission name #[#com.yarward.factorytestoh:entry:EntryAbility]  lockedState #0
+      AbilityRecord ID #6
+        app name [com.yarward.factorytestoh]
+        main name [EntryAbility]
+        bundle name [com.yarward.factorytestoh]
+        ability type [PAGE]
+        state #BACKGROUND  start time [11523]
+        app state #BACKGROUND
+        ready #1  window attached #0  launcher #1
+        callee connections: 
+        isKeepAlive: false
+        can restart num #3
+        missionAffinity: 
+  ExtensionRecords:
+    uri [/com.example.kikakeyboard/entry/ServiceExtAbility]
+      AbilityRecord ID #10   state #ACTIVE   start time [11848]
+      main name [ServiceExtAbility]
+      bundle name [com.example.kikakeyboard]
+      ability type [SERVICE]
+      app state #BEGIN
+        isKeepAlive: false
+      Connections: 0
+    uri [/com.ohos.launcher/phone-launcher/com.ohos.launcher.MainAbility]
+      AbilityRecord ID #16   state #ACTIVE   start time [41407]
+      main name [com.ohos.launcher.MainAbility]
+      bundle name [com.ohos.launcher]
+      ability type [SERVICE]
+      app state #READY
+        isKeepAlive: true
+      can restart num #15
+      Connections: 0
+    uri [/com.ohos.medialibrary.medialibrarydata/entry/DataShareExtAbility]
+      AbilityRecord ID #9   state #ACTIVE   start time [11834]
+      main name [DataShareExtAbility]
+      bundle name [com.ohos.medialibrary.medialibrarydata]
+      ability type [SERVICE]
+      app state #BEGIN
+        isKeepAlive: false
+      Connections: 2
+       > com.ohos.medialibrary.medialibrarydata/DataShareExtAbility   connectionState #CONNECTED
+       > com.ohos.medialibrary.medialibrarydata/DataShareExtAbility   connectionState #CONNECTED
+    uri [/com.unionman.bootmanager/entry/EnterpriseAdminAbility]
+      AbilityRecord ID #15   state #ACTIVE   start time [16742]
+      main name [EnterpriseAdminAbility]
+      bundle name [com.unionman.bootmanager]
+      ability type [SERVICE]
+      app state #BEGIN
+        isKeepAlive: false
+      Connections: 1
+       > com.unionman.bootmanager/EnterpriseAdminAbility   connectionState #CONNECTED
+    PendingWantRecords:
