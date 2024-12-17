@@ -1,0 +1,35 @@
+{
+  "module": {
+    "name": "peripheral_application",
+    "type": "feature",
+    "description": "$string:module_desc",
+    "mainElement": "Peripheral_applicationAbility",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "abilities": [
+      {
+        "name": "Peripheral_applicationAbility",
+        "srcEntry": "./ets/peripheral_applicationability/Peripheral_applicationAbility.ets",
+        "description": "$string:Peripheral_applicationAbility_desc",
+        "icon": "$media:icon",
+        "label": "$string:Peripheral_applicationAbility_label",
+        "startWindowIcon": "$media:startIcon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true
+      }
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.DISTRIBUTED_DATASYNC",
+      },
+      {
+        "name": "ohos.permission.ACCESS_SERVICE_DM"
+      }
+    ]
+  }
+}
