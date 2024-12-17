@@ -1,0 +1,45 @@
+{
+  "module": {
+    "name": "control_application",
+    "type": "entry",
+    "description": "$string:module_desc",
+    "mainElement": "Control_applicationAbility",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "abilities": [
+      {
+        "name": "Control_applicationAbility",
+        "srcEntry": "./ets/control_applicationability/Control_applicationAbility.ets",
+        "description": "$string:Control_applicationAbility_desc",
+        "icon": "$media:icon",
+        "label": "$string:Control_applicationAbility_label",
+        "startWindowIcon": "$media:startIcon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true,
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ]
+      }
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.DISTRIBUTED_DATASYNC",
+      },
+      {
+        "name": "ohos.permission.ACCESS_SERVICE_DM"
+      }
+    ]
+  }
+}

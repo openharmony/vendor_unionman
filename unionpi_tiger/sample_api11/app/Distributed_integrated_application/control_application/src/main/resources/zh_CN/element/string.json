@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "模块描述"
+    },
+    {
+      "name": "Control_applicationAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "Control_applicationAbility_label",
+      "value": "label"
+    }
+  ]
+}
