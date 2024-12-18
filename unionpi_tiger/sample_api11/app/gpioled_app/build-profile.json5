@@ -1,0 +1,49 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "material": {
+          "certpath": "C:/Users/jiaming.cai/.ohos/config/openharmony/default_gpioled_app_vy4wAxxZQMGtjfLtInYFdBI61ZygWvvBD5tlKilHjh0=.cer",
+          "storePassword": "0000001A3CA59DF1652FA8B645D7201CB7258A86C756EEB28308D994AB470A43516F361F3BD91D54693F",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001A922BF8067FC3F22878124ED37D2BDF24AA434C72A64A673F9F6AF4434F3A1A30039DE93F13AC",
+          "profile": "C:/Users/jiaming.cai/.ohos/config/openharmony/default_gpioled_app_vy4wAxxZQMGtjfLtInYFdBI61ZygWvvBD5tlKilHjh0=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:/Users/jiaming.cai/.ohos/config/openharmony/default_gpioled_app_vy4wAxxZQMGtjfLtInYFdBI61ZygWvvBD5tlKilHjh0=.p12"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compileSdkVersion": 11,
+        "compatibleSdkVersion": 11,
+        "runtimeOS": "OpenHarmony",
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
