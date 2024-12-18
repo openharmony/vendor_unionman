@@ -1,0 +1,32 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "login_text",
+      "value": "login"
+    },
+    {
+      "name": "onClick_message",
+      "value": "logging..."
+    },
+    {
+      "name": "register",
+      "value": "To Register!"
+    },
+    {
+      "name": "register_text",
+      "value": "Don't have an account yet?"
+    }
+  ]
+}

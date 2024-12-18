@@ -1,0 +1,32 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "模块描述"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "login_text",
+      "value": "登录"
+    },
+    {
+      "name": "onClick_message",
+      "value": "登录中,您的电子邮箱为:"
+    },
+    {
+      "name": "register",
+      "value": "去注册！"
+    },
+    {
+      "name": "register_text",
+      "value": "还没有账号？"
+    }
+  ]
+}
