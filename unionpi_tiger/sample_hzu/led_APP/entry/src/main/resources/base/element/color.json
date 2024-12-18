@@ -1,0 +1,44 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "app_color_bar_sel",
+      "value": "#FFD05353"
+    },
+    {
+      "name": "app_color_bar_normal",
+      "value": "#FF599CB7"
+    },
+    {
+      "name": "app_color_selection_1",
+      "value": "#FF575A5A"
+    },
+    {
+      "name": "app_color_selection_2",
+      "value": "#00F465"
+    },
+    {
+      "name": "app_color_selection_3",
+      "value": "#001234"
+    },
+    {
+      "name": "app_color_selection_4",
+      "value": "#00FFFF"
+    },
+    {
+      "name": "app_color_selection_5",
+      "value": "#FF0022FF"
+    },
+    {
+      "name": "app_color_selection_6",
+      "value": "#FF292D2D"
+    },
+    {
+      "name": "button_color",
+      "value": "#007DFF"
+    }
+  ]
+}
